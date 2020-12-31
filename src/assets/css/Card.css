@@ -1,7 +1,14 @@
+#playground {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
 .card {
   width: 220px;
   height: 280px;
-  border: 1px red solid;
+  /* border: 1px red solid; */
   box-sizing: border-box;
 }
 .card:not(:nth-child(5n)) {

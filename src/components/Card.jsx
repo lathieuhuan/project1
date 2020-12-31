@@ -1,40 +1,71 @@
 import React from 'react'
 import '../assets/css/Card.css'
 
-let chosen = [];
+function shuffleDouble(arr) {
+  let result = [];
+  while (arr.length > 0) {
+    let random = Math.floor(Math.random() * arr.length);
+    if (result.indexOf(arr[random]) === -1) {
+      result.push(arr[random]);
+    } else if (arr.length === 1 ||
+      (result.indexOf(arr[random]) !== -1 &&
+      arr[random] !== result[result.length - 1])) {
+        result.push(arr[random]);
+        arr.splice(random, 1);
+    }
+  }
+  return result;
+}
 
-class Card extends React.Component {
+let imgI = shuffleDouble([0, 1, 2, 3, 4]);
+let imgs = [
+  "club8.jpg",
+  "diamond6.jpg",
+  "heart2.jpg",
+  "spade5.jpg",
+  "heart10.jpg",
+];
+let data = imgI.map((i) => {return {
+  image: imgs[i],
+  faceUp: true,
+  isDone: false,
+  needFlip: false
+}});
+// console.log(data);
+
+class Playground extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      faceUp: false,
-      isDone: false
+      cards: data,
+      chosen: []
     }
   }
-  turnOver() {
-    if (!this.state.faceUp) {
-      this.setState({faceUp: true});
-    } else {
-      this.setState({faceUp: false});
-    }
+  flip (i, val) {
+    this.setState((state) => {
+      let data = state.cards;
+      data[i].needFlip = val;
+      return {cards: data};
+    });
   }
-  render () {
-    return (
-      <div className={this.state.isDone ? "card invis" : "card"} data-no={this.props.cardNo} id={this.props.id}
-        onClick={() => {
-          this.turnOver();
-          if (chosen.length < 2) {
-            chosen.push(this.props.cardNo);
-          }
-          if (chosen.length === 2) {
-            this.setState({isDone: chosen[0] === chosen[1] ? true : false});
-            chosen = [this.props.cardNo];
-          }
-        }}>
-        <img src={this.state.faceUp ? this.props.img : "cardback.jpg"} alt="" />
-      </div>
-    )
+  render() {
+    return <div id="playground">{
+      this.state.cards.map((val, i) => {
+        return <Card key={i}
+          {...val}
+          index={i}
+          flip />; // here
+      })
+    }</div>
   }
 }
 
-export {Card}
+function Card(props) {
+    return (
+      <div className="card" >
+        <img src={props.faceUp ? props.image : "cardback.jpg"} alt="card"/>
+      </div>
+    )
+}
+
+export {Playground}
