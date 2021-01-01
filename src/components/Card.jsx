@@ -50,6 +50,7 @@ class Playground extends React.Component {
     let chosen = this.state.chosen;
     let a = chosen[0];
     let b = chosen[1];
+    // console.log(data[a], data[b]);
     setTimeout(() => {
       if (data[a].image === data[b].image) {
         data[a].isDone = true;
@@ -60,7 +61,7 @@ class Playground extends React.Component {
       }
       this.setState({
         cards: data,
-        choose: [],
+        chosen: [],
       });
     }, 500);
   }
@@ -75,6 +76,7 @@ class Playground extends React.Component {
           chosen = [];
         }
         data[i].faceUp = !data[i].faceUp;
+        console.log(data[i].faceUp); //
         return {
           ...state,
           data,
@@ -84,7 +86,7 @@ class Playground extends React.Component {
     });
   }
   flip (i, val) {
-    console.log("flip");
+    // console.log("flip");
     this.setState((state) => {
       let data = state.cards;
       data[i].needFlip = val;
@@ -110,15 +112,16 @@ class Playground extends React.Component {
 }
 
 function Card(props) {
-    return (
-      <div className={props.isDone ? "card invis" : "card"}
-      onClick={() => props.flip(props.index, 1)}>
-        <img src={props.faceUp ? props.image : props.back}
-        flip={props.needFlip}
-        onAnimationEnd={() => {props.flip(props.index, 0); props.choose(props.index)}}
-        alt="card"/>
-      </div>
-    )
+  console.log(props.faceUp); //
+  return (
+    <div className={props.isDone ? "card invis" : "card"}
+    onClick={() => props.flip(props.index, 1)}>
+      <img src={props.faceUp ? props.image : props.back}
+      flip={props.needFlip}
+      onAnimationEnd={() => {props.flip(props.index, 0); props.choose(props.index);}}
+      alt="card"/>
+    </div>
+  )
 }
 
 export {Playground}
