@@ -41,8 +41,8 @@ class App extends Component {
     this.check = this.check.bind(this);
   }
   check() {
-    let data = JSON.parse(JSON.stringify(this.state.data));
-    let selected = JSON.parse(JSON.stringify(this.state.selected));
+    let data = this.state.data;
+    let selected = this.state.selected;
     let a = selected[0];
     let b = selected[1];
     // console.log(data[a],data[b])
@@ -89,7 +89,7 @@ class App extends Component {
   flip(indx, val) {
     // console.log(`flip ${indx} ${val}`)
     this.setState((oldState) => {
-      let data = JSON.parse(JSON.stringify(oldState.data));
+      let data = oldState.data;
       data[indx].isFlip = val;
       return {
         data: data,
