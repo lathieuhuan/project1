@@ -27,98 +27,89 @@ let imgs = [
 ];
 let data = imgI.map((i) => {return {
   image: imgs[i],
-  back: "cardback.jpg",
   faceUp: false,
   isDone: false,
-  needFlip: 0
+  needFlip: "false"
 }});
-// console.log(data);
+// console.log(cards);
 
 class Playground extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       cards: data,
-      chosen: []
-    }
+      chosen: [],
+    };
     this.choose = this.choose.bind(this);
     this.flip = this.flip.bind(this);
-    this.check = this.check.bind(this);
-  }
-  check() {
-    let data = this.state.cards;
-    let chosen = this.state.chosen;
-    let a = chosen[0];
-    let b = chosen[1];
-    // console.log(data[a], data[b]);
-    setTimeout(() => {
-      if (data[a].image === data[b].image) {
-        data[a].isDone = true;
-        data[b].isDone = true;
-      } else {
-        data[a].faceUp = false;
-        data[b].faceUp = false;
-      }
-      this.setState({
-        cards: data,
-        chosen: [],
-      });
-    }, 500);
   }
   choose(i) {
-    this.setState((state) => {
-      let data = JSON.parse(JSON.stringify(state.cards));
-      let chosen = JSON.parse(JSON.stringify(state.chosen));
+    this.setState((prevS) => {
+      let data = JSON.parse(JSON.stringify(prevS.cards));
       if (!data[i].isDone) {
-        if (chosen.indexOf(i) === -1) {
-          chosen.push(i);
-        } else {
-          chosen = [];
-        }
         data[i].faceUp = !data[i].faceUp;
-        console.log(data[i].faceUp); //
         return {
-          ...state,
-          data,
-          chosen,
+          cards: data,
+          chosen: prevS.chosen.indexOf(i) === -1 ? prevS.chosen.concat([i]) : []
         };
       }
     });
   }
-  flip (i, val) {
-    // console.log("flip");
-    this.setState((state) => {
-      let data = state.cards;
+  flip(i, val) {
+    this.setState((prevS) => {
+      let data = prevS.cards;
       data[i].needFlip = val;
-      return {cards: data};
+      return data[i].needFlip;
     });
   }
   componentDidUpdate() {
-    if (this.state.chosen.length === 2) {
-      this.check();
+    let chosen = this.state.chosen;
+    console.log(chosen);
+    if (chosen.length >= 2) {
+      let data = this.state.cards,
+        cardX = data[this.state.chosen[0]],
+        cardY = data[this.state.chosen[1]];
+      setTimeout(() => {
+        if (cardX.image === cardY.image) {
+          cardX.isDone = cardY.isDone = true;
+        } else {
+          cardX.faceUp = cardY.faceUp = false;
+        }
+        this.setState({
+          cardX,
+          cardY,
+          chosen: chosen.length === 2 ? [] : chosen.slice(2)
+        });
+      }, 500);
     }
   }
   render() {
-    return <div id="playground">{
-      this.state.cards.map((val, i) => {
-        return <Card key={i}
-          {...val}
-          index={i}
-          flip={this.flip}
-          choose={this.choose} />;
-      })
-    }</div>
+    // console.log(this.state.chosen, "in render");
+    return (
+      <div id="playground">
+        {this.state.cards.map((val, i) => {
+          return (
+            <Card key={i}
+              {...val}
+              index={i}
+              choose={this.choose}
+              flip={this.flip}
+            />
+          );
+        })}
+      </div>
+    );
   }
 }
-
 function Card(props) {
-  console.log(props.faceUp); //
   return (
     <div className={props.isDone ? "card invis" : "card"}
-    onClick={() => props.flip(props.index, 1)}>
-      <img src={props.faceUp ? props.image : props.back}
+    onClick={() => props.flip(props.index, "true")}>
+      <img src={props.faceUp ? props.image : "cardback.jpg"}
       flip={props.needFlip}
-      onAnimationEnd={() => {props.flip(props.index, 0); props.choose(props.index);}}
+      onAnimationEnd={() => {
+        props.flip(props.index, "false");
+        props.choose(props.index);}}
       alt="card"/>
     </div>
   )
