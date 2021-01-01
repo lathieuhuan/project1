@@ -10,9 +10,9 @@ class LightBulb extends React.Component{
     }
     switch() {
         if (this.state.isOn) {
-            this.setState({isOn:false});
+            this.setState({isOn: false});
         } else {
-            this.setState({isOn:true});
+            this.setState({isOn: true});
         }
     }
     render() {
