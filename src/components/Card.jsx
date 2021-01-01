@@ -25,35 +25,23 @@ let imgs = [
   "spade5.jpg",
   "heart10.jpg",
 ];
-let data = imgI.map((i) => {return {
+let cards = imgI.map((i) => {return {
   image: imgs[i],
   faceUp: false,
   isDone: false,
   needFlip: "false"
 }});
-// console.log(cards);
 
 class Playground extends React.Component {
   constructor(props) {
     super(props);
+    this.temp = []; //
     this.state = {
-      cards: data,
-      chosen: [],
+      cards,
+      chosen: []
     };
     this.choose = this.choose.bind(this);
     this.flip = this.flip.bind(this);
-  }
-  choose(i) {
-    this.setState((prevS) => {
-      let data = JSON.parse(JSON.stringify(prevS.cards));
-      if (!data[i].isDone) {
-        data[i].faceUp = !data[i].faceUp;
-        return {
-          cards: data,
-          chosen: prevS.chosen.indexOf(i) === -1 ? prevS.chosen.concat([i]) : []
-        };
-      }
-    });
   }
   flip(i, val) {
     this.setState((prevS) => {
@@ -62,29 +50,56 @@ class Playground extends React.Component {
       return data[i].needFlip;
     });
   }
+  choose(i) {
+    this.setState((prevS) => {
+      let data = JSON.parse(JSON.stringify(prevS.cards));
+      if (!data[i].isDone) {
+        data[i].faceUp = !data[i].faceUp;
+        return {
+          cards: data,
+          // chosen: prevS.chosen.indexOf(i) === -1 ? prevS.chosen.concat([i]) : []
+        };
+      }
+    });
+  }
   componentDidUpdate() {
-    let chosen = this.state.chosen;
-    console.log(chosen);
-    if (chosen.length >= 2) {
-      let data = this.state.cards,
-        cardX = data[this.state.chosen[0]],
-        cardY = data[this.state.chosen[1]];
+    if (this.temp.length > 1) {
       setTimeout(() => {
-        if (cardX.image === cardY.image) {
-          cardX.isDone = cardY.isDone = true;
-        } else {
-          cardX.faceUp = cardY.faceUp = false;
+        console.log("after update", this.temp);
+        let data = this.state.cards;
+        while (this.temp.length > 1) {
+          let cardX = data[this.temp[0]],
+            cardY = data[this.temp[1]];
+          if (cardX.image === cardY.image) {
+            cardX.isDone = cardY.isDone = true;
+          } else {
+            cardX.faceUp = cardY.faceUp = false;
+          }
+          this.temp.splice(0, 2);
         }
-        this.setState({
-          cardX,
-          cardY,
-          chosen: chosen.length === 2 ? [] : chosen.slice(2)
-        });
-      }, 500);
+        this.setState({cards: data});
+      }, 1000);
     }
+    // let chosen = this.state.chosen;
+    // if (chosen.length >= 2) {
+    //   let data = this.state.cards,
+    //     cardX = data[this.state.chosen[0]],
+    //     cardY = data[this.state.chosen[1]];
+    //   setTimeout(() => {
+    //     if (cardX.image === cardY.image) {
+    //       cardX.isDone = cardY.isDone = true;
+    //     } else {
+    //       cardX.faceUp = cardY.faceUp = false;
+    //     }
+    //     this.setState({
+    //       cardX,
+    //       cardY,
+    //       chosen: chosen.length === 2 ? [] : chosen.slice(2)
+    //     });
+    //   }, 500);
+    // }
   }
   render() {
-    // console.log(this.state.chosen, "in render");
     return (
       <div id="playground">
         {this.state.cards.map((val, i) => {
@@ -94,6 +109,7 @@ class Playground extends React.Component {
               index={i}
               choose={this.choose}
               flip={this.flip}
+              temp={this.temp}
             />
           );
         })}
@@ -104,12 +120,24 @@ class Playground extends React.Component {
 function Card(props) {
   return (
     <div className={props.isDone ? "card invis" : "card"}
-    onClick={() => props.flip(props.index, "true")}>
+    onClick={() => {
+      props.flip(props.index, "true");
+      // start here
+      let pos = props.temp.indexOf(props.index);
+      if (pos === -1) {
+        props.temp.push(props.index);
+      } else {
+        props.temp.splice(pos, 1);
+      }
+      console.log(props.temp, "in func card");
+      // end
+    }}>
       <img src={props.faceUp ? props.image : "cardback.jpg"}
       flip={props.needFlip}
       onAnimationEnd={() => {
         props.flip(props.index, "false");
-        props.choose(props.index);}}
+        props.choose(props.index);
+      }}
       alt="card"/>
     </div>
   )

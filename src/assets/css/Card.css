@@ -22,7 +22,7 @@ img {
   visibility: hidden;
 }
 [flip="true"] {
-  animation: flip 0.5s;
+  animation: flip 0.2s;
 }
 @keyframes flip {
   0% {
