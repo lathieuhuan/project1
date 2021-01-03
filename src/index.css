@@ -9,16 +9,133 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100vw;
   height: 100vh;
+  background-color: rgb(238, 238, 238);
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.col-3 {
+  width: 25%;
+  height: 100%;
+}
+.col-6 {
+  width: 50%;
+  height: 100%;
+}
+#left-col {
+  box-sizing: border-box;
+  padding: 175px 30px 0 60px;
+}
+h1 {
+  margin: 0 0 30px 0;
+  font-size: 44px;
+  color: red;
+}
+h3 {
+  margin: 0 0 10px 0;
+  font-size: 22px;
+}
+#left-col > p {
+  margin: 0;
+  font-size: 18px;
+  text-align: justify;
+  line-height: 1.6;
+}
+#center-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 #root {
-  width: 1160px;
-  min-width: 1160px;
-  height: 575px;
+  width: 700px;
+  min-width: 700px;
+}
+#right-col {
+  box-sizing: border-box;
+  padding: 150px 70px 0 30px;
+}
+#stats,
+#setup {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 20px;
+}
+#stats {
+  height: 150px;
+}
+#setup {
+  padding: 20px;
+  border: 1px black solid;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 172);
+}
+.col-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.group {
+  margin-bottom: 20px;
+}
+.group > label {
+  margin: 0 0 5px 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+label,
+#submit,
+#show-line {
+  font-size: 18px;
+}
+label[for="easy"] {
+  margin-right: 10px;
+}
+#card-type {
+  box-sizing: border-box;
+  margin-top: 5px;
+  width: 90%;
+  background-image: url(https://toppng.com/uploads/preview/arrow-down-icon-11549436707mosicxsqad.png);
+  background-size: 15px;
+  background-position: right;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  border: 1px black solid;
+  border-radius: 5px;
+  cursor: default;
+  position: relative;
+}
+#show-line {
+  margin: 0;
+}
+#dropdown {
+  position: absolute;
+  top: 105%;
+  left: 1%;
+  width: 97%;
+  border: 1px black solid;
+}
+.hidden {
+  display: none;
+}
+input[type="button"] {
+  width: 100%;
+  border: none;
+  text-align: left;
+}
+input[type="button"],
+#card-type {
+  background-color: white;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+input[type="button"]:hover {
+  background-color: rgb(218, 231, 245);
+}
+#submit {
+  padding: 5px 10px;
+  font-weight: 700;
+  border-radius: 5px;
+  outline: none;
 }
