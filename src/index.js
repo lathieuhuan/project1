@@ -6,11 +6,12 @@ import reportWebVitals from "./reportWebVitals";
 
 let difficulty = "easy",
   cardType = "Classic",
-  dfctInputs = document.getElementsByClassName("difficulty"),
+  dfct = document.getElementsByClassName("difficulty"),
   types = document.getElementsByClassName("type"),
-  root = document.getElementById("root");
+  root = document.getElementById("root"),
+  dropdown = document.getElementById("dropdown");
 
-for (let inp of dfctInputs) {
+for (let inp of dfct) {
   inp.onclick = (e) => {
     difficulty = e.target.value;
   };
@@ -22,7 +23,7 @@ for (let type of types) {
   };
 }
 document.getElementById("card-type").onclick = () => {
-  document.getElementById("dropdown").classList.toggle("hidden");
+  dropdown.classList.toggle("hidden");
 };
 
 document.getElementById("submit").onclick = () => {
@@ -31,7 +32,7 @@ document.getElementById("submit").onclick = () => {
     <React.StrictMode>
       <App difficulty={difficulty} type={cardType} />
     </React.StrictMode>,
-    document.getElementById("root")
+    root
   );
 };
 
