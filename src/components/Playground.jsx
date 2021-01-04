@@ -72,21 +72,17 @@ class Playground extends React.Component {
         done: false
       }});
     }
+    this.state = {cards, gameWon: false}; // ===
     this.chosen = [];
-    this.state = {cards};
-    this.flip = this.flip.bind(this);
-    this.setAnimation = this.setAnimation.bind(this);
-    this.forceFaceDown = this.forceFaceDown.bind(this);
-    // this.test = this.test.bind(this);
   }
-  setAnimation(i, val) {
+  setAnimation = (i, val) => {
     this.setState((prevS) => {
       let data = prevS.cards;
       data[i].animated = val;
       return data[i].animated;
     });
   }
-  flip(i) {
+  flip = (i) => {
     this.setState((prevS) => {
       let data = JSON.parse(JSON.stringify(prevS.cards));
       if (!data[i].done) {
@@ -97,81 +93,90 @@ class Playground extends React.Component {
       }
     });
   }
-  forceFaceDown() {
-    setTimeout(() => {
-      this.setState((prevS) => {
-        let data = prevS.cards;
-        for (let index in data) {
-          if (data[index].front === "top" &&
-            this.chosen.indexOf(parseInt(index)) === -1) {
-            let temp = data[index].front;
-            data[index].front = data[index].back;
-            data[index].back = temp;
-          }
-        }
-        return {cards: data};
-      });
-    }, 600);
-  }
-  componentDidUpdate() {
-    if (this.chosen.length > 1) {
-      setTimeout(() => {
-        let data = this.state.cards;
-        while (this.chosen.length > 1) {
-          let cardX = data[this.chosen[0]],
-            cardY = data[this.chosen[1]];
-          if (cardX.imageFrt === cardY.imageFrt) {
-            cardX.done = cardY.done = true;
-          } else {
-            cardX.front = cardY.front = "bottom";
-            cardX.back = cardY.back = "top";
-          }
-          this.chosen.splice(0, 2);
-        }
-        this.setState({cards: data});
-      }, 600);
+  process = (i) => {
+    let length = this.chosen.length;
+    if (length % 2 === 0 || i !== this.chosen[length - 1]) {
+      this.chosen.push(i);
+    } else {
+      this.chosen.splice(-1);
     }
+    // console.log(this.chosen, "before");
+    setTimeout(() => {
+      let data = this.state.cards;
+      while (this.chosen.length > 1) {
+        let cardX = data[this.chosen[0]],
+          cardY = data[this.chosen[1]];
+        if (cardX.imageFrt === cardY.imageFrt) {
+          cardX.done = cardY.done = true;
+        }
+        this.chosen.splice(0, 2);
+        // dành cho TH: thẻ 1 = thẻ 2, nhấn nhanh thẻ 1-2-1 hoặc 1-2-2,
+        // thẻ 1 & 2 done nhưng thẻ 1 hoặc 2 vẫn được chọn
+        if (this.chosen.length === 1 && data[this.chosen[0]].done) {
+          this.chosen = [];
+        }
+      }
+      // console.log(this.chosen, "after");
+      for (let j = 0; j < data.length; j++) {
+        if ( (data[j].front === "top" && this.chosen.indexOf(j) === -1) ||
+        (data[j].front === "bottom" && this.chosen.indexOf(j) !== -1) ) {
+          let temp = data[j].front;
+          data[j].front = data[j].back;
+          data[j].back = temp;
+        }
+      }
+      // here
+      let result = true;
+      for (let i = 0; i < this.state.cards.length; i++) {
+        if (!this.state.cards[i].done) {
+          result = false;
+          break;
+        }
+      }
+      this.setState({cards: data, gameWon: result});
+    }, 400);
   }
-  // test(done) {
-  // }
   render() {
+    let content;
+    if (this.state.gameWon) {
+      content = <Congratulation />;
+    } else {
+      content = this.state.cards.map((val, i) => {
+        return (
+          <Card key={i} index={i} chosen={this.chosen} {...val}
+            flip={this.flip} setAnimation={this.setAnimation}
+            process={this.process}
+          />
+        );
+      });
+    }
     return (
-      <div id="playground">
-        {this.state.cards.map((val, i) => {
-          return (
-            <Card key={i} index={i} chosen={this.chosen} {...val}
-              flip={this.flip} setAnimation={this.setAnimation}
-              forceFaceDown={this.forceFaceDown}
-              // test={this.test}
-            />
-          );
-        })}
-      </div>
+      <div id="playground">{content}</div>
     );
   }
 }
+
 function Card(props) {
-  // console.log(props.size);
   return (
     <div className={props.done ? props.size + " invis" : props.size}
-    onClick={() => {
-      props.setAnimation(props.index, "true");
-      let pos = props.chosen.indexOf(props.index);
-      if (pos === -1) {
-        props.chosen.push(props.index);
-      } else if (pos !== -1) {
-        props.chosen.splice(0);
-      }
-    }}>
+    onClick={() => {props.setAnimation(props.index, "true");}}>
       <img className={props.back} src={props.imageBck} animated={props.animated}
       onAnimationEnd={() => {
-        props.setAnimation(props.index, "false");
         props.flip(props.index);
-        props.forceFaceDown();
+        props.setAnimation(props.index, "false");
+        props.process(props.index);
       }} alt="" />
       <img className={props.front} src={props.imageFrt} animated={props.animated} alt="" />
     </div>
-  )
+  );
+}
+
+function Congratulation() {
+  return (
+    <div>
+      <h1>YOU WON!</h1>
+    </div>
+  );
 }
 
 export {Playground}
