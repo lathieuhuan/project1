@@ -4,37 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-// let timer, message = document.getElementById("message");
-
-// function runTimer() {
-//   let centisec = 0,
-//     sec = 0,
-//     min = 0;
-//   timer = setInterval(() => {
-//     centisec++;
-//     if (centisec === 100) {
-//       centisec = 0;
-//       sec++;
-//     }
-//     if (sec === 60) {
-//       sec = 0;
-//       min++;
-//     }
-//     let time = `${min}:${sec < 10 ? "0" + sec : sec}:${
-//       centisec < 10 ? "0" + centisec : centisec
-//     }`;
-//     if (sec === 30) {
-//       clearInterval(timer);
-//       message.innerHTML = `<h1>GAME OVER</h1>`;
-//       message.classList.remove("hidden");
-//       ReactDOM.unmountComponentAtNode(root);
-//     }
-//     document.getElementById("time").innerHTML = time;
-//   }, 10);
-// }
-
-// SETUP
-let difficulty = "easy",
+let difficulty = "Easy",
   cardType = "Classic",
   dfcts = document.getElementsByClassName("difficulty"),
   types = document.getElementsByClassName("type"),
@@ -66,10 +36,6 @@ window.onclick = (e) => {
 };
 
 document.getElementById("submit").onclick = () => {
-  // clearInterval(timer);
-  // if (!message.classList.contains("hidden")) {
-  //   message.classList.add("hidden");
-  // }
   ReactDOM.unmountComponentAtNode(root);
   ReactDOM.render(
     <React.StrictMode>
@@ -77,7 +43,6 @@ document.getElementById("submit").onclick = () => {
     </React.StrictMode>,
     root
   );
-  // runTimer();
 };
 
 // If you want to start measuring performance in your app, pass a function

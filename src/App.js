@@ -1,10 +1,6 @@
 import { Component } from "react";
-import {
-  runTimer,
-  Card,
-  Congratulation,
-  shuffleDouble,
-} from "./components/Functions";
+import { Card, Congratulation, shuffleDouble } from "./components/Functions";
+import { Timer, Portal } from "./components/Timer";
 import "./App.css";
 
 let classicCards = [
@@ -37,12 +33,17 @@ let classicCards = [
 class App extends Component {
   constructor(props) {
     super(props);
-    let imgI, cards;
-    if (props.difficulty === "easy") {
-      imgI = shuffleDouble([0, 1, 2, 3, 4]);
-    } else {
-      imgI = shuffleDouble([0, 1, 2, 3, 4, 5, 6, 7, 8]);
-    }
+    let cards,
+      imgI =
+        props.difficulty === "Easy"
+          ? [0, 1, 2, 3, 4]
+          : [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    imgI = shuffleDouble(imgI);
+    // if (props.difficulty === "Easy") {
+    //   imgI = shuffleDouble([0, 1, 2, 3, 4]);
+    // } else {
+    //   imgI = shuffleDouble([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+    // }
     if (props.type === "Classic") {
       cards = imgI.map((i) => {
         return {
@@ -51,7 +52,7 @@ class App extends Component {
           front: "bottom",
           back: "top",
           animated: "false",
-          size: props.difficulty === "easy" ? "card-large" : "card-small",
+          size: props.difficulty === "Easy" ? "card-large" : "card-small",
           done: false,
         };
       });
@@ -63,13 +64,15 @@ class App extends Component {
           front: "bottom",
           back: "top",
           animated: "false",
-          size: props.difficulty === "easy" ? "card-large" : "card-small",
+          size: props.difficulty === "Easy" ? "card-large" : "card-small",
           done: false,
         };
       });
     }
     this.state = { cards, gameWon: false };
     this.chosen = [];
+    this.left = [];
+    this.run = true; //
   }
   setAnimation = (i, val) => {
     this.setState((prevS) => {
@@ -90,49 +93,66 @@ class App extends Component {
     });
   };
   process = (i) => {
+    if (this.chosen.length > 1) {
+      // dành cho TH: thẻ 1 = thẻ 2, nhấn nhanh thẻ 1-2-1 hoặc 1-2-2,
+      // thẻ 1 & 2 done nhưng thẻ 1 hoặc 2 vẫn được chọn
+      // while (this.chosen.length > 0 && this.state.cards[this.chosen[0]].done) {
+      //   this.chosen.shift();
+      // }
+      // let length = this.chosen.length;
+      // if (length % 2 === 0 || i !== this.chosen[length - 1]) {
+      //   this.chosen.push(i);
+      // } else {
+      //   this.chosen.splice(-1);
+      // }
+      // console.log(this.chosen, "before");
+      setTimeout(() => {
+        let data = this.state.cards;
+        if (this.chosen.length > 1) {
+          let cardX = data[this.chosen[0]],
+            cardY = data[this.chosen[1]];
+          if (cardX.imageFrt === cardY.imageFrt) {
+            cardX.done = cardY.done = true;
+          }
+          this.chosen.splice(0, 2);
+        }
+        console.log(this.chosen, "after");
+        for (let j = 0; j < data.length; j++) {
+          if (
+            (data[j].front === "top" && this.chosen.indexOf(j) === -1) ||
+            (data[j].front === "bottom" && this.chosen.indexOf(j) !== -1)
+          ) {
+            let temp = data[j].front;
+            data[j].front = data[j].back;
+            data[j].back = temp;
+          }
+        }
+        // check game won
+        let result = true;
+        for (let i = 0; i < this.state.cards.length; i++) {
+          if (!this.state.cards[i].done) {
+            result = false;
+            break;
+          }
+        }
+        this.run = !result; //
+        this.setState({ cards: data, gameWon: result });
+      }, 300);
+    }
+  };
+  test = (i) => {
+    // dành cho TH: thẻ 1 = thẻ 2, nhấn nhanh thẻ 1-2-1 hoặc 1-2-2,
+    // thẻ 1 & 2 done nhưng thẻ 1 hoặc 2 vẫn được chọn
+    while (this.chosen.length > 0 && this.state.cards[this.chosen[0]].done) {
+      this.chosen.shift();
+    }
     let length = this.chosen.length;
     if (length % 2 === 0 || i !== this.chosen[length - 1]) {
       this.chosen.push(i);
     } else {
       this.chosen.splice(-1);
     }
-    // console.log(this.chosen, "before");
-    setTimeout(() => {
-      let data = this.state.cards;
-      while (this.chosen.length > 1) {
-        let cardX = data[this.chosen[0]],
-          cardY = data[this.chosen[1]];
-        if (cardX.imageFrt === cardY.imageFrt) {
-          cardX.done = cardY.done = true;
-        }
-        this.chosen.splice(0, 2);
-        // dành cho TH: thẻ 1 = thẻ 2, nhấn nhanh thẻ 1-2-1 hoặc 1-2-2,
-        // thẻ 1 & 2 done nhưng thẻ 1 hoặc 2 vẫn được chọn
-        if (this.chosen.length === 1 && data[this.chosen[0]].done) {
-          this.chosen = [];
-        }
-      }
-      // console.log(this.chosen, "after");
-      for (let j = 0; j < data.length; j++) {
-        if (
-          (data[j].front === "top" && this.chosen.indexOf(j) === -1) ||
-          (data[j].front === "bottom" && this.chosen.indexOf(j) !== -1)
-        ) {
-          let temp = data[j].front;
-          data[j].front = data[j].back;
-          data[j].back = temp;
-        }
-      }
-      // check game won
-      let result = true;
-      for (let i = 0; i < this.state.cards.length; i++) {
-        if (!this.state.cards[i].done) {
-          result = false;
-          break;
-        }
-      }
-      this.setState({ cards: data, gameWon: result });
-    }, 400);
+    console.log(this.chosen, "before");
   };
   render() {
     let content;
@@ -149,11 +169,17 @@ class App extends Component {
             flip={this.flip}
             setAnimation={this.setAnimation}
             process={this.process}
+            test={this.test}
           />
         );
       });
     }
-    return <div id="playground">{content}</div>;
+    return (
+      <div id="playground">
+        {content}
+        <Portal child={<Timer />} container={"time"} run={this.run} />
+      </div>
+    );
   }
 }
 
