@@ -62,12 +62,18 @@ function Card(props) {
   );
 }
 
-function Congratulation() {
+function Message(props) {
+  let mess;
+  if (props.gameState === "Won") {
+    mess = "YOU WON!";
+  } else if (props.gameState === "Lost") {
+    mess = "GAME OVER!";
+  }
   return (
     <div>
-      <h1>YOU WON!</h1>
+      <h1>{mess}</h1>
     </div>
   );
 }
 
-export { shuffleDouble, Card, Congratulation }
+export { shuffleDouble, Card, Message }

@@ -14,14 +14,28 @@ class Timer extends React.Component {
     this.timer = setInterval(this.count, 10);
   }
   render() {
-    // console.log(this.props.run);
     let centis = this.state.count % 100,
-      sec = (this.state.count - centis) / 100 % 60,
-      min = Math.floor(this.state.count / 6000);
+        sec = (this.state.count - centis) / 100 % 60,
+        min = Math.floor(this.state.count / 6000);
+    if (!this.props.running) {
+      clearInterval(this.timer);
+    } else if (this.state.count === 1500) {
+      this.props.stopGame();
+    }
+    if (this.props.gameState === "Won") {
+      this.props.saveScore(this.state.count);
+    }
     return <span>
       {min + ":" + (sec < 10 ? "0" + sec : sec)
       + ":" + (centis < 10 ? "0" + centis : centis)}
     </span>;
+  }
+}
+
+class Record extends React.Component {
+  render() {
+    console.log(this.props.score);
+    return <span>{this.props.score}</span>;
   }
 }
 
@@ -34,4 +48,4 @@ class Portal extends React.Component {
     }
 }
 
-export { Timer, Portal }
+export { Timer, Record, Portal }
