@@ -49,8 +49,7 @@ function Card(props) {
   return (
     <div className={props.done ? props.size + " invis" : props.size}
     onClick={() => {
-      props.setAnimation(props.index, "true");
-      props.test(props.index);
+      props.setAnimation(props.index, props.animated === "false" ? "true" : "false");
     }}>
       <img className={props.back} src={props.imageBck} animated={props.animated}
       onAnimationEnd={() => {

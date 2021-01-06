@@ -38,7 +38,7 @@ h3 {
   font-size: 22px;
 }
 #left-col > p {
-  margin: 0;
+  margin: 0 0 15px 0;
   font-size: 18px;
   text-align: justify;
   line-height: 1.6;

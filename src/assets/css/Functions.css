@@ -49,10 +49,10 @@ img {
   z-index: -1;
 }
 .top[animated="true"] {
-  animation: flip 0.4s linear normal;
+  animation: flip 0.3s linear normal;
 }
 .bottom[animated="true"] {
-  animation: flip 0.4s linear reverse;
+  animation: flip 0.3s linear reverse;
 }
 @keyframes flip {
   from {
