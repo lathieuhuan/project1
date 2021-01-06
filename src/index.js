@@ -31,7 +31,7 @@ window.onclick = (e) => {
     !e.target.matches("#show-line") &&
     !dropdown.classList.contains("hidden")
   ) {
-    dropdown.classList.toggle("hidden");
+    dropdown.classList.add("hidden");
   }
 };
 

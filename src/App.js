@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Card, Message, shuffleDouble } from "./components/Functions";
-import { Timer, Record, Portal } from "./components/Timer";
+import { Timer, Portal } from "./components/Timer";
 import "./App.css";
 
 let cardImgs = {
@@ -56,14 +56,17 @@ class App extends Component {
         done: false,
       };
     });
+    // SETUP APP HERE
     this.state = {
       cards,
       running: true,
       gameState: "Progressing",
-      bestRecord: "",
+      time: 0,
+      bestRecord: 1500,
     };
     this.chosen = [];
     this.cardLeft = imgI.length;
+    this.timer = 0;
   }
   setAnimation = (i, val) => {
     this.setState((prevS) => {
@@ -104,40 +107,44 @@ class App extends Component {
         if (cardX.imageFrt === cardY.imageFrt) {
           cardX.done = cardY.done = true;
           this.cardLeft -= 2;
+        } else {
+          cardX.front = cardY.front = "bottom";
+          cardX.back = cardY.back = "top";
         }
         this.chosen.splice(0, 2);
       }
       // console.log(this.chosen, "after");
-      for (let j = 0; j < data.length; j++) {
-        if (
-          (data[j].front === "top" && this.chosen.indexOf(j) === -1) ||
-          (data[j].front === "bottom" && this.chosen.indexOf(j) !== -1)
-        ) {
-          let temp = data[j].front;
-          data[j].front = data[j].back;
-          data[j].back = temp;
+      let run = this.state.running,
+        state = this.state.gameState,
+        newRecord = this.state.bestRecord;
+      if (this.cardLeft === 0) {
+        run = false;
+        state = "Won";
+        if (this.state.time < this.state.bestRecord) {
+          newRecord = this.state.time;
         }
       }
       this.setState({
         cards: data,
-        running: this.cardLeft === 0 ? false : true,
-        gameState: this.cardLeft === 0 ? "Won" : "Progressing",
+        running: run,
+        gameState: state,
+        bestRecord: newRecord,
       });
     }, 300);
   };
-  stopGame = () => {
-    this.setState({ running: false, gameState: "Lost" });
-  };
-  saveScore = (score) => {
-    console.log(Number.isNaN(this.state.bestRecord));
-    console.log(score, "score");
-    if (this.state.bestRecord === "" || score < this.state.bestRecord) {
-      this.setState({ bestRecord: score });
-    }
-  };
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      if (this.state.time === 1500) {
+        this.setState({ running: false, gameState: "Lost" });
+      } else {
+        this.setState({ time: this.state.time + 1 });
+      }
+    }, 10);
+  }
   render() {
     let content;
     if (!this.state.running) {
+      clearInterval(this.timer);
       content = <Message gameState={this.state.gameState} />;
     } else {
       content = this.state.cards.map((val, i) => {
@@ -157,19 +164,9 @@ class App extends Component {
     return (
       <div id="playground">
         {content}
+        <Portal child={<Timer time={this.state.time} />} container={"time"} />
         <Portal
-          child={
-            <Timer
-              running={this.state.running}
-              gameState={this.state.gameState}
-              stopGame={this.stopGame}
-              saveScore={this.saveScore}
-            />
-          }
-          container={"time"}
-        />
-        <Portal
-          child={<Record score={this.state.bestRecord} />}
+          child={<Timer time={this.state.bestRecord} />}
           container={"record"}
         />
       </div>
