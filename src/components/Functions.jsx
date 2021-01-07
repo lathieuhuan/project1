@@ -40,9 +40,11 @@ function Message(props) {
     mess = "YOU WON!";
   } else if (props.gameState === "Lost") {
     mess = "GAME OVER!";
+  } else if (props.gameState === "Paused") {
+    mess = "PAUSED";
   }
   return (
-    <div>
+    <div id="message">
       <h1>{mess}</h1>
     </div>
   );

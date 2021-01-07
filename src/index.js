@@ -8,9 +8,9 @@ let difficulty = "Easy",
   cardType = "Classic",
   dfcts = document.getElementsByClassName("difficulty"),
   types = document.getElementsByClassName("type"),
-  root = document.getElementById("root"),
   showline = document.getElementById("show-line"),
-  dropdown = document.getElementById("dropdown");
+  dropdown = document.getElementById("dropdown"),
+  root = document.getElementById("root");
 
 for (let dfct of dfcts) {
   dfct.onclick = (e) => {

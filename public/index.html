@@ -3,6 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -13,7 +17,7 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Card Memory Game</title>
   </head>
-  <body>
+  <body class="flex">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div class="col-3" id="left-col">
       <h1>Card Memory Game</h1>
@@ -21,26 +25,25 @@
       <p>
         Click on a card to flip it up or down. A pair of cards flipped up
         together in sequence will disappear if they are identical. Try to clear
-        them all within <strong>15 seconds</strong>!
+        them all within <strong>20 seconds</strong>!
       </p>
       <p>
         <i
-          >Note that you cannot choose a card that is being flipped up, but
-          still can choose a card before it disappears.</i
+          >Note that you cannot choose a card that is being flipped, but still
+          can choose a card before it disappears.</i
         >
       </p>
     </div>
-    <div class="col-6" id="center-col">
+    <div class="flex-center col-6" id="center-col">
       <div id="root"></div>
-      <div class="flex hidden" id="message"></div>
     </div>
     <div class="col-3" id="right-col">
-      <div id="stats">
+      <div class="flex" id="stats">
         <p class="desc">Time:</p>
         <p class="num" id="time"></p>
         <p class="desc">Best Record:</p>
         <p class="num" id="record"></p>
-        <button id="pause">&#9612;&#9612;</button>
+        <div class="flex-center" id="pause"></div>
       </div>
       <div class="col-container" id="setup">
         <div class="group col-container">

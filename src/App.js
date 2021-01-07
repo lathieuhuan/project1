@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Card, Message, shuffleDouble } from "./components/Functions";
-import { Timer, Portal } from "./components/Timer";
+import { Timer, PauseBtn, Portal } from "./components/Children";
 import "./App.css";
 
 let cardImgs = {
@@ -40,6 +40,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     let cards,
+      score = localStorage.getItem("score"),
       imgI =
         props.difficulty === "Easy"
           ? [0, 1, 2, 3, 4]
@@ -62,7 +63,7 @@ class App extends Component {
       running: true,
       gameState: "Progressing",
       time: 0,
-      bestRecord: 1500,
+      bestRecord: score === null ? 1500 : score,
     };
     this.chosen = [];
     this.cardLeft = imgI.length;
@@ -87,19 +88,19 @@ class App extends Component {
     });
   };
   process = (i) => {
-    // dành cho TH: thẻ 1 = thẻ 2, nhấn nhanh thẻ 1-2-1 hoặc 1-2-2,
-    // thẻ 1 & 2 done nhưng thẻ 1 hoặc 2 vẫn được chọn
-    while (this.chosen.length > 0 && this.state.cards[this.chosen[0]].done) {
-      this.chosen.shift();
-    }
-    let length = this.chosen.length;
-    if (length % 2 === 0 || i !== this.chosen[length - 1]) {
-      this.chosen.push(i);
-    } else {
-      this.chosen.splice(-1);
-    }
-    // console.log(this.chosen, "before");
     setTimeout(() => {
+      // dành cho TH: thẻ 1 = thẻ 2, nhấn nhanh thẻ 1-2-1 hoặc 1-2-2,
+      // thẻ 1 & 2 done nhưng thẻ 1 hoặc 2 vẫn được chọn
+      while (this.chosen.length > 0 && this.state.cards[this.chosen[0]].done) {
+        this.chosen.shift();
+      }
+      let length = this.chosen.length;
+      if (length % 2 === 0 || i !== this.chosen[length - 1]) {
+        this.chosen.push(i);
+      } else {
+        this.chosen.splice(-1);
+      }
+      // console.log(this.chosen, "before");
       let data = this.state.cards;
       if (this.chosen.length > 1) {
         let cardX = data[this.chosen[0]],
@@ -132,21 +133,31 @@ class App extends Component {
       });
     }, 300);
   };
+  switchPause = () => {
+    if (this.state.gameState === "Progressing") {
+      this.setState({ gameState: "Paused" });
+    } else if (this.state.gameState === "Paused") {
+      this.setState({ gameState: "Progressing" });
+    }
+  };
   componentDidMount() {
     this.timer = setInterval(() => {
       if (this.state.time === 1500) {
         this.setState({ running: false, gameState: "Lost" });
+      } else if (this.state.gameState === "Paused") {
+        this.setState({ time: this.state.time });
       } else {
         this.setState({ time: this.state.time + 1 });
       }
     }, 10);
   }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    localStorage.setItem("score", this.state.bestRecord);
+  }
   render() {
     let content;
-    if (!this.state.running) {
-      clearInterval(this.timer);
-      content = <Message gameState={this.state.gameState} />;
-    } else {
+    if (this.state.running && this.state.gameState === "Progressing") {
       content = this.state.cards.map((val, i) => {
         return (
           <Card
@@ -160,6 +171,11 @@ class App extends Component {
           />
         );
       });
+    } else if (!this.state.running || this.state.gameState === "Paused") {
+      if (!this.state.running) {
+        clearInterval(this.timer);
+      }
+      content = <Message gameState={this.state.gameState} />;
     }
     return (
       <div id="playground">
@@ -168,6 +184,15 @@ class App extends Component {
         <Portal
           child={<Timer time={this.state.bestRecord} />}
           container={"record"}
+        />
+        <Portal
+          child={
+            <PauseBtn
+              state={this.state.gameState}
+              switchPause={this.switchPause}
+            />
+          }
+          container={"pause"}
         />
       </div>
     );
