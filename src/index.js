@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+// SETTING TOOLS
 let timeLimit = 1500;
 if (+localStorage.getItem("score") == false) {
   localStorage.setItem("score", timeLimit);
@@ -21,6 +22,17 @@ document.getElementById("delete-record").onclick = () => {
   alert("Best record deleted!");
 };
 
+document.getElementById("change-color").onclick = () => {
+  let r = document.querySelector(":root"),
+    primaColor = prompt("Enter Primary Color:"),
+    seconColor = prompt("Enter Secondary Color:"),
+    accenColor = prompt("Enter Accent Color:");
+  r.style.setProperty("--primary", primaColor);
+  r.style.setProperty("--secondary", seconColor);
+  r.style.setProperty("--accent", accenColor);
+};
+
+// APP INITIATION
 let difficulty = "Easy",
   cardType = "Classic",
   dfcts = document.getElementsByClassName("difficulty"),
