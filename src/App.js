@@ -60,10 +60,11 @@ class App extends Component {
     // SETUP APP HERE
     this.state = {
       cards,
-      running: true,
-      gameState: "Progressing",
+      running: this.props.running,
+      gameState: this.props.gameState,
       time: 0,
-      bestRecord: score === null ? 1500 : score,
+      bestRecord: score < this.props.timeLimit ? score : this.props.timeLimit,
+      newRecord: false,
     };
     this.chosen = [];
     this.cardLeft = imgI.length;
@@ -117,19 +118,23 @@ class App extends Component {
       // console.log(this.chosen, "after");
       let run = this.state.running,
         state = this.state.gameState,
-        newRecord = this.state.bestRecord;
+        record = this.state.bestRecord,
+        newRecord = this.state.newRecord;
       if (this.cardLeft === 0) {
         run = false;
         state = "Won";
         if (this.state.time < this.state.bestRecord) {
-          newRecord = this.state.time;
+          record = this.state.time;
+          newRecord = true;
+          localStorage.setItem("score", record);
         }
       }
       this.setState({
         cards: data,
         running: run,
         gameState: state,
-        bestRecord: newRecord,
+        bestRecord: record,
+        newRecord: newRecord,
       });
     }, 300);
   };
@@ -141,19 +146,20 @@ class App extends Component {
     }
   };
   componentDidMount() {
-    this.timer = setInterval(() => {
-      if (this.state.time === 1500) {
-        this.setState({ running: false, gameState: "Lost" });
-      } else if (this.state.gameState === "Paused") {
-        this.setState({ time: this.state.time });
-      } else {
-        this.setState({ time: this.state.time + 1 });
-      }
-    }, 10);
+    if (this.state.running) {
+      this.timer = setInterval(() => {
+        if (this.state.time === this.props.timeLimit) {
+          this.setState({ running: false, gameState: "Lost" });
+        } else if (this.state.gameState === "Paused") {
+          this.setState({ time: this.state.time });
+        } else {
+          this.setState({ time: this.state.time + 1 });
+        }
+      }, 10);
+    }
   }
   componentWillUnmount() {
     clearInterval(this.timer);
-    localStorage.setItem("score", this.state.bestRecord);
   }
   render() {
     let content;
@@ -175,7 +181,12 @@ class App extends Component {
       if (!this.state.running) {
         clearInterval(this.timer);
       }
-      content = <Message gameState={this.state.gameState} />;
+      content = (
+        <Message
+          gameState={this.state.gameState}
+          newRecord={this.state.newRecord}
+        />
+      );
     }
     return (
       <div id="playground">

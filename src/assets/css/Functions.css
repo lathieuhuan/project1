@@ -69,9 +69,15 @@ img {
   border: 3px black solid;
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 #message > h1 {
   font-size: 60px;
+  margin: 0 0 10px;
+}
+#message > p {
+  font-size: 30px;
+  margin: 0;
 }

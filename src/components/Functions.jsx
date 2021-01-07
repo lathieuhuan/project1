@@ -35,17 +35,23 @@ function Card(props) {
 }
 
 function Message(props) {
-  let mess;
+  let mess, extraMess;
   if (props.gameState === "Won") {
     mess = "YOU WON!";
+    if (props.newRecord) {
+      extraMess = <p>New Record!</p>
+    }
   } else if (props.gameState === "Lost") {
     mess = "GAME OVER!";
   } else if (props.gameState === "Paused") {
     mess = "PAUSED";
+  } else {
+    mess = "WELCOME";
   }
   return (
     <div id="message">
       <h1>{mess}</h1>
+      {extraMess}
     </div>
   );
 }

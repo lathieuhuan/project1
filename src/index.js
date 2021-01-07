@@ -4,6 +4,23 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+let timeLimit = 1500;
+if (+localStorage.getItem("score") == false) {
+  localStorage.setItem("score", timeLimit);
+}
+document.getElementById("time-limit").innerHTML = `${timeLimit / 100} seconds!`;
+
+document.getElementById("change-time-limit").onclick = () => {
+  timeLimit = parseInt(prompt("Set time limit:"));
+  document.getElementById("time-limit").innerHTML = `${
+    timeLimit / 100
+  } seconds!`;
+};
+document.getElementById("delete-record").onclick = () => {
+  localStorage.setItem("score", timeLimit);
+  alert("Best record deleted!");
+};
+
 let difficulty = "Easy",
   cardType = "Classic",
   dfcts = document.getElementsByClassName("difficulty"),
@@ -35,11 +52,30 @@ window.onclick = (e) => {
   }
 };
 
-document.getElementById("submit").onclick = () => {
+ReactDOM.render(
+  <React.StrictMode>
+    <App
+      running={false}
+      gameState="NYS"
+      difficulty={difficulty}
+      type={cardType}
+      timeLimit={timeLimit}
+    />
+  </React.StrictMode>,
+  root
+);
+
+document.getElementById("start").onclick = () => {
   ReactDOM.unmountComponentAtNode(root);
   ReactDOM.render(
     <React.StrictMode>
-      <App difficulty={difficulty} type={cardType} />
+      <App
+        running={true}
+        gameState="Progressing"
+        difficulty={difficulty}
+        type={cardType}
+        timeLimit={timeLimit}
+      />
     </React.StrictMode>,
     root
   );

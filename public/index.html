@@ -18,6 +18,8 @@
     <title>Card Memory Game</title>
   </head>
   <body class="flex">
+    <button class="fa fa-wrench" id="change-time-limit"></button>
+    <button class="fa fa-trash-o" id="delete-record"></button>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div class="col-3" id="left-col">
       <h1>Card Memory Game</h1>
@@ -25,7 +27,7 @@
       <p>
         Click on a card to flip it up or down. A pair of cards flipped up
         together in sequence will disappear if they are identical. Try to clear
-        them all within <strong>20 seconds</strong>!
+        them all within <strong id="time-limit"></strong>
       </p>
       <p>
         <i
@@ -76,7 +78,7 @@
             </div>
           </div>
         </div>
-        <button id="submit">START</button>
+        <button id="start">START</button>
       </div>
     </div>
   </body>

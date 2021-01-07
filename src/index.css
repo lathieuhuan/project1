@@ -9,6 +9,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100vw;
   height: 100vh;
+  position: relative;
+}
+#change-time-limit,
+#delete-record {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+  bottom: 10px;
+}
+#change-time-limit {
+  right: 50px;
+}
+#delete-record {
+  right: 10px;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -119,7 +136,7 @@ h3 {
   font-weight: 700;
 }
 label,
-#submit {
+#start {
   font-size: 18px;
 }
 label[for="easy"] {
@@ -167,7 +184,7 @@ input[type="button"],
 input[type="button"]:hover {
   background-color: rgb(239, 239, 239);
 }
-#submit {
+#start {
   padding: 5px 10px;
   font-weight: 700;
   border-radius: 5px;
