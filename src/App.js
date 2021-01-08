@@ -1,36 +1,63 @@
 import { Component } from "react";
-import { Card, Message, shuffleDouble } from "./components/Functions";
+import { Card, Message, RandomShuffleDouble } from "./components/Functions";
 import { Timer, PauseBtn, Portal } from "./components/Children";
 import "./App.css";
 
+let classicURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/",
+  lolURL = "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/",
+  classicImgs = [
+    "d/d5/Playing_card_heart_2.svg/819px-Playing_card_heart_2.svg.png",
+    "5/59/Playing_card_diamond_2.svg/819px-Playing_card_diamond_2.svg.png",
+    "5/52/Playing_card_spade_3.svg/1200px-Playing_card_spade_3.svg.png",
+    "6/6b/Playing_card_club_3.svg/819px-Playing_card_club_3.svg.png",
+    "a/a2/Playing_card_heart_4.svg/819px-Playing_card_heart_4.svg.png",
+    "2/2c/Playing_card_spade_4.svg/1200px-Playing_card_spade_4.svg.png",
+    "9/94/Playing_card_spade_5.svg/1200px-Playing_card_spade_5.svg.png",
+    "5/50/Playing_card_club_5.svg/1200px-Playing_card_club_5.svg.png",
+    "8/80/Playing_card_diamond_6.svg/819px-Playing_card_diamond_6.svg.png",
+    "d/d2/Playing_card_spade_6.svg/1200px-Playing_card_spade_6.svg.png",
+    "9/94/Playing_card_heart_7.svg/819px-Playing_card_heart_7.svg.png",
+    "4/4b/Playing_card_club_7.svg/819px-Playing_card_club_7.svg.png",
+    "5/50/Playing_card_heart_8.svg/1200px-Playing_card_heart_8.svg.png",
+    "7/78/Playing_card_diamond_8.svg/1200px-Playing_card_diamond_8.svg.png",
+    "e/e0/Playing_card_spade_9.svg/1200px-Playing_card_spade_9.svg.png",
+    "2/27/Playing_card_club_9.svg/819px-Playing_card_club_9.svg.png",
+    "d/d3/Playing_card_diamond_A.svg/1200px-Playing_card_diamond_A.svg.png",
+    "5/57/Playing_card_heart_A.svg/1200px-Playing_card_heart_A.svg.png",
+  ],
+  lolImgs = [
+    "Annie",
+    "Braum",
+    "Corki",
+    "Diana",
+    "Fizz",
+    "Gnar",
+    "Heimerdinger",
+    "Irelia",
+    "Jax",
+    "Katarina",
+    "Leona",
+    "Neeko",
+    "Rammus",
+    "Syndra",
+    "Teemo",
+    "Vayne",
+    "Yasuo",
+    "Zoe",
+  ];
+
 let cardImgs = {
   Classic: {
-    front: [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Playing_card_heart_2.svg/819px-Playing_card_heart_2.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Playing_card_heart_6.svg/1200px-Playing_card_heart_6.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Playing_card_diamond_3.svg/1200px-Playing_card_diamond_3.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Playing_card_diamond_8.svg/1200px-Playing_card_diamond_8.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Playing_card_club_4.svg/819px-Playing_card_club_4.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Playing_card_club_9.svg/819px-Playing_card_club_9.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Playing_card_diamond_A.svg/1200px-Playing_card_diamond_A.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Playing_card_spade_5.svg/1200px-Playing_card_spade_5.svg.png",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Playing_card_spade_10.svg/1200px-Playing_card_spade_10.svg.png",
-    ],
+    front: classicImgs.map((val) => {
+      return classicURL + val;
+    }),
     back:
       "https://previews.123rf.com/images/bobyramone/bobyramone1206/bobyramone120600016/14167526-playing-card-back-side-60x90-mm.jpg",
   },
   "LoL Champions": {
-    front: [
-      "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg",
-      "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Ahri_0.jpg",
-      "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Akali_0.jpg",
-      "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Alistar_0.jpg",
-      "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Amumu_0.jpg",
-      "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Anivia_0.jpg",
-      "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Annie_0.jpg",
-      "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Ashe_0.jpg",
-      "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Azir_0.jpg",
-    ],
+    front: lolImgs.map((val) => {
+      return lolURL + val + "_0.jpg";
+    }),
     back:
       "https://static.wikia.nocookie.net/leagueoflegends/images/2/2d/LoR_Summoner%27s_Rift_Order_Card_Back.png",
   },
@@ -39,24 +66,19 @@ let cardImgs = {
 class App extends Component {
   constructor(props) {
     super(props);
-    let cards,
-      score = localStorage.getItem("score"),
-      imgI =
-        props.difficulty === "Easy"
-          ? [0, 1, 2, 3, 4]
-          : [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    imgI = shuffleDouble(imgI);
-    cards = imgI.map((i) => {
-      return {
-        imageFrt: cardImgs[props.type].front[i],
-        imageBck: cardImgs[props.type].back,
-        front: "bottom",
-        back: "top",
-        animated: "false",
-        size: props.difficulty === "Easy" ? "card-large" : "card-small",
-        done: false,
-      };
-    });
+    let score = localStorage.getItem("score"),
+      imgI = RandomShuffleDouble(props.difficulty === "Easy" ? 5 : 9, 18),
+      cards = imgI.map((i) => {
+        return {
+          imageFrt: cardImgs[props.type].front[i],
+          imageBck: cardImgs[props.type].back,
+          front: "bottom",
+          back: "top",
+          animated: "false",
+          size: props.difficulty === "Easy" ? "card-large" : "card-small",
+          done: false,
+        };
+      });
     // SETUP APP HERE
     this.state = {
       cards,
@@ -90,19 +112,16 @@ class App extends Component {
   };
   process = (i) => {
     setTimeout(() => {
-      // dành cho TH: thẻ 1 = thẻ 2, nhấn nhanh thẻ 1-2-1 hoặc 1-2-2,
-      // thẻ 1 & 2 done nhưng thẻ 1 hoặc 2 vẫn được chọn
-      while (this.chosen.length > 0 && this.state.cards[this.chosen[0]].done) {
-        this.chosen.shift();
-      }
-      let length = this.chosen.length;
-      if (length % 2 === 0 || i !== this.chosen[length - 1]) {
+      let data = this.state.cards,
+        length = this.chosen.length;
+      if (
+        !data[i].done &&
+        (length % 2 === 0 || i !== this.chosen[length - 1])
+      ) {
         this.chosen.push(i);
-      } else {
+      } else if (length % 2 === 1 && i === this.chosen[length - 1]) {
         this.chosen.splice(-1);
       }
-      // console.log(this.chosen, "before");
-      let data = this.state.cards;
       if (this.chosen.length > 1) {
         let cardX = data[this.chosen[0]],
           cardY = data[this.chosen[1]];
@@ -115,7 +134,6 @@ class App extends Component {
         }
         this.chosen.splice(0, 2);
       }
-      // console.log(this.chosen, "after");
       let run = this.state.running,
         state = this.state.gameState,
         record = this.state.bestRecord,
@@ -164,19 +182,23 @@ class App extends Component {
   render() {
     let content;
     if (this.state.running && this.state.gameState === "Progressing") {
-      content = this.state.cards.map((val, i) => {
-        return (
-          <Card
-            key={i}
-            index={i}
-            chosen={this.chosen}
-            {...val}
-            flip={this.flip}
-            setAnimation={this.setAnimation}
-            process={this.process}
-          />
-        );
-      });
+      content = (
+        <div id="playground">
+          {this.state.cards.map((val, i) => {
+            return (
+              <Card
+                key={i}
+                index={i}
+                chosen={this.chosen}
+                {...val}
+                flip={this.flip}
+                setAnimation={this.setAnimation}
+                process={this.process}
+              />
+            );
+          })}
+        </div>
+      );
     } else if (!this.state.running || this.state.gameState === "Paused") {
       if (!this.state.running) {
         clearInterval(this.timer);
@@ -189,7 +211,7 @@ class App extends Component {
       );
     }
     return (
-      <div id="playground">
+      <div id="app-container">
         {content}
         <Portal child={<Timer time={this.state.time} />} container={"time"} />
         <Portal
@@ -199,7 +221,7 @@ class App extends Component {
         <Portal
           child={
             <PauseBtn
-              state={this.state.gameState}
+              gameState={this.state.gameState}
               switchPause={this.switchPause}
             />
           }

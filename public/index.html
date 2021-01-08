@@ -22,7 +22,7 @@
     <button class="fa fa-wrench" id="change-time-limit"></button>
     <button class="fa fa-trash-o" id="delete-record"></button>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div class="col-3" id="left-col">
+    <div class="col-3 border-box" id="left-col">
       <h1>Card Memory Game</h1>
       <h3>HOW TO PLAY:</h3>
       <p>
@@ -32,23 +32,21 @@
       </p>
       <p>
         <i
-          >Note that you cannot choose a card that is being flipped, but still
-          can choose a card before it disappears.</i
+          >Note: you cannot choose a card that is being flipped or the one that
+          will disappear.</i
         >
       </p>
     </div>
-    <div class="flex-center col-6" id="center-col">
-      <div id="root"></div>
-    </div>
-    <div class="col-3" id="right-col">
-      <div class="flex" id="stats">
+    <div class="col-6 flex-center border-box" id="root"></div>
+    <div class="col-3 border-box" id="right-col">
+      <div class="flex border-box" id="stats">
         <p class="desc">Time:</p>
         <p class="num" id="time"></p>
         <p class="desc">Best Record:</p>
         <p class="num" id="record"></p>
-        <div class="flex-center" id="pause"></div>
       </div>
-      <div class="col-container" id="setup">
+      <div class="flex-center" id="pause"></div>
+      <div class="col-container border-box" id="setup">
         <div class="group col-container">
           <label>Choose difficulty:</label>
           <div>

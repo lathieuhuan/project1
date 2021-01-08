@@ -1,6 +1,15 @@
+#app-container {
+  width: 756px;
+  min-width: 756px;
+}
 #playground {
   width: 100%;
   height: 100%;
+  padding: 25px 25px 17px 25px;
+  box-sizing: border-box;
+  background-color: white;
+  border: 3px black solid;
+  border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;

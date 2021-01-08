@@ -18,7 +18,7 @@ class PauseBtn extends React.Component {
   render() {
     return <div id="pause-btn" onClick={() => this.props.switchPause()}>
       <i className={
-        this.props.state === "Paused" ? "fa fa-play" : "fa fa-pause"
+        this.props.gameState === "Paused" ? "fa fa-play" : "fa fa-pause"
       }></i>
     </div>;
   }

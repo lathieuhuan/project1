@@ -12,14 +12,14 @@ if (+localStorage.getItem("score") == false) {
 document.getElementById("time-limit").innerHTML = `${timeLimit / 100} seconds!`;
 
 document.getElementById("change-time-limit").onclick = () => {
-  timeLimit = parseInt(prompt("Set time limit:"));
+  timeLimit = parseInt(prompt("Set the time limit in seconds:")) * 100;
   document.getElementById("time-limit").innerHTML = `${
     timeLimit / 100
   } seconds!`;
 };
 document.getElementById("delete-record").onclick = () => {
   localStorage.setItem("score", timeLimit);
-  alert("Best record deleted!");
+  alert("The best record has been deleted and set to the time limit!");
 };
 
 document.getElementById("change-color").onclick = () => {

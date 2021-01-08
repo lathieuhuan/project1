@@ -1,7 +1,14 @@
 import React from 'react'
 import '../assets/css/Functions.css'
 
-function shuffleDouble(arr) {
+function RandomShuffleDouble(limit, max) {
+  let arr = [];
+  while (arr.length < limit) {
+    let random = Math.floor(Math.random() * max);
+    if (arr.indexOf(random) === -1) {
+      arr.push(random);
+    }
+  }
   let result = [];
   while (arr.length > 0) {
     let random = Math.floor(Math.random() * arr.length);
@@ -56,4 +63,4 @@ function Message(props) {
   );
 }
 
-export { shuffleDouble, Card, Message }
+export { RandomShuffleDouble, Card, Message }
