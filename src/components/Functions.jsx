@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom';
 import '../assets/css/Functions.css'
 
 function RandomShuffleDouble(limit, max) {
@@ -63,4 +64,29 @@ function Message(props) {
   );
 }
 
-export { RandomShuffleDouble, Card, Message }
+function Timer(props) {
+  let centis = props.time % 100,
+    sec = (props.time - centis) / 100 % 60;
+    // min = Math.floor(props.time / 6000);
+  return <span>
+    {(sec < 10 ? "0" + sec : sec) + ":" + 
+    (centis < 10 ? "0" + centis : centis)}
+  </span>;
+}
+
+function PauseBtn(props) {
+  return <div id="pause-btn" onClick={() => props.switchPause()}>
+    <i className={
+      props.gameState === "Paused" ? "fa fa-play" : "fa fa-pause"
+    }></i>
+  </div>;
+}
+
+function Portal(props) {
+  return ReactDOM.createPortal(
+    props.child,
+    document.getElementById(props.container)
+  );
+}
+
+export { RandomShuffleDouble, Card, Message, Timer, PauseBtn, Portal }

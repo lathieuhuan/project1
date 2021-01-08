@@ -81,3 +81,15 @@ img {
   font-size: 30px;
   margin: 0;
 }
+
+#pause-btn {
+  width: 100%;
+  height: 100%;
+  border: 1px black solid;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}

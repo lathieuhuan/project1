@@ -1,6 +1,12 @@
 import { Component } from "react";
-import { Card, Message, RandomShuffleDouble } from "./components/Functions";
-import { Timer, PauseBtn, Portal } from "./components/Children";
+import {
+  RandomShuffleDouble,
+  Card,
+  Message,
+  Timer,
+  PauseBtn,
+  Portal,
+} from "./components/Functions";
 import "./App.css";
 
 let classicURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/",
