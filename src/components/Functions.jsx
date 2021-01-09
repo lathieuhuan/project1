@@ -26,18 +26,19 @@ function RandomShuffleDouble(limit, max) {
 }
 
 function Card(props) {
+  const { imageFrt, imageBck, front, back, animated, size, done, index } = props;
   return (
-    <div className={props.done ? props.size + " invis" : props.size}
+    <div className={done ? size + " invis" : size}
     onClick={() => {
-      props.setAnimation(props.index, "true");
+      props.setAnimation(index, "true");
     }}>
-      <img className={props.back} src={props.imageBck} animated={props.animated}
+      <img className={back} src={imageBck} animated={animated}
       onAnimationEnd={() => {
-        props.flip(props.index);
-        props.setAnimation(props.index, "false");
-        props.process(props.index);
+        props.flip(index);
+        props.setAnimation(index, "false");
+        props.process(index);
     }} alt="" />
-      <img className={props.front} src={props.imageFrt} animated={props.animated} alt="" />
+      <img className={front} src={imageFrt} animated={animated} alt="" />
     </div>
   );
 }
