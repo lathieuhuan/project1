@@ -1,14 +1,13 @@
 import "./App.css";
 import { Component } from "react";
-import { Collection } from "./Components/Collection";
-import { SectionList } from "./Components/SectionList";
+import { Collection } from "./components/Collection";
+import { SectionList } from "./components/SectionList";
 import { pokemon } from "./pokemonData";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pokemons: pokemon,
       remain: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       fire: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       water: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

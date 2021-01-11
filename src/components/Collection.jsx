@@ -1,11 +1,22 @@
-import { Section } from './Section'
+import { Pokemon } from './Pokemon'
 
-export function SectionList(props) {
+export function Collection(props) {
   return (
-    <div className="section-list-cont">
-      <Section type="fire" pokemons={props.pokemons} fire={props.fire} move={props.move} />
-      <Section type="water" pokemons={props.pokemons} water={props.water} move={props.move} />
-      <Section type="grass" pokemons={props.pokemons} grass={props.grass} move={props.move} />
+    <div className="border collection-cont"
+      onDragOver={(e) => e.preventDefault()}
+      onDrop={(e) => {
+        props.move(e.dataTransfer.getData('from'), props.type, e.dataTransfer.getData('indx'))
+      }}>
+      {props.remain.map((val, indx) => {
+        if (val != 0) return indx
+        return -1
+      })
+        .filter(val => val !== -1)
+        .map((val) => {
+          return (
+            <Pokemon {...props.pokemons[val]} key={val} indx={val} type={props.type} />
+          )
+        })}
     </div>
   )
 }

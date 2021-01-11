@@ -1,19 +1,11 @@
-import React from 'react';
+import { Section } from '../components/Section'
 
-function End(props) {
+export function SectionList(props) {
   return (
-    <div id="end">
-      <div onDragOver={(ev) => props.allowDrop(ev)} onDrop={(ev) => props.drop(ev)}>
-        <h2 id="fire">FIRE</h2>
-      </div>
-      <div onDragOver={(ev) => props.allowDrop(ev)} onDrop={(ev) => props.drop(ev)}>
-        <h2 id="water">WATER</h2>
-      </div>
-      <div onDragOver={(ev) => props.allowDrop(ev)} onDrop={(ev) => props.drop(ev)}>
-        <h2 id="grass">GRASS</h2>
-      </div>
+    <div className="section-list-cont">
+      <Section type="fire" pokemons={props.pokemons} fire={props.fire} move={props.move} />
+      <Section type="water" pokemons={props.pokemons} water={props.water} move={props.move} />
+      <Section type="grass" pokemons={props.pokemons} grass={props.grass} move={props.move} />
     </div>
-  );
+  )
 }
-
-export { End }
