@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 body {
   margin: 0;
@@ -20,7 +19,42 @@ code {
 }
 #root {
   width: 100%;
-  height: 615px;
-  border: 1px black solid;
+  height: 618px;
   margin: auto 0;
+}
+#app-con {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.side-col {
+  width: 160px;
+  height: 100%;
+  border: 1px black solid;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+#platform {
+  width: 910px;
+  height: 100%;
+  border-right: 1px black solid;
+  border-bottom: 1px black solid;
+  display: flex;
+  flex-wrap: wrap;
+}
+.cell {
+  border-top: 1px black solid;
+  border-left: 1px black solid;
+  width: 100px;
+  height: 102px;
+  float: left;
+}
+.side-col > img {
+  margin-top: 20px;
+}
+.cell > img {
+  width: 100%;
+  height: 100%;
 }
