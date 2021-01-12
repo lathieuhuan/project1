@@ -3,7 +3,7 @@ import { Pokemon } from './Pokemon'
 export function Collection(props) {
   return (
     <div className="border collection-cont"
-      onDragOver={(e) => e.preventDefault()}
+      onDragOver={e => e.preventDefault()}
       onDrop={(e) => {
         props.move(e.dataTransfer.getData('from'), props.type, e.dataTransfer.getData('indx'))
       }}>
