@@ -1,0 +1,48 @@
+.list-container {
+  width: 100%;
+  height: 406px;
+  overflow: auto;
+}
+#gallery {
+  height: 202px;
+  margin-bottom: 20px;
+  border: 1px black solid;
+}
+#gallery > img {
+  width: 161px;
+  height: 161px;
+  margin: 20px;
+}
+
+#filter {
+  width: 100%;
+  height: 450px;
+  display: flex;
+  justify-content: space-between;
+}
+.filter-col {
+  width: 32%;
+  border: 1px black solid;
+}
+h2 {
+  text-align: center;
+  padding: 5px 0;
+  color: white;
+  text-transform: uppercase;
+}
+h2[id="fire-h"] {
+  background-color: red;
+}
+h2[id="water-h"] {
+  background-color: blue;
+}
+h2[id="grass-h"] {
+  background-color: green;
+}
+#fire > img,
+#water > img,
+#grass > img {
+  width: 151px;
+  height: 151px;
+  margin: 15px;
+}

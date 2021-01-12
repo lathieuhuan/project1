@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -5,100 +10,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  width: 100vw;
-  height: 100vh;
-}
-
 #root {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-}
-.app-cont {
-  width: 75%;
-  height: 100%;
-}
-
-.collection-cont {
-  width: 95%;
-  height: 25%;
-  margin: 2.5% 2.5%;
-  display: flex;
-  overflow: scroll;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-img {
-  width: 150px;
-  height: 150px;
-}
-.collection-cont > .pokemon-cont {
-  width: 30%;
-  height: 25%;
-  margin: 0px 1.6%;
-  display: flex;
-  justify-content: center;
-}
-
-.section-cont {
-  height: 95%;
-  width: 30%;
-  margin: auto;
-}
-.type-cont {
-  height: 5%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.fire {
-  background-color: #e95e0e;
-  color: white;
-}
-.water {
-  background-color: #1cf7ec;
-  color: black;
-}
-.grass {
-  background-color: #37ec12;
-  color: black;
-}
-.type-cont > p {
-  text-transform: uppercase;
-  font-weight: bolder;
-}
-.pokemons-cont {
-  width: 100%;
-  height: 95%;
-  overflow: scroll;
-  border: #cfdfde solid 1px;
-}
-.pokemons-cont > .pokemon-cont {
-  width: 100%;
-  height: 20%;
-  display: flex;
-  justify-content: center;
-}
-
-.section-list-cont {
-  width: 95%;
-  height: 65%;
-  margin: 0 2.5%;
-  display: flex;
-  justify-content: space-evenly;
+  width: 80%;
+  margin: 20px auto;
 }

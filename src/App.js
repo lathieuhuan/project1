@@ -1,49 +1,37 @@
 import "./App.css";
 import { Component } from "react";
-import { Collection } from "./components/Collection";
-import { SectionList } from "./components/SectionList";
+import { FilterCol, PokemonList } from "./components/Functions";
 import { pokemon } from "./pokemonData";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      remain: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      fire: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      water: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      grass: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      gallery: pokemon,
+      fire: [],
+      water: [],
+      grass: [],
     };
-    this.move = this.move.bind(this);
   }
-  move(from, to, index) {
-    console.log(from, to, index);
-    this.setState((oldState) => {
-      let tempState = JSON.parse(JSON.stringify(oldState));
-      if (tempState[from][index] === 1) {
-        tempState[from][index] = 0;
-        tempState[to][index] = 1;
-        return tempState;
-      }
+  move = (start, pos, end) => {
+    this.setState((prevS) => {
+      let data = JSON.parse(JSON.stringify(prevS));
+      data[end].push(data[start].splice(pos, 1)[0]);
+      return data;
     });
-  }
+  };
   render() {
     return (
-      <div className="app-cont">
-        <Collection
-          pokemons={pokemon}
-          type="remain"
-          remain={this.state.remain}
-          move={this.move}
-        />
-        <SectionList
-          pokemons={pokemon}
-          fire={this.state.fire}
-          water={this.state.water}
-          grass={this.state.grass}
-          move={this.move}
-        />
+      <div>
+        <PokemonList data={this.state.gallery} id="gallery" move={this.move} />
+        <div id="filter">
+          <FilterCol data={this.state.fire} id="fire" move={this.move} />
+          <FilterCol data={this.state.water} id="water" move={this.move} />
+          <FilterCol data={this.state.grass} id="grass" move={this.move} />
+        </div>
       </div>
     );
   }
 }
+
 export default App;
