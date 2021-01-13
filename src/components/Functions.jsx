@@ -66,7 +66,7 @@ function Message(props) {
 }
 
 function Timer(props) {
-  let centis = props.time % 100,
+  const centis = props.time % 100,
     sec = (props.time - centis) / 100 % 60;
     // min = Math.floor(props.time / 6000);
   return <span>
