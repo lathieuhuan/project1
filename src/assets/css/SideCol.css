@@ -1,0 +1,12 @@
+.side-col {
+  width: 160px;
+  height: 100%;
+  border: 1px black solid;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+.side-col > img {
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+}
