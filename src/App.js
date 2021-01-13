@@ -14,11 +14,13 @@ class App extends Component {
     };
   }
   move = (start, pos, end) => {
-    this.setState((prevS) => {
-      let data = JSON.parse(JSON.stringify(prevS));
-      data[end].push(data[start].splice(pos, 1)[0]);
-      return data;
-    });
+    if (start !== end) {
+      this.setState((prevS) => {
+        let data = JSON.parse(JSON.stringify(prevS));
+        data[end].push(data[start].splice(pos, 1)[0]);
+        return data;
+      });
+    }
   };
   render() {
     return (
