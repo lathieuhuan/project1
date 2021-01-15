@@ -40,6 +40,7 @@ class App extends Component {
       rightCol: shuffledI[1],
       platform: indexes,
       done: false,
+      hiliPiece: 0,
     };
   }
   restart = () => {
@@ -60,6 +61,9 @@ class App extends Component {
         done: false,
       };
     });
+  };
+  showHint = (i) => {
+    this.setState({ hiliPiece: i });
   };
   move = (start, pos, end) => {
     if (start !== end) {
@@ -101,16 +105,36 @@ class App extends Component {
     }
   };
   render() {
+    let { leftCol, rightCol, platform, done, hiliPiece } = this.state;
     return (
       <div id="app-con">
-        <SideCol imgIs={this.state.leftCol} id="leftCol" move={this.move} />
+        <SideCol
+          imgIs={leftCol}
+          id="leftCol"
+          move={this.move}
+          hiliPiece={hiliPiece}
+        />
         <div id="platform">
-          {this.state.platform.map((val, i) => {
-            return <Cell key={i} imgI={val} index={i} move={this.move} />;
+          {platform.map((val, i) => {
+            return (
+              <Cell
+                key={i}
+                imgI={val}
+                index={i}
+                move={this.move}
+                hiliPiece={hiliPiece}
+                showHint={this.showHint}
+              />
+            );
           })}
-          {this.state.done ? <Message restart={this.restart} /> : null}
+          {done ? <Message restart={this.restart} /> : null}
         </div>
-        <SideCol imgIs={this.state.rightCol} id="rightCol" move={this.move} />
+        <SideCol
+          imgIs={rightCol}
+          id="rightCol"
+          move={this.move}
+          hiliPiece={hiliPiece}
+        />
       </div>
     );
   }

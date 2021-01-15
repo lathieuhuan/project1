@@ -12,7 +12,8 @@ export function SideCol(props) {
       );
     }}>
       {props.imgIs.map((val, i) => {
-        return <ImgPiece key={val} imgI={val} index={i} id={props.id} />;
+        return <ImgPiece key={val} imgI={val} index={i} id={props.id}
+          showHint={props.showHint} hiliPiece={props.hiliPiece}/>;
       })}
   </div>;
 }
