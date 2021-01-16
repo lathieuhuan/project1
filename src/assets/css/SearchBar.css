@@ -1,0 +1,29 @@
+#search-bar {
+  width: 100%;
+  padding: 15px 0 25px 0;
+}
+#inner {
+  width: 500px;
+  margin: 0 auto;
+  position: relative;
+}
+#search-box {
+  width: 500px;
+  border: 2px black solid;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 5px 20px rgba(0, 0, 0, 0.19);
+}
+#search-btn {
+  width: 42.4px;
+  height: 100%;
+  border: 2px black solid;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: absolute;
+  left: 105%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 5px 20px rgba(0, 0, 0, 0.19);
+}

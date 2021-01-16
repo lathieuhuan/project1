@@ -4,15 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-let modal = document.getElementById("modal");
-window.onclick = (e) => {
-  if (
-    !e.target.matches(".img-piece") &&
-    !e.target.matches("#modal-img") &&
-    getComputedStyle(modal).display === "flex"
-  ) {
-    modal.style.display = "none";
-  }
+document.getElementById("change-color").onclick = () => {
+  let r = document.querySelector(":root"),
+    primaColor = prompt("Enter Primary Color:"),
+    seconColor = prompt("Enter Secondary Color:"),
+    accenColor = prompt("Enter Accent Color:");
+  r.style.setProperty("--primary", primaColor);
+  r.style.setProperty("--secondary", seconColor);
+  r.style.setProperty("--accent", accenColor);
 };
 
 ReactDOM.render(

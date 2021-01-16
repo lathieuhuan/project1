@@ -1,6 +1,22 @@
+:root {
+  --primary: rgb(249, 211, 2);
+  --secondary: black;
+  --accent: black;
+}
+.info-card {
+  background-color: white;
+}
+#search-bar {
+  background-color: var(--primary);
+}
+.info-card h2 {
+  color: var(--secondary);
+}
+
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 body {
   margin: 0;
@@ -9,11 +25,23 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
+  background-color: var(--primary);
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+#root {
+  width: 80%;
+  margin: 0 auto;
+}
+#change-color {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  position: fixed;
+  top: 10px;
+  right: 10px;
 }
