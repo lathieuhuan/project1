@@ -6,7 +6,7 @@ export function ImgPiece(props) {
     (props.id === "leftCol" || props.id === "rightCol") ) {
       boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19)";
   } else if (props.imgI === props.hiliPiece + 1) {
-    boxShadow = "0 5px 10px rgba(255, 0, 0, 0.8), 0 8px 20px rgba(255, 0, 0, 0.7)";
+    boxShadow = "0 5px 10px rgb(255, 0, 0), 0 8px 20px rgb(255, 0, 0)";
   }
   return <img className="img-piece"
     style={{boxShadow: boxShadow}}

@@ -8,12 +8,8 @@ function divideShuffle(total) {
   let arr = [],
     result = [[], []];
   for (let i = 1; i <= total; i++) {
-    // ko cần if nếu ko cho hint
-    if (i !== 1 && i !== 9 && i !== 46 && i !== 54) {
-      arr.push(i);
-    }
+    arr.push(i);
   }
-  total -= 4; // ko cần giảm nếu ko cho hint
   for (let i = 0; i < total / 2; i++) {
     for (let j = 0; j < 2; j++) {
       let random = Math.floor(Math.random() * arr.length);
@@ -29,18 +25,14 @@ class App extends Component {
     let shuffledI = divideShuffle(54),
       indexes = [];
     for (let i = 1; i <= 54; i++) {
-      if (i === 1 || i === 9 || i === 46 || i === 54) {
-        indexes.push(i);
-      } else {
-        indexes.push(0); // chỉ cần dòng này nếu ko cho hint
-      }
+      indexes.push(0);
     }
     this.state = {
       leftCol: shuffledI[0],
       rightCol: shuffledI[1],
       platform: indexes,
       done: false,
-      hiliPiece: 0,
+      hiliPiece: -1,
     };
   }
   restart = () => {
@@ -48,17 +40,14 @@ class App extends Component {
       let shuffledI = divideShuffle(54),
         indexes = [];
       for (let i = 1; i <= 54; i++) {
-        if (i === 1 || i === 9 || i === 46 || i === 54) {
-          indexes.push(i);
-        } else {
-          indexes.push(0); // chỉ cần dòng này nếu ko cho hint
-        }
+        indexes.push(0);
       }
       return {
         leftCol: shuffledI[0],
         rightCol: shuffledI[1],
         platform: indexes,
         done: false,
+        hiliPiece: 0,
       };
     });
   };
