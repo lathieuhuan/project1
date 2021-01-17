@@ -5,7 +5,6 @@
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  break-inside: avoid-column;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 5px 20px rgba(0, 0, 0, 0.19);
 }
 .info-card p {
@@ -20,6 +19,7 @@
   margin-right: 15px;
 }
 .intro h2 {
+  font-weight: 700;
   margin-bottom: 10px;
 }
 .intro p {

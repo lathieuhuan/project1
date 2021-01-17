@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -19,7 +20,29 @@
   </head>
   <body>
     <button class="fa fa-paint-brush" id="change-color"></button>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="color-inp">
+      <div class="row">
+        <input type="text" class="color-val" placeholder="Primary" />
+        <div class="color"></div>
+      </div>
+      <div class="row">
+        <input type="text" class="color-val" placeholder="Secondary" />
+        <div class="color"></div>
+      </div>
+      <div class="row">
+        <input type="text" class="color-val" placeholder="Accent" />
+        <div class="color"></div>
+      </div>
+      <div class="row">
+        <input type="text" class="color-val" placeholder="Hover" />
+        <div class="color"></div>
+      </div>
+      <button id="confirm">CONFIRM</button>
+    </div>
     <div id="root"></div>
+    <button class="border" id="to-top-btn">
+      <i class="fa fa-angle-double-up"></i>
+      <p id="tooltip">Go to Top</p>
+    </button>
   </body>
 </html>

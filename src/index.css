@@ -1,16 +1,29 @@
 :root {
-  --primary: rgb(249, 211, 2);
-  --secondary: black;
-  --accent: black;
+  --primary: #ffe603;
+  --secondary: #ff6803;
+  --accent: #ffa703;
+  --hover: #ff781e;
 }
 .info-card {
-  background-color: white;
+  background-color: rgb(253, 253, 253);
 }
+body,
 #search-bar {
   background-color: var(--primary);
 }
 .info-card h2 {
   color: var(--secondary);
+}
+.desc-btn,
+#search-btn,
+#to-top-btn {
+  color: white;
+  background-color: var(--accent);
+}
+.desc-btn:hover,
+#search-btn:hover,
+#to-top-btn:hover {
+  background-color: var(--hover);
 }
 
 * {
@@ -25,23 +38,96 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--primary);
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-#root {
-  width: 80%;
-  margin: 0 auto;
-}
+
 #change-color {
   width: 30px;
   height: 30px;
+  border: 1px black solid;
   border-radius: 50%;
   cursor: pointer;
   outline: none;
   position: fixed;
   top: 10px;
   right: 10px;
+}
+#color-inp {
+  position: fixed;
+  top: 50px;
+  right: 10px;
+  background-color: white;
+  border: 1px black solid;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 1;
+  display: none;
+  flex-direction: column;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+.color-val {
+  width: 100px;
+  padding: 5px 10px;
+  margin-right: 10px;
+}
+.color {
+  width: 36.4px;
+  border: 1px black solid;
+}
+#confirm {
+  padding: 5px 10px;
+  margin: 0 auto;
+}
+
+#root {
+  width: 80%;
+  margin: 0 auto;
+}
+.border {
+  border: 2px black solid;
+}
+
+#to-top-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  position: fixed;
+  bottom: 30px;
+  right: 50px;
+  font-size: 30px;
+  display: none;
+}
+#tooltip {
+  visibility: hidden;
+  width: 90px;
+  height: 35px;
+  line-height: 35px;
+  position: absolute;
+  z-index: 1;
+  bottom: 120%;
+  left: -20%;
+  font-size: 16px;
+  background-color: black;
+  border-radius: 5px;
+}
+#to-top-btn:hover > #tooltip {
+  visibility: visible;
+}
+#tooltip::after {
+  content: "";
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+  border-width: 5px;
+  position: absolute;
+  top: 100%;
+  left: 30%;
 }

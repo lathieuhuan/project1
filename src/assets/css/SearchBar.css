@@ -9,7 +9,6 @@
 }
 #search-box {
   width: 500px;
-  border: 2px black solid;
   border-radius: 5px;
   padding: 10px;
   font-size: 16px;
@@ -17,9 +16,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 5px 20px rgba(0, 0, 0, 0.19);
 }
 #search-btn {
-  width: 42.4px;
+  width: 45px;
   height: 100%;
-  border: 2px black solid;
+  font-size: 20px;
   border-radius: 50%;
   outline: none;
   cursor: pointer;

@@ -16,9 +16,9 @@ function InfoCard(props) {
         </p>
         <p>Categories: <strong>{info.categories}</strong></p>
         {info.description === undefined ? "" :
-          <button className="desc-btn"
+          <button className="desc-btn border"
             onClick={() => toggleDesc(place, index)}>
-            <strong>{descShown ? "Hide Description" : "Show Description"}</strong>
+            <strong>{descShown ? "Hide Description" : "See Description"}</strong>
           </button>}
       </div>
     </div>

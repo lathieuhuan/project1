@@ -6,13 +6,14 @@ function SearchBar(props) {
       <input
         type="text"
         placeholder="Enter a keyword..."
+        className="border"
         id="search-box"
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             props.search(e.target.value);
           }
         }} />
-      <button className="fa fa-search" id="search-btn"
+      <button className="fa fa-search border" id="search-btn"
         onClick={() => {
           props.search(document.getElementById("search-box").value);
         }}>
