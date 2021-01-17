@@ -47,7 +47,7 @@ class App extends Component {
         rightCol: shuffledI[1],
         platform: indexes,
         done: false,
-        hiliPiece: 0,
+        hiliPiece: -1,
       };
     });
   };
