@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 
 // SETTING TOOLS
 let timeLimit = 1500;
-if (+localStorage.getItem("score") == false) {
+if (localStorage.getItem("score") === null) {
   localStorage.setItem("score", timeLimit);
 }
 document.getElementById("time-limit").innerHTML = `${timeLimit / 100} seconds!`;
@@ -41,17 +41,22 @@ let difficulty = "Easy",
   dropdown = document.getElementById("dropdown"),
   root = document.getElementById("root");
 
-for (let dfct of dfcts) {
-  dfct.onclick = (e) => {
-    difficulty = e.target.value;
-  };
-}
-for (let type of types) {
-  type.onclick = (e) => {
-    showline.innerHTML = e.target.value;
-    cardType = e.target.value;
-  };
-}
+dfcts[0].onclick = (e) => {
+  difficulty = e.target.value;
+};
+dfcts[1].onclick = (e) => {
+  difficulty = e.target.value;
+};
+
+types[0].onclick = (e) => {
+  showline.innerHTML = e.target.value;
+  cardType = e.target.value;
+};
+types[1].onclick = (e) => {
+  showline.innerHTML = e.target.value;
+  cardType = e.target.value;
+};
+
 showline.onclick = () => {
   dropdown.classList.toggle("hidden");
 };
