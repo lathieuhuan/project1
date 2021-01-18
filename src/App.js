@@ -1,9 +1,22 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { showInfo } from "./ultis/ultis";
+import { signUp, addTodo } from "./ultis/ultis";
+
+signUp({ username: "john", password: "123" })
+  .then((userId) => {
+    console.log(userId);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+addTodo({
+  owner: "w6whE4WVpHH8rHDWBNyT",
+  title: "housework",
+  content: "Cooking",
+});
 
 function App() {
-  showInfo();
   return (
     <div className="App">
       <header className="App-header">
