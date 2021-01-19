@@ -40,16 +40,6 @@ export class SigningUp extends React.Component {
         onClick={() => {
           this.handleAcc(isGood("account"));
           this.handlePas(isGood("password"));
-          // if (isGood("account")) {
-          //   this.handleAcc(true);
-          // } else {
-          //   this.handleAcc(false);
-          // }
-          // if (isGood("password")) {
-          //   this.handlePas(true);
-          // } else {
-          //   this.handlePas(false);
-          // }
           if (isGood("account") && isGood("password")) {
             this.props.changeUI("signed-in");
           }
