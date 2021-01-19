@@ -1,0 +1,19 @@
+#nav-bar {
+  background-color: #333;
+  padding-right: 30px;
+  height: 7%;
+  display: flex;
+  justify-content: flex-end;
+}
+#nav-bar input {
+  background-color: #333;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 0 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+#nav-bar input:hover {
+  background-color: #111;
+}

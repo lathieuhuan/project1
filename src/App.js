@@ -1,40 +1,63 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { signUp, addTodo } from "./ultis/ultis";
+import { Component } from "react";
+import { NavBar } from "./components/NavBar";
+import { Intro } from "./components/Intro";
+import { SigningUp } from "./components/SigningUp";
+// import { signUp, addTask, editTask, getTasks } from "./ultis/ultis";
 
-signUp({ username: "john", password: "123" })
-  .then((userId) => {
-    console.log(userId);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// signUp({ username: "john", password: "123" })
+//   .then((userId) => {
+//     console.log(userId);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
-addTodo({
-  owner: "w6whE4WVpHH8rHDWBNyT",
-  title: "housework",
-  content: "Cooking",
-});
+// addTask({
+//   owner: "w6whE4WVpHH8rHDWBNyT",
+//   title: "do exercise",
+//   content: "push-up",
+// });
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// editTask({
+//   taskId: "UMHFPI1cv2bMx2deFx4K",
+//   title: "homework",
+//   content: "Math",
+// }).then(() => {
+//   console.log("Success");
+// });
+
+// getTasks("YqtfiyUu2jgt2Fwu3QsH")
+//   .then((tasks) => {
+//     console.log(tasks);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { UIstate: "intro" };
+  }
+  changeUI = (UIstate) => {
+    this.setState({ UIstate: UIstate });
+  };
+  render() {
+    let content,
+      { UIstate } = this.state;
+    if (UIstate === "intro") {
+      content = <Intro changeUI={this.changeUI} />;
+    } else if (UIstate === "signing-up") {
+      content = <SigningUp changeUI={this.changeUI} />;
+    }
+    return (
+      <div id="app-con">
+        <NavBar UIstate={UIstate} changeUI={this.changeUI} />
+        <div id="content">{content}</div>
+      </div>
+    );
+  }
 }
 
 export default App;

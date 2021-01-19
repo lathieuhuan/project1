@@ -9,7 +9,7 @@ try {
 }
 const db = firebase.firestore();
 
-export function signUp(userInfo) {
+function signUp(userInfo) {
   return new Promise((res, rej) => {
     const { username, password } = userInfo;
     db.collection("users")
@@ -34,10 +34,10 @@ export function signUp(userInfo) {
   });
 }
 
-export function addTodo(todoInfo) {
+function addTask(taskInfo) {
   return new Promise((res, rej) => {
-    const { owner, title, content } = todoInfo;
-    db.collection("todo")
+    const { owner, title, content } = taskInfo;
+    db.collection("tasks")
       .add({
         owner: owner,
         title: title,
@@ -51,3 +51,41 @@ export function addTodo(todoInfo) {
       });
   });
 }
+
+function editTask(taskInfo) {
+  return new Promise((res, rej) => {
+    const { taskId, title, content } = taskInfo;
+    db.collection("tasks")
+      .doc(taskId)
+      .update({
+        title: title,
+        content: content,
+      })
+      .catch(() => {
+        rej(new Error("Error"));
+      });
+  });
+}
+
+function getTasks(userId) {
+  return new Promise((res, rej) => {
+    db.collection("tasks")
+      .where("owner", "==", userId)
+      .get()
+      .then((querySnapshot) => {
+        const tasks = [];
+        querySnapshot.forEach((doc) => {
+          tasks.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        res(tasks);
+      })
+      .catch(() => {
+        rej(new Error("Error"));
+      });
+  });
+}
+
+export { signUp, addTask, editTask, getTasks };
