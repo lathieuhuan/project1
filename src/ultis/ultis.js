@@ -17,16 +17,35 @@ function signUp(userInfo) {
       .get()
       .then((querySnapshot) => {
         if (!querySnapshot.empty) {
-          throw new Error("Existed");
+          throw new Error("Username existed.");
         }
       })
       .then(() => {
         db.collection("users")
           .add({ username: username, password: password })
           .then((data) => {
-            console.log("Success");
             res(data.id);
           });
+      })
+      .catch((err) => {
+        rej(err);
+      });
+  });
+}
+
+function signIn(userInfo) {
+  return new Promise((res, rej) => {
+    const { username, password } = userInfo;
+    db.collection("users")
+      .where("username", "==", username)
+      .where("password", "==", password)
+      .get()
+      .then((querySnapshot) => {
+        if (querySnapshot.empty) {
+          throw new Error("No account found.");
+        } else {
+          res(querySnapshot.docs[0].id);
+        }
       })
       .catch((err) => {
         rej(err);
@@ -88,4 +107,4 @@ function getTasks(userId) {
   });
 }
 
-export { signUp, addTask, editTask, getTasks };
+export { signUp, signIn, addTask, editTask, getTasks };

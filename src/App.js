@@ -3,15 +3,9 @@ import { Component } from "react";
 import { NavBar } from "./components/NavBar";
 import { Intro } from "./components/Intro";
 import { SigningUp } from "./components/SigningUp";
+import { Redirecting } from "./components/Redirecting";
+import { SignedIn } from "./components/SignedIn";
 // import { signUp, addTask, editTask, getTasks } from "./ultis/ultis";
-
-// signUp({ username: "john", password: "123" })
-//   .then((userId) => {
-//     console.log(userId);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
 
 // addTask({
 //   owner: "w6whE4WVpHH8rHDWBNyT",
@@ -38,23 +32,37 @@ import { SigningUp } from "./components/SigningUp";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { UIstate: "intro" };
+    this.state = { userId: null, UIstate: "intro" };
   }
   changeUI = (UIstate) => {
     this.setState({ UIstate: UIstate });
   };
+  changeId = (id) => {
+    this.setState({ userId: id });
+  };
   render() {
-    let content,
-      { UIstate } = this.state;
-    if (UIstate === "intro") {
-      content = <Intro changeUI={this.changeUI} />;
-    } else if (UIstate === "signing-up") {
-      content = <SigningUp changeUI={this.changeUI} />;
-    }
+    let { userId, UIstate } = this.state,
+      content = {
+        intro: <Intro changeUI={this.changeUI} />,
+        "signing-up": (
+          <SigningUp changeUI={this.changeUI} changeId={this.changeId} />
+        ),
+        "signed-in": <SignedIn userId={userId} changeUI={this.changeUI} />,
+      };
     return (
       <div id="app-con">
-        <NavBar UIstate={UIstate} changeUI={this.changeUI} />
-        <div id="content">{content}</div>
+        <NavBar
+          UIstate={UIstate}
+          changeUI={this.changeUI}
+          changeId={this.changeId}
+        />
+        <div id="content">
+          {content[UIstate] === undefined ? (
+            <Redirecting UIstate={UIstate} changeUI={this.changeUI} />
+          ) : (
+            content[UIstate]
+          )}
+        </div>
       </div>
     );
   }

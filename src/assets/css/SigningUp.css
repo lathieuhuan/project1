@@ -23,9 +23,7 @@
 #submit {
   font-size: 18px;
   margin: 10px auto 0;
-  cursor: pointer;
 }
-#submit,
 #signup-form input {
   padding: 5px 10px;
   border-radius: 5px;

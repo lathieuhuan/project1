@@ -1,5 +1,6 @@
 import "../assets/css/SigningUp.css";
 import React from 'react';
+import { signUp } from "../ultis/ultis";
 
 function isGood(id) {
   if (document.getElementById(id).value.length < 4) {
@@ -11,39 +12,64 @@ function isGood(id) {
 export class SigningUp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { accOk: true, pasOk: true };
+    this.state = { nameExisted: false, nameGood: true, passGood: true };
   }
   handleAcc = (boo) => {
-    this.setState({ accOk: boo });
+    this.setState({ nameGood: boo });
   }
   handlePas = (boo) => {
-    this.setState({ pasOk: boo });
+    this.setState({ passGood: boo });
+  }
+  handleSubmit = () => {
+    this.handleAcc(isGood("username"));
+    this.handlePas(isGood("password"));
+    if (isGood("username") && isGood("password")) {
+      signUp({
+        username: document.getElementById("username").value,
+        password: document.getElementById("password").value,
+      })
+      .then((userId) => {
+        this.props.changeId(userId);
+        this.props.changeUI("done-signing-up");
+      })
+      .catch(() => {
+        this.setState({ nameExisted: true });
+      });
+    }
   }
   render() {
     return (<div id="signup-form">
       <h3>SIGN UP</h3>
-      <p>Your account:</p>
-      <input type="text" id="account"
-        placeholder="Enter atleast 4 characters" />
-      {this.state.accOk === true ? null :
+      <p>Your username:</p>
+      <input type="text" id="username"
+        placeholder="Enter atleast 4 characters"
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            this.handleSubmit();
+          }
+        }} />
+      {this.state.nameGood ? null :
         <p className="warning">
-          Your account must contains atlest 4 characters.
+          Your username must contains atlest 4 characters.
+        </p>}
+      {!this.state.nameExisted ? null :
+        <p className="warning">
+          This username has already existed.
         </p>}
       <p>Your password:</p>
       <input type="text" id="password"
-        placeholder="Enter atleast 4 characters" />
-      {this.state.pasOk === true ? null :
+        placeholder="Enter atleast 4 characters"
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            this.handleSubmit();
+          }
+        }} />
+      {this.state.passGood ? null :
         <p className="warning">
           Your password must contains atlest 4 characters.
         </p>}
       <button id="submit"
-        onClick={() => {
-          this.handleAcc(isGood("account"));
-          this.handlePas(isGood("password"));
-          if (isGood("account") && isGood("password")) {
-            this.props.changeUI("signed-in");
-          }
-        }}>
+        onClick={this.handleSubmit}>
           Submit
       </button>
     </div>);
