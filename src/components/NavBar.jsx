@@ -13,9 +13,19 @@ export class NavBar extends React.Component {
   render() {
     const { UIstate, changeUI, changeId } = this.props,
       { signingIn } = this.state;
+    let name = document.getElementById("acc-name"),
+      pass = document.getElementById("acc-pass");
     return (<div id="nav-bar">
       <input type="button"
-        onClick={this.toggleForm}
+        onClick={() => {
+          if (UIstate === "signed-in") {
+            changeUI("intro");
+            name.value = "";
+            pass.value = "";
+          } else {
+            this.toggleForm();
+          }
+        }}
         value={UIstate === "signed-in" ? "Sign out" : "Sign in"} />
       <input type="button" value="About" />
       <div id="signing-in" style={{display: signingIn ? "flex" : "none"}}>
@@ -23,16 +33,17 @@ export class NavBar extends React.Component {
         <input type="text" id="acc-pass" placeholder="Password" />
         <button onClick={() => {
           signIn({
-            username: document.getElementById("acc-name").value,
-            password: document.getElementById("acc-pass").value,
+            username: name.value,
+            password: pass.value,
           })
           .then((userId) => {
             changeId(userId);
+            changeUI("signed-in");
+            this.toggleForm();
           })
           .catch((err) => {
             console.log(err.message); // error need handling
           });
-          changeUI(UIstate === "signed-in" ? "intro" : "signed-in")
         }}>
           Confirm
         </button>
