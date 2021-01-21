@@ -2,7 +2,7 @@ import "../assets/css/SignedIn.css";
 import React from 'react';
 import { Home } from "./Home";
 import { Editing } from "./Editing";
-import { editTask, getTasks } from "../ultis/ultis";
+import { getTasks, addTask, editTask } from "../ultis/ultis";
 
 export class SignedIn extends React.Component {
   constructor(props) {
@@ -13,11 +13,25 @@ export class SignedIn extends React.Component {
       editedI: null,
     };
   }
-  cancelEdit = () => {
-    this.setState({ UIstate: "home" });
-  }
   toEditing = (index) => {
     this.setState({ UIstate: "editing", editedI: index });
+  }
+  saveEdit = (i, title, content) => {
+    if (i === undefined) {
+      addTask({ owner: this.props.userId, title: title, content: content})
+      .then(this.update).then(this.exitEdit);
+    } else {
+      editTask({ taskId: i, title: title, content: content })
+      .then(this.update).then(this.exitEdit);
+    }
+  }
+  update = () => {
+    getTasks(this.props.userId).then((tasks) => {
+      this.setState({ tasks: tasks });
+    });
+  }
+  exitEdit = () => {
+    this.setState({ UIstate: "home" });
   }
   componentDidMount() {
     getTasks(this.props.userId).then((tasks) => {
@@ -27,7 +41,9 @@ export class SignedIn extends React.Component {
   render() {
     let { UIstate, tasks, editedI } = this.state;
     return UIstate === "home"
-      ? <Home tasks={tasks} toEditing={this.toEditing} />
-      : <Editing task={tasks[editedI]} cancelEdit={this.cancelEdit} />;
+      ? <Home tasks={tasks} toEditing={this.toEditing} update={this.update} />
+      : <Editing task={tasks[editedI]}
+          saveEdit={this.saveEdit}
+          exitEdit={this.exitEdit} />;
   }
 }

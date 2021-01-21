@@ -53,6 +53,27 @@ function signIn(userInfo) {
   });
 }
 
+function getTasks(userId) {
+  return new Promise((res, rej) => {
+    db.collection("tasks")
+      .where("owner", "==", userId)
+      .get()
+      .then((querySnapshot) => {
+        const tasks = [];
+        querySnapshot.forEach((doc) => {
+          tasks.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        res(tasks);
+      })
+      .catch(() => {
+        rej(new Error("Error"));
+      });
+  });
+}
+
 function addTask(taskInfo) {
   return new Promise((res, rej) => {
     const { owner, title, content } = taskInfo;
@@ -80,26 +101,8 @@ function editTask(taskInfo) {
         title: title,
         content: content,
       })
-      .catch(() => {
-        rej(new Error("Error"));
-      });
-  });
-}
-
-function getTasks(userId) {
-  return new Promise((res, rej) => {
-    db.collection("tasks")
-      .where("owner", "==", userId)
-      .get()
-      .then((querySnapshot) => {
-        const tasks = [];
-        querySnapshot.forEach((doc) => {
-          tasks.push({
-            id: doc.id,
-            ...doc.data(),
-          });
-        });
-        res(tasks);
+      .then(() => {
+        res();
       })
       .catch(() => {
         rej(new Error("Error"));
@@ -107,4 +110,17 @@ function getTasks(userId) {
   });
 }
 
-export { signUp, signIn, addTask, editTask, getTasks };
+function deleteTask(taskId) {
+  return new Promise((res) => {
+    db.collection("tasks")
+      .doc(taskId)
+      .update({
+        owner: firebase.firestore.FieldValue.delete(),
+      })
+      .then(() => {
+        res();
+      });
+  });
+}
+
+export { signUp, signIn, getTasks, addTask, editTask, deleteTask };
