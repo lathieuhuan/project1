@@ -7,10 +7,30 @@
 }
 .note-paper {
   width: 350px;
-  height: 25%;
+  height: 295px;
   margin-right: 27px;
   margin-bottom: 27px;
   border: 3px black solid;
+  border-radius: 5px;
   padding: 20px;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+.note-paper h1 {
+  margin-bottom: 15px;
+}
+.note-paper p {
+  margin-bottom: 20px;
+}
+.text-area {
+  height: 209px;
+  margin-bottom: 10px;
+}
+.control-bar {
+  align-self: center;
+  justify-self: flex-end;
+}
+.control-bar button {
+  margin-right: 10px;
 }

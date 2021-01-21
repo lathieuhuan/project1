@@ -1,0 +1,33 @@
+#editing {
+  width: 60%;
+  height: 90%;
+  margin: 30px auto;
+}
+#row-top,
+#row-btm {
+  display: flex;
+}
+#row-top {
+  height: 10%;
+  margin-bottom: 10px;
+}
+#row-btm {
+  height: 60%;
+}
+#editing p {
+  width: 10%;
+  padding-top: 10px;
+}
+#editing textarea {
+  width: 90%;
+  resize: none;
+  padding: 10px;
+  font-size: 16px;
+}
+#editing .control-bar {
+  padding-left: 45%;
+}
+#editing button {
+  margin: 15px;
+  background-color: white;
+}
