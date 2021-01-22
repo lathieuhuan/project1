@@ -35,17 +35,29 @@ function signUp(userInfo) {
 
 function signIn(userInfo) {
   return new Promise((res, rej) => {
-    const { username, password } = userInfo;
-    db.collection("users")
-      .where("username", "==", username)
-      .where("password", "==", password)
+    const { username, password } = userInfo,
+      usernameRef = db.collection("users").where("username", "==", username);
+    usernameRef
       .get()
       .then((querySnapshot) => {
         if (querySnapshot.empty) {
-          throw new Error("No account found.");
-        } else {
-          res(querySnapshot.docs[0].id);
+          throw new Error("The username is not correct.");
         }
+      })
+      .then(() => {
+        usernameRef
+          .where("password", "==", password)
+          .get()
+          .then((querySnapshot) => {
+            if (querySnapshot.empty) {
+              throw new Error("The password is not correct.");
+            } else {
+              res(querySnapshot.docs[0].id);
+            }
+          })
+          .catch((err) => {
+            rej(err);
+          });
       })
       .catch((err) => {
         rej(err);

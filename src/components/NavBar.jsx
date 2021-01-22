@@ -5,23 +5,40 @@ import { signIn } from "../ultis/ultis";
 export class NavBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { signingIn: false, nameGood: true, passGood: true };
+    this.state = { signingIn: false, warning: null };
+  }
+  tryLogIn = () => {
+    const name = document.getElementById("acc-name"),
+      pass = document.getElementById("acc-pass");
+    signIn({
+      username: name.value,
+      password: pass.value,
+    })
+    .then((userId) => {
+      this.props.signIO(userId, "signed-in");
+      name.value = "";
+      pass.value = "";
+      this.toggleForm();
+    })
+    .catch((err) => {
+      this.setWarning(err.message);
+    });
+  }
+  setWarning = (err) => {
+    this.setState({ warning: err });
   }
   toggleForm = () => {
-    this.setState({ signingIn: !this.state.signingIn })
+    this.setState({ signingIn: !this.state.signingIn });
   }
   render() {
-    const { UIstate, changeUI, changeId } = this.props,
-      { signingIn } = this.state;
-    let name = document.getElementById("acc-name"),
-      pass = document.getElementById("acc-pass");
+    const { UIstate, signIO } = this.props,
+      { signingIn, warning } = this.state;
     return (<div id="nav-bar">
       <input type="button"
         onClick={() => {
           if (UIstate === "signed-in") {
-            changeUI("intro");
-            name.value = "";
-            pass.value = "";
+            signIO(null, "intro");
+            this.setWarning(null);
           } else {
             this.toggleForm();
           }
@@ -29,22 +46,20 @@ export class NavBar extends React.Component {
         value={UIstate === "signed-in" ? "Sign out" : "Sign in"} />
       <input type="button" value="About" />
       <div id="signing-in" style={{display: signingIn ? "flex" : "none"}}>
-        <input type="text" id="acc-name" placeholder="Username" />
-        <input type="text" id="acc-pass" placeholder="Password" />
-        <button onClick={() => {
-          signIn({
-            username: name.value,
-            password: pass.value,
-          })
-          .then((userId) => {
-            changeId(userId);
-            changeUI("signed-in");
-            this.toggleForm();
-          })
-          .catch((err) => {
-            console.log(err.message); // error need handling
-          });
-        }}>
+        <input type="text" id="acc-name" placeholder="Username"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              this.tryLogIn();
+            }
+          }} />
+        <input type="text" id="acc-pass" placeholder="Password"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              this.tryLogIn();
+            }
+          }} />
+        {warning === null ? null : <p className="warning">{warning}</p>}
+        <button onClick={this.tryLogIn}>
           Confirm
         </button>
       </div>

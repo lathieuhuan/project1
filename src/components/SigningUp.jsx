@@ -17,20 +17,21 @@ export class SigningUp extends React.Component {
   handleAcc = (boo) => {
     this.setState({ nameGood: boo });
   }
-  handlePas = (boo) => {
+  handlePwd = (boo) => {
     this.setState({ passGood: boo });
   }
   handleSubmit = () => {
-    this.handleAcc(isGood("username"));
-    this.handlePas(isGood("password"));
-    if (isGood("username") && isGood("password")) {
+    const nameGood = isGood("username"),
+      passGood = isGood("password");
+    this.handleAcc(nameGood);
+    this.handlePwd(passGood);
+    if (nameGood && passGood) {
       signUp({
         username: document.getElementById("username").value,
         password: document.getElementById("password").value,
       })
       .then((userId) => {
-        this.props.changeId(userId);
-        this.props.changeUI("done-signing-up");
+        this.props.signIO(userId, "done-signing-up");
       })
       .catch(() => {
         this.setState({ nameExisted: true });
