@@ -81,7 +81,7 @@ function getTasks(userId) {
         res(tasks);
       })
       .catch(() => {
-        rej(new Error("Error"));
+        rej(new Error("Cannot get tasks."));
       });
   });
 }
@@ -99,7 +99,7 @@ function addTask(taskInfo) {
         res(data.id);
       })
       .catch(() => {
-        rej(new Error("Error"));
+        rej(new Error("Cannot add a task."));
       });
   });
 }
@@ -117,20 +117,21 @@ function editTask(taskInfo) {
         res();
       })
       .catch(() => {
-        rej(new Error("Error"));
+        rej(new Error("Cannot edit the task."));
       });
   });
 }
 
 function deleteTask(taskId) {
-  return new Promise((res) => {
+  return new Promise((res, rej) => {
     db.collection("tasks")
       .doc(taskId)
-      .update({
-        owner: firebase.firestore.FieldValue.delete(),
-      })
+      .delete()
       .then(() => {
         res();
+      })
+      .catch(() => {
+        rej(new Error("Cannot delete the task."));
       });
   });
 }

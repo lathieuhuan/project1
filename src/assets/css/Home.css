@@ -50,6 +50,6 @@
   align-self: center;
   justify-self: flex-end;
 }
-.control-bar button {
+#home .control-bar button {
   margin-right: 10px;
 }

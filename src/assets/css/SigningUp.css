@@ -20,9 +20,9 @@
   font-size: 16px;
   margin-bottom: 10px;
 }
-#submit {
-  font-size: 18px;
-  margin: 10px auto 0;
+#signup-form .control-bar button {
+  font-size: 16px;
+  margin: 10px 5px 0;
 }
 #signup-form input {
   padding: 5px 10px;

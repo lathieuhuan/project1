@@ -69,10 +69,10 @@ export class SigningUp extends React.Component {
         <p className="warning">
           Your password must contains atlest 4 characters.
         </p>}
-      <button id="submit"
-        onClick={this.handleSubmit}>
-          Submit
-      </button>
+      <div className="control-bar">
+        <button onClick={this.handleSubmit}>Submit</button>
+        <button onClick={() => this.props.signIO(null, "intro")}>Cancel</button>
+      </div>
     </div>);
   }
 }

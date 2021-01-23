@@ -7,7 +7,7 @@ export class NavBar extends React.Component {
     super(props);
     this.state = { signingIn: false, warning: null };
   }
-  tryLogIn = () => {
+  tryLogin = () => {
     const name = document.getElementById("acc-name"),
       pass = document.getElementById("acc-pass");
     signIn({
@@ -21,7 +21,7 @@ export class NavBar extends React.Component {
       this.toggleForm();
     })
     .catch((err) => {
-      this.setWarning(err.message);
+      this.setWarning(<p className="warning">{err.message}</p>);
     });
   }
   setWarning = (err) => {
@@ -49,17 +49,17 @@ export class NavBar extends React.Component {
         <input type="text" id="acc-name" placeholder="Username"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              this.tryLogIn();
+              this.tryLogin();
             }
           }} />
         <input type="text" id="acc-pass" placeholder="Password"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              this.tryLogIn();
+              this.tryLogin();
             }
           }} />
-        {warning === null ? null : <p className="warning">{warning}</p>}
-        <button onClick={this.tryLogIn}>
+        {warning}
+        <button onClick={this.tryLogin}>
           Confirm
         </button>
       </div>

@@ -5,12 +5,7 @@ export function Home(props) {
   let { tasks, toEditing, update } = props;
   return (<div id="home">
     <button id="add" onClick={() => toEditing(tasks.length)}>Add</button>
-    {tasks
-    // temp solution for deleting
-    .filter((val) => {
-      return val.onwer !== null;
-    })
-    .map((val, i) => {
+    {tasks.map((val, i) => {
       return (<div key={val.id} className="note-paper">
         <div className="text-area">
           <h1>{val.title}</h1>
