@@ -1,0 +1,22 @@
+#home {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+#top-sec {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+#intro,
+#top-games {
+  height: 400px;
+}
+#intro {
+  background-color: #eee;
+  width: 70%;
+}
+#top-games {
+  background-color: #eee;
+  width: 28%;
+}
