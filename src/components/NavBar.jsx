@@ -7,15 +7,14 @@ export class NavBar extends React.Component {
     this.state = { signedIn: false };
   }
   render() {
+    const { toggleForm } = this.props;
     return (
       <div id="head">
         <div id="nav-bar">
-          <div id="logo-head">
-            {this.props.at === "Home"
-              ? <p>Minigame Hub</p>
-              : <a href="/home">Minigame Hub</a>
-            }
-          </div>
+          {this.props.at === "Home"
+            ? <p id="logo-head">Minigame Hub</p>
+            : <a href="/home" id="logo-head">Minigame Hub</a>
+          }
           <div id="search-bar">
             <input type="text" id="search-box" placeholder="Search for minigames..."/>
             <div id="search-btn">
@@ -25,8 +24,8 @@ export class NavBar extends React.Component {
             </div>
           </div>
           <ul>
-            <li>Sign In</li>
-            <li>Sign Up</li>
+            <li onClick={() => toggleForm("SignIn")}>Sign In</li>
+            <li onClick={() => toggleForm("SignUp")}>Sign Up</li>
           </ul>
         </div>
       </div>

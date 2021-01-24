@@ -1,12 +1,12 @@
 #home {
-  width: 100%;
-  max-width: 900px;
+  width: 900px;
   margin: 0 auto;
 }
+
 #top-sec {
-  width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 #intro,
 #top-games {
@@ -15,8 +15,30 @@
 #intro {
   background-color: #eee;
   width: 70%;
+  flex-direction: column;
+}
+#intro h1 {
+  font-size: 34px;
+}
+#intro h3 {
+  margin-top: 10px;
 }
 #top-games {
   background-color: #eee;
   width: 28%;
+}
+
+#mid-sec {
+  display: flex;
+}
+#mid-sec > h2 {
+  border-bottom: 2px royalblue solid;
+}
+
+#btm-sec {
+  background-color: #eee;
+  padding: 20px;
+  padding-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
 }

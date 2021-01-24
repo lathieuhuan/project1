@@ -3,6 +3,7 @@
   width: 100%;
   height: 70px;
   margin-bottom: 15px;
+  color: white;
 }
 #nav-bar {
   width: 900px;
@@ -14,41 +15,40 @@
 }
 #logo-head {
   line-height: 40px;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 700;
 }
 #search-bar {
-  width: 400px;
+  width: 450px;
   display: flex;
+  align-items: center;
 }
 #search-box,
 #search-btn {
-  height: 40px;
+  height: 30px;
 }
 #search-box {
-  min-width: 320px;
+  min-width: 400px;
   padding: 5px 10px;
-  font-size: 16px;
   border: none;
   border-radius: 3px 0 0 3px;
 }
 #search-btn {
   background-color: yellow;
-  min-width: 80px;
+  min-width: 50px;
   border-radius: 0 3px 3px 0;
   cursor: pointer;
 }
 #search-icon {
-  width: 26px;
-  height: 26px;
-  margin: 7px 27px;
+  width: 16px;
+  height: 16px;
+  margin: 7px 17px;
 }
 #nav-bar ul {
   display: flex;
   justify-content: flex-end;
-  width: 200px;
-  line-height: 40px;
-  font-size: 18px;
+  align-items: center;
+  width: 160px;
   font-weight: 500;
   list-style: none;
 }
