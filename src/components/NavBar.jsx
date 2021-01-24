@@ -11,9 +11,9 @@ export class NavBar extends React.Component {
     return (
       <div id="head">
         <div id="nav-bar">
-          {this.props.at === "Home"
-            ? <p id="logo-head">Minigame Hub</p>
-            : <a href="/home" id="logo-head">Minigame Hub</a>
+          {this.state.signedIn
+            ? <a href="/home" id="logo-head">Minigame Hub</a>
+            : <p id="logo-head">Minigame Hub</p>
           }
           <div id="search-bar">
             <input type="text" id="search-box" placeholder="Search for minigames..."/>

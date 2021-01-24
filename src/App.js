@@ -7,7 +7,7 @@ import { CardMemoryGame } from "./components/CardMemoryGame";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { userId: null, at: "Home", modal: "None" };
+    this.state = { userId: null, modal: "None" };
   }
   toggleForm = (modal) => {
     this.setState({ modal: modal });
@@ -57,7 +57,7 @@ class App extends Component {
     );
     return (
       <div>
-        <NavBar at={this.state.at} toggleForm={this.toggleForm} />
+        <NavBar toggleForm={this.toggleForm} />
         <div id="app-body">{content[window.location.pathname]}</div>
         <div id="footer"></div>
         <div
