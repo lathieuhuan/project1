@@ -1,7 +1,6 @@
-#cmg-content #playground {
+#cmg-content .playground {
   width: 100%;
   padding: 25px 25px 17px 25px;
-  background-color: white;
   border: 3px black solid;
   border-radius: 10px;
   display: flex;

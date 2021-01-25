@@ -44,6 +44,7 @@ export class CardMemoryGame extends React.Component {
     };
     this.chosen = [];
     this.left = 0;
+    this.limit = 1500;
     this.timer = 0;
   }
   startGame = (difficulty, type) => {
@@ -69,14 +70,14 @@ export class CardMemoryGame extends React.Component {
       gameState: "Progressing",
       cards,
       time: 0,
-      bestRecord: 1500,
       newRecord: false,
     })
     this.left = imgI.length;
+    this.limit = difficulty === "Easy" ? 1500 : 2500;
     this.timer = setInterval(this.countUp, 10);
   }
   countUp = () => {
-    if (this.state.time === 1500) {
+    if (this.state.time === this.limit) {
       this.setState({ running: false, gameState: "Lost" });
     } else {
       this.setState({ time: this.state.time + 1 });
@@ -166,13 +167,13 @@ export class CardMemoryGame extends React.Component {
     }
     return (
       <div id="cmg-content">
-        <LeftCol difficulty={difficulty} />
+        <LeftCol />
         <div className="flex-center center-col">
           {content}
         </div>
         <RightCol
+          limit={this.limit}
           time={this.state.time}
-          bestRecord={this.state.bestRecord}
           gameState={gameState}
           switchPause={this.switchPause}
           startGame={this.startGame}

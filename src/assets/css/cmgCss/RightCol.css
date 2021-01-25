@@ -1,8 +1,7 @@
-#cmg-content #right-col {
+#cmg-content .right-col {
   padding: 30px 60px 0 30px;
 }
-#cmg-content #stats,
-#cmg-content #setup {
+#cmg-content .stats {
   width: 100%;
   margin-bottom: 25px;
   background-color: white;

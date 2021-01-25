@@ -1,4 +1,4 @@
-#cmg-content #setup {
+#cmg-content .setup {
   padding: 20px;
   border: 2px black solid;
   border-radius: 10px;
@@ -17,7 +17,7 @@
   font-weight: 700;
 }
 #cmg-content label,
-#cmg-content #start {
+#cmg-content .start {
   font-size: var(--medium);
 }
 #cmg-content input[type="radio"] {
@@ -26,47 +26,44 @@
 #cmg-content label[for="easy"] {
   margin-right: 10px;
 }
-#cmg-content #card-type {
+#cmg-content .card-type {
   margin-top: 5px;
   width: 90%;
   position: relative;
 }
-#cmg-content #show-line {
+#cmg-content .show-line {
   margin: 0;
   padding: var(--btn-pad);
   border: 1px black solid;
   border-radius: var(--btn-rad);
-  background-image: url(https://toppng.com/uploads/preview/arrow-down-icon-11549436707mosicxsqad.png);
+  background-image: url(https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-512.png);
   background-size: 15px;
   background-position: right;
   background-repeat: no-repeat;
   background-origin: content-box;
+  cursor: default;
 }
-#cmg-content #dropdown {
+#cmg-content .dropdown {
   position: absolute;
-  top: 100%;
-  left: 1%;
-  width: 97%;
+  top: 101%;
+  left: 2%;
+  width: 96%;
   border: 1px black solid;
-}
-#cmg-content .hidden {
-  display: none;
+  border-radius: 0 0 3px 3px;
 }
 #cmg-content input[type="button"] {
   width: 100%;
-  border: none;
-  text-align: left;
   padding: var(--btn-pad);
-}
-#cmg-content input[type="button"],
-#cmg-content #card-type {
-  background-color: white;
+  border: none;
+  border-radius: 3px;
   font-size: var(--small);
+  text-align: left;
+  background-color: white;
 }
 #cmg-content input[type="button"]:hover {
   background-color: rgb(239, 239, 239);
 }
-#cmg-content #start {
+#cmg-content .start {
   font-weight: 700;
   padding: var(--btn-pad);
   border-radius: var(--btn-rad);

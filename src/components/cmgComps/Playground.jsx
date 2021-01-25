@@ -3,7 +3,7 @@ import { Card } from "./Card";
 
 export function Playground(props) {
   return (
-    <div id="playground">
+    <div className="playground">
       {props.cards.map((val, i) => {
         return (
           <Card

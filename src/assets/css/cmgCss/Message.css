@@ -1,7 +1,6 @@
 #cmg-content #message {
   width: 600px;
   height: 350px;
-  background-color: white;
   border: 3px black solid;
   border-radius: 10px;
   display: flex;

@@ -1,15 +1,15 @@
-#cmg-content #left-col {
+#cmg-content .left-col {
   padding: 30px 30px 0 60px;
 }
-#cmg-content #left-col > h1 {
-  margin-bottom: 30px;
+#cmg-content .left-col > h1 {
+  margin-bottom: 25px;
   font-size: 42px;
 }
-#cmg-content #left-col > h3 {
+#cmg-content .left-col > h3 {
   margin: 0 0 10px 0;
   font-size: var(--large);
 }
-#cmg-content #left-col > p {
+#cmg-content .left-col > p {
   margin: 0 0 15px 0;
   font-size: var(--medium);
   line-height: 1.6;

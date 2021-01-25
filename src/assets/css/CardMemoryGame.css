@@ -14,10 +14,12 @@
   justify-content: center;
   align-items: center;
 }
-#cmg-content #left-col,
-#cmg-content #right-col {
+#cmg-content .left-col,
+#cmg-content .right-col {
   width: 381px;
+  min-width: 381px;
 }
 #cmg-content .center-col {
   width: 756px;
+  min-width: 756px;
 }

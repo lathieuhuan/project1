@@ -27,14 +27,13 @@ export class Setup extends React.Component {
   render() {
     const { dropdownShown, difficulty, type } = this.state;
     return (
-      <div className="col-container" id="setup">
+      <div className="col-container setup">
         <div className="group col-container">
           <label>Choose difficulty:</label>
           <div>
             <input
               type="radio"
               name="difficulty"
-              className="difficulty"
               value="Easy"
               checked={difficulty === "Easy"}
               onChange={this.changeState}
@@ -43,27 +42,34 @@ export class Setup extends React.Component {
             <input
               type="radio"
               name="difficulty"
-              className="difficulty"
               value="Hard"
               checked={difficulty === "Hard"}
               onChange={this.changeState}
             />
-            <label htmlFor="hard">Hard</label>
+            <label>Hard</label>
           </div>
         </div>
         <div className="group col-container">
           <label>Choose card type:</label>
-          <div ref={this.typeRef} id="card-type" onClick={this.toggleDropdown}>
-            <p id="show-line">{type}</p>
-            <div id="dropdown" style={{ display: dropdownShown ? "block" : "none" }}>
-              <input type="button" name="type" className="type" value="Classic"
-                onClick={this.changeState} />
-              <input type="button" name="type" className="type" value="LoL Champions"
-                onClick={this.changeState} />
+          <div ref={this.typeRef} className="card-type" onClick={this.toggleDropdown}>
+            <p className="show-line">{type}</p>
+            <div className="dropdown" style={{ display: dropdownShown ? "block" : "none" }}>
+              <input
+                type="button"
+                name="type"
+                value="Classic"
+                onClick={this.changeState}
+              />
+              <input
+                type="button"
+                name="type"
+                value="LoL Champions"
+                onClick={this.changeState}
+              />
             </div>
           </div>
         </div>
-        <button id="start" onClick={() => this.props.startGame(difficulty, type)}>
+        <button className="start" onClick={() => this.props.startGame(difficulty, type)}>
           START
         </button>
       </div>

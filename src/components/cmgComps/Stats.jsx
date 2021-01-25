@@ -3,14 +3,14 @@ import { Timer } from "./Timer"
 
 export function Stats(props) {
   return (
-    <div id="stats">
-      <p className="desc">Time:</p>
-      <p className="num" id="time">
-        <Timer time={props.time} />
+    <div className="stats">
+      <p className="desc">Time Limit:</p>
+      <p className="num">
+        <Timer time={props.limit} />
       </p>
-      <p className="desc">Best Record:</p>
-      <p className="num" id="record">
-        <Timer time={props.bestRecord} />
+      <p className="desc">Time Passed:</p>
+      <p className="num">
+        <Timer time={props.time} />
       </p>
     </div>
   );
