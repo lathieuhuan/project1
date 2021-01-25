@@ -7,7 +7,7 @@ import { CardMemoryGame } from "./components/CardMemoryGame";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { userId: null, modal: "None" };
+    this.state = { modal: "None" };
   }
   toggleForm = (modal) => {
     this.setState({ modal: modal });
@@ -21,11 +21,12 @@ class App extends Component {
   }
   render() {
     const content = {
-      "/": <Home />,
-      "/CardMemoryGame": <CardMemoryGame />,
-    };
+        "/": <Home />,
+        "/Card_Memory_Game": <CardMemoryGame />,
+      },
+      { modal } = this.state;
     let h1, subHeading, thirdLine;
-    if (this.state.modal === "SignIn") {
+    if (modal === "SignIn") {
       h1 = <h1>SIGN IN</h1>;
       subHeading = (
         <p className="sub-heading">
@@ -62,9 +63,9 @@ class App extends Component {
         <div id="footer"></div>
         <div
           id="home-modal"
-          style={{ display: this.state.modal === "None" ? "none" : "block" }}
+          style={{ display: modal === "None" ? "none" : "block" }}
         >
-          {this.state.modal === "None" ? null : form}
+          {modal === "None" ? null : form}
         </div>
       </div>
     );

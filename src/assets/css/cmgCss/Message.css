@@ -1,0 +1,18 @@
+#cmg-content #message {
+  width: 600px;
+  height: 350px;
+  background-color: white;
+  border: 3px black solid;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#cmg-content #message > h1 {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+#cmg-content #message > p {
+  font-size: 30px;
+}

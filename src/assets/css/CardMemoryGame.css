@@ -1,27 +1,23 @@
 #cmg-content {
+  margin-top: 60px;
+  margin-bottom: 63px;
   display: flex;
+  height: 528px;
+  --btn-pad: 5px 10px;
+  --btn-rad: 5px;
+  --large: 22px;
+  --medium: 18px;
+  --small: 16px;
 }
-#cmg-left-col,
-#cmg-right-col {
-  width: 390px;
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-#cmg-left-col {
-  padding: 50px 30px 0 70px;
+#cmg-content #left-col,
+#cmg-content #right-col {
+  width: 381px;
 }
-#cmg-left-col > h1 {
-  font-size: 40px;
-  margin-bottom: 10px;
-}
-#cmg-left-col > p {
-  margin-top: 10px;
-  line-height: 1.6;
-}
-
-#cmg-center-col {
+#cmg-content .center-col {
   width: 756px;
-}
-
-#cmg-right-col {
-  padding: 50px 70px 0 30px;
 }
