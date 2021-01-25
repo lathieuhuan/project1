@@ -1,7 +1,7 @@
 import "../../assets/css/cmgCss/Message.css";
 
 export function Message(props) {
-  const { gameState, newRecord, display } = props;
+  const { gameState, newRecord } = props;
   let mess, extraMess;
   if (gameState === "Won") {
     mess = "YOU WON!";
@@ -16,7 +16,7 @@ export function Message(props) {
     mess = "WELCOME";
   }
   return (
-    <div id="message" style={{ display: display }}>
+    <div id="message">
       <h1>{mess}</h1>
       {extraMess}
     </div>

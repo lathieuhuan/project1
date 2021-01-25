@@ -4,17 +4,11 @@ import { PauseBtn } from "./PauseBtn";
 import { Setup } from "./Setup";
 
 export function RightCol(props) {
-  const { running, gameState, switchPause, stopGame, makeNewRecord } = props;
   return (
     <div id="right-col">
-      <Stats
-        running={running}
-        gameState={gameState}
-        stopGame={stopGame}
-        makeNewRecord={makeNewRecord}
-      />
-      <PauseBtn gameState={gameState} switchPause={switchPause} />
-      <Setup />
+      <Stats time={props.time} bestRecord={props.bestRecord} />
+      <PauseBtn gameState={props.gameState} switchPause={props.switchPause} />
+      <Setup startGame={props.startGame} />
     </div>
   );
 }
