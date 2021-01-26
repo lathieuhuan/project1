@@ -1,21 +1,38 @@
 import "../assets/css/NavBar.css";
 import React from 'react';
+import { getUserInfo } from "../ultis/ultis"
 
 export class NavBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { expanded: false };
+    this.state = {
+      expanded: false,
+      username: "Guest",
+      nickname: null,
+    };
+  }
+  componentDidUpdate() {
+    const { username } = this.props;
+    if (username !== this.state.username) {
+      getUserInfo(username).then((info) => {
+        this.setState({ username: username, nickname: info.nickname });
+      })
+    }
   }
   render() {
-    const { nickname, setModal } = this.props;
-    let accNav = nickname === undefined ? (
+    const { username, setModal } = this.props;
+    const accNav = username === "Guest" ? (
       <ul>
-          <li onClick={() => setModal("SignIn")}>Sign In</li>
-          <li onClick={() => setModal("SignUp")}>Sign Up</li>
+        <li onClick={() => setModal("SignIn")}>Sign In</li>
+        <li onClick={() => setModal("SignUp")}>Sign Up</li>
       </ul>
     ) : (
       <ul>
-          <li>{nickname}</li>
+        <li>
+          <img src="https://image.flaticon.com/icons/png/512/61/61205.png" id="acc-icon" alt=""/>
+          {this.state.nickname}
+          {/* <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-512.png" alt=""/> */}
+        </li>
       </ul>
     );
     return (

@@ -53,11 +53,19 @@
   list-style: none;
 }
 #nav-bar li {
+  display: flex;
   cursor: pointer;
+  line-height: 25px;
 }
 #nav-bar li:last-child {
   margin-left: 30px;
 }
 #nav-bar li:hover {
   color: yellow;
+}
+#acc-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  /* background-color: white; */
 }

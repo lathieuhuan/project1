@@ -9,18 +9,18 @@ import { SignUp } from "./components/SignUp";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { modal: "None", userData: undefined };
+    this.state = { modal: "None", username: "Guest" };
   }
-  setModal = (modal, data) => {
-    this.setState({ modal: modal, userData: data });
+  setModal = (modal, username = "Guest") => {
+    this.setState({ modal: modal, username: username });
   };
-  componentDidMount() {
-    window.onclick = (e) => {
-      if (e.target.matches("#modal")) {
-        this.setModal("None");
-      }
-    };
-  }
+  // componentDidMount() {
+  //   window.onclick = (e) => {
+  //     if (e.target.matches("#modal")) {
+  //       this.setModal("None");
+  //     }
+  //   };
+  // }
   render() {
     const bodyContent = {
         "/": <Home />,
@@ -31,10 +31,10 @@ class App extends Component {
         SignIn: <SignIn setModal={this.setModal} />,
         SignUp: <SignUp setModal={this.setModal} />,
       },
-      { modal, userData } = this.state;
+      { modal, username } = this.state;
     return (
       <div>
-        <NavBar nickname={userData?.nickname} setModal={this.setModal} />
+        <NavBar username={username} setModal={this.setModal} />
         <div id="app-body">{bodyContent[window.location.pathname]}</div>
         <div id="footer"></div>
         <div

@@ -43,7 +43,7 @@ function signIn(userInfo) {
             if (querySnapshot.empty) {
               throw new Error("The password is not correct.");
             } else {
-              res(querySnapshot.docs[0].data());
+              res(username);
             }
           })
           .catch((err) => {
@@ -56,4 +56,18 @@ function signIn(userInfo) {
   });
 }
 
-export { getGames, signIn };
+function getUserInfo(username) {
+  return new Promise((res, rej) => {
+    db.collection("users")
+      .where("username", "==", username)
+      .get()
+      .then((querySnapshot) => {
+        res(querySnapshot.docs[0].data());
+      })
+      .catch(() => {
+        rej(new Error("Cannot get the info."));
+      });
+  });
+}
+
+export { getGames, signIn, getUserInfo };

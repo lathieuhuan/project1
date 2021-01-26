@@ -32,8 +32,8 @@ export class SignIn extends React.Component {
       })
     } else {
       signIn({ username: name, password: pass })
-      .then((data) => {
-        this.props.setModal("None", data);
+      .then(() => {
+        this.props.setModal("None", name);
         // name = "";
         // pass = "";
       })
@@ -67,7 +67,7 @@ export class SignIn extends React.Component {
           }}
         />
         <input
-          type="password"
+          type="text" // password
           id="si-pass"
           placeholder="Enter your password"
           onKeyDown={(e) => {
