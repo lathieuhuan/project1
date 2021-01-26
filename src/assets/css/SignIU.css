@@ -1,0 +1,36 @@
+.signIU-form {
+  width: 400px;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: white;
+  border: 3px black solid;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.signIU-form h1 {
+  text-align: center;
+}
+.signIU-form input,
+.signIU-form button {
+  padding: 10px;
+  border: 1px black solid;
+  border-radius: 3px;
+  margin-top: 15px;
+  font-size: 16px;
+}
+.signIU-form p {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+.signIU-form button {
+  align-self: center;
+}
+.signIU-form .warning {
+  color: red;
+}
+.pointer {
+  cursor: pointer;
+}

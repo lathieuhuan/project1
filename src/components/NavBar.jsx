@@ -4,18 +4,24 @@ import React from 'react';
 export class NavBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { signedIn: false };
+    this.state = { expanded: false };
   }
   render() {
-    const { toggleForm } = this.props;
+    const { nickname, setModal } = this.props;
+    let accNav = nickname === undefined ? (
+      <ul>
+          <li onClick={() => setModal("SignIn")}>Sign In</li>
+          <li onClick={() => setModal("SignUp")}>Sign Up</li>
+      </ul>
+    ) : (
+      <ul>
+          <li>{nickname}</li>
+      </ul>
+    );
     return (
       <div id="head">
         <div id="nav-bar">
           <a href="/" id="logo-head">MinigameHub</a>
-          {/* {this.state.signedIn
-            ? <a href="/home" id="logo-head">Minigame Hub</a>
-            : <p id="logo-head">Minigame Hub</p>
-          } */}
           <div id="search-bar">
             <input type="text" id="search-box" placeholder="Search for minigames..."/>
             <div id="search-btn">
@@ -24,10 +30,7 @@ export class NavBar extends React.Component {
                 id="search-icon" alt=""/>
             </div>
           </div>
-          <ul>
-            <li onClick={() => toggleForm("SignIn")}>Sign In</li>
-            <li onClick={() => toggleForm("SignUp")}>Sign Up</li>
-          </ul>
+          {accNav}
         </div>
       </div>
     );

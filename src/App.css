@@ -1,8 +1,9 @@
-#home-modal {
+#modal {
   width: 100%;
   height: 100%;
   position: fixed;
   top: 0;
+  z-index: 1;
   background-color: rgba(0, 0, 0, 0.6);
 }
 .close {
@@ -17,47 +18,6 @@
   cursor: pointer;
   font-size: 16px;
 }
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#signIU-form {
-  width: 400px;
-  margin: 120px auto;
-  padding: 20px;
-  background-color: white;
-  border: 3px black solid;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-#signIU-form h1,
-.sub-heading {
-  text-align: center;
-}
-#signIU-form input,
-#signIU-form button {
-  padding: 10px;
-  border: 1px black solid;
-  border-radius: 3px;
-  margin-top: 15px;
-  font-size: 16px;
-}
-#signIU-form p {
-  margin-top: 10px;
-  padding-left: 5px;
-  font-size: 14px;
-}
-#signIU-form button {
-  align-self: center;
-}
-#switch-form {
-  color: red;
-  cursor: pointer;
-}
-
 #footer {
   background-color: royalblue;
   margin-top: 60px;
