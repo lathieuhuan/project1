@@ -24,6 +24,35 @@ function getGames() {
   });
 }
 
+function signUp(userInfo) {
+  return new Promise((res, rej) => {
+    const { username, password, email } = userInfo;
+    db.collection("users")
+      .where("username", "==", username)
+      .get()
+      .then((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          throw new Error("Username existed.");
+        }
+      })
+      .then(() => {
+        db.collection("users")
+          .add({
+            username: username,
+            nickname: username,
+            password: password,
+            email: email,
+          })
+          .then((doc) => {
+            res(doc.id);
+          });
+      })
+      .catch((err) => {
+        rej(err);
+      });
+  });
+}
+
 function signIn(userInfo) {
   return new Promise((res, rej) => {
     const { username, password } = userInfo,
@@ -43,7 +72,7 @@ function signIn(userInfo) {
             if (querySnapshot.empty) {
               throw new Error("The password is not correct.");
             } else {
-              res(username);
+              res(querySnapshot.docs[0].data());
             }
           })
           .catch((err) => {
@@ -70,4 +99,4 @@ function getUserInfo(username) {
   });
 }
 
-export { getGames, signIn, getUserInfo };
+export { getGames, signUp, signIn, getUserInfo };

@@ -1,16 +1,8 @@
 .signIU-form {
   width: 400px;
   margin: 100px auto;
-  padding: 20px;
   background-color: white;
-  border: 3px black solid;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
   position: relative;
-}
-.signIU-form h1 {
-  text-align: center;
 }
 .signIU-form input,
 .signIU-form button {
@@ -28,9 +20,10 @@
 .signIU-form button {
   align-self: center;
 }
-.signIU-form .warning {
-  color: red;
-}
-.pointer {
-  cursor: pointer;
+
+#su-repass {
+  background-repeat: no-repeat;
+  background-position: right;
+  background-origin: content-box;
+  background-size: contain;
 }

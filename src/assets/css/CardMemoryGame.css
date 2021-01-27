@@ -1,18 +1,12 @@
 #cmg-content {
-  margin-top: 60px;
-  margin-bottom: 63px;
-  display: flex;
-  height: 528px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  height: 608px;
   --btn-pad: 5px 10px;
   --btn-rad: 5px;
   --large: 22px;
   --medium: 18px;
   --small: 16px;
-}
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 #cmg-content .left-col,
 #cmg-content .right-col {

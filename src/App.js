@@ -5,36 +5,57 @@ import { Home } from "./components/Home";
 import { CardMemoryGame } from "./components/CardMemoryGame";
 import { SignIn } from "./components/SignIn";
 import { SignUp } from "./components/SignUp";
+import { Redirecting } from "./components/Redirecting";
+import { Profile } from "./components/Profile";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { modal: "None", username: "Guest" };
+    const nickname = localStorage.getItem("nickname"),
+      username = localStorage.getItem("username");
+    this.state = {
+      modal: "None",
+      nickname: nickname === null ? "Guest" : nickname,
+      username: username === null ? "Guest" : username,
+    };
   }
-  setModal = (modal, username = "Guest") => {
-    this.setState({ modal: modal, username: username });
+  setAppState = (modal, nickname = "Guest", username = "Guest") => {
+    this.setState({ modal: modal, nickname: nickname, username: username });
   };
-  // componentDidMount() {
-  //   window.onclick = (e) => {
-  //     if (e.target.matches("#modal")) {
-  //       this.setModal("None");
-  //     }
-  //   };
-  // }
+  componentDidMount() {
+    window.onclick = (e) => {
+      if (e.target.matches("#modal")) {
+        this.setAppState("None");
+      }
+    };
+    window.onkeydown = (e) => {
+      if (e.key === "Escape" && this.state.modal !== "None") {
+        this.setAppState("None");
+      }
+    };
+  }
   render() {
-    const bodyContent = {
+    const { modal, nickname, username } = this.state,
+      bodyContent = {
         "/": <Home />,
-        "/Card_Memory_Game": <CardMemoryGame />,
+        "/card_memory_game": <CardMemoryGame />,
+        "/my_profile": <Profile username={username} />,
       },
       modalContent = {
         None: null,
-        SignIn: <SignIn setModal={this.setModal} />,
-        SignUp: <SignUp setModal={this.setModal} />,
-      },
-      { modal, username } = this.state;
+        SignIn: <SignIn setAppState={this.setAppState} />,
+        SignUp: <SignUp setAppState={this.setAppState} />,
+        Redirecting: (
+          <Redirecting nickname={nickname} setAppState={this.setAppState} />
+        ),
+      };
     return (
       <div>
-        <NavBar username={username} setModal={this.setModal} />
+        <NavBar
+          nickname={nickname}
+          username={username}
+          setAppState={this.setAppState}
+        />
         <div id="app-body">{bodyContent[window.location.pathname]}</div>
         <div id="footer"></div>
         <div

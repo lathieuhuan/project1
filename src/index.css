@@ -22,6 +22,7 @@ code {
 button,
 input {
   outline: none;
+  padding: 5px 10px;
 }
 button {
   cursor: pointer;
@@ -29,8 +30,58 @@ button {
 a {
   text-decoration: none;
 }
-.center {
+h1,
+h2,
+h3 {
+  text-align: center;
+}
+.flex {
+  display: flex;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.col-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.thinnest-border {
+  border: 1px black solid;
+}
+.thinner-border {
+  border: 2px black solid;
+}
+.thin-border {
+  border: 3px black solid;
+}
+.narrow-padding {
+  padding: 5px 10px;
+}
+.medium-padding {
+  padding: 10px;
+}
+.wide-padding {
+  padding: 20px;
+}
+.smaller-b-radius {
+  border-radius: 3px;
+}
+.small-b-radius {
+  border-radius: 5px;
+}
+.medium-b-radius {
+  border-radius: 10px;
+}
+.warning-color {
+  color: red;
+}
+.pointer {
+  cursor: pointer;
 }

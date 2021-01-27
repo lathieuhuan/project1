@@ -4,7 +4,6 @@
 }
 
 #top-sec {
-  display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
@@ -28,17 +27,12 @@
   width: 28%;
 }
 
-#mid-sec {
-  display: flex;
-}
 #mid-sec > h2 {
   border-bottom: 2px royalblue solid;
 }
 
 #btm-sec {
   background-color: #eee;
-  padding: 20px;
   padding-bottom: 0;
-  display: flex;
   flex-wrap: wrap;
 }

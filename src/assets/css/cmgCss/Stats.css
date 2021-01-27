@@ -1,14 +1,11 @@
 #cmg-content .stats {
-  display: flex;
   padding: 15px;
   flex-wrap: wrap;
-  border: 2px black solid;
-  border-radius: 10px;
 }
 #cmg-content .stats > p {
+  padding: var(--btn-pad);
   font-size: var(--large);
   font-weight: 700;
-  padding: var(--btn-pad);
 }
 #cmg-content .stats > p:nth-child(1),
 #cmg-content .stats > p:nth-child(2) {

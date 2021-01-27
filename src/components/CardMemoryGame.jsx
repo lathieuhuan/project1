@@ -166,7 +166,7 @@ export class CardMemoryGame extends React.Component {
       }
     }
     return (
-      <div id="cmg-content">
+      <div className="flex" id="cmg-content">
         <LeftCol />
         <div className="flex-center center-col">
           {content}

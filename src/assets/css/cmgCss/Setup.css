@@ -1,13 +1,3 @@
-#cmg-content .setup {
-  padding: 20px;
-  border: 2px black solid;
-  border-radius: 10px;
-}
-#cmg-content .col-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 #cmg-content .group {
   margin-bottom: 20px;
 }
@@ -33,7 +23,6 @@
 }
 #cmg-content .show-line {
   padding: var(--btn-pad);
-  border: 1px black solid;
   border-radius: var(--btn-rad);
   background-image: url(https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-512.png);
   background-size: 15px;
@@ -47,7 +36,6 @@
   top: 101%;
   left: 2%;
   width: 96%;
-  border: 1px black solid;
   border-radius: 0 0 3px 3px;
 }
 #cmg-content input[type="button"] {
@@ -64,6 +52,4 @@
 }
 #cmg-content .start {
   font-weight: 700;
-  padding: var(--btn-pad);
-  border-radius: var(--btn-rad);
 }

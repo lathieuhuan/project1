@@ -1,0 +1,17 @@
+#profile {
+  width: 1519px;
+  padding: 15px 30px;
+  justify-content: space-between;
+}
+#profile .left-col,
+#profile .right-col {
+  background-color: #eee;
+  height: 800px;
+}
+#profile .left-col {
+  padding: 40px;
+  width: 28%;
+}
+#profile .right-col {
+  width: 70%;
+}

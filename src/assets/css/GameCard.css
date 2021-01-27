@@ -1,8 +1,6 @@
 .game-card {
   background-color: #eee;
   width: 200px;
-  border: 1px black solid;
-  border-radius: 3px;
   margin-bottom: 20px;
 }
 .game-card:not(:nth-child(4n)) {
@@ -11,12 +9,6 @@
 .img-sec {
   background-color: rgb(255, 255, 109);
   height: 150px;
-}
-.info-sec {
-  padding: 10px;
-}
-.info-sec > h3 {
-  text-align: center;
 }
 .info-sec > p {
   margin-top: 5px;

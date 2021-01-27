@@ -3,7 +3,7 @@ import { Card } from "./Card";
 
 export function Playground(props) {
   return (
-    <div className="playground">
+    <div className="playground flex thin-border medium-b-radius">
       {props.cards.map((val, i) => {
         return (
           <Card

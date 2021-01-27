@@ -3,7 +3,7 @@ import { Timer } from "./Timer"
 
 export function Stats(props) {
   return (
-    <div className="stats">
+    <div className="stats flex thinner-border medium-b-radius">
       <p className="desc">Time Limit:</p>
       <p className="num">
         <Timer time={props.limit} />

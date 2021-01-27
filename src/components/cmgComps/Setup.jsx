@@ -27,8 +27,8 @@ export class Setup extends React.Component {
   render() {
     const { dropdownShown, difficulty, type } = this.state;
     return (
-      <div className="col-container setup">
-        <div className="group col-container">
+      <div className="setup col-center wide-padding thinner-border medium-b-radius">
+        <div className="group col-center">
           <label>Choose difficulty:</label>
           <div>
             <input
@@ -49,11 +49,11 @@ export class Setup extends React.Component {
             <label>Hard</label>
           </div>
         </div>
-        <div className="group col-container">
+        <div className="group col-center">
           <label>Choose card type:</label>
           <div ref={this.typeRef} className="card-type" onClick={this.toggleDropdown}>
-            <p className="show-line">{type}</p>
-            <div className="dropdown" style={{ display: dropdownShown ? "block" : "none" }}>
+            <p className="show-line thinnest-border">{type}</p>
+            <div className="dropdown thinnest-border" style={{ display: dropdownShown ? "block" : "none" }}>
               <input
                 type="button"
                 name="type"
@@ -69,7 +69,9 @@ export class Setup extends React.Component {
             </div>
           </div>
         </div>
-        <button className="start" onClick={() => this.props.startGame(difficulty, type)}>
+        <button className="start narrow-padding small-b-radius"
+          onClick={() => this.props.startGame(difficulty, type)}
+        >
           START
         </button>
       </div>

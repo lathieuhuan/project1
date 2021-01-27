@@ -32,10 +32,10 @@ export class SignIn extends React.Component {
       })
     } else {
       signIn({ username: name, password: pass })
-      .then(() => {
-        this.props.setModal("None", name);
-        // name = "";
-        // pass = "";
+      .then((data) => {
+        this.props.setAppState("None", data.nickname, data.username);
+        localStorage.setItem("nickname", data.nickname);
+        localStorage.setItem("username", data.username);
       })
       .catch((err) => {
         this.setState({ warning: err.message });
@@ -43,17 +43,17 @@ export class SignIn extends React.Component {
     }
   }
   render() {
-    const { setModal } = this.props,
+    const { setAppState } = this.props,
       { warning } = this.state;
     return (
-      <div className="signIU-form">
-        <div onClick={() => setModal("None")} className="close center">
+      <div className="signIU-form wide-padding thin-border small-b-radius flex-col">
+        <div onClick={() => setAppState("None")} className="close flex-center">
           <i className="fa fa-close"></i>
         </div>
         <h1>SIGN IN</h1>
         <p>
           Not a member yet? <span
-            className="warning pointer" onClick={() => setModal("SignUp")}
+            className="warning-color pointer" onClick={() => setAppState("SignUp")}
           >Sign up</span> now!
         </p>
         <input
@@ -67,7 +67,7 @@ export class SignIn extends React.Component {
           }}
         />
         <input
-          type="text" // password
+          type="password"
           id="si-pass"
           placeholder="Enter your password"
           onKeyDown={(e) => {
@@ -76,7 +76,7 @@ export class SignIn extends React.Component {
             }
           }}
         />
-        {warning === null ? null : <p className="warning">{warning}</p>}
+        {warning === null ? null : <p className="warning-color">{warning}</p>}
         <p style={{ textAlign: "left", paddingLeft: "5px" }}>
           Forget your password? Click here.
         </p>
