@@ -97,6 +97,9 @@ export class PersonalInfo extends React.Component {
         >
           {info.about}
         </p>
+        {/* Chữa cháy: nếu ở /profile sẽ tắt nút Edit, ở /my_profile
+        thì ko.
+        Cons: xem App.js, NavBar.jsx */}
         {window.location.pathname === "/profile" ? null : (
           <button
             className="edit-btn thinnest-border smaller-b-radius"

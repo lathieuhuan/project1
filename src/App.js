@@ -1,7 +1,7 @@
 import "./App.css";
 import { Component } from "react";
 import { NavBar } from "./components/NavBar";
-import { Home } from "./components/Home";
+// import { Home } from "./components/Home";
 import { CardMemoryGame } from "./components/CardMemoryGame";
 import { SignIn } from "./components/SignIn";
 import { SignUp } from "./components/SignUp";
@@ -38,7 +38,8 @@ class App extends Component {
     const param = new URLSearchParams(window.location.search).get("user"),
       { modal, nickname, username } = this.state,
       bodyContent = {
-        "/": <Home />,
+        // "/": <Home />,
+        "/": <div>Home</div>,
         "/card_memory_game": <CardMemoryGame />,
         "/my_profile": (
           <Profile username={username} setAppState={this.setAppState} />
@@ -53,6 +54,11 @@ class App extends Component {
           <Redirecting nickname={nickname} setAppState={this.setAppState} />
         ),
       };
+    /* Chữa cháy: nếu user muốn đến /profile của chính họ, hoặc sign in
+    khi đang ở /profile của chính họ, chuyển sang /my_profile để bật
+    nút Edit.
+    Cons: trước khi chuyển, <Profile /> đã mount và getUserInfo rồi,
+    chuyển trang sẽ mount và getUserInfo lần nữa */
     if (param === username) {
       window.location.assign("/my_profile");
     }
