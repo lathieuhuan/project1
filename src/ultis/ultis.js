@@ -55,29 +55,24 @@ function signUp(userInfo) {
 
 function signIn(userInfo) {
   return new Promise((res, rej) => {
-    const { username, password } = userInfo,
-      usernameRef = db.collection("users").where("username", "==", username);
-    usernameRef
+    const { username, password } = userInfo;
+    db.collection("users")
+      .where("username", "==", username)
+      .limit(1)
       .get()
       .then((querySnapshot) => {
         if (querySnapshot.empty) {
           throw new Error("The username is not correct.");
         }
+        return querySnapshot;
       })
-      .then(() => {
-        usernameRef
-          .where("password", "==", password)
-          .get()
-          .then((querySnapshot) => {
-            if (querySnapshot.empty) {
-              throw new Error("The password is not correct.");
-            } else {
-              res(querySnapshot.docs[0].data());
-            }
-          })
-          .catch((err) => {
-            rej(err);
-          });
+      .then((querySnapshot) => {
+        const data = querySnapshot.docs[0].data();
+        if (data.password === password) {
+          res(data);
+        } else {
+          throw new Error("The password is not correct.");
+        }
       })
       .catch((err) => {
         rej(err);
@@ -89,6 +84,7 @@ function getUserInfo(username) {
   return new Promise((res, rej) => {
     db.collection("users")
       .where("username", "==", username)
+      .limit(1)
       .get()
       .then((querySnapshot) => {
         res(querySnapshot.docs[0].data());
@@ -99,4 +95,22 @@ function getUserInfo(username) {
   });
 }
 
-export { getGames, signUp, signIn, getUserInfo };
+function editUserInfo(username, info) {
+  return new Promise((res) => {
+    db.collection("users")
+      .where("username", "==", username)
+      .limit(1)
+      .get()
+      .then((querySnapshot) => {
+        return querySnapshot.docs[0].id;
+      })
+      .then((id) => {
+        db.collection("users")
+          .doc(id)
+          .update({ ...info });
+        res();
+      });
+  });
+}
+
+export { getGames, signUp, signIn, getUserInfo, editUserInfo };

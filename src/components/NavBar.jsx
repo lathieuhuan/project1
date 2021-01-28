@@ -34,6 +34,9 @@ export class NavBar extends React.Component {
               setAppState("None");
               localStorage.removeItem("nickname");
               localStorage.removeItem("username");
+              if (window.location.pathname === "/my_profile") {
+                window.location.assign(`/profile?user=${username}`);
+              }
             }}>
               Sign out
             </button>

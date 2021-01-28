@@ -7,7 +7,7 @@
   margin: 15px 0;
 }
 #profile .left-col p {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 2;
 }
 #about {
@@ -28,12 +28,37 @@
   background-color: blue;
 }
 
-/* #profile .left-col > .row {
-} */
-
 #profile .left-col input[name="nickname"] {
+  width: 50%;
   align-self: center;
+  text-align: center;
   margin: 15px 0;
   font-size: 22px;
   font-weight: 700;
+}
+#profile .left-col > .row {
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+#profile .left-col .row p {
+  width: 35%;
+}
+#profile .left-col input[type="text"],
+#profile .left-col input[type="date"],
+#profile .left-col .gender {
+  width: 63%;
+}
+#profile .left-col .gender {
+  align-items: center;
+}
+#profile .left-col input[type="radio"] {
+  margin-right: 5px;
+}
+#profile .left-col label {
+  margin-right: 15px;
+}
+#profile .left-col textarea,
+#profile .left-col input,
+#profile .left-col label {
+  font-size: 16px;
 }

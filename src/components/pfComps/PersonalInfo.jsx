@@ -1,37 +1,23 @@
 import "../../assets/css/pfCss/PersonalInfo.css";
 import React from 'react';
-import { getUserInfo } from "../../ultis/ultis";
 
 export class PersonalInfo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      nickname: "",
-      gender: "",
-      dob: "",
-      townOcity: "",
-      email: "",
-      about: "",
-    }
+    this.state = {};
   }
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
-  componentDidMount() {
-    getUserInfo(this.props.username).then((data) => {
-      this.setState({
-        nickname: data.nickname,
-        gender: data.gender,
-        dob: data.dob,
-        townOcity: data.townOcity,
-        email: data.email,
-        about: data.about,
-      })
-    })
+  componentDidUpdate() {
+    if (!this.props.editing &&
+    JSON.stringify(this.state) !== JSON.stringify(this.props.info)) {
+      this.setState({ ...this.props.info });
+    }
   }
   render() {
     const { nickname, gender, dob, townOcity, email, about } = this.state,
-      { toggleEdit } = this.props;
+      { info, toggleEdit, tryUpdate } = this.props;
     return this.props.editing ? (
         <div className="left-col thin-border medium-b-radius flex-col">
         <img
@@ -39,33 +25,49 @@ export class PersonalInfo extends React.Component {
           src="https://image.flaticon.com/icons/png/512/61/61205.png"
           alt=""
         />
-        <input name="nickname" value={nickname} onChange={this.handleChange}/>
+        <input type="text" name="nickname" value={nickname}
+          onChange={this.handleChange}
+        />
         <div className="flex row">
-          <p>Gender:</p>  
-          <input name="gender" value={gender} onChange={this.handleChange}/>
+          <p>Gender:</p>
+          <div className="flex gender">
+            <input type="radio" name="gender" value="Male"
+              checked={gender === "Male"} onChange={this.handleChange}
+            />
+            <label>Male</label>
+            <input type="radio" name="gender" value="Female"
+              checked={gender === "Female"} onChange={this.handleChange}
+            />
+            <label>Female</label>
+          </div>
         </div>
         <div className="flex row">
-          <p>Date of Birth:</p>  
-          <input name="dob" value={dob} onChange={this.handleChange}/>
+          <p>Date of Birth:</p>
+          <input type="date" name="dob" value={dob || "2000-01-01"}
+            min="1940-01-01" max="2015-12-31" onChange={this.handleChange}
+          />
         </div>
         <div className="flex row">
-          <p>Current Town/City:</p>  
-          <input name="townOcity" value={townOcity} onChange={this.handleChange}/>
+          <p>Town/City:</p>
+          <input type="text" name="townOcity" value={townOcity || ""} onChange={this.handleChange}/>
         </div>
         <div className="flex row">
-          <p>Email address:</p>  
-          <input name="email" value={email} onChange={this.handleChange}/>
+          <p>Email address:</p>
+          <input type="text" name="email" value={email} onChange={this.handleChange}/>
         </div>
         <p>About me:</p>
         <textarea
           className="thinner-border narrow-padding small-b-radius"
           id="about"
           name="about"
-          value={about}
+          value={about || ""}
           onChange={this.handleChange}
         />
-        <div className="flex row">
-          <button className="edit-btn thinnest-border smaller-b-radius">
+        <div className="flex-center">
+          <button style={{ marginRight: "15px" }}
+            className="edit-btn thinnest-border smaller-b-radius"
+            onClick={() => tryUpdate(this.state)}
+          >
             Save
           </button>
           <button
@@ -83,24 +85,26 @@ export class PersonalInfo extends React.Component {
           src="https://image.flaticon.com/icons/png/512/61/61205.png"
           alt=""
         />
-        <h1>{nickname}</h1>
-        <p>Gender: {gender}</p>
-        <p>Date of Birth: {dob}</p>
-        <p>Current Town/City: {townOcity}</p>
-        <p>Email address: {email}</p>
+        <h1>{info.nickname}</h1>
+        <p>Gender: {info.gender}</p>
+        <p>Date of Birth: {info.dob}</p>
+        <p>Town/City: {info.townOcity}</p>
+        <p>Email address: {info.email}</p>
         <p>About me:</p>
         <p
           className="thinner-border narrow-padding small-b-radius"
           id="about"
         >
-          {about}
+          {info.about}
         </p>
-        <button
-          className="edit-btn thinnest-border smaller-b-radius"
-          onClick={toggleEdit}
-        >
-          Edit Profile
-        </button>
+        {window.location.pathname === "/profile" ? null : (
+          <button
+            className="edit-btn thinnest-border smaller-b-radius"
+            onClick={toggleEdit}
+          >
+            Edit Profile
+          </button>
+        )}
       </div>
     );
   }

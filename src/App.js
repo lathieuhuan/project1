@@ -35,11 +35,15 @@ class App extends Component {
     };
   }
   render() {
-    const { modal, nickname, username } = this.state,
+    const param = new URLSearchParams(window.location.search).get("user"),
+      { modal, nickname, username } = this.state,
       bodyContent = {
         "/": <Home />,
         "/card_memory_game": <CardMemoryGame />,
-        "/my_profile": <Profile username={username} />,
+        "/my_profile": (
+          <Profile username={username} setAppState={this.setAppState} />
+        ),
+        "/profile": <Profile username={param} />,
       },
       modalContent = {
         None: null,
@@ -49,6 +53,9 @@ class App extends Component {
           <Redirecting nickname={nickname} setAppState={this.setAppState} />
         ),
       };
+    if (param === username) {
+      window.location.assign("/my_profile");
+    }
     return (
       <div>
         <NavBar
