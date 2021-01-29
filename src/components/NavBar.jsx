@@ -13,7 +13,7 @@ export class NavBar extends React.Component {
   }
   render() {
     const { username, nickname, setAppState } = this.props;
-    const accNav = username === "Guest" ? (
+    const accNav = username === null ? (
       <div className="acc-nav">
         <button onClick={() => setAppState("SignIn")}>Sign In</button>
         <button onClick={() => setAppState("SignUp")}>Sign Up</button>
@@ -26,7 +26,7 @@ export class NavBar extends React.Component {
         </button>
         {!this.state.expanded ? null : (
           <div className="acc-dropdown thinnest-border small-b-radius">
-            <a href={"/profile/" + username}>
+            <a href={"/Profile/" + username}>
               My Profile
             </a>
             <button onClick={() => {

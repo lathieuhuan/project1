@@ -28,7 +28,7 @@ export class Profile extends React.Component {
       this.setState({ info: { ...data } });
     })
     .catch(() => {
-      window.location.assign("/not_found");
+      window.location.assign("/Page_Not_Found");
     });
   }
   render() {

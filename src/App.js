@@ -18,11 +18,11 @@ class App extends Component {
       username = localStorage.getItem("username");
     this.state = {
       modal: "None",
-      nickname: nickname === null ? "Guest" : nickname,
-      username: username === null ? "Guest" : username,
+      nickname: nickname,
+      username: username,
     };
   }
-  setAppState = (modal, nickname = "Guest", username = "Guest") => {
+  setAppState = (modal, nickname = null, username = null) => {
     this.setState({ modal: modal, nickname: nickname, username: username });
   };
   componentDidMount() {
@@ -59,16 +59,16 @@ class App extends Component {
               {/* <Home /> */}
               <div>Home</div>
             </Route>
-            <Route path="/card_memory_game">
+            <Route path="/Card_Memory_Game">
               <CardMemoryGame />
             </Route>
-            <Route path="/profile">
+            <Route path="/Profile">
               <Profile username={username} setAppState={this.setAppState} />
             </Route>
-            <Route path="/profiles">
+            <Route path="/Profiles">
               <ProfileList />
             </Route>
-            <Route path="/not_found" component={NotFound} />
+            <Route path="/Page_Not_Found" component={NotFound} />
             <Route path="*" component={NotFound} />
           </Switch>
         </div>

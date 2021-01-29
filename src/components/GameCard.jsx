@@ -9,7 +9,7 @@ export function GameCard(props) {
       </div>
       <div className="info-sec medium-padding">
         <h3>
-          <a href={"/" + name.toLowerCase().split(" ").join("_")}>{name}</a>
+          <a href={"/" + name.split(" ").join("_")}>{name}</a>
         </h3>
         <p>Total Players: {totalPlayers}</p>
         <p>Category:</p>
