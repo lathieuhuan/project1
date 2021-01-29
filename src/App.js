@@ -14,12 +14,10 @@ import { NotFound } from "./components/NotFound";
 class App extends Component {
   constructor(props) {
     super(props);
-    const nickname = localStorage.getItem("nickname"),
-      username = localStorage.getItem("username");
     this.state = {
       modal: "None",
-      nickname: nickname,
-      username: username,
+      nickname: localStorage.getItem("nickname"),
+      username: localStorage.getItem("username"),
     };
   }
   setAppState = (modal, nickname = null, username = null) => {
@@ -59,7 +57,7 @@ class App extends Component {
               {/* <Home /> */}
               <div>Home</div>
             </Route>
-            <Route path="/Card_Memory_Game">
+            <Route exact path="/Card_Memory_Game">
               <CardMemoryGame />
             </Route>
             <Route path="/Profile">

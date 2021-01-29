@@ -51,9 +51,9 @@ export class SignUp extends React.Component {
       .catch((err) => this.setState({ nameWarning: err.message }));
     }
   }
-  compacfPass = () => {
+  comparePwd = () => {
     const pass = document.getElementById("su-pass").value,
-      cfpass = document.getElementById("su-cfpass").value;
+      cfpass = document.getElementById("cf-pass").value;
     if (cfpass === pass) {
       this.setState({ cfpassGood: true })
     } else {
@@ -91,7 +91,7 @@ export class SignUp extends React.Component {
           id="su-pass"
           type="password"
           placeholder="Enter your password"
-          onChange={this.compacfPass}
+          onChange={this.comparePwd}
           onKeyDown = {(e) => {
             if (e.key === "Enter") {
               this.trySignUp();
@@ -102,15 +102,15 @@ export class SignUp extends React.Component {
           <p className="warning-color">{passWarning}</p>
         )}
         <input
-          id="su-cfpass"
+          id="cf-pass"
           type="password"
-          placeholder="Re-enter your password"
+          placeholder="Confirm your password"
           style={{
             backgroundImage: cfpassGood
               ? "url(https://www.pngitem.com/pimgs/m/508-5084657_green-check-mark-icon-free-check-icon-hd.png)"
               : "url(https://png.pngitem.com/pimgs/s/4-46202_red-cross-transparent-png-red-transparent-background-cross.png)"
           }}
-          onChange={this.compacfPass}
+          onChange={this.comparePwd}
           onKeyDown = {(e) => {
             if (e.key === "Enter") {
               this.trySignUp();
@@ -127,7 +127,7 @@ export class SignUp extends React.Component {
             }
           }}
         />
-        <button onClick={this.trySignUp}>Confirm</button>
+        <button onClick={this.trySignUp}>Submit</button>
       </div>
     );
   }

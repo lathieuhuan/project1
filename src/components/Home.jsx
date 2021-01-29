@@ -1,5 +1,5 @@
 import "../assets/css/Home.css";
-import React from 'react';
+import React from "react";
 import { getGames } from "../ultis/ultis";
 import { GameCard } from "./GameCard";
 
@@ -11,7 +11,7 @@ export class Home extends React.Component {
   componentDidMount() {
     getGames().then((data) => {
       this.setState({ games: data });
-    })
+    });
   }
   render() {
     return (
@@ -27,9 +27,7 @@ export class Home extends React.Component {
           <h2>Game List</h2>
         </div>
         <div className="flex wide-padding" id="btm-sec">
-          {this.state.games.map((val, i) => {
-            return <GameCard key={i} info={val} />
-          })}
+          {this.state.games.map((val, i) => <GameCard key={i} info={val} />)}
         </div>
       </div>
     );
