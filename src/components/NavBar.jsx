@@ -26,7 +26,7 @@ export class NavBar extends React.Component {
         </button>
         {!this.state.expanded ? null : (
           <div className="acc-dropdown thinnest-border small-b-radius">
-            <a href="/my_profile">
+            <a href={"/profile/" + username}>
               My Profile
             </a>
             <button onClick={() => {
@@ -34,13 +34,6 @@ export class NavBar extends React.Component {
               setAppState("None");
               localStorage.removeItem("nickname");
               localStorage.removeItem("username");
-              /* Chữa cháy: sign out ở /my_profile sẽ chuyển sang /profile
-              của chính user đó để tắt nút Edit ở <Profile />.
-              Cons: <Profile /> được mount lại (xem App.js) và getUserInfo
-              một lần nữa */
-              if (window.location.pathname === "/my_profile") {
-                window.location.assign(`/profile?user=${username}`);
-              }
             }}>
               Sign out
             </button>

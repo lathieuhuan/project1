@@ -85,3 +85,7 @@ h3 {
 .pointer {
   cursor: pointer;
 }
+.cover-body {
+  width: 100%;
+  height: calc(477 / 722 * 100vh);
+}

@@ -20,7 +20,7 @@ export class SignUp extends React.Component {
     this.state = { 
       nameWarning: null,
       passWarning: null,
-      repassGood: false,
+      cfpassGood: false,
     };
   }
   trySignUp = () => {
@@ -39,7 +39,7 @@ export class SignUp extends React.Component {
       nameWarning: nameWarning,
       passWarning: passWarning,
     });
-    if (isGood(name) && isGood(pass)) {
+    if (isGood(name) && isGood(pass) && this.state.cfpassGood) {
       signUp({
         username: name,
         password: pass,
@@ -51,18 +51,18 @@ export class SignUp extends React.Component {
       .catch((err) => this.setState({ nameWarning: err.message }));
     }
   }
-  comparePass = () => {
+  compacfPass = () => {
     const pass = document.getElementById("su-pass").value,
-      repass = document.getElementById("su-repass").value;
-    if (repass === pass) {
-      this.setState({ repassGood: true })
+      cfpass = document.getElementById("su-cfpass").value;
+    if (cfpass === pass) {
+      this.setState({ cfpassGood: true })
     } else {
-      this.setState({ repassGood: false });
+      this.setState({ cfpassGood: false });
     }
   }
   render() {
     const { setAppState } = this.props,
-      { nameWarning, passWarning, repassGood } = this.state;
+      { nameWarning, passWarning, cfpassGood } = this.state;
     return (
       <div className="signIU-form wide-padding thin-border small-b-radius flex-col">
         <div onClick={() => setAppState("None")} className="close flex-center">
@@ -91,7 +91,7 @@ export class SignUp extends React.Component {
           id="su-pass"
           type="password"
           placeholder="Enter your password"
-          onChange={this.comparePass}
+          onChange={this.compacfPass}
           onKeyDown = {(e) => {
             if (e.key === "Enter") {
               this.trySignUp();
@@ -102,15 +102,15 @@ export class SignUp extends React.Component {
           <p className="warning-color">{passWarning}</p>
         )}
         <input
-          id="su-repass"
+          id="su-cfpass"
           type="password"
           placeholder="Re-enter your password"
           style={{
-            backgroundImage: repassGood
+            backgroundImage: cfpassGood
               ? "url(https://www.pngitem.com/pimgs/m/508-5084657_green-check-mark-icon-free-check-icon-hd.png)"
               : "url(https://png.pngitem.com/pimgs/s/4-46202_red-cross-transparent-png-red-transparent-background-cross.png)"
           }}
-          onChange={this.comparePass}
+          onChange={this.compacfPass}
           onKeyDown = {(e) => {
             if (e.key === "Enter") {
               this.trySignUp();

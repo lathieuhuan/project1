@@ -1,12 +1,15 @@
 import "./App.css";
 import { Component } from "react";
+import { Switch, Route } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
-// import { Home } from "./components/Home";
+import { Home } from "./components/Home";
 import { CardMemoryGame } from "./components/CardMemoryGame";
 import { SignIn } from "./components/SignIn";
 import { SignUp } from "./components/SignUp";
 import { Redirecting } from "./components/Redirecting";
+import { ProfileList } from "./components/ProfileList";
 import { Profile } from "./components/Profile";
+import { NotFound } from "./components/NotFound";
 
 class App extends Component {
   constructor(props) {
@@ -35,33 +38,14 @@ class App extends Component {
     };
   }
   render() {
-    const param = new URLSearchParams(window.location.search).get("user"),
-      { modal, nickname, username } = this.state,
-      bodyContent = {
-        // "/": <Home />,
-        "/": <div>Home</div>,
-        "/card_memory_game": <CardMemoryGame />,
-        "/my_profile": (
-          <Profile username={username} setAppState={this.setAppState} />
-        ),
-        "/profile": <Profile username={param} />,
-      },
+    const { modal, nickname, username } = this.state,
       modalContent = {
-        None: null,
         SignIn: <SignIn setAppState={this.setAppState} />,
         SignUp: <SignUp setAppState={this.setAppState} />,
         Redirecting: (
           <Redirecting nickname={nickname} setAppState={this.setAppState} />
         ),
       };
-    /* Chữa cháy: nếu user muốn đến /profile của chính họ, hoặc sign in
-    khi đang ở /profile của chính họ, chuyển sang /my_profile để bật
-    nút Edit.
-    Cons: trước khi chuyển, <Profile /> đã mount và getUserInfo rồi,
-    chuyển trang sẽ mount và getUserInfo lần nữa */
-    if (param === username) {
-      window.location.assign("/my_profile");
-    }
     return (
       <div>
         <NavBar
@@ -69,14 +53,27 @@ class App extends Component {
           username={username}
           setAppState={this.setAppState}
         />
-        <div id="app-body">{bodyContent[window.location.pathname]}</div>
-        <div id="footer"></div>
-        <div
-          id="modal"
-          style={{ display: modal === "None" ? "none" : "block" }}
-        >
-          {modalContent[modal]}
+        <div id="app-body">
+          <Switch>
+            <Route exact path="/">
+              {/* <Home /> */}
+              <div>Home</div>
+            </Route>
+            <Route path="/card_memory_game">
+              <CardMemoryGame />
+            </Route>
+            <Route path="/profile">
+              <Profile username={username} setAppState={this.setAppState} />
+            </Route>
+            <Route path="/profiles">
+              <ProfileList />
+            </Route>
+            <Route path="/not_found" component={NotFound} />
+            <Route path="*" component={NotFound} />
+          </Switch>
         </div>
+        <div id="footer"></div>
+        {modal === "None" ? null : <div id="modal">{modalContent[modal]}</div>}
       </div>
     );
   }

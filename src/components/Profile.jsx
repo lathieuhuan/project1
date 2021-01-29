@@ -1,5 +1,5 @@
 import "../assets/css/Profile.css"
-import React from 'react';
+import React from "react";
 import { PersonalInfo } from "./pfComps/PersonalInfo";
 import { getUserInfo, editUserInfo } from "../ultis/ultis";
 
@@ -10,6 +10,7 @@ export class Profile extends React.Component {
       editing: false,
       info: {},
     };
+    this.nameForInfo = window.location.pathname.slice(9);
   }
   tryUpdate = (info) => {
     if (JSON.stringify(this.state.info) !== JSON.stringify(info)) {
@@ -23,20 +24,19 @@ export class Profile extends React.Component {
     this.setState({ editing: !this.state.editing });
   }
   componentDidMount() {
-    if (this.props.username === "Guest") {
-      window.location.assign("/");
-    } else {
-      getUserInfo(this.props.username).then((data) => {
-        this.setState({ info: { ...data } });
-      });
-    }
+    getUserInfo(this.nameForInfo).then((data) => {
+      this.setState({ info: { ...data } });
+    })
+    .catch(() => {
+      window.location.assign("/not_found");
+    });
   }
   render() {
     return (
       <div className="flex" id="profile">
         <PersonalInfo
           {...this.state}
-          username={this.props.username}
+          isOwner={this.props.username === this.nameForInfo}
           toggleEdit={this.toggleEdit}
           tryUpdate={this.tryUpdate}
         />
