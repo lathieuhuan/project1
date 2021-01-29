@@ -31,11 +31,11 @@ export class SignIn extends React.Component {
         warning: "Please enter a valid password."
       })
     } else {
-      signIn({ username: name, password: pass })
+      signIn({ userId: name, password: pass })
       .then((data) => {
-        this.props.setAppState("None", data.nickname, data.username);
-        localStorage.setItem("nickname", data.nickname);
+        this.props.setAppState("None", data.username, name);
         localStorage.setItem("username", data.username);
+        localStorage.setItem("userId", name);
       })
       .catch((err) => {
         this.setState({ warning: err.message });

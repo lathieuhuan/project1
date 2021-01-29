@@ -16,12 +16,12 @@ class App extends Component {
     super(props);
     this.state = {
       modal: "None",
-      nickname: localStorage.getItem("nickname"),
       username: localStorage.getItem("username"),
+      userId: localStorage.getItem("userId"),
     };
   }
-  setAppState = (modal, nickname = null, username = null) => {
-    this.setState({ modal: modal, nickname: nickname, username: username });
+  setAppState = (modal, username = null, userId = null) => {
+    this.setState({ modal: modal, username: username, userId: userId });
   };
   componentDidMount() {
     window.onclick = (e) => {
@@ -36,19 +36,19 @@ class App extends Component {
     };
   }
   render() {
-    const { modal, nickname, username } = this.state,
+    const { modal, username, userId } = this.state,
       modalContent = {
         SignIn: <SignIn setAppState={this.setAppState} />,
         SignUp: <SignUp setAppState={this.setAppState} />,
         Redirecting: (
-          <Redirecting nickname={nickname} setAppState={this.setAppState} />
+          <Redirecting username={username} setAppState={this.setAppState} />
         ),
       };
     return (
       <div>
         <NavBar
-          nickname={nickname}
           username={username}
+          userId={userId}
           setAppState={this.setAppState}
         />
         <div id="app-body">
@@ -61,7 +61,7 @@ class App extends Component {
               <CardMemoryGame />
             </Route>
             <Route path="/Profile">
-              <Profile username={username} setAppState={this.setAppState} />
+              <Profile userId={userId} setAppState={this.setAppState} />
             </Route>
             <Route path="/Profiles">
               <ProfileList />

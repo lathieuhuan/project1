@@ -12,12 +12,16 @@ export class Profile extends React.Component {
     };
     this.nameForInfo = window.location.pathname.slice(9);
   }
-  tryUpdate = (info) => {
-    if (JSON.stringify(this.state.info) !== JSON.stringify(info)) {
-      editUserInfo(this.props.username, info);
-      this.setState({ editing: false, info: info });
-      this.props.setAppState("None", info.nickname, this.props.username);
-      localStorage.setItem("nickname", info.nickname);
+  tryUpdate = (newInfo) => {
+    const { info } = this.state,
+      { userId } = this.props;
+    if (JSON.stringify(info) !== JSON.stringify(newInfo)) {
+      editUserInfo(userId, newInfo);
+      this.setState({ editing: false, info: newInfo });
+      // if (info.username !== newInfo.username) {
+      this.props.setAppState("None", newInfo.username, userId);
+      localStorage.setItem("username", newInfo.username);
+      // }
     }
   }
   toggleEdit = () => {
@@ -36,7 +40,7 @@ export class Profile extends React.Component {
       <div className="flex" id="profile">
         <PersonalInfo
           {...this.state}
-          isOwner={this.props.username === this.nameForInfo}
+          isOwner={this.props.userId === this.nameForInfo}
           toggleEdit={this.toggleEdit}
           tryUpdate={this.tryUpdate}
         />

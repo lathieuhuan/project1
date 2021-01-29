@@ -28,7 +28,7 @@
   background-color: blue;
 }
 
-#profile .left-col input[name="nickname"] {
+#profile .left-col input[name="username"] {
   width: 50%;
   align-self: center;
   text-align: center;

@@ -12,8 +12,8 @@ export class NavBar extends React.Component {
     this.setState({ expanded: !this.state.expanded });
   }
   render() {
-    const { username, nickname, setAppState } = this.props;
-    const accNav = username === null ? (
+    const { username, userId, setAppState } = this.props;
+    const accNav = userId === null ? (
       <div className="acc-nav">
         <button onClick={() => setAppState("SignIn")}>Sign In</button>
         <button onClick={() => setAppState("SignUp")}>Sign Up</button>
@@ -22,18 +22,18 @@ export class NavBar extends React.Component {
       <div className="acc-nav" id="acc-btn">
         <button onClick={this.toggleDropdown}>
           <img src="https://image.flaticon.com/icons/png/512/61/61205.png" id="acc-icon" alt=""/>
-          {nickname}
+          {username}
         </button>
         {!this.state.expanded ? null : (
           <div className="acc-dropdown thinnest-border small-b-radius">
-            <a href={"/Profile/" + username}>
+            <a href={"/Profile/" + userId}>
               My Profile
             </a>
             <button onClick={() => {
               this.toggleDropdown();
               setAppState("None");
-              localStorage.removeItem("nickname");
               localStorage.removeItem("username");
+              localStorage.removeItem("userId");
             }}>
               Sign out
             </button>

@@ -2,7 +2,11 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import { firebaseConfig } from "../config/config.firebase";
 
-firebase.initializeApp(firebaseConfig);
+try {
+  firebase.initializeApp(firebaseConfig);
+} catch {
+  console.log("Firebase has already been installed.");
+}
 const db = firebase.firestore();
 
 function getGames() {
@@ -24,28 +28,28 @@ function getGames() {
   });
 }
 
-function signUp(userInfo) {
+function signUp(accountInfo) {
   return new Promise((res, rej) => {
-    const { username, password, email } = userInfo;
+    const { userId, password, email } = accountInfo;
     db.collection("users")
-      .where("username", "==", username)
+      .doc(userId)
       .get()
-      .then((querySnapshot) => {
-        if (!querySnapshot.empty) {
+      .then((doc) => {
+        if (doc.exists) {
           throw new Error("Username existed.");
         }
       })
       .then(() => {
-        db.collection("users")
-          .add({
-            username: username,
-            nickname: username,
-            password: password,
-            email: email,
-          })
-          .then((doc) => {
-            res(doc.id);
-          });
+        db.collection("users").doc(userId).set({
+          username: userId,
+          password: password,
+          gender: "",
+          dob: "",
+          townOcity: "",
+          email: email,
+          about: "",
+        });
+        res();
       })
       .catch((err) => {
         rej(err);
@@ -53,25 +57,24 @@ function signUp(userInfo) {
   });
 }
 
-function signIn(userInfo) {
+function signIn(accountInfo) {
   return new Promise((res, rej) => {
-    const { username, password } = userInfo;
+    const { userId, password } = accountInfo;
     db.collection("users")
-      .where("username", "==", username)
-      .limit(1)
+      .doc(userId)
       .get()
-      .then((querySnapshot) => {
-        if (querySnapshot.empty) {
+      .then((doc) => {
+        if (!doc.exists) {
           throw new Error("The username is not correct.");
-        }
-        return querySnapshot;
-      })
-      .then((querySnapshot) => {
-        const data = querySnapshot.docs[0].data();
-        if (data.password === password) {
-          res(data);
         } else {
+          return doc.data();
+        }
+      })
+      .then((data) => {
+        if (data.password !== password) {
           throw new Error("The password is not correct.");
+        } else {
+          res(data);
         }
       })
       .catch((err) => {
@@ -80,14 +83,13 @@ function signIn(userInfo) {
   });
 }
 
-function getUserInfo(username) {
+function getUserInfo(user) {
   return new Promise((res, rej) => {
     db.collection("users")
-      .where("username", "==", username)
-      .limit(1)
+      .doc(user)
       .get()
-      .then((querySnapshot) => {
-        res(querySnapshot.docs[0].data());
+      .then((doc) => {
+        res(doc.data());
       })
       .catch(() => {
         rej(new Error("Cannot get the info."));
@@ -95,19 +97,12 @@ function getUserInfo(username) {
   });
 }
 
-function editUserInfo(username, info) {
+function editUserInfo(userId, info) {
   return new Promise((res) => {
     db.collection("users")
-      .where("username", "==", username)
-      .limit(1)
-      .get()
-      .then((querySnapshot) => {
-        return querySnapshot.docs[0].id;
-      })
-      .then((id) => {
-        db.collection("users")
-          .doc(id)
-          .update({ ...info });
+      .doc(userId)
+      .update({ ...info })
+      .then(() => {
         res();
       });
   });

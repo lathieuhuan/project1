@@ -16,16 +16,16 @@ export class PersonalInfo extends React.Component {
     }
   }
   render() {
-    const { nickname, gender, dob, townOcity, email, about } = this.state,
-      { info, toggleEdit, tryUpdate } = this.props;
-    return this.props.editing ? (
+    const { username, gender, dob, townOcity, email, about } = this.state,
+      { editing, info, isOwner, toggleEdit, tryUpdate } = this.props;
+    return editing && isOwner ? (
         <div className="left-col thin-border medium-b-radius flex-col">
         <img
           className="avatar"
           src="https://image.flaticon.com/icons/png/512/61/61205.png"
           alt=""
         />
-        <input type="text" name="nickname" value={nickname}
+        <input type="text" name="username" value={username}
           onChange={this.handleChange}
         />
         <div className="flex row">
@@ -85,7 +85,7 @@ export class PersonalInfo extends React.Component {
           src="https://image.flaticon.com/icons/png/512/61/61205.png"
           alt=""
         />
-        <h1>{info.nickname}</h1>
+        <h1>{info.username}</h1>
         <p>Gender: {info.gender}</p>
         <p>Date of Birth: {info.dob}</p>
         <p>Town/City: {info.townOcity}</p>
@@ -97,14 +97,14 @@ export class PersonalInfo extends React.Component {
         >
           {info.about}
         </p>
-        {this.props.isOwner ? (
+        {!isOwner ? null : (
           <button
             className="edit-btn thinnest-border smaller-b-radius"
             onClick={toggleEdit}
           >
             Edit Profile
           </button>
-        ) : null}
+        )}
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import "../assets/css/SignIU.css";
-import React from 'react';
+import React from "react";
 import { signUp } from "../ultis/ultis";
 
 function isGood(str) {
@@ -41,7 +41,7 @@ export class SignUp extends React.Component {
     });
     if (isGood(name) && isGood(pass) && this.state.cfpassGood) {
       signUp({
-        username: name,
+        userId: name,
         password: pass,
         email: email,
       })
@@ -54,7 +54,9 @@ export class SignUp extends React.Component {
   comparePwd = () => {
     const pass = document.getElementById("su-pass").value,
       cfpass = document.getElementById("cf-pass").value;
-    if (cfpass === pass) {
+    if (pass === "") {
+      this.setState({ cfpassGood: false });
+    } else if (cfpass === pass) {
       this.setState({ cfpassGood: true })
     } else {
       this.setState({ cfpassGood: false });
