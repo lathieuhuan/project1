@@ -11,9 +11,9 @@ const db = firebase.firestore(),
   usersRef = db.collection("users"),
   gamesRef = db.collection("games");
 
-function getGames(key) {
+function getGames(keywords) {
   return new Promise((res, rej) => {
-    if (key === undefined || key === null) {
+    if (keywords === "all") {
       gamesRef
         .get()
         .then((querySnapshot) => {
@@ -30,7 +30,7 @@ function getGames(key) {
         });
     } else {
       gamesRef
-        .where("gameName", ">=", key)
+        .where("searchTerms", "array-contains-any", keywords)
         .get()
         .then((querySnapshot) => {
           let result = [];
@@ -39,10 +39,14 @@ function getGames(key) {
               ...doc.data(),
             });
           });
-          res(result);
+          if (result.length > 0) {
+            res(result);
+          } else {
+            throw new Error("Cannot get the games.");
+          }
         })
-        .catch(() => {
-          rej(new Error("Cannot get the games."));
+        .catch((err) => {
+          rej(err);
         });
     }
   });

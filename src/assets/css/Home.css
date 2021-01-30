@@ -3,7 +3,7 @@
   margin: 0 auto;
 }
 
-#top-sec {
+#home > .top-sec {
   justify-content: space-between;
   margin-bottom: 20px;
 }
@@ -27,11 +27,11 @@
   width: 28%;
 }
 
-#mid-sec > h2 {
+#home > .mid-sec > h2 {
   border-bottom: 2px royalblue solid;
 }
 
-#btm-sec {
+#home > .btm-sec {
   background-color: #eee;
   padding-bottom: 0;
   flex-wrap: wrap;

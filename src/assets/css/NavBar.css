@@ -27,24 +27,24 @@
   color: yellow;
 }
 
-#search-bar {
+#games-s-bar {
   width: 450px;
 }
-#search-box,
-#search-btn {
+#games-s-box,
+#games-s-btn {
   height: 30px;
 }
-#search-box {
+#games-s-box {
   min-width: 400px;
   border: none;
   border-radius: 3px 0 0 3px;
 }
-#search-btn {
+#games-s-btn {
   background-color: yellow;
   min-width: 50px;
   border-radius: 0 3px 3px 0;
 }
-#search-icon {
+#games-s-icon {
   width: 16px;
   height: 16px;
   margin: 7px 17px;

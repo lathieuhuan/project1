@@ -11,6 +11,13 @@ export class NavBar extends React.Component {
   toggleDropdown = () => {
     this.setState({ expanded: !this.state.expanded });
   }
+  toSearchResult = () => {
+    const searchTerm = document.getElementById("games-s-box").value;
+    if (searchTerm.match(/([a-zA-Z0-9])+([ -~])*/)) {
+      // true nếu searchTerm chứa ít nhất một chữ cái hoặc con số
+      window.location.assign("/Library?search=" + searchTerm);
+    }
+  }
   render() {
     const { username, userId, setAppState } = this.props;
     const accNav = userId === null ? (
@@ -45,15 +52,21 @@ export class NavBar extends React.Component {
       <div id="head">
         <div className="flex" id="nav-bar">
           <a href="/" id="logo-head">MinigameHub</a>
-          <div className="flex" id="search-bar">
+          <div className="flex" id="games-s-bar">
             <input
-              className="narrow-padding" type="text"
-              id="search-box" placeholder="Search for minigames..."
+              className="narrow-padding" type="text" id="games-s-box"
+              placeholder="Enter some keywords to search for games..."
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  this.toSearchResult();
+                }
+              }}
             />
-            <div className="pointer" id="search-btn">
+            <div className="pointer" id="games-s-btn">
               <img
                 src="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/search-512.png"
-                id="search-icon" alt=""
+                id="games-s-icon" alt=""
+                onClick={this.toSearchResult}
               />
             </div>
           </div>

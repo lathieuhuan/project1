@@ -9,24 +9,24 @@ export class Home extends React.Component {
     this.state = { games: [] };
   }
   componentDidMount() {
-    getGames().then((data) => {
+    getGames("all").then((data) => {
       this.setState({ games: data });
     });
   }
   render() {
     return (
       <div id="home">
-        <div className="flex" id="top-sec">
+        <div className="flex top-sec">
           <div className="flex-center" id="intro">
             <h1>WELCOME TO MINIGAME HUB</h1>
             <h3>We have the most enteresting mind games!</h3>
           </div>
           <div id="top-games"></div>
         </div>
-        <div className="flex" id="mid-sec">
-          <h2>Game List</h2>
+        <div className="flex mid-sec">
+          <h2><a href="/Library">Game Library</a></h2>
         </div>
-        <div className="flex wide-padding" id="btm-sec">
+        <div className="flex wide-padding btm-sec">
           {this.state.games.map((val, i) => <GameCard key={i} info={val} />)}
         </div>
       </div>

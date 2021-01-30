@@ -3,7 +3,7 @@ import { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
 import { Home } from "./components/Home";
-import { Games } from "./components/Games";
+import { Library } from "./components/Library";
 import { CardMemoryGame } from "./components/CardMemoryGame";
 import { SignIn } from "./components/SignIn";
 import { SignUp } from "./components/SignUp";
@@ -61,9 +61,8 @@ class App extends Component {
               <Home />
               {/* <div>Home</div> */}
             </Route>
-            <Route path="/Games">
-              <Games />
-              {/* <div>Home</div> */}
+            <Route path="/Library">
+              <Library />
             </Route>
             <Route exact path="/Card_Memory_Game">
               <CardMemoryGame />
