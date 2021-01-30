@@ -7,31 +7,88 @@ try {
 } catch {
   console.log("Firebase has already been installed.");
 }
-const db = firebase.firestore();
+const db = firebase.firestore(),
+  usersRef = db.collection("users"),
+  gamesRef = db.collection("games");
 
-function getGames() {
+function getGames(key) {
   return new Promise((res, rej) => {
-    db.collection("games")
-      .get()
-      .then((querySnapshot) => {
-        let result = [];
-        querySnapshot.forEach((doc) => {
-          result.push({
-            ...doc.data(),
+    if (key === undefined || key === null) {
+      gamesRef
+        .get()
+        .then((querySnapshot) => {
+          let result = [];
+          querySnapshot.forEach((doc) => {
+            result.push({
+              ...doc.data(),
+            });
           });
+          res(result);
+        })
+        .catch(() => {
+          rej(new Error("Cannot get the games."));
         });
-        res(result);
-      })
-      .catch(() => {
-        rej(new Error("Cannot get the games."));
-      });
+    } else {
+      gamesRef
+        .where("gameName", ">=", key)
+        .get()
+        .then((querySnapshot) => {
+          let result = [];
+          querySnapshot.forEach((doc) => {
+            result.push({
+              ...doc.data(),
+            });
+          });
+          res(result);
+        })
+        .catch(() => {
+          rej(new Error("Cannot get the games."));
+        });
+    }
+  });
+}
+
+function getUsers(keyword) {
+  return new Promise((res, rej) => {
+    if (keyword === undefined) {
+      usersRef
+        .get()
+        .then((querySnapshot) => {
+          let result = [];
+          querySnapshot.forEach((doc) => {
+            result.push({
+              ...doc.data(),
+            });
+          });
+          res(result);
+        })
+        .catch(() => {
+          rej(new Error("Cannot get the users."));
+        });
+    } else {
+      usersRef
+        .where("username", "in", keyword)
+        .get()
+        .then((querySnapshot) => {
+          let result = [];
+          querySnapshot.forEach((doc) => {
+            result.push({
+              ...doc.data(),
+            });
+          });
+          res(result);
+        })
+        .catch(() => {
+          rej(new Error("Cannot get the users."));
+        });
+    }
   });
 }
 
 function signUp(accountInfo) {
   return new Promise((res, rej) => {
     const { userId, password, email } = accountInfo;
-    db.collection("users")
+    usersRef
       .doc(userId)
       .get()
       .then((doc) => {
@@ -60,7 +117,7 @@ function signUp(accountInfo) {
 function signIn(accountInfo) {
   return new Promise((res, rej) => {
     const { userId, password } = accountInfo;
-    db.collection("users")
+    usersRef
       .doc(userId)
       .get()
       .then((doc) => {
@@ -83,10 +140,10 @@ function signIn(accountInfo) {
   });
 }
 
-function getUserInfo(user) {
+function getUserInfo(userId) {
   return new Promise((res, rej) => {
-    db.collection("users")
-      .doc(user)
+    usersRef
+      .doc(userId)
       .get()
       .then((doc) => {
         res(doc.data());
@@ -98,14 +155,17 @@ function getUserInfo(user) {
 }
 
 function editUserInfo(userId, info) {
-  return new Promise((res) => {
-    db.collection("users")
+  return new Promise((res, rej) => {
+    usersRef
       .doc(userId)
       .update({ ...info })
       .then(() => {
         res();
+      })
+      .catch(() => {
+        rej(new Error("Cannot update the info."));
       });
   });
 }
 
-export { getGames, signUp, signIn, getUserInfo, editUserInfo };
+export { getGames, getUsers, signUp, signIn, getUserInfo, editUserInfo };

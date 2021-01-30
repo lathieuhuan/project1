@@ -62,3 +62,6 @@
 #profile .left-col label {
   font-size: 16px;
 }
+#profile span {
+  color: blue;
+}

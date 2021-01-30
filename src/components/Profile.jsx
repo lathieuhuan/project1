@@ -17,11 +17,16 @@ export class Profile extends React.Component {
       { userId } = this.props;
     if (JSON.stringify(info) !== JSON.stringify(newInfo)) {
       editUserInfo(userId, newInfo);
-      this.setState({ editing: false, info: newInfo });
-      // if (info.username !== newInfo.username) {
-      this.props.setAppState("None", newInfo.username, userId);
-      localStorage.setItem("username", newInfo.username);
-      // }
+      this.setState({
+        editing: false,
+        info: newInfo,
+      });
+      if (info.username !== newInfo.username) {
+        this.props.setAppState("None", newInfo.username, userId);
+        localStorage.setItem("username", newInfo.username);
+      }
+    } else {
+      this.setState({ editing: false });
     }
   }
   toggleEdit = () => {

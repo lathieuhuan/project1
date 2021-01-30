@@ -3,12 +3,13 @@ import { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
 import { Home } from "./components/Home";
+import { Games } from "./components/Games";
 import { CardMemoryGame } from "./components/CardMemoryGame";
 import { SignIn } from "./components/SignIn";
 import { SignUp } from "./components/SignUp";
 import { Redirecting } from "./components/Redirecting";
-import { ProfileList } from "./components/ProfileList";
 import { Profile } from "./components/Profile";
+import { Users } from "./components/Users";
 import { NotFound } from "./components/NotFound";
 
 class App extends Component {
@@ -22,6 +23,9 @@ class App extends Component {
   }
   setAppState = (modal, username = null, userId = null) => {
     this.setState({ modal: modal, username: username, userId: userId });
+  };
+  setModal = (modal) => {
+    this.setState({ modal: modal });
   };
   componentDidMount() {
     window.onclick = (e) => {
@@ -54,8 +58,12 @@ class App extends Component {
         <div id="app-body">
           <Switch>
             <Route exact path="/">
-              {/* <Home /> */}
-              <div>Home</div>
+              <Home />
+              {/* <div>Home</div> */}
+            </Route>
+            <Route path="/Games">
+              <Games />
+              {/* <div>Home</div> */}
             </Route>
             <Route exact path="/Card_Memory_Game">
               <CardMemoryGame />
@@ -63,8 +71,8 @@ class App extends Component {
             <Route path="/Profile">
               <Profile userId={userId} setAppState={this.setAppState} />
             </Route>
-            <Route path="/Profiles">
-              <ProfileList />
+            <Route path="/Users">
+              <Users />
             </Route>
             <Route path="/Page_Not_Found" component={NotFound} />
             <Route path="*" component={NotFound} />
