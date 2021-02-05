@@ -1,7 +1,7 @@
 import "../assets/css/GameCard.css";
 
 export function GameCard(props) {
-  const { gameName, totalPlayers } = props.info;
+  const { gameTitle, totalPlayers } = props.info;
   return (
     <div className="game-card thinnest-border smaller-b-radius">
       <div className="img-sec flex-center">
@@ -9,7 +9,7 @@ export function GameCard(props) {
       </div>
       <div className="info-sec medium-padding">
         <h3>
-          <a href={"/" + gameName.split(" ").join("_")}>{gameName}</a>
+          <a href={"/" + gameTitle.split(" ").join("_")}>{gameTitle}</a>
         </h3>
         <p>Total Players: {totalPlayers}</p>
         <p>Category:</p>

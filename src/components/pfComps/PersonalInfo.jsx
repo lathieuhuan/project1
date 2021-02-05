@@ -2,15 +2,10 @@ import "../../assets/css/pfCss/PersonalInfo.css";
 import React from 'react';
 
 function isGood(str) {
-  if (str === "") {
-    return false;
+  if (str.match(/([a-zA-Z0-9])+([ -~])*/)) {
+    return true;
   }
-  for (let char of str) {
-    if (char === " ") {
-      return false;
-    }
-  }
-  return true;
+  return false;
 }
 
 export class PersonalInfo extends React.Component {

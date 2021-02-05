@@ -96,6 +96,7 @@
   border-radius: 3px;
   font-size: 16px;
   line-height: 20px;
+  text-align: left;
 }
 #nav-bar .acc-dropdown > button {
   background-color: inherit;

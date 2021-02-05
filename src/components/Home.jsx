@@ -19,14 +19,14 @@ export class Home extends React.Component {
         <div className="flex top-sec">
           <div className="flex-center" id="intro">
             <h1>WELCOME TO MINIGAME HUB</h1>
-            <h3>We have the most enteresting mind games!</h3>
+            <h3>We have the most interesting mind games!</h3>
           </div>
           <div id="top-games"></div>
         </div>
         <div className="flex mid-sec">
           <h2><a href="/Library">Game Library</a></h2>
         </div>
-        <div className="flex wide-padding btm-sec">
+        <div className="flex btm-sec">
           {this.state.games.map((val, i) => <GameCard key={i} info={val} />)}
         </div>
       </div>

@@ -1,0 +1,8 @@
+#library > h1 {
+  margin-bottom: 20px;
+}
+#library .list {
+  width: 1110px;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}

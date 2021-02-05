@@ -28,9 +28,9 @@ export class Library extends React.Component {
   }
   render() {
     return this.state.found ? (
-      <div>
+      <div id="library">
         <h1>GAME LIBRARY</h1>
-        <div>
+        <div className="list flex">
           {this.state.games.map((val, i) => <GameCard key={i} info={val} />)}
         </div>
       </div>

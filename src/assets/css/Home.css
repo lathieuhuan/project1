@@ -32,7 +32,7 @@
 }
 
 #home > .btm-sec {
+  padding: 10px;
   background-color: #eee;
-  padding-bottom: 0;
   flex-wrap: wrap;
 }

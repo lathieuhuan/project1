@@ -15,6 +15,9 @@ export class Profile extends React.Component {
   tryUpdate = (newInfo) => {
     const { info } = this.state,
       { userId } = this.props;
+    for (let key in newInfo) {
+      newInfo[key] = newInfo[key].trim();
+    }
     if (JSON.stringify(info) !== JSON.stringify(newInfo)) {
       editUserInfo(userId, newInfo);
       this.setState({
@@ -22,7 +25,7 @@ export class Profile extends React.Component {
         info: newInfo,
       });
       if (info.username !== newInfo.username) {
-        this.props.setAppState("None", newInfo.username, userId);
+      this.props.setAppState("None", newInfo.username, userId);
         localStorage.setItem("username", newInfo.username);
       }
     } else {

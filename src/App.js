@@ -28,11 +28,11 @@ class App extends Component {
     this.setState({ modal: modal });
   };
   componentDidMount() {
-    window.onclick = (e) => {
-      if (e.target.matches("#modal")) {
-        this.setAppState("None");
-      }
-    };
+    // window.onclick = (e) => {
+    //   if (e.target.matches("#modal")) {
+    //     this.setAppState("None");
+    //   }
+    // };
     window.onkeydown = (e) => {
       if (e.key === "Escape" && this.state.modal !== "None") {
         this.setAppState("None");

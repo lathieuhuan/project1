@@ -3,15 +3,7 @@ import React from "react";
 import { signUp } from "../ultis/ultis";
 
 function isGood(str) {
-  if (str === "") {
-    return false;
-  }
-  for (let char of str) {
-    if (char === " ") {
-      return false;
-    }
-  }
-  return true;
+  return str.match(/([a-zA-Z0-9])+([ -~])*/);
 }
 
 export class SignUp extends React.Component {
