@@ -19,22 +19,29 @@ function signIn(userInfo) {
       .then((querySnapshot) => {
         if (querySnapshot.empty) {
           throw new Error("The username is not correct.");
-        }
-        return querySnapshot;
-      })
-      .then((querySnapshot) => {
-        const data = querySnapshot.docs[0].data();
-        if (data.password === password) {
-          console.log(data.avatar);
-          res(data);
         } else {
-          throw new Error("The password is not correct.");
+          const doc = querySnapshot.docs[0];
+          if (doc.data().password !== password) {
+            throw new Error("The password is not correct.");
+          } else {
+            return {
+              id: doc.id,
+              ...doc.data(),
+            };
+          }
         }
+      })
+      .then((info) => {
+        delete info.password;
+        console.log(info);
+        res(info);
       })
       .catch((err) => {
         rej(err);
       });
   });
 }
+
+signIn({ username: "userA", password: "A123" });
 
 export { signIn };

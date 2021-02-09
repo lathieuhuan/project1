@@ -1,4 +1,4 @@
-import {  } from "../assets/css/LeftCol.css";
+import "../assets/css/LeftCol.css";
 import React from "react";
 
 export class LeftCol extends React.Component {

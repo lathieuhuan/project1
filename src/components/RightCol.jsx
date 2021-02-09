@@ -1,4 +1,4 @@
-import {  } from "../assets/css/RightCol.css";
+import "../assets/css/RightCol.css";
 import React from "react";
 
 export class RightCol extends React.Component {
