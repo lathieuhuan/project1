@@ -33,7 +33,7 @@ function signIn(userInfo) {
       })
       .then((info) => {
         delete info.password;
-        console.log(info);
+        // console.log(info);
         res(info);
       })
       .catch((err) => {
@@ -42,6 +42,39 @@ function signIn(userInfo) {
   });
 }
 
-signIn({ username: "userA", password: "A123" });
+function getConvers(userId) {
+  return db
+    .collection("conversations")
+    .where("userIds", "array-contains", userId)
+    .get()
+    .then((querySnapshot) => {
+      let convers = [];
+      querySnapshot.forEach((doc) => {
+        convers.push({
+          ...doc.data(),
+        });
+      });
+      // console.log(convers);
+      return convers;
+    })
+    .catch((error) => {
+      console.log(error);
+      throw error;
+    });
+}
+
+function test(userId) {
+  getConvers(userId).then((convers) => {
+    let chatFrs = convers.map((conver) => {
+      return conver.userIds.filter((val) => val !== userId);
+    });
+    console.log(chatFrs);
+    return chatFrs;
+  });
+}
+
+// signIn({ username: "userA", password: "A123" });
+// getConvers("nNgjPz58plLZNnI9pVim");
+test("nNgjPz58plLZNnI9pVim");
 
 export { signIn };
