@@ -9,13 +9,13 @@ export class LeftCol extends React.Component {
     this.state = { chosen: 0, converList: [] };
   }
   choose = (i) => {
+    this.props.changeConver(this.state.converList[i]);
     this.setState({ chosen: i });
   }
   componentDidMount() {
     getConversOf(this.props.userId)
     .then((convers) => {
-      console.log("length", convers.length);
-      console.log("convers", convers);
+      this.props.changeConver(convers[this.state.chosen]);
       this.setState({ converList: convers });
     });
   }

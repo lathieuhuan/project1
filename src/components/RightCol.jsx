@@ -1,5 +1,6 @@
 import "../assets/css/RightCol.css";
 import React from "react";
+import { ConverContent } from "./ConverContent";
 
 export class RightCol extends React.Component {
   constructor(props) {
@@ -10,20 +11,15 @@ export class RightCol extends React.Component {
     this.setState({ message: e.target.value })
   }
   render() {
+    const { userId, conver } = this.props;
     return (
       <div className="right-col">
         <div className="flex-col wide-padding" id="message-area">
-          <h1>???</h1>
           <div className="flex">
-            <div>
-              <p>Bla bla</p>
-              <p>Bla bla</p>
-            </div>
-            <div>
-              <p>Blo Blo</p>
-              <p>Blo Blo</p>
-            </div>
+            <img className="avatar" src={conver?.FrInfo.avatar} alt=""/>
+            <h1>{conver?.FrInfo.username}</h1>
           </div>
+          <ConverContent userId={userId} conver={conver} />
         </div>
         <div className="flex-between narrow-padding" id="input-area">
           <input

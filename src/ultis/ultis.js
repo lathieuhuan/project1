@@ -55,62 +55,62 @@ function getUserInfo(userId) {
   });
 }
 
-function getConvers(userId) {
-  return db
-    .collection("conversations")
-    .where("userIds", "array-contains", userId)
-    .get()
-    .then((querySnapshot) => {
-      let convers = [];
-      querySnapshot.forEach((doc) => {
-        convers.push({
-          id: doc.id,
-          ...doc.data(),
-        });
-      });
-      // console.log(convers);
-      return convers;
-    })
-    .catch((error) => {
-      console.log(error);
-      throw error;
-    });
-}
+// function getConvers(userId) {
+//   return db
+//     .collection("conversations")
+//     .where("userIds", "array-contains", userId)
+//     .get()
+//     .then((querySnapshot) => {
+//       let convers = [];
+//       querySnapshot.forEach((doc) => {
+//         convers.push({
+//           id: doc.id,
+//           ...doc.data(),
+//         });
+//       });
+//       // console.log(convers);
+//       return convers;
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       throw error;
+//     });
+// }
 
-function test(userId) {
-  return getConvers(userId)
-    .then((convers) => {
-      let foo = convers.map((conver) => {
-        return {
-          converId: conver.id,
-          chatFr: conver.userIds.filter((val) => val !== userId),
-        };
-      });
-      // console.log(foo);
-      return foo;
-    })
-    .then((convers) => {
-      const refinedConvers = convers.map((conver) => {
-        return new Promise((res, rej) => {
-          getUserInfo(conver.chatFr[0])
-            .then((userInfo) => {
-              res({
-                converId: conver.converId,
-                chatFrInfo: userInfo,
-              });
-            })
-            .catch((error) => {
-              console.log(error);
-              rej(error);
-            });
-        }).catch((error) => {
-          console.log(error);
-          throw error;
-        });
-      });
-      return Promise.all(refinedConvers);
-    });
-}
+// function test(userId) {
+//   return getConvers(userId)
+//     .then((convers) => {
+//       let foo = convers.map((conver) => {
+//         return {
+//           converId: conver.id,
+//           chatFr: conver.userIds.filter((val) => val !== userId),
+//         };
+//       });
+//       // console.log(foo);
+//       return foo;
+//     })
+//     .then((convers) => {
+//       const refinedConvers = convers.map((conver) => {
+//         return new Promise((res, rej) => {
+//           getUserInfo(conver.chatFr[0])
+//             .then((userInfo) => {
+//               res({
+//                 converId: conver.converId,
+//                 chatFrInfo: userInfo,
+//               });
+//             })
+//             .catch((error) => {
+//               console.log(error);
+//               rej(error);
+//             });
+//         }).catch((error) => {
+//           console.log(error);
+//           throw error;
+//         });
+//       });
+//       return Promise.all(refinedConvers);
+//     });
+// }
 
 function getConversOf(userId) {
   return new Promise((res) => {
@@ -137,4 +137,16 @@ function getConversOf(userId) {
   });
 }
 
-export { signIn, getConversOf, test };
+function subscribeConver(converId, listener) {
+  db.collection("messages")
+    .where("conversationId", "==", converId)
+    .onSnapshot((observer) => {
+      observer.docChanges().forEach((change) => {
+        if (change.type === "added") {
+          listener(change.doc.data());
+        }
+      });
+    });
+}
+
+export { signIn, getConversOf, subscribeConver };
