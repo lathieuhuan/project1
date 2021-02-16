@@ -42,6 +42,19 @@ function signIn(userInfo) {
   });
 }
 
+function getUserInfo(userId) {
+  return new Promise((res) => {
+    db.collection("users")
+      .doc(userId)
+      .get()
+      .then((querySnapshot) => {
+        const result = { ...querySnapshot.data() };
+        delete result.password;
+        res(result);
+      });
+  });
+}
+
 function getConvers(userId) {
   return db
     .collection("conversations")
@@ -51,6 +64,7 @@ function getConvers(userId) {
       let convers = [];
       querySnapshot.forEach((doc) => {
         convers.push({
+          id: doc.id,
           ...doc.data(),
         });
       });
@@ -64,17 +78,63 @@ function getConvers(userId) {
 }
 
 function test(userId) {
-  getConvers(userId).then((convers) => {
-    let chatFrs = convers.map((conver) => {
-      return conver.userIds.filter((val) => val !== userId);
+  return getConvers(userId)
+    .then((convers) => {
+      let foo = convers.map((conver) => {
+        return {
+          converId: conver.id,
+          chatFr: conver.userIds.filter((val) => val !== userId),
+        };
+      });
+      // console.log(foo);
+      return foo;
+    })
+    .then((convers) => {
+      const refinedConvers = convers.map((conver) => {
+        return new Promise((res, rej) => {
+          getUserInfo(conver.chatFr[0])
+            .then((userInfo) => {
+              res({
+                converId: conver.converId,
+                chatFrInfo: userInfo,
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+              rej(error);
+            });
+        }).catch((error) => {
+          console.log(error);
+          throw error;
+        });
+      });
+      return Promise.all(refinedConvers);
     });
-    console.log(chatFrs);
-    return chatFrs;
+}
+
+function getConversOf(userId) {
+  return new Promise((res) => {
+    db.collection("conversations")
+      .where("userIds", "array-contains", userId)
+      .get()
+      .then((querySnapshot) => {
+        let convers = [];
+        querySnapshot.forEach((doc) => {
+          const chatFrs = doc.data().userIds.filter((mem) => mem !== userId);
+          convers.push(
+            new Promise((res) => {
+              getUserInfo(chatFrs[0]).then((userInfo) => {
+                res({
+                  converId: doc.id,
+                  FrInfo: userInfo,
+                });
+              });
+            })
+          );
+        });
+        res(Promise.all(convers));
+      });
   });
 }
 
-// signIn({ username: "userA", password: "A123" });
-// getConvers("nNgjPz58plLZNnI9pVim");
-test("nNgjPz58plLZNnI9pVim");
-
-export { signIn };
+export { signIn, getConversOf, test };

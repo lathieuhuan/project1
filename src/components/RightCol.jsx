@@ -13,7 +13,7 @@ export class RightCol extends React.Component {
     return (
       <div className="right-col">
         <div className="flex-col wide-padding" id="message-area">
-          <h1>{this.props.target}</h1>
+          <h1>???</h1>
           <div className="flex">
             <div>
               <p>Bla bla</p>
