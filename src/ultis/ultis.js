@@ -141,7 +141,7 @@ function getConversOf(userId) {
 
 function subscribeConver(converId, listener) {
   db.collection("messages")
-    .where("conversationId", "==", converId)
+    .where("converId", "==", converId)
     .onSnapshot((observer) => {
       observer.docChanges().forEach((change) => {
         if (change.type === "added") {
@@ -151,4 +151,9 @@ function subscribeConver(converId, listener) {
     });
 }
 
-export { signIn, getConversOf, subscribeConver };
+async function sendMessage(message) {
+  const doc = await db.collection("messages").add(message);
+  return doc.id;
+}
+
+export { signIn, getConversOf, subscribeConver, sendMessage };

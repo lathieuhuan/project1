@@ -23,10 +23,10 @@ export class LeftCol extends React.Component {
     return (
       <div className="left-col wide-padding">
         <h1>CHAT APP</h1>
-        <div className="flex">
+        <div className="flex narrow-padding">
           <img className="avatar" src={this.props.userInfo.avatar} alt=""/>
           <p>{this.props.userInfo.username}</p>
-          <button>Sign out</button>
+          <button id="sign-out" onClick={this.props.signOut}>Sign out</button>
         </div>
         <div className="flex-between">
           <input type="text" placeholder="Search for friends..." id="fr-search-box"/>

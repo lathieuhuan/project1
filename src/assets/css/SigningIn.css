@@ -1,0 +1,16 @@
+#signing-in {
+  margin-top: 200px;
+  border: 2px black solid;
+  border-radius: 10px;
+}
+#signing-in h1 {
+  text-align: center;
+}
+#signing-in button {
+  align-self: center;
+}
+#signing-in input,
+#signing-in button,
+#signing-in h1 {
+  margin-bottom: 10px;
+}

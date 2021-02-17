@@ -15,11 +15,19 @@ export class SigningIn extends React.Component {
   }
   render() {
     return (
-      <div>
-        <div>
+      <div className="flex-center">
+        <div className="flex-col wide-padding" id="signing-in">
           <h1>SIGN IN</h1>
-          <input id="acc-name" type="text" placeholder="Enter your username" />
-          <input id="acc-pass" type="text" placeholder="Enter your password" />
+          <input id="acc-name" type="text" placeholder="Enter your username"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") this.trySignIn();
+            }}
+          />
+          <input id="acc-pass" type="text" placeholder="Enter your password"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") this.trySignIn();
+            }}
+          />
           <button onClick={this.trySignIn}>Confirm</button>
         </div>
       </div>

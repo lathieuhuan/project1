@@ -12,11 +12,15 @@ class App extends Component {
   signIn = (userInfo) => {
     this.setState({ userInfo: userInfo });
   };
+  signOut = () => {
+    localStorage.removeItem("userInfo");
+    this.setState({ userInfo: null });
+  };
   render() {
     return this.state.userInfo === null ? (
       <SigningIn signIn={this.signIn} />
     ) : (
-      <SignedIn userInfo={this.state.userInfo} />
+      <SignedIn userInfo={this.state.userInfo} signOut={this.signOut} />
     );
   }
 }

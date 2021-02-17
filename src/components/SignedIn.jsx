@@ -12,10 +12,10 @@ export class SignedIn extends React.Component {
     this.setState({ currentConver: conver });
   };
   render() {
-    const { userInfo } = this.props;
+    const { userInfo, signOut } = this.props;
     return (
       <div className="flex" id="chat-app">
-        <LeftCol userInfo={userInfo} changeConver={this.changeConver} />
+        <LeftCol userInfo={userInfo} changeConver={this.changeConver} signOut={signOut} />
         <RightCol
           userId={userInfo.id}
           conver={this.state.currentConver}
