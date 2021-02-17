@@ -13,8 +13,8 @@ export class ConverContent extends React.Component {
   componentDidUpdate() {
     const { conver } = this.props;
     // console.log(conver);
-    if (conver.converId !== this.state.converId) {
-      subscribeConver(conver.converId, (data) => {
+    if (conver.id !== this.state.converId) {
+      subscribeConver(conver.id, (data) => {
         console.log(data);
       });
     }

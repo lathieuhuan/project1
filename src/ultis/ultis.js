@@ -9,11 +9,10 @@ try {
 }
 const db = firebase.firestore();
 
-function signIn(userInfo) {
+function signIn(accInfo) {
   return new Promise((res, rej) => {
-    const { username, password } = userInfo;
     db.collection("users")
-      .where("username", "==", username)
+      .where("username", "==", accInfo.username)
       .limit(1)
       .get()
       .then((querySnapshot) => {
@@ -21,20 +20,16 @@ function signIn(userInfo) {
           throw new Error("The username is not correct.");
         } else {
           const doc = querySnapshot.docs[0];
-          if (doc.data().password !== password) {
+          if (doc.data().password !== accInfo.password) {
             throw new Error("The password is not correct.");
           } else {
-            return {
+            res({
               id: doc.id,
-              ...doc.data(),
-            };
+              username: doc.data().username,
+              avatar: doc.data().avatar,
+            });
           }
         }
-      })
-      .then((info) => {
-        delete info.password;
-        // console.log(info);
-        res(info);
       })
       .catch((err) => {
         rej(err);
@@ -48,9 +43,14 @@ function getUserInfo(userId) {
       .doc(userId)
       .get()
       .then((querySnapshot) => {
-        const result = { ...querySnapshot.data() };
-        delete result.password;
-        res(result);
+        // const result = { ...querySnapshot.data() };
+        // delete result.password;
+        // res(result);
+        const data = querySnapshot.data();
+        res({
+          username: data.username,
+          avatar: data.avatar,
+        });
       });
   });
 }
@@ -120,13 +120,15 @@ function getConversOf(userId) {
       .then((querySnapshot) => {
         let convers = [];
         querySnapshot.forEach((doc) => {
-          const chatFrs = doc.data().userIds.filter((mem) => mem !== userId);
+          const chatFrs = doc
+            .data()
+            .userIds.filter((participants) => participants !== userId);
           convers.push(
             new Promise((res) => {
               getUserInfo(chatFrs[0]).then((userInfo) => {
                 res({
-                  converId: doc.id,
-                  FrInfo: userInfo,
+                  id: doc.id,
+                  frInfo: userInfo,
                 });
               });
             })

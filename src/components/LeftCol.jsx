@@ -8,14 +8,14 @@ export class LeftCol extends React.Component {
     super(props);
     this.state = { chosen: 0, converList: [] };
   }
-  choose = (i) => {
-    this.props.changeConver(this.state.converList[i]);
-    this.setState({ chosen: i });
+  choose = (index) => {
+    this.props.changeConver(this.state.converList[index]);
+    this.setState({ chosen: index });
   }
   componentDidMount() {
-    getConversOf(this.props.userId)
+    getConversOf(this.props.userInfo.id)
     .then((convers) => {
-      this.props.changeConver(convers[this.state.chosen]);
+      this.props.changeConver(convers[0]);
       this.setState({ converList: convers });
     });
   }
@@ -23,6 +23,11 @@ export class LeftCol extends React.Component {
     return (
       <div className="left-col wide-padding">
         <h1>CHAT APP</h1>
+        <div className="flex">
+          <img className="avatar" src={this.props.userInfo.avatar} alt=""/>
+          <p>{this.props.userInfo.username}</p>
+          <button>Sign out</button>
+        </div>
         <div className="flex-between">
           <input type="text" placeholder="Search for friends..." id="fr-search-box"/>
           <button id="fr-search-btn">Search</button>
@@ -33,9 +38,8 @@ export class LeftCol extends React.Component {
               <Conver
                 key={i}
                 isChosen={i === this.state.chosen}
-                name={conver.FrInfo.username}
-                avatar={conver.FrInfo.avatar}
-                choose={() => this.choose(i)} />
+                frInfo={conver.frInfo}
+                choose={() => this.choose(i, conver.id)} />
             );
           })}
         </div>

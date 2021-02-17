@@ -16,8 +16,8 @@ export class RightCol extends React.Component {
       <div className="right-col">
         <div className="flex-col wide-padding" id="message-area">
           <div className="flex">
-            <img className="avatar" src={conver?.FrInfo.avatar} alt=""/>
-            <h1>{conver?.FrInfo.username}</h1>
+            <img className="avatar" src={conver?.frInfo.avatar} alt=""/>
+            <h1>{conver?.frInfo.username}</h1>
           </div>
           <ConverContent userId={userId} conver={conver} />
         </div>

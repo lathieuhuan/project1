@@ -1,11 +1,6 @@
 .conver:hover {
   background-color: rgb(102, 102, 102);
 }
-.chosenConver {
+.chosen-conver {
   background-color: rgb(62, 62, 62);
-}
-.avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
 }

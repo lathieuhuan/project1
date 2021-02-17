@@ -1,26 +1,22 @@
 import "./App.css";
-// import { signIn } from "./ultis/ultis";
 import { Component } from "react";
-import { LeftCol } from "./components/LeftCol";
-import { RightCol } from "./components/RightCol";
+import { SigningIn } from "./components/SigningIn";
+import { SignedIn } from "./components/SignedIn";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { userId: "nNgjPz58plLZNnI9pVim", currentConver: null };
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    this.state = { userInfo: userInfo };
   }
-  changeConver = (conver) => {
-    this.setState({ currentConver: conver });
+  signIn = (userInfo) => {
+    this.setState({ userInfo: userInfo });
   };
   render() {
-    return (
-      <div className="flex" id="chat-app">
-        <LeftCol userId={this.state.userId} changeConver={this.changeConver} />
-        <RightCol
-          userId={this.state.userId}
-          conver={this.state.currentConver}
-        />
-      </div>
+    return this.state.userInfo === null ? (
+      <SigningIn signIn={this.signIn} />
+    ) : (
+      <SignedIn userInfo={this.state.userInfo} />
     );
   }
 }
