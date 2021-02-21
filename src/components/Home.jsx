@@ -1,25 +1,20 @@
 import "../assets/css/Home.css";
-import { deleteTask } from "../ultis/ultis";
 
 export function Home(props) {
-  let { tasks, toEditing, update } = props;
+  let { tasks, toggleEditing, tryDelete } = props;
   return (<div id="home">
-    <button id="add" onClick={() => toEditing(tasks.length)}>Add</button>
-    {tasks.map((val, i) => {
-      return (<div key={val.id} className="note-paper">
+    <button id="add" onClick={() => toggleEditing(tasks.length)}>Add</button>
+    {tasks.map((task, i) => {
+      return (<div key={task.id} className="note-paper">
         <div className="text-area">
-          <h1>{val.title}</h1>
-          <p>{val.content}</p>
+          <h1>{task.title}</h1>
+          <p>{task.content}</p>
         </div>
         <div className="control-bar">
-          <button onClick={() => toEditing(i)}>
+          <button onClick={() => toggleEditing(i)}>
             Edit
           </button>
-          <button onClick={() => {
-            deleteTask(val.id).then(update);
-          }}>
-            Delete
-          </button>
+          <button onClick={() => tryDelete(task.id, i)}>Delete</button>
         </div>
       </div>);
     })}

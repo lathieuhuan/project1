@@ -27,41 +27,31 @@ function signUp(userInfo) {
             res(data.id);
           });
       })
-      .catch((err) => {
-        rej(err);
-      });
+      .catch((err) => rej(err));
   });
 }
 
-function signIn(userInfo) {
+function signIn(accountInfo) {
   return new Promise((res, rej) => {
-    const { username, password } = userInfo,
-      usernameRef = db.collection("users").where("username", "==", username);
-    usernameRef
+    db.collection("users")
+      .where("username", "==", accountInfo.username)
+      .limit(1)
       .get()
       .then((querySnapshot) => {
         if (querySnapshot.empty) {
           throw new Error("The username is not correct.");
+        } else {
+          return querySnapshot.docs[0];
         }
       })
-      .then(() => {
-        usernameRef
-          .where("password", "==", password)
-          .get()
-          .then((querySnapshot) => {
-            if (querySnapshot.empty) {
-              throw new Error("The password is not correct.");
-            } else {
-              res(querySnapshot.docs[0].id);
-            }
-          })
-          .catch((err) => {
-            rej(err);
-          });
+      .then((doc) => {
+        if (doc.data().password !== accountInfo.password) {
+          throw new Error("The password is not correct.");
+        } else {
+          res(doc.id);
+        }
       })
-      .catch((err) => {
-        rej(err);
-      });
+      .catch((err) => rej(err));
   });
 }
 
@@ -80,23 +70,16 @@ function getTasks(userId) {
         });
         res(tasks);
       })
-      .catch(() => {
-        rej(new Error("Cannot get tasks."));
-      });
+      .catch(() => rej("Cannot get tasks."));
   });
 }
 
 function addTask(taskInfo) {
   return new Promise((res, rej) => {
-    const { owner, title, content } = taskInfo;
     db.collection("tasks")
-      .add({
-        owner: owner,
-        title: title,
-        content: content,
-      })
-      .then((data) => {
-        res(data.id);
+      .add(taskInfo)
+      .then((doc) => {
+        res(doc.id);
       })
       .catch(() => {
         rej(new Error("Cannot add a task."));
@@ -106,19 +89,12 @@ function addTask(taskInfo) {
 
 function editTask(taskInfo) {
   return new Promise((res, rej) => {
-    const { taskId, title, content } = taskInfo;
+    const { id, title, content } = taskInfo;
     db.collection("tasks")
-      .doc(taskId)
-      .update({
-        title: title,
-        content: content,
-      })
-      .then(() => {
-        res();
-      })
-      .catch(() => {
-        rej(new Error("Cannot edit the task."));
-      });
+      .doc(id)
+      .update({ title, content })
+      .then(() => res())
+      .catch(() => rej("Cannot edit the task."));
   });
 }
 
@@ -127,12 +103,8 @@ function deleteTask(taskId) {
     db.collection("tasks")
       .doc(taskId)
       .delete()
-      .then(() => {
-        res();
-      })
-      .catch(() => {
-        rej(new Error("Cannot delete the task."));
-      });
+      .then(() => res())
+      .catch(() => rej("Cannot delete the task."));
   });
 }
 

@@ -3,39 +3,43 @@ import { Component } from "react";
 import { NavBar } from "./components/NavBar";
 import { Intro } from "./components/Intro";
 import { SigningUp } from "./components/SigningUp";
-import { Redirecting } from "./components/Redirecting";
 import { SignedIn } from "./components/SignedIn";
+import { Switch, Route } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { userId: null, UIstate: "intro" };
+    this.state = { userId: localStorage.getItem("userId") };
   }
-  signIO = (id, UIstate) => {
-    this.setState({ userId: id, UIstate: UIstate });
-  };
-  changeUI = (UIstate) => {
-    this.setState({ UIstate: UIstate });
-  };
-  changeId = (id) => {
-    this.setState({ userId: id });
+  signIO = (userId) => {
+    if (userId === undefined) {
+      localStorage.removeItem("userId");
+      this.setState({ userId: null });
+    } else {
+      localStorage.setItem("userId", userId);
+      this.setState({ userId });
+    }
   };
   render() {
-    const { userId, UIstate } = this.state,
-      content = {
-        intro: <Intro changeUI={this.changeUI} />,
-        "signing-up": <SigningUp signIO={this.signIO} />,
-        "signed-in": <SignedIn userId={userId} changeUI={this.changeUI} />,
-      };
+    const { userId } = this.state;
     return (
       <div id="app-con">
-        <NavBar UIstate={UIstate} signIO={this.signIO} />
+        <NavBar signedIn={userId !== null} signIO={this.signIO} />
         <div id="content">
-          {content[UIstate] === undefined ? (
-            <Redirecting UIstate={UIstate} changeUI={this.changeUI} />
-          ) : (
-            content[UIstate]
-          )}
+          <Switch>
+            <Route exact path="/">
+              <Intro />
+            </Route>
+            <Route path="/sign-up">
+              <SigningUp userId={userId} signIO={this.signIO} />
+            </Route>
+            <Route path="/tasks">
+              <SignedIn userId={userId} />
+            </Route>
+            <Route path="*">
+              <h1>This page does not exist</h1>
+            </Route>
+          </Switch>
         </div>
       </div>
     );

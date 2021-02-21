@@ -2,48 +2,65 @@ import "../assets/css/SignedIn.css";
 import React from 'react';
 import { Home } from "./Home";
 import { Editing } from "./Editing";
-import { getTasks, addTask, editTask } from "../ultis/ultis";
+import { getTasks, addTask, editTask, deleteTask } from "../ultis/ultis";
 
 export class SignedIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      UIstate: "home",
+      editing: false,
       tasks: [],
       editedI: null,
     };
   }
-  toEditing = (index) => {
-    this.setState({ UIstate: "editing", editedI: index });
-  }
-  saveEdit = (i, title, content) => {
-    if (i === undefined) {
-      addTask({ owner: this.props.userId, title: title, content: content})
-      .then(this.update).then(this.exitEdit);
-    } else {
-      editTask({ taskId: i, title: title, content: content })
-      .then(this.update).then(this.exitEdit);
-    }
-  }
-  update = () => {
-    getTasks(this.props.userId).then((tasks) => {
-      this.setState({ tasks: tasks });
+  toggleEditing = (index = this.state.editedI) => {
+    this.setState({
+      editing: !this.state.editing,
+      editedI: index,
     });
   }
-  exitEdit = () => {
-    this.setState({ UIstate: "home" });
+  saveEdit = (id, title, content) => {
+    let { tasks } = this.state,
+      owner = this.props.userId;
+    if (id === undefined) {
+      addTask({ owner, title, content})
+      .then((newId) => {
+        tasks.push({ owner, id: newId, title, content });
+        this.setState({ tasks, editing: false });
+      });
+    } else if (tasks[this.state.editedI].title !== title
+      && tasks[this.state.editedI].title !== title) {
+      editTask({ id, title, content })
+      .then(() => {
+        tasks[this.state.editedI] = { owner, id, title, content };
+        this.setState({ tasks, editing: false });
+      });
+    } else {
+      this.setState({ editing: false });
+    }
+  }
+  tryDelete = (taskId, index) => {
+    deleteTask(taskId).then(() => {
+      let { tasks } = this.state;
+      tasks.splice(index, 1);
+      this.setState({ tasks });
+    });
   }
   componentDidMount() {
     getTasks(this.props.userId).then((tasks) => {
-      this.setState({ tasks: tasks });
+      this.setState({ tasks });
     });
   }
   render() {
-    let { UIstate, tasks, editedI } = this.state;
-    return UIstate === "home"
-      ? <Home tasks={tasks} toEditing={this.toEditing} update={this.update} />
-      : <Editing task={tasks[editedI]}
-          saveEdit={this.saveEdit}
-          exitEdit={this.exitEdit} />;
+    let { editing, tasks, editedI } = this.state;
+    return editing
+      ? <Editing
+          task={tasks[editedI]}
+          toggleEditing={this.toggleEditing}
+          saveEdit={this.saveEdit} />
+      : <Home
+          tasks={tasks}
+          toggleEditing={this.toggleEditing}
+          tryDelete={this.tryDelete} />;
   }
 }

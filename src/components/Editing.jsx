@@ -21,42 +21,45 @@ export class Editing extends React.Component {
       warning: null,
     };
   }
-  changeTitle = (e) => {
-    this.setState({ title: e.target.value });
+  handleChange = (e) => {
+    this.setState({ [e.target.id]: e.target.value });
   }
-  changeContent = (e) => {
-    this.setState({ content: e.target.value });
-  }
-  setWarning = (ele) => {
-    this.setState({ warning: ele });
+  trySave = () => {
+    const { title, content } = this.state;
+    if (!isGood(title) || !isGood(content)) {
+      this.setState({
+        warning: <p className="warning">Please enter atleast one character.</p>
+      });
+    } else {
+      this.props.saveEdit(this.props.task?.id, title, content);
+    }
   }
   render() {
-    let { title, content } = this.state,
-      { task, saveEdit, exitEdit } = this.props;
-    return (<div id="editing">
-      <div id="row-top">
-        <p>Title</p>
-        <textarea id="title" value={title} onChange={this.changeTitle} />
+    const { title, content } = this.state;
+    return (
+      <div id="editing">
+        <div id="row-top">
+          <p>Title</p>
+          <textarea
+            id="title"
+            name="title"
+            value={title}
+            onChange={this.handleChange} />
+        </div>
+        <div id="row-btm">
+          <p>Content</p>
+          <textarea
+            id="content"
+            name="content"
+            value={content}
+            onChange={this.handleChange} />
+        </div>
+        {this.state.warning}
+        <div className="control-bar">
+          <button id="save" onClick={this.trySave}>Save</button>
+          <button id="cancel" onClick={this.props.toggleEditing}>Cancel</button>
+        </div>
       </div>
-      <div id="row-btm">
-        <p>Content</p>
-        <textarea id="content" value={content} onChange={this.changeContent} />
-      </div>
-      {this.state.warning}
-      <div className="control-bar">
-        <button id="save" onClick={() => {
-          if (!isGood(title) || !isGood(content)) {
-            this.setWarning(
-              <p className="warning">Please enter atleast one character.</p>
-            )
-          } else {
-            saveEdit(task?.id, title, content);
-          }
-        }}>
-          Save
-        </button>
-        <button id="cancel" onClick={exitEdit}>Cancel</button>
-      </div>
-    </div>);
+    );
   } 
 }
