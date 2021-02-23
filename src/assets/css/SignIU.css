@@ -4,6 +4,25 @@
   background-color: white;
   position: relative;
 }
+.signIU-form > .tooltip {
+  position: absolute;
+  top: 25%;
+  left: calc(100% + 11px);
+  width: 50%;
+  background-color: black;
+  color: white;
+  text-align: left;
+}
+.signIU-form > .tooltip::after {
+  content: "";
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+  border-width: 8px;
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  margin-top: -8px;
+}
 .signIU-form input,
 .signIU-form button {
   padding: 10px;

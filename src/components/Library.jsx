@@ -1,6 +1,6 @@
 import "../assets/css/Library.css";
 import React from "react";
-import { GameCard } from "./GameCard";
+import { GameCard } from "./GameDisplayers";
 import { getGames } from "../ultis/ultis";
 import { Loading } from "./Loading";
 

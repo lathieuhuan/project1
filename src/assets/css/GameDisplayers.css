@@ -1,0 +1,38 @@
+.game-card {
+  background-color: #eee;
+  width: 200px;
+  margin: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2), 0 3px 10px rgba(0, 0, 0, 0.19);
+}
+.game-card:hover {
+  transform: scale(1.05);
+}
+.img-sec {
+  background-color: rgb(255, 255, 109);
+  height: 150px;
+}
+.info-sec > p {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+#top-games p[class|="top"] {
+  margin-right: 10px;
+  min-width: 35px;
+  border-radius: 3px;
+  font-size: 22px;
+  line-height: 45px;
+  text-align: center;
+  color: white;
+}
+#top-games .top-3 {
+  background-color: red;
+}
+#top-games .top-10 {
+  background-color: royalblue;
+}
+#top-games .num {
+  margin-top: 5px;
+  font-size: 14px;
+  color: rgb(100, 100, 100);
+}

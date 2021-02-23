@@ -3,7 +3,10 @@ import React from "react";
 import { signUp } from "../ultis/ultis";
 
 function isGood(str) {
-  return str.match(/([a-zA-Z0-9])+([ -~])*/);
+  if (str.length < 8) {
+    return false;
+  }
+  return !/[^a-zA-Z0-9]/.test(str);
 }
 
 export class SignUp extends React.Component {
@@ -13,6 +16,7 @@ export class SignUp extends React.Component {
       nameWarning: null,
       passWarning: null,
       pwdConfirmed: false,
+      tooltipOn: false,
     };
   }
   trySignUp = () => {
@@ -38,11 +42,17 @@ export class SignUp extends React.Component {
       cfpass = document.getElementById("cf-pass").value;
     this.setState({ pwdConfirmed: pass !== "" && cfpass === pass });
   }
+  toggleTooltip = () => {
+    this.setState({ tooltipOn: !this.state.tooltipOn });
+  }
   render() {
     const { setAppState } = this.props,
-      { nameWarning, passWarning, pwdConfirmed } = this.state;
+      { nameWarning, passWarning, pwdConfirmed, tooltipOn } = this.state;
     return (
       <div className="signIU-form flex-col wide-padding thin-border small-b-radius">
+        {tooltipOn ? <p className="tooltip medium-padding small-b-radius">
+          Your username and password must contain atleast 8 characters, letters and numbers only.
+        </p> : null}
         <div onClick={() => setAppState("None")} className="close flex-center">
           <i className="fa fa-close"></i>
         </div>
@@ -61,6 +71,8 @@ export class SignUp extends React.Component {
               this.trySignUp();
             }
           }}
+          onFocus={this.toggleTooltip}
+          onBlur={this.toggleTooltip}
         />
         {nameWarning === null ? null : (
           <p className="warning">{nameWarning}</p>
@@ -75,6 +87,8 @@ export class SignUp extends React.Component {
               this.trySignUp();
             }
           }}
+          onFocus={this.toggleTooltip}
+          onBlur={this.toggleTooltip}
         />
         {passWarning === null ? null : (
           <p className="warning">{passWarning}</p>

@@ -5,9 +5,15 @@ export class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { expanded: false };
+    this.typeRef = React.createRef();
   }
   toggleDropdown = () => {
     this.setState({ expanded: !this.state.expanded });
+  }
+  handleClickOutside = (e) => {
+    if (this.state.expanded && !this.typeRef.current.contains(e.target)) {
+      this.toggleDropdown();
+    }
   }
   toSearchResult = () => {
     const searchTerm = document.getElementById("games-s-box").value;
@@ -15,6 +21,12 @@ export class NavBar extends React.Component {
       // true nếu searchTerm chứa ít nhất một chữ cái hoặc con số
       window.location.assign("/Library?search=" + searchTerm);
     }
+  }
+  componentDidMount() {
+    document.addEventListener("click", this.handleClickOutside);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("click", this.handleClickOutside);
   }
   render() {
     const { username, userId, setAppState } = this.props;
@@ -24,7 +36,7 @@ export class NavBar extends React.Component {
         <button onClick={() => setAppState("SignUp")}>Sign Up</button>
       </div>
     ) : (
-      <div className="acc-nav" id="acc-btn">
+      <div ref={this.typeRef} className="acc-nav">
         <button onClick={this.toggleDropdown}>
           <img
             id="acc-icon"
