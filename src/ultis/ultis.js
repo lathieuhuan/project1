@@ -91,9 +91,9 @@ function getUsers(keyword) {
 
 function signUp(accountInfo) {
   return new Promise((res, rej) => {
-    const { userId, password, email } = accountInfo;
+    const { username, password, email } = accountInfo;
     usersRef
-      .doc(userId)
+      .doc(username)
       .get()
       .then((doc) => {
         if (doc.exists) {
@@ -101,28 +101,26 @@ function signUp(accountInfo) {
         }
       })
       .then(() => {
-        db.collection("users").doc(userId).set({
-          username: userId,
-          password: password,
+        usersRef.doc(username).set({
+          username,
+          password,
           gender: "",
           dob: "",
           townOcity: "",
-          email: email,
+          email,
           about: "",
         });
         res();
       })
-      .catch((err) => {
-        rej(err);
-      });
+      .catch((err) => rej(err));
   });
 }
 
 function signIn(accountInfo) {
   return new Promise((res, rej) => {
-    const { userId, password } = accountInfo;
+    const { username, password } = accountInfo;
     usersRef
-      .doc(userId)
+      .doc(username)
       .get()
       .then((doc) => {
         if (!doc.exists) {
@@ -138,9 +136,7 @@ function signIn(accountInfo) {
           res(data);
         }
       })
-      .catch((err) => {
-        rej(err);
-      });
+      .catch((err) => rej(err));
   });
 }
 
@@ -150,11 +146,13 @@ function getUserInfo(userId) {
       .doc(userId)
       .get()
       .then((doc) => {
-        res(doc.data());
+        if (!doc.exists) {
+          throw new Error("There is no such user.");
+        } else {
+          res(doc.data());
+        }
       })
-      .catch(() => {
-        rej(new Error("Cannot get the info."));
-      });
+      .catch((err) => rej(err));
   });
 }
 
@@ -162,13 +160,9 @@ function editUserInfo(userId, info) {
   return new Promise((res, rej) => {
     usersRef
       .doc(userId)
-      .update({ ...info })
-      .then(() => {
-        res();
-      })
-      .catch(() => {
-        rej(new Error("Cannot update the info."));
-      });
+      .update(info)
+      .then(() => res())
+      .catch(() => rej(new Error("Cannot update the info.")));
   });
 }
 

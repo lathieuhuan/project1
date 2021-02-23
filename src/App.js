@@ -22,10 +22,7 @@ class App extends Component {
     };
   }
   setAppState = (modal, username = null, userId = null) => {
-    this.setState({ modal: modal, username: username, userId: userId });
-  };
-  setModal = (modal) => {
-    this.setState({ modal: modal });
+    this.setState({ modal, username, userId });
   };
   componentDidMount() {
     // window.onclick = (e) => {

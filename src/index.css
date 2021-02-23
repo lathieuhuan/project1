@@ -79,7 +79,7 @@ h3 {
 .medium-b-radius {
   border-radius: 10px;
 }
-.warning-color {
+.warning {
   color: red;
 }
 .pointer {
@@ -87,7 +87,7 @@ h3 {
 }
 .cover-body {
   width: 100%;
-  height: calc(477 / 722 * 100vh);
+  min-height: calc(477 / 722 * 100vh);
 }
 .center-align {
   text-align: center;

@@ -4,9 +4,7 @@ import React from 'react';
 export class NavBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      expanded: false,
-    };
+    this.state = { expanded: false };
   }
   toggleDropdown = () => {
     this.setState({ expanded: !this.state.expanded });
@@ -28,14 +26,17 @@ export class NavBar extends React.Component {
     ) : (
       <div className="acc-nav" id="acc-btn">
         <button onClick={this.toggleDropdown}>
-          <img src="https://image.flaticon.com/icons/png/512/61/61205.png" id="acc-icon" alt=""/>
+          <img
+            id="acc-icon"
+            // src="https://image.flaticon.com/icons/png/512/61/61205.png" denied
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA"
+            alt="avatar"
+          />
           {username}
         </button>
-        {!this.state.expanded ? null : (
+        {this.state.expanded ? (
           <div className="acc-dropdown thinnest-border small-b-radius">
-            <a href={"/Profile/" + userId}>
-              My Profile
-            </a>
+            <a href={"/Profile/" + userId}>My Profile</a>
             <button onClick={() => {
               this.toggleDropdown();
               setAppState("None");
@@ -45,7 +46,7 @@ export class NavBar extends React.Component {
               Sign out
             </button>
           </div>
-        )}
+        ) : null}
       </div>
     );
     return (

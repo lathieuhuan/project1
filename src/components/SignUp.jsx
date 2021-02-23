@@ -12,33 +12,23 @@ export class SignUp extends React.Component {
     this.state = { 
       nameWarning: null,
       passWarning: null,
-      cfpassGood: false,
+      pwdConfirmed: false,
     };
   }
   trySignUp = () => {
-    const name = document.getElementById("su-name").value,
-      pass = document.getElementById("su-pass").value,
-      email = document.getElementById("su-email").value;
-    let nameWarning = null,
-      passWarning = null;
-    if (!isGood(name)) {
-      nameWarning = "Please enter a valid username.";
-    }
-    if (!isGood(pass)) {
-      passWarning = "Please enter a valid password.";
-    }
+    const username = document.getElementById("su-name").value,
+      password = document.getElementById("su-pass").value,
+      email = document.getElementById("su-email").value,
+      nameGood = isGood(username),
+      passGood = isGood(password);
     this.setState({
-      nameWarning: nameWarning,
-      passWarning: passWarning,
+      nameWarning: nameGood ? null : "Please enter a valid username.",
+      passWarning: passGood ? null : "Please enter a valid password.",
     });
-    if (isGood(name) && isGood(pass) && this.state.cfpassGood) {
-      signUp({
-        userId: name,
-        password: pass,
-        email: email,
-      })
+    if (nameGood && passGood && this.state.pwdConfirmed) {
+      signUp({ username, password, email })
       .then(() => {
-        this.props.setAppState("Redirecting", name);
+        this.props.setAppState("Redirecting", username);
       })
       .catch((err) => this.setState({ nameWarning: err.message }));
     }
@@ -46,26 +36,20 @@ export class SignUp extends React.Component {
   comparePwd = () => {
     const pass = document.getElementById("su-pass").value,
       cfpass = document.getElementById("cf-pass").value;
-    if (pass === "") {
-      this.setState({ cfpassGood: false });
-    } else if (cfpass === pass) {
-      this.setState({ cfpassGood: true })
-    } else {
-      this.setState({ cfpassGood: false });
-    }
+    this.setState({ pwdConfirmed: pass !== "" && cfpass === pass });
   }
   render() {
     const { setAppState } = this.props,
-      { nameWarning, passWarning, cfpassGood } = this.state;
+      { nameWarning, passWarning, pwdConfirmed } = this.state;
     return (
-      <div className="signIU-form wide-padding thin-border small-b-radius flex-col">
+      <div className="signIU-form flex-col wide-padding thin-border small-b-radius">
         <div onClick={() => setAppState("None")} className="close flex-center">
           <i className="fa fa-close"></i>
         </div>
         <h1>SIGN UP</h1>
         <p>
           Already a member? <span
-            className="warning-color pointer" onClick={() => setAppState("SignIn")}
+            className="warning pointer" onClick={() => setAppState("SignIn")}
           >Sign in</span>!
         </p>
         <input
@@ -79,7 +63,7 @@ export class SignUp extends React.Component {
           }}
         />
         {nameWarning === null ? null : (
-          <p className="warning-color">{nameWarning}</p>
+          <p className="warning">{nameWarning}</p>
         )}
         <input
           id="su-pass"
@@ -93,14 +77,14 @@ export class SignUp extends React.Component {
           }}
         />
         {passWarning === null ? null : (
-          <p className="warning-color">{passWarning}</p>
+          <p className="warning">{passWarning}</p>
         )}
         <input
           id="cf-pass"
           type="password"
           placeholder="Confirm your password"
           style={{
-            backgroundImage: cfpassGood
+            backgroundImage: pwdConfirmed
               ? "url(https://www.pngitem.com/pimgs/m/508-5084657_green-check-mark-icon-free-check-icon-hd.png)"
               : "url(https://png.pngitem.com/pimgs/s/4-46202_red-cross-transparent-png-red-transparent-background-cross.png)"
           }}

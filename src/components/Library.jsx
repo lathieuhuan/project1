@@ -2,24 +2,32 @@ import "../assets/css/Library.css";
 import React from "react";
 import { GameCard } from "./GameCard";
 import { getGames } from "../ultis/ultis";
+import { Loading } from "./Loading";
 
 export class Library extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { found: true, games: [] };
+    this.state = {
+      found: true,
+      loadingDone: false,
+      games: [],
+    };
+    this.keywords = new URLSearchParams(window.location.search).get("search");
   }
   componentDidMount() {
-    let keywords = new URLSearchParams(window.location.search).get("search");
-    if (keywords === "") {
+    // let keywords = new URLSearchParams(window.location.search).get("search");
+    if (this.keywords === "") {
       // TH "/Games?search=" do user tự nhấn
       this.setState({ found: false });
     } else {
-      keywords = keywords === null ? "all" : keywords.toLowerCase().split(" ");
-      // TH "/Games" => keywords = "all"
-      // TH "/Games?search=..." => tách keywords thành arr
-      getGames(keywords)
-      .then((data) => {
-        this.setState({ found: true, games: data });
+      this.keywords = this.keywords === null
+        // TH "/Games" => keywords = "all"
+        ? "all"
+        // TH "/Games?search=..." => tách keywords thành arr
+        : this.keywords.toLowerCase().split(" ");
+      getGames(this.keywords)
+      .then((games) => {
+        this.setState({ loadingDone: true, games });
       })
       .catch(() => {
         this.setState({ found: false });
@@ -27,16 +35,18 @@ export class Library extends React.Component {
     }
   }
   render() {
-    return this.state.found ? (
-      <div id="library">
+    return this.state.found ? this.state.loadingDone ? (
+      <div className="cover-body" id="library">
         <h1>GAME LIBRARY</h1>
         <div className="list flex">
           {this.state.games.map((val, i) => <GameCard key={i} info={val} />)}
         </div>
       </div>
-    ) : (
-      <div>
-        <p>No games found.</p>
+    ) : <Loading /> : (
+      <div className="flex-center cover-body">
+        <h1>No games found with the keywords "{
+          this.keywords === "" ? null : this.keywords.join(" ")
+        }".</h1>
       </div>
     );
   }

@@ -11,6 +11,7 @@
   margin: 0 auto;
   padding: 15px 0;
   justify-content: space-between;
+  align-items: center;
 }
 
 #logo-head {
@@ -80,6 +81,7 @@
   width: 25px;
   height: 25px;
   margin-right: 10px;
+  border-radius: 50%;
 }
 #nav-bar .acc-dropdown {
   position: absolute;

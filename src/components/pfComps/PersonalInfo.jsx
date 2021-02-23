@@ -1,11 +1,9 @@
 import "../../assets/css/pfCss/PersonalInfo.css";
 import React from 'react';
+import { ShowInfo } from "./ShowInfo";
 
 function isGood(str) {
-  if (str.match(/([a-zA-Z0-9])+([ -~])*/)) {
-    return true;
-  }
-  return false;
+  return str.match(/([a-zA-Z0-9])+([ -~])*/);
 }
 
 export class PersonalInfo extends React.Component {
@@ -13,13 +11,13 @@ export class PersonalInfo extends React.Component {
     super(props);
     this.state = {
       newNameGood: true,
-      infoDup: {},
+      infoDup: { ...props.info },
     };
   }
   handleChange = (e) => {
-    let infoDup = this.state.infoDup;
+    let { infoDup } = this.state;
     infoDup[e.target.name] = e.target.value;
-    this.setState({ infoDup: infoDup });
+    this.setState({ infoDup });
   }
   setNewNameGood = (boo) => {
     this.setState({ newNameGood: boo });
@@ -27,17 +25,18 @@ export class PersonalInfo extends React.Component {
   componentDidUpdate() {
     if (!this.props.editing &&
     JSON.stringify(this.state.infoDup) !== JSON.stringify(this.props.info)) {
-      this.setState({ infoDup: {...this.props.info} });
+      this.setState({ infoDup: { ...this.props.info } });
     }
   }
   render() {
-    const { infoDup, newNameGood } = this.state,
+    const { newNameGood, infoDup } = this.state,
       { editing, info, isOwner, toggleEdit, tryUpdate } = this.props;
     return editing && isOwner ? (
-        <div className="left-col thin-border medium-b-radius flex-col">
+      <div className="left-col thin-border medium-b-radius flex-col">
         <img
           className="avatar"
-          src="https://image.flaticon.com/icons/png/512/61/61205.png"
+          // src="https://image.flaticon.com/icons/png/512/61/61205.png" denied
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA"
           alt=""
         />
         <input type="text" name="username" value={infoDup.username}
@@ -58,7 +57,7 @@ export class PersonalInfo extends React.Component {
         </div>
         <div className="flex row">
           <p>Date of Birth:</p>
-          <input type="date" name="dob" value={infoDup.dob || "2000-01-01"}
+          <input type="date" name="dob" value={infoDup.dob}
             min="1940-01-01" max="2015-12-31" onChange={this.handleChange}
           />
         </div>
@@ -67,7 +66,7 @@ export class PersonalInfo extends React.Component {
           <input
             type="text"
             name="townOcity"
-            value={infoDup.townOcity || ""}
+            value={infoDup.townOcity}
             onChange={this.handleChange}
           />
         </div>
@@ -85,7 +84,7 @@ export class PersonalInfo extends React.Component {
           className="thinner-border narrow-padding small-b-radius"
           id="about"
           name="about"
-          value={infoDup.about || ""}
+          value={infoDup.about}
           onChange={this.handleChange}
         />
         {newNameGood ? null : <p className="warning-color center-align">
@@ -96,9 +95,7 @@ export class PersonalInfo extends React.Component {
             className="edit-btn thinnest-border smaller-b-radius"
             onClick={() => {
               const nameGood = isGood(infoDup.username);
-              if (nameGood) {
-                tryUpdate(this.state.infoDup);
-              }
+              if (nameGood) tryUpdate(infoDup);
               this.setNewNameGood(nameGood);
             }}
           >
@@ -107,42 +104,14 @@ export class PersonalInfo extends React.Component {
           <button
             className="edit-btn thinnest-border smaller-b-radius"
             onClick={() => {
-              toggleEdit();
               this.setNewNameGood(true);
+              toggleEdit();
             }}
           >
             Cancel
           </button>
         </div>
       </div>
-    ) : (
-      <div className="left-col thin-border medium-b-radius flex-col">
-        <img
-          className="avatar"
-          src="https://image.flaticon.com/icons/png/512/61/61205.png"
-          alt=""
-        />
-        <h1><span>{info.username}</span></h1>
-        <p>Gender: <span>{info.gender}</span></p>
-        <p>Date of Birth: <span>{info.dob}</span></p>
-        <p>Town/City: <span>{info.townOcity}</span></p>
-        <p>Email address: <span>{info.email}</span></p>
-        <p>About me:</p>
-        <p
-          className="thinner-border narrow-padding small-b-radius"
-          id="about"
-        >
-          <span>{info.about}</span>
-        </p>
-        {!isOwner ? null : (
-          <button
-            className="edit-btn thinnest-border smaller-b-radius"
-            onClick={toggleEdit}
-          >
-            Edit Profile
-          </button>
-        )}
-      </div>
-    );
+    ) : <ShowInfo info={info} isOwner={isOwner} toggleEdit={toggleEdit} />;
   }
 }

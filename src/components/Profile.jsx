@@ -2,15 +2,19 @@ import "../assets/css/Profile.css"
 import React from "react";
 import { PersonalInfo } from "./pfComps/PersonalInfo";
 import { getUserInfo, editUserInfo } from "../ultis/ultis";
+import { Loading } from "./Loading";
+import { NotFound } from "./NotFound";
 
 export class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      found: true,
+      loadingDone: false,
       editing: false,
       info: {},
     };
-    this.nameForInfo = window.location.pathname.slice(9);
+    this.idForInfo = window.location.pathname.slice(9);
   }
   tryUpdate = (newInfo) => {
     const { info } = this.state,
@@ -19,15 +23,17 @@ export class Profile extends React.Component {
       newInfo[key] = newInfo[key].trim();
     }
     if (JSON.stringify(info) !== JSON.stringify(newInfo)) {
-      editUserInfo(userId, newInfo);
-      this.setState({
-        editing: false,
-        info: newInfo,
-      });
-      if (info.username !== newInfo.username) {
-      this.props.setAppState("None", newInfo.username, userId);
-        localStorage.setItem("username", newInfo.username);
-      }
+      editUserInfo(userId, newInfo)
+      .then(() => {
+        if (info.username !== newInfo.username) {
+          this.props.setAppState("None", newInfo.username, userId);
+          localStorage.setItem("username", newInfo.username);
+        }
+        this.setState({
+          editing: false,
+          info: { ...newInfo }
+        });
+      });    
     } else {
       this.setState({ editing: false });
     }
@@ -36,24 +42,23 @@ export class Profile extends React.Component {
     this.setState({ editing: !this.state.editing });
   }
   componentDidMount() {
-    getUserInfo(this.nameForInfo).then((data) => {
-      this.setState({ info: { ...data } });
+    getUserInfo(this.idForInfo).then((info) => {
+      this.setState({ info, loadingDone: true });
     })
-    .catch(() => {
-      window.location.assign("/Page_Not_Found");
-    });
+    .catch(() => this.setState({ found: false }));
   }
   render() {
-    return (
+    return this.state.found ? this.state.loadingDone ? (
       <div className="flex" id="profile">
         <PersonalInfo
-          {...this.state}
-          isOwner={this.props.userId === this.nameForInfo}
+          editing={this.state.editing}
+          info={this.state.info}
+          isOwner={this.props.userId === this.idForInfo}
           toggleEdit={this.toggleEdit}
           tryUpdate={this.tryUpdate}
         />
         <div className="right-col medium-b-radius"></div>
       </div>
-    );
+    ) : <Loading /> : <NotFound />;
   }
 }

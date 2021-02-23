@@ -12,26 +12,24 @@ export class SignIn extends React.Component {
     this.state = { warning: null };
   }
   trySignIn = () => {
-    const name = document.getElementById("si-name").value,
-      pass = document.getElementById("si-pass").value;
-    if (!isGood(name)) {
+    const username = document.getElementById("si-name").value,
+      password = document.getElementById("si-pass").value;
+    if (!isGood(username)) {
       this.setState({
         warning: "Please enter a valid username."
       })
-    } else if (!isGood(pass)) {
+    } else if (!isGood(password)) {
       this.setState({
         warning: "Please enter a valid password."
       })
     } else {
-      signIn({ userId: name, password: pass })
+      signIn({ username, password })
       .then((data) => {
-        this.props.setAppState("None", data.username, name);
+        this.props.setAppState("None", data.username, username);
         localStorage.setItem("username", data.username);
-        localStorage.setItem("userId", name);
+        localStorage.setItem("userId", username);
       })
-      .catch((err) => {
-        this.setState({ warning: err.message });
-      });
+      .catch((err) => this.setState({ warning: err.message }));
     }
   }
   render() {
@@ -45,7 +43,7 @@ export class SignIn extends React.Component {
         <h1>SIGN IN</h1>
         <p>
           Not a member yet? <span
-            className="warning-color pointer" onClick={() => setAppState("SignUp")}
+            className="warning pointer" onClick={() => setAppState("SignUp")}
           >Sign up</span> now!
         </p>
         <input
@@ -68,7 +66,7 @@ export class SignIn extends React.Component {
             }
           }}
         />
-        {warning === null ? null : <p className="warning-color">{warning}</p>}
+        {warning === null ? null : <p className="warning">{warning}</p>}
         <p style={{ textAlign: "left", paddingLeft: "5px" }}>
           Forget your password? Click here.
         </p>
