@@ -16,7 +16,7 @@
 }
 
 #logo-head {
-  font-size: 2rem;
+  font-size: 30px;
   font-weight: 700;
 }
 #logo-head:link,
@@ -31,15 +31,12 @@
 #games-s-bar {
   width: 450px;
 }
-/* #games-s-box,
-#games-s-btn {
-  height: 30px;
-} */
 #games-s-box {
   min-width: 400px;
+  padding-left: 20px;
   border: none;
   border-radius: 3px 0 0 3px;
-  font-size: inherit;
+  font-size: 14px;
 }
 #games-s-btn {
   background-color: #fed218;
@@ -55,7 +52,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 160px;
+  width: 150px;
   position: relative;
 }
 #nav-bar .acc-nav > button {
@@ -72,7 +69,7 @@
   color: black;
 }
 #nav-bar .acc-nav > button:last-child {
-  margin-left: 30px;
+  margin-left: 20px;
 }
 
 #acc-icon {

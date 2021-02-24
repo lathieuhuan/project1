@@ -1,11 +1,11 @@
 import "../assets/css/GameDisplayers.css";
 
 export function GameCard(props) {
-  const { gameTitle, totalPlayers } = props.info;
+  const { gameTitle, totalPlayers, image } = props.info;
   return (
     <div className="game-card thinnest-border smaller-b-radius">
       <div className="img-sec flex-center">
-        <img src="" alt="not found"/>
+        <img src={image} alt="not found"/>
       </div>
       <div className="info-sec medium-padding">
         <a href={"/" + gameTitle.split(" ").join("_")}>

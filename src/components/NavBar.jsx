@@ -67,7 +67,7 @@ export class NavBar extends React.Component {
           <a href="/" id="logo-head">MinigameHub</a>
           <div className="flex" id="games-s-bar">
             <input
-              className="narrow-padding" type="text" id="games-s-box"
+              type="text" id="games-s-box"
               placeholder="Enter some keywords to search for games..."
               onKeyDown={(e) => {
                 if (e.key === "Enter") {

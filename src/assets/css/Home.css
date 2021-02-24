@@ -18,7 +18,7 @@
 }
 
 #intro {
-  width: 70%;
+  width: 68%;
   flex-direction: column;
   position: relative;
   text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
@@ -30,9 +30,10 @@
 #intro > div {
   position: absolute;
   top: 0;
-  width: 70%;
+  width: 75%;
   height: 100%;
   padding: 30px;
+  user-select: none;
 }
 #intro h1 {
   font-size: 48px;
@@ -47,7 +48,7 @@
 
 #top-games {
   background-color: white;
-  width: 28%;
+  width: 30%;
 }
 #top-games > h2 {
   border-bottom: 2px royalblue solid;

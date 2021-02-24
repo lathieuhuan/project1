@@ -9,7 +9,11 @@
 }
 .img-sec {
   background-color: rgb(255, 255, 109);
-  height: 150px;
+  height: 200px;
+}
+.img-sec img {
+  width: 100%;
+  height: 100%;
 }
 .info-sec h3 {
   color: royalblue;

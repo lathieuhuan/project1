@@ -25,7 +25,7 @@ code {
 button,
 input {
   outline: none;
-  padding: 5px 10px;
+  padding: 10px;
 }
 button {
   cursor: pointer;
