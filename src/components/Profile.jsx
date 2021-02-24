@@ -1,6 +1,6 @@
 import "../assets/css/Profile.css"
 import React from "react";
-import { PersonalInfo } from "./pfComps/PersonalInfo";
+import { PersonalInfo } from "./profile/PersonalInfo";
 import { getUserInfo, editUserInfo } from "../ultis/ultis";
 import { Loading } from "./Loading";
 import { NotFound } from "./NotFound";

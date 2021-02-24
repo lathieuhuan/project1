@@ -1,10 +1,12 @@
-import "../assets/css/CardMemoryGame.css";
+import "../../assets/css/cmg/CardMemoryGame.css";
 import React from 'react';
-import { LeftCol } from "./cmgComps/LeftCol";
-import { RightCol } from "./cmgComps/RightCol";
-import { Playground } from "./cmgComps/Playground";
-import { Message } from "./cmgComps/Message";
-import { cardImgs } from "./cmgData";
+import { LeftCol } from "./LeftCol";
+import { RightCol } from "./RightCol";
+import { Playground } from "./Playground";
+import { Message } from "./Message";
+import { cardImgs } from "../cmgData";
+import { HighScores } from "../HighScores";
+import { getHighScores } from "../../ultis/ultis";
 
 function RandomShuffleDouble(limit, max) {
   let arr = [];
@@ -41,6 +43,7 @@ export class CardMemoryGame extends React.Component {
       time: 0,
       bestRecord: 1500,
       newRecord: false,
+      highScores: [],
     };
     this.chosen = [];
     this.left = 0;
@@ -146,18 +149,25 @@ export class CardMemoryGame extends React.Component {
       });
     }, 300);
   };
+  componentDidMount() {
+    getHighScores("Card Memory Game")
+    .then((highScores) => {
+      highScores.sort((a, b) => a.score - b.score);
+      this.setState({ highScores });
+    });
+  }
   render() {
     const { difficulty, running, gameState } = this.state;
     let content;
     if (running && gameState === "Progressing") {
       content = (
         <Playground
-            cards={this.state.cards}
-            difficulty={difficulty}
-            setAnimation={this.setAnimation}
-            flip={this.flip}
-            process={this.process}
-          />
+          cards={this.state.cards}
+          difficulty={difficulty}
+          setAnimation={this.setAnimation}
+          flip={this.flip}
+          process={this.process}
+        />
       );
     } else {
       content = <Message gameState={gameState} newRecord={this.state.newRecord} />;
@@ -166,18 +176,21 @@ export class CardMemoryGame extends React.Component {
       }
     }
     return (
-      <div className="flex" id="cmg-content">
-        <LeftCol />
-        <div className="flex-center center-col">
-          {content}
+      <div id="cmg">
+        <div className="flex content">
+          <LeftCol />
+          <div className="flex-center center-col">
+            {content}
+          </div>
+          <RightCol
+            limit={this.limit}
+            time={this.state.time}
+            gameState={gameState}
+            switchPause={this.switchPause}
+            startGame={this.startGame}
+          />
         </div>
-        <RightCol
-          limit={this.limit}
-          time={this.state.time}
-          gameState={gameState}
-          switchPause={this.switchPause}
-          startGame={this.startGame}
-        />
+        <HighScores highScores={this.state.highScores} />
       </div>
     );
   }

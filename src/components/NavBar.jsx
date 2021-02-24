@@ -75,7 +75,7 @@ export class NavBar extends React.Component {
                 }
               }}
             />
-            <div className="pointer" id="games-s-btn">
+            <div className="flex-center pointer" id="games-s-btn">
               <img
                 src="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/search-512.png"
                 id="games-s-icon" alt=""

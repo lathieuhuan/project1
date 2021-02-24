@@ -20,9 +20,12 @@ export class Home extends React.Component {
       <div id="home">
         <div id="home-content">
           <div className="flex top-sec">
-            <div className="flex-center" id="intro">
-              <img src="https://wallpapercave.com/wp/wp4658650.jpg" alt=""/>
-              <div className="flex-center flex-col wide-padding">
+            <div id="intro">
+              <img
+                src="https://image.freepik.com/free-photo/white-dominoes-yellow-background-top-view-board-game-place-text_153325-295.jpg"
+                alt=""
+              />
+              <div className="flex-center flex-col">
                 <h1>WELCOME TO MINIGAME HUB</h1>
                 <h3>We have the most interesting mini-games!</h3>
               </div>
@@ -37,7 +40,7 @@ export class Home extends React.Component {
             </div>
           </div>
           <div className="flex mid-sec">
-            <h2><a href="/Library">Game Library</a></h2>
+            <a href="/Library"><h2>Game Library</h2></a>
           </div>
           <div className="flex btm-sec">
             {this.state.games.map((val, i) => <GameCard key={i} info={val} />)}

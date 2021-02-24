@@ -1,4 +1,4 @@
-import "../../assets/css/cmgCss/Setup.css";
+import "../../assets/css/cmg/Setup.css";
 import React from "react";
 
 export class Setup extends React.Component {

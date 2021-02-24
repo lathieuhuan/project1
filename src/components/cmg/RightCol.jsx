@@ -1,4 +1,4 @@
-import "../../assets/css/cmgCss/RightCol.css";
+import "../../assets/css/cmg/RightCol.css";
 import { Stats } from "./Stats";
 import { PauseBtn } from "./PauseBtn";
 import { Setup } from "./Setup";

@@ -1,4 +1,4 @@
-#cmg-content #message {
+#cmg .message {
   width: 600px;
   height: 350px;
   border: 3px black solid;
@@ -8,10 +8,10 @@
   justify-content: center;
   align-items: center;
 }
-#cmg-content #message > h1 {
+#cmg .message > h1 {
   font-size: 60px;
   margin-bottom: 10px;
 }
-#cmg-content #message > p {
+#cmg .message > p {
   font-size: 30px;
 }

@@ -1,20 +1,20 @@
-#cmg-content .stats {
+#cmg .stats {
   padding: 15px;
   flex-wrap: wrap;
 }
-#cmg-content .stats > p {
+#cmg .stats > p {
   padding: var(--btn-pad);
   font-size: var(--large);
   font-weight: 700;
 }
-#cmg-content .stats > p:nth-child(1),
-#cmg-content .stats > p:nth-child(2) {
+#cmg .stats > p:nth-child(1),
+#cmg .stats > p:nth-child(2) {
   margin-bottom: 10px;
 }
-#cmg-content .desc {
+#cmg .desc {
   width: 60%;
 }
-#cmg-content .num {
+#cmg .num {
   width: 35%;
   text-align: right;
   color: white;

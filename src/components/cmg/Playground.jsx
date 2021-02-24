@@ -1,4 +1,4 @@
-import "../../assets/css/cmgCss/Playground.css";
+import "../../assets/css/cmg/Playground.css";
 import { Card } from "./Card";
 
 export function Playground(props) {

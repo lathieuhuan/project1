@@ -1,4 +1,4 @@
-import "../../assets/css/cmgCss/LeftCol.css";
+import "../../assets/css/cmg/LeftCol.css";
 
 export function LeftCol() {
   return (

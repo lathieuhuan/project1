@@ -1,4 +1,4 @@
-import "../../assets/css/cmgCss/Card.css";
+import "../../assets/css/cmg/Card.css";
 
 export function Card(props) {
     const { index, size, imageFrt, imageBck, front, back, animated, done } = props;
@@ -7,13 +7,13 @@ export function Card(props) {
       onClick={() => {
         props.setAnimation(index, "true");
       }}>
-        <img className={back} src={imageBck} animated={animated}
-        onAnimationEnd={() => {
-          props.flip(index);
-          props.setAnimation(index, "false");
-          props.process(index);
-      }} alt="" />
         <img className={front} src={imageFrt} animated={animated} alt="" />
+        <img className={back} src={imageBck} animated={animated}
+          onAnimationEnd={() => {
+            props.flip(index);
+            props.setAnimation(index, "false");
+            props.process(index);
+        }} alt="" />
       </div>
     );
 }

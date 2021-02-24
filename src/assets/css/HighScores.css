@@ -1,0 +1,8 @@
+#high-scores {
+  padding-top: 50px;
+}
+#high-scores > div {
+  width: 700px;
+  min-width: 700px;
+  margin: 0 auto;
+}

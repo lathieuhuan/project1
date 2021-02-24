@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
 import { Home } from "./components/Home";
 import { Library } from "./components/Library";
-import { CardMemoryGame } from "./components/CardMemoryGame";
+import { CardMemoryGame } from "./components/cmg/CardMemoryGame";
 import { SignIn } from "./components/SignIn";
 import { SignUp } from "./components/SignUp";
 import { Redirecting } from "./components/Redirecting";

@@ -1,4 +1,4 @@
-import "../../assets/css/pfCss/PersonalInfo.css";
+import "../../assets/css/profile/PersonalInfo.css";
 import React from 'react';
 import { ShowInfo } from "./ShowInfo";
 

@@ -20,6 +20,7 @@ function getGames(keywords) {
           let result = [];
           querySnapshot.forEach((doc) => {
             result.push({
+              gameTitle: doc.id,
               ...doc.data(),
             });
           });
@@ -36,6 +37,7 @@ function getGames(keywords) {
           let result = [];
           querySnapshot.forEach((doc) => {
             result.push({
+              gameTitle: doc.id,
               ...doc.data(),
             });
           });
@@ -166,4 +168,27 @@ function editUserInfo(userId, info) {
   });
 }
 
-export { getGames, getUsers, signUp, signIn, getUserInfo, editUserInfo };
+function getHighScores(gameTitle) {
+  return new Promise((res, rej) => {
+    gamesRef
+      .doc(gameTitle)
+      .get()
+      .then((doc) => {
+        if (!doc.exists) {
+          throw new Error("Probably wrong game title.");
+        }
+        res(doc.data().highScores);
+      })
+      .catch((err) => rej(err));
+  });
+}
+
+export {
+  getGames,
+  getUsers,
+  signUp,
+  signIn,
+  getUserInfo,
+  editUserInfo,
+  getHighScores,
+};

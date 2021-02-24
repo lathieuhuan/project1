@@ -1,4 +1,4 @@
-import "../../assets/css/cmgCss/Stats.css";
+import "../../assets/css/cmg/Stats.css";
 import { Timer } from "./Timer"
 
 export function Stats(props) {

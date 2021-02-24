@@ -1,4 +1,4 @@
-import "../../assets/css/cmgCss/Message.css";
+import "../../assets/css/cmg/Message.css";
 
 export function Message(props) {
   const { gameState, newRecord } = props;
@@ -16,7 +16,7 @@ export function Message(props) {
     mess = "WELCOME";
   }
   return (
-    <div id="message">
+    <div className="message">
       <h1>{mess}</h1>
       {extraMess}
     </div>

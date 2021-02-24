@@ -16,6 +16,7 @@
   height: 400px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
 }
+
 #intro {
   width: 70%;
   flex-direction: column;
@@ -29,17 +30,21 @@
 #intro > div {
   position: absolute;
   top: 0;
+  width: 70%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.4);
+  padding: 30px;
 }
 #intro h1 {
-  font-size: 68px;
+  font-size: 48px;
+  text-align: left;
 }
 #intro h3 {
-  font-size: 34px;
+  font-size: 28px;
   margin-top: 10px;
   letter-spacing: 2px;
+  text-align: left;
 }
+
 #top-games {
   background-color: white;
   width: 28%;
@@ -53,8 +58,11 @@
   justify-content: space-between;
 }
 
-#home .mid-sec > h2 {
-  border-bottom: 2px royalblue solid;
+#home .mid-sec h2 {
+  font-size: 28px;
+  line-height: 46px;
+  color: black;
+  border-bottom: 3px royalblue solid;
 }
 
 #home .btm-sec {

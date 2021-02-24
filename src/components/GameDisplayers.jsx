@@ -8,9 +8,9 @@ export function GameCard(props) {
         <img src="" alt="not found"/>
       </div>
       <div className="info-sec medium-padding">
-        <h3>
-          <a href={"/" + gameTitle.split(" ").join("_")}>{gameTitle}</a>
-        </h3>
+        <a href={"/" + gameTitle.split(" ").join("_")}>
+          <h3>{gameTitle}</h3>
+        </a>
         <p>Total Players: {
           totalPlayers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         }</p>

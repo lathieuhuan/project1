@@ -1,19 +1,21 @@
-#cmg-content {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  height: 608px;
+#cmg {
+  padding: 50px 0;
   --btn-pad: 5px 10px;
   --btn-rad: 5px;
   --large: 22px;
   --medium: 18px;
   --small: 16px;
 }
-#cmg-content .left-col,
-#cmg-content .right-col {
+#cmg .content {
+  height: 560px;
+  padding-bottom: 50px;
+}
+#cmg .left-col,
+#cmg .right-col {
   width: 381px;
   min-width: 381px;
 }
-#cmg-content .center-col {
+#cmg .center-col {
   width: 756px;
   min-width: 756px;
 }
