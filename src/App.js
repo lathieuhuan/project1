@@ -75,7 +75,11 @@ class App extends Component {
           </Switch>
         </div>
         <div id="footer"></div>
-        {modal === "None" ? null : <div id="modal">{modalContent[modal]}</div>}
+        {modal === "None" ? null : (
+          <div className="flex-center" id="modal">
+            {modalContent[modal]}
+          </div>
+        )}
       </div>
     );
   }

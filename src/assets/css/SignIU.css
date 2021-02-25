@@ -1,48 +1,51 @@
 .signIU-form {
-  width: 400px;
-  margin: 100px auto;
-  background-color: white;
   position: relative;
+  width: 400px;
+  margin: 0 auto;
+  background-color: white;
 }
-.signIU-form > .tooltip {
-  position: absolute;
-  top: 25%;
-  left: calc(100% + 11px);
-  width: 50%;
-  background-color: black;
-  color: white;
-  text-align: left;
+#modal h1 {
+  color: var(--primary);
 }
-.signIU-form > .tooltip::after {
-  content: "";
-  border-style: solid;
-  border-color: transparent black transparent transparent;
-  border-width: 8px;
-  position: absolute;
-  right: 100%;
-  top: 50%;
-  margin-top: -8px;
-}
-.signIU-form input,
-.signIU-form button {
-  padding: 10px;
-  border: 1px black solid;
-  border-radius: 3px;
+#modal .line {
+  /* input & button */
   margin-top: 15px;
-  font-size: 16px;
+  border: 1px black solid;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
 }
-.signIU-form p {
+#modal .extra-line {
+  /* p */
   margin-top: 10px;
   text-align: center;
   font-size: 14px;
 }
-.signIU-form button {
+#modal .last-btn {
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: var(--primary);
+  font-weight: 700;
+  color: white;
   align-self: center;
 }
 
-#cf-pass {
-  background-repeat: no-repeat;
-  background-position: right;
-  background-origin: content-box;
-  background-size: contain;
+#modal .tooltip {
+  position: absolute;
+  top: 20%;
+  left: calc(100% + 11px);
+  width: 50%;
+  background-color: black;
+  text-align: left;
+  color: white;
+}
+#modal .tooltip::after {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -8px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+  border-width: 8px;
+  content: "";
 }

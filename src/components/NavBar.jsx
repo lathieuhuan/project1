@@ -4,11 +4,14 @@ import React from 'react';
 export class NavBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { expanded: false };
+    this.state = { expanded: false, searchTerm: "" };
     this.typeRef = React.createRef();
   }
   toggleDropdown = () => {
     this.setState({ expanded: !this.state.expanded });
+  }
+  handleChange = (e) => {
+    this.setState({ searchTerm: e.target.value })
   }
   handleClickOutside = (e) => {
     if (this.state.expanded && !this.typeRef.current.contains(e.target)) {
@@ -16,7 +19,7 @@ export class NavBar extends React.Component {
     }
   }
   toSearchResult = () => {
-    const searchTerm = document.getElementById("games-s-box").value;
+    const { searchTerm } = this.state;
     if (searchTerm.match(/([a-zA-Z0-9])+([ -~])*/)) {
       // true nếu searchTerm chứa ít nhất một chữ cái hoặc con số
       window.location.assign("/Library?search=" + searchTerm);
@@ -30,26 +33,34 @@ export class NavBar extends React.Component {
   }
   render() {
     const { username, userId, setAppState } = this.props;
-    const accNav = userId === null ? (
-      <div className="acc-nav">
-        <button onClick={() => setAppState("SignIn")}>Sign In</button>
-        <button onClick={() => setAppState("SignUp")}>Sign Up</button>
+    const menu = userId === null ? (
+      <div className="menu">
+        <button className="menu-opt" onClick={() => setAppState("SignIn")}>
+          Sign In
+        </button>
+        <button className="menu-opt" onClick={() => setAppState("SignUp")}>
+          Sign Up
+        </button>
       </div>
     ) : (
-      <div ref={this.typeRef} className="acc-nav">
-        <button onClick={this.toggleDropdown}>
+      <div ref={this.typeRef} className="menu">
+        <button className="menu-opt flex" onClick={this.toggleDropdown}>
           <img
-            id="acc-icon"
+            className="avatar"
             // src="https://image.flaticon.com/icons/png/512/61/61205.png" denied
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA"
             alt="avatar"
           />
-          {username}
+          <p className="username">{username}</p>
         </button>
         {this.state.expanded ? (
-          <div className="acc-dropdown thinnest-border small-b-radius">
-            <a href={"/Profile/" + userId}>My Profile</a>
-            <button onClick={() => {
+          <div className="dropdown flex-col radius-5 padding-10">
+            <button className="acc-opt" onClick={() => {
+              window.location.assign("/Profile/" + userId)
+            }}>
+              My Profile
+            </button>
+            <button className="acc-opt" onClick={() => {
               this.toggleDropdown();
               setAppState("None");
               localStorage.removeItem("username");
@@ -62,28 +73,31 @@ export class NavBar extends React.Component {
       </div>
     );
     return (
-      <div id="head">
-        <div className="flex" id="nav-bar">
-          <a href="/" id="logo-head">MinigameHub</a>
-          <div className="flex" id="games-s-bar">
+      <div id="nav">
+        <div id="nav-inner">
+          <a href="/" className="logo">MinigameHub</a>
+          <div className="search-bar flex">
             <input
-              type="text" id="games-s-box"
+              className="search-box"
+              type="text"
+              spellCheck={false}
               placeholder="Enter some keywords to search for games..."
+              onChange={this.handleChange}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   this.toSearchResult();
                 }
               }}
             />
-            <div className="flex-center pointer" id="games-s-btn">
+            <div className="search-btn flex-center pointer">
               <img
                 src="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/search-512.png"
-                id="games-s-icon" alt=""
+                className="search-icon" alt="search"
                 onClick={this.toSearchResult}
               />
             </div>
           </div>
-          {accNav}
+          {menu}
         </div>
       </div>
     );

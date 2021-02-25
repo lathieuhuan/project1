@@ -3,17 +3,17 @@ import "../assets/css/SignIU.css";
 export function Redirecting(props) {
   const { username, setAppState } = props;
   return (
-    <div className="signIU-form wide-padding thin-border small-b-radius col-center">
-      <h1>SIGNUP SUCCESSFUL</h1>
-      <div>
-        <button style={{ marginRight: "15px" }} onClick={() => {
+    <div className="signIU-form flex-col border-2 radius-5 padding-20">
+      <h1 className="center-text">SIGNUP SUCCESSFUL</h1>
+      <div className="flex-center">
+        <button className="line last-btn" onClick={() => {
           setAppState("None", username, username);
           localStorage.setItem("username", username);
           localStorage.setItem("userId", username);
         }}>
           Sign In
         </button>
-        <button onClick={() => setAppState("None")}>
+        <button className="line last-btn" onClick={() => setAppState("None")}>
           Not Sign In
         </button>
       </div>

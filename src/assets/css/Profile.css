@@ -1,17 +1,19 @@
 #profile {
-  width: 1519px;
-  padding: 15px 30px;
+  width: 1519.2px;
+  /* innerWidth (1536) - scrollbar width
+  set for profile left & right to not shrink */
+  padding: 30px;
   justify-content: space-between;
 }
-#profile .left-col,
-#profile .right-col {
-  background-color: #eee;
+#psn-info,
+#achievements {
+  box-shadow: var(--shadow);
   height: 800px;
 }
-#profile .left-col {
+#psn-info {
   padding: 40px;
   width: 28%;
 }
-#profile .right-col {
-  width: 70%;
+#achievements {
+  min-width: 70%;
 }

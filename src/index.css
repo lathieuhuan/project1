@@ -1,13 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-html {
-  font-size: 16px;
-}
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -18,25 +9,36 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-#root {
-  width: 100%;
-  height: 100%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+:root {
+  font-size: 16px;
+  --primary: rgb(255, 23, 112);
+  --secondary: rgb(255, 211, 23);
+  --secondary-light: rgb(255, 221, 70);
+  --accent: rgb(50, 23, 255);
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+  --inner-width: 900px;
+  --nav-height: 70px;
+  --nav-text: white;
+  --nav-hover: black;
+  --btn-hover: #eee;
+}
+
 button,
 input {
   outline: none;
-  padding: 10px;
 }
 button {
   cursor: pointer;
+  font-size: 1rem;
+  user-select: none;
 }
 a {
   text-decoration: none;
-}
-h1,
-h2,
-h3 {
-  text-align: center;
 }
 .flex {
   display: flex;
@@ -45,53 +47,76 @@ h3 {
   display: flex;
   flex-direction: column;
 }
-.col-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.thinnest-border {
-  border: 1px black solid;
+
+.mgtop-5 {
+  margin-top: 5px;
 }
-.thinner-border {
-  border: 2px black solid;
+
+.border-1 {
+  border: 1px solid black;
 }
-.thin-border {
-  border: 3px black solid;
+.border-2 {
+  border: 2px solid black;
 }
-.narrow-padding {
-  padding: 5px 10px;
+.border-3 {
+  border: 3px solid black;
 }
-.medium-padding {
-  padding: 10px;
-}
-.wide-padding {
-  padding: 20px;
-}
-.smaller-b-radius {
+
+.radius-3 {
   border-radius: 3px;
 }
-.small-b-radius {
+.radius-5 {
   border-radius: 5px;
 }
-.medium-b-radius {
+.radius-10 {
   border-radius: 10px;
 }
+
+.padding-10 {
+  padding: 10px;
+}
+.padding-20 {
+  padding: 20px;
+}
+
+.center-text {
+  text-align: center;
+}
+.left-text {
+  text-align: left;
+}
+
 .warning {
   color: red;
+}
+.recommend {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.align-center {
+  align-self: center;
 }
 .pointer {
   cursor: pointer;
 }
+.cover-img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+.right-bg-img {
+  background-repeat: no-repeat;
+  background-position: right;
+  background-origin: content-box;
+  background-size: contain;
+}
 .cover-body {
   width: 100%;
   min-height: calc(552 / 722 * 100vh);
-}
-.center-align {
-  text-align: center;
 }

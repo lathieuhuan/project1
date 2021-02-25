@@ -12,24 +12,29 @@ function isGood(str) {
 export class SignUp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
+      username: "",
+      password: "",
+      cf_password: "",
+      email: "",
       nameWarning: null,
       passWarning: null,
       pwdConfirmed: false,
       tooltipOn: false,
     };
   }
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
   trySignUp = () => {
-    const username = document.getElementById("su-name").value,
-      password = document.getElementById("su-pass").value,
-      email = document.getElementById("su-email").value,
+    const { username, password, email, pwdConfirmed } = this.state,
       nameGood = isGood(username),
       passGood = isGood(password);
     this.setState({
       nameWarning: nameGood ? null : "Please enter a valid username.",
       passWarning: passGood ? null : "Please enter a valid password.",
     });
-    if (nameGood && passGood && this.state.pwdConfirmed) {
+    if (nameGood && passGood && pwdConfirmed) {
       signUp({ username, password, email })
       .then(() => {
         this.props.setAppState("Redirecting", username);
@@ -37,10 +42,15 @@ export class SignUp extends React.Component {
       .catch((err) => this.setState({ nameWarning: err.message }));
     }
   }
-  comparePwd = () => {
-    const pass = document.getElementById("su-pass").value,
-      cfpass = document.getElementById("cf-pass").value;
-    this.setState({ pwdConfirmed: pass !== "" && cfpass === pass });
+  comparePwd = (e) => {
+    const { password, cf_password } = this.state,
+      value = e.target.value;
+    this.setState({
+      [e.target.name]: value,
+      pwdConfirmed: e.target.name === "password"
+        ? (value !== "" && value === cf_password)
+        : (password !== "" && password === value)
+    });
   }
   toggleTooltip = () => {
     this.setState({ tooltipOn: !this.state.tooltipOn });
@@ -49,23 +59,25 @@ export class SignUp extends React.Component {
     const { setAppState } = this.props,
       { nameWarning, passWarning, pwdConfirmed, tooltipOn } = this.state;
     return (
-      <div className="signIU-form flex-col wide-padding thin-border small-b-radius">
-        {tooltipOn ? <p className="tooltip medium-padding small-b-radius">
+      <div className="signIU-form border-3 radius-10 padding-20 flex-col">
+        {tooltipOn ? <p className="tooltip radius-10 padding-10">
           Your username and password must contain atleast 8 characters, letters and numbers only.
         </p> : null}
-        <div onClick={() => setAppState("None")} className="close flex-center">
+        <div onClick={() => setAppState("None")} className="close-btn flex-center">
           <i className="fa fa-close"></i>
         </div>
-        <h1>SIGN UP</h1>
-        <p>
+        <h1 className="center-text">SIGN UP</h1>
+        <p className="extra-line">
           Already a member? <span
-            className="warning pointer" onClick={() => setAppState("SignIn")}
+            className="recommend pointer" onClick={() => setAppState("SignIn")}
           >Sign in</span>!
         </p>
         <input
-          id="su-name"
+          className="line"
           type="text"
+          name="username"
           placeholder="Enter your username"
+          onChange={this.handleChange}
           onKeyDown = {(e) => {
             if (e.key === "Enter") {
               this.trySignUp();
@@ -75,11 +87,12 @@ export class SignUp extends React.Component {
           onBlur={this.toggleTooltip}
         />
         {nameWarning === null ? null : (
-          <p className="warning">{nameWarning}</p>
+          <p className="extra-line warning">{nameWarning}</p>
         )}
         <input
-          id="su-pass"
+          className="line"
           type="password"
+          name="password"
           placeholder="Enter your password"
           onChange={this.comparePwd}
           onKeyDown = {(e) => {
@@ -91,11 +104,12 @@ export class SignUp extends React.Component {
           onBlur={this.toggleTooltip}
         />
         {passWarning === null ? null : (
-          <p className="warning">{passWarning}</p>
+          <p className="extra-line warning">{passWarning}</p>
         )}
         <input
-          id="cf-pass"
+          className="line right-bg-img"
           type="password"
+          name="cf_password"
           placeholder="Confirm your password"
           style={{
             backgroundImage: pwdConfirmed
@@ -110,16 +124,20 @@ export class SignUp extends React.Component {
           }}
         />
         <input
-          id="su-email"
+          className="line"
           type="text"
+          name="email"
           placeholder="Enter your email address"
+          onChange={this.handleChange}
           onKeyDown = {(e) => {
             if (e.key === "Enter") {
               this.trySignUp();
             }
           }}
         />
-        <button onClick={this.trySignUp}>Submit</button>
+        <button className="line last-btn" onClick={this.trySignUp}>
+          Submit
+        </button>
       </div>
     );
   }

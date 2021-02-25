@@ -49,7 +49,7 @@ export class Profile extends React.Component {
   }
   render() {
     return this.state.found ? this.state.loadingDone ? (
-      <div className="flex" id="profile">
+      <div className="flex" id="profile" >
         <PersonalInfo
           editing={this.state.editing}
           info={this.state.info}
@@ -57,7 +57,7 @@ export class Profile extends React.Component {
           toggleEdit={this.toggleEdit}
           tryUpdate={this.tryUpdate}
         />
-        <div className="right-col medium-b-radius"></div>
+        <div className="radius-10" id="achievements"></div>
       </div>
     ) : <Loading /> : <NotFound />;
   }

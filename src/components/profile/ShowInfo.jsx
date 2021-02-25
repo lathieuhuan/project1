@@ -3,28 +3,25 @@
 export function ShowInfo(props) {
   const { info, isOwner, toggleEdit } = props;
   return (
-    <div className="left-col thin-border medium-b-radius flex-col">
+    <div className="border-3 radius-10 flex-col" id="psn-info">
       <img
         className="avatar"
         // src="https://image.flaticon.com/icons/png/512/61/61205.png" denied
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA"
         alt=""
       />
-      <h1><span>{info.username}</span></h1>
-      <p>Gender: <span>{info.gender}</span></p>
-      <p>Date of Birth: <span>{info.dob}</span></p>
-      <p>Town/City: <span>{info.townOcity}</span></p>
-      <p>Email address: <span>{info.email}</span></p>
-      <p>About me:</p>
-      <p
-        className="thinner-border narrow-padding small-b-radius"
-        id="about"
-      >
+      <h1 className="center-text"><span>{info.username}</span></h1>
+      <p className="psn_line">Gender: <span>{info.gender}</span></p>
+      <p className="psn_line">Date of Birth: <span>{info.dob}</span></p>
+      <p className="psn_line">Town/City: <span>{info.townOcity}</span></p>
+      <p className="psn_line">Email address: <span>{info.email}</span></p>
+      <p className="psn_line">About me:</p>
+      <p className="psn_line" id="about">
         <span>{info.about}</span>
       </p>
       {isOwner ? (
         <button
-          className="edit-btn thinnest-border smaller-b-radius"
+          className="last-btn"
           onClick={toggleEdit}
         >
           Edit Profile
