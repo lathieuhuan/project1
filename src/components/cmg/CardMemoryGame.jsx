@@ -38,7 +38,7 @@ export class CardMemoryGame extends React.Component {
       difficulty: "",
       type: "",
       running: false,
-      gameState: "NYS",
+      gameState: "welcome",
       cards: [],
       time: 0,
       bestRecord: 1500,
@@ -70,7 +70,7 @@ export class CardMemoryGame extends React.Component {
       difficulty: difficulty,
       type: type,
       running: true,
-      gameState: "Progressing",
+      gameState: "progressing",
       cards,
       time: 0,
       newRecord: false,
@@ -81,18 +81,18 @@ export class CardMemoryGame extends React.Component {
   }
   countUp = () => {
     if (this.state.time === this.limit) {
-      this.setState({ running: false, gameState: "Lost" });
+      this.setState({ running: false, gameState: "game over!" });
     } else {
       this.setState({ time: this.state.time + 1 });
     }
   }
   switchPause = () => {
-    if (this.state.gameState === "Progressing") {
+    if (this.state.gameState === "progressing") {
       clearInterval(this.timer);
-      this.setState({ gameState: "Paused" });
-    } else if (this.state.gameState === "Paused") {
+      this.setState({ gameState: "paused" });
+    } else if (this.state.gameState === "paused") {
       this.timer = setInterval(this.countUp, 10);
-      this.setState({ gameState: "Progressing" });
+      this.setState({ gameState: "progressing" });
     }
   };
   setAnimation = (i, val) => {
@@ -134,7 +134,7 @@ export class CardMemoryGame extends React.Component {
       let { running, gameState, bestRecord, newRecord, time } = this.state;
       if (!this.left) {
         running = false;
-        gameState = "Won";
+        gameState = "you won!";
         if (time < bestRecord) {
           bestRecord = time;
           newRecord = true;
@@ -158,9 +158,9 @@ export class CardMemoryGame extends React.Component {
   }
   render() {
     const { difficulty, running, gameState } = this.state;
-    let content;
-    if (running && gameState === "Progressing") {
-      content = (
+    let centerCol;
+    if (running && gameState === "progressing") {
+      centerCol = (
         <Playground
           cards={this.state.cards}
           difficulty={difficulty}
@@ -170,17 +170,17 @@ export class CardMemoryGame extends React.Component {
         />
       );
     } else {
-      content = <Message gameState={gameState} newRecord={this.state.newRecord} />;
+      centerCol = <Message gameState={gameState} newRecord={this.state.newRecord} />;
       if (!running) {
         clearInterval(this.timer);
       }
     }
     return (
-      <div id="cmg">
-        <div className="flex content">
+      <div>
+        <div id="cmg-content">
           <LeftCol />
-          <div className="flex-center center-col">
-            {content}
+          <div className="flex-center" id="cmg_center-col">
+            {centerCol}
           </div>
           <RightCol
             limit={this.limit}

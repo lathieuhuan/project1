@@ -59,21 +59,21 @@ export class SignUp extends React.Component {
     const { setAppState } = this.props,
       { nameWarning, passWarning, pwdConfirmed, tooltipOn } = this.state;
     return (
-      <div className="signIU-form border-3 radius-10 padding-20 flex-col">
-        {tooltipOn ? <p className="tooltip radius-10 padding-10">
+      <div className="border-3 radius-10 padding-20 flex-col" id="modal_inner">
+        {tooltipOn ? <p className="tooltip radius-10 padding-20">
           Your username and password must contain atleast 8 characters, letters and numbers only.
         </p> : null}
         <div onClick={() => setAppState("None")} className="close-btn flex-center">
           <i className="fa fa-close"></i>
         </div>
-        <h1 className="center-text">SIGN UP</h1>
-        <p className="extra-line">
+        <h1 id="modal_heading">SIGN UP</h1>
+        <p className="modal_sub-line">
           Already a member? <span
             className="recommend pointer" onClick={() => setAppState("SignIn")}
           >Sign in</span>!
         </p>
         <input
-          className="line"
+          className="modal_main-line"
           type="text"
           name="username"
           placeholder="Enter your username"
@@ -87,10 +87,10 @@ export class SignUp extends React.Component {
           onBlur={this.toggleTooltip}
         />
         {nameWarning === null ? null : (
-          <p className="extra-line warning">{nameWarning}</p>
+          <p className="modal_sub-line warning">{nameWarning}</p>
         )}
         <input
-          className="line"
+          className="modal_main-line"
           type="password"
           name="password"
           placeholder="Enter your password"
@@ -104,10 +104,10 @@ export class SignUp extends React.Component {
           onBlur={this.toggleTooltip}
         />
         {passWarning === null ? null : (
-          <p className="extra-line warning">{passWarning}</p>
+          <p className="modal_sub-line warning">{passWarning}</p>
         )}
         <input
-          className="line right-bg-img"
+          className="modal_main-line right-bg-img"
           type="password"
           name="cf_password"
           placeholder="Confirm your password"
@@ -124,7 +124,7 @@ export class SignUp extends React.Component {
           }}
         />
         <input
-          className="line"
+          className="modal_main-line"
           type="text"
           name="email"
           placeholder="Enter your email address"
@@ -135,7 +135,7 @@ export class SignUp extends React.Component {
             }
           }}
         />
-        <button className="line last-btn" onClick={this.trySignUp}>
+        <button className="modal_main-line last-btn" onClick={this.trySignUp}>
           Submit
         </button>
       </div>

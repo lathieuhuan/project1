@@ -1,12 +1,11 @@
 import "../../assets/css/profile/PersonalInfo.css";
 import React from 'react';
-import { ShowInfo } from "./ShowInfo";
 
 function isGood(str) {
   return str.match(/([a-zA-Z0-9])+([ -~])*/);
 }
 
-export class PersonalInfo extends React.Component {
+export class EditPsnI extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,8 +29,8 @@ export class PersonalInfo extends React.Component {
   }
   render() {
     const { newNameGood, infoDup } = this.state,
-      { editing, info, isOwner, toggleEdit, tryUpdate } = this.props;
-    return editing && isOwner ? (
+      { toggleEdit, tryUpdate } = this.props;
+    return (
       <div className="border-3 radius-10 flex-col" id="psn-info">
         <img
           className="avatar"
@@ -40,18 +39,18 @@ export class PersonalInfo extends React.Component {
           alt=""
         />
         <input
-          id="psn-username"
+          id="psni_username"
           type="text"
           name="username"
           spellCheck={false}
           value={infoDup.username}
           onChange={this.handleChange}
         />
-        <div className="row">
-          <p className="psni-type">Gender:</p>
-          <div className="flex psni-val">
+        <div className="psni_row">
+          <p className="psni_type">Gender:</p>
+          <div className="flex psni_val">
             <input
-              className="psn-gender"
+              className="psni_gender"
               type="radio"
               name="gender"
               value="Male"
@@ -60,7 +59,7 @@ export class PersonalInfo extends React.Component {
             />
             <label>Male</label>
             <input
-              className="psn-gender"
+              className="psni_gender"
               type="radio"
               name="gender"
               value="Female"
@@ -70,10 +69,10 @@ export class PersonalInfo extends React.Component {
             <label>Female</label>
           </div>
         </div>
-        <div className="row">
-          <p className="psni-type">Date of Birth:</p>
+        <div className="psni_row">
+          <p className="psni_type">Date of Birth:</p>
           <input
-            className="psni-val"
+            className="psni_val"
             type="date"
             name="dob"
             value={infoDup.dob}
@@ -81,35 +80,35 @@ export class PersonalInfo extends React.Component {
             onChange={this.handleChange}
           />
         </div>
-        <div className="row">
-          <p className="psni-type">Town/City:</p>
+        <div className="psni_row">
+          <p className="psni_type">Town/City:</p>
           <input
-            className="psni-val"
+            className="psni_val"
             type="text"
             name="townOcity"
             value={infoDup.townOcity}
             onChange={this.handleChange}
           />
         </div>
-        <div className="row">
-          <p className="psni-type">Email address:</p>
+        <div className="psni_row">
+          <p className="psni_type">Email address:</p>
           <input
-            className="psni-val"
+            className="psni_val"
             type="text"
             name="email"
             value={infoDup.email}
             onChange={this.handleChange}
           />
         </div>
-        <p className="psni-type">About me:</p>
+        <p className="psni_type">About me:</p>
         <textarea
-          id="about"
+          id="psni_about-editing"
           name="about"
           spellCheck={false}
           value={infoDup.about}
           onChange={this.handleChange}
         />
-        {newNameGood ? null : <p className="warning-color center-align">
+        {newNameGood ? null : <p className="mgtop-10 warning center-text">
           Your new name is not valid.
         </p>}
         <div className="flex-center">
@@ -134,6 +133,6 @@ export class PersonalInfo extends React.Component {
           </button>
         </div>
       </div>
-    ) : <ShowInfo info={info} isOwner={isOwner} toggleEdit={toggleEdit} />;
+    );
   }
 }

@@ -1,23 +1,23 @@
-#cmg .stats {
-  padding: 15px;
+#cmgrc_stats {
+  margin-bottom: 25px;
+  padding: 10px 15px;
+  display: flex;
   flex-wrap: wrap;
+  box-shadow: var(--normal-shadow);
 }
-#cmg .stats > p {
-  padding: var(--btn-pad);
-  font-size: var(--large);
+#cmgrc_stats .desc,
+#cmgrc_stats .num {
+  margin: 5px 0;
+  padding: 5px 10px;
+  font-size: 1.375em;
   font-weight: 700;
 }
-#cmg .stats > p:nth-child(1),
-#cmg .stats > p:nth-child(2) {
-  margin-bottom: 10px;
-}
-#cmg .desc {
+#cmgrc_stats .desc {
   width: 60%;
 }
-#cmg .num {
+#cmgrc_stats .num {
   width: 35%;
+  background-color: black;
   text-align: right;
   color: white;
-  border-radius: var(--btn-rad);
-  background-color: black;
 }

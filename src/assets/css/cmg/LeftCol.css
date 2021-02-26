@@ -1,18 +1,13 @@
-#cmg .left-col {
-  padding: 30px 30px 0 60px;
-}
-#cmg .left-col > h1 {
-  text-align: left;
+#cmglc_title {
   margin-bottom: 25px;
-  font-size: 42px;
+  font-size: 2.625em;
 }
-#cmg .left-col > h3 {
-  text-align: left;
-  margin: 0 0 10px 0;
-  font-size: var(--large);
+#cmglc_main-line {
+  margin-bottom: 10px;
+  font-size: 1.375em;
 }
-#cmg .left-col > p {
-  margin: 0 0 15px 0;
-  font-size: var(--medium);
+.cmglc_sub-line {
+  margin-bottom: 15px;
+  font-size: 1.125em;
   line-height: 1.6;
 }

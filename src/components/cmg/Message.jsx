@@ -2,23 +2,14 @@ import "../../assets/css/cmg/Message.css";
 
 export function Message(props) {
   const { gameState, newRecord } = props;
-  let mess, extraMess;
-  if (gameState === "Won") {
-    mess = "YOU WON!";
-    if (newRecord) {
-      extraMess = <p>New Record!</p>
-    }
-  } else if (gameState === "Lost") {
-    mess = "GAME OVER!";
-  } else if (gameState === "Paused") {
-    mess = "PAUSED";
-  } else {
-    mess = "WELCOME";
+  let line;
+  if (gameState === "you won!" && newRecord) {
+    line = <p id="cmgms_line">New Record!</p>
   }
   return (
-    <div className="message">
-      <h1>{mess}</h1>
-      {extraMess}
+    <div className="border-3 radius-10" id="cmg_message">
+      <h1 id="cmgms_heading">{gameState}</h1>
+      {line}
     </div>
   );
 }

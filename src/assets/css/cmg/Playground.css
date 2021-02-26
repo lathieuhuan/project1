@@ -1,6 +1,7 @@
-#cmg .playground {
+#cmg_playground {
   width: 100%;
-  padding: 25px 25px 17px 25px;
+  padding: 25px 25px 17px;
   flex-wrap: wrap;
   align-content: space-between;
+  box-shadow: var(--normal-shadow);
 }

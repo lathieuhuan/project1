@@ -27,49 +27,55 @@ export class Setup extends React.Component {
   render() {
     const { dropdownShown, difficulty, type } = this.state;
     return (
-      <div className="setup col-center wide-padding thinner-border medium-b-radius">
+      <div className="border-2 radius-10 padding-20 col-center" id="cmgrc_setup">
         <div className="group col-center">
-          <label>Choose difficulty:</label>
+          <p className="cmgrc_heading">Choose difficulty:</p>
           <div>
             <input
+              className="dfc-radio"
               type="radio"
               name="difficulty"
               value="Easy"
               checked={difficulty === "Easy"}
               onChange={this.changeState}
             />
-            <label htmlFor="easy">Easy</label>
+            <label htmlFor="Easy">Easy</label>
             <input
+              className="dfc-radio"
               type="radio"
               name="difficulty"
               value="Hard"
               checked={difficulty === "Hard"}
               onChange={this.changeState}
             />
-            <label>Hard</label>
+            <label htmlFor="Hard">Hard</label>
           </div>
         </div>
         <div className="group col-center">
-          <label>Choose card type:</label>
+          <p className="cmgrc_heading">Choose card type:</p>
           <div ref={this.typeRef} className="card-type" onClick={this.toggleDropdown}>
-            <p className="show-line thinnest-border">{type}</p>
-            <div className="dropdown thinnest-border" style={{ display: dropdownShown ? "block" : "none" }}>
-              <input
-                type="button"
-                name="type"
-                value="Classic"
-                onClick={this.changeState}
-              />
-              <input
-                type="button"
-                name="type"
-                value="LoL Champions"
-                onClick={this.changeState}
-              />
-            </div>
+            <p className="show-line right-bg-img border-1 radius-5 padding-5-10">{type}</p>
+            {dropdownShown ? (
+              <div className="dropdown border-1">
+                <input
+                  className="type-btn padding-5-10 radius-5"
+                  type="button"
+                  name="type"
+                  value="Classic"
+                  onClick={this.changeState}
+                />
+                <input
+                  className="type-btn padding-5-10 radius-5"
+                  type="button"
+                  name="type"
+                  value="LoL Champions"
+                  onClick={this.changeState}
+                />
+              </div>
+            ) : null}
           </div>
         </div>
-        <button className="start narrow-padding small-b-radius"
+        <button className="start-btn radius-5 padding-5-10"
           onClick={() => this.props.startGame(difficulty, type)}
         >
           START

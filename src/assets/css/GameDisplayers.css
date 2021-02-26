@@ -1,9 +1,8 @@
 .game-card {
   width: 200px;
   margin: 10px;
-  border-radius: 5px;
   font-size: 1rem;
-  box-shadow: var(--shadow);
+  box-shadow: var(--normal-shadow);
 }
 .game-card:hover {
   transform: scale(1.05);
@@ -13,36 +12,49 @@
   border-radius: 5px 5px 0 0;
   background-color: #eee;
 }
-.game-card .line {
+.gc_heading {
   align-self: center;
   font-size: 1.125em;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
 }
-.game-card .extra-line {
+.gc_line {
   margin-top: 5px;
   font-size: 0.875em;
 }
 
-#top-games .rank {
-  margin-right: 10px;
+#top-games .rank-num {
   min-width: 35px;
+  margin-right: 10px;
   border-radius: 5px;
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 3rem;
   text-align: center;
+  cursor: pointer;
 }
 #top-games .top-3 {
-  background-color: var(--primary);
+  background-color: var(--primary-light);
   color: white;
 }
+#top-games .top-3:hover {
+  background-color: var(--primary);
+}
 #top-games .top-5 {
-  background-color: var(--secondary);
+  background-color: var(--secondary-light);
   color: black;
 }
-#top-games .game-title:hover h4 {
+#top-games .top-5:hover {
+  background-color: var(--secondary);
+}
+.gt_heading {
+  cursor: pointer;
+}
+.game-title:hover .gt_heading {
   color: var(--accent);
 }
-#top-games .num {
+.gt_line {
   margin-top: 5px;
   font-size: 0.875rem;
   color: rgb(100, 100, 100);

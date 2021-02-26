@@ -1,33 +1,37 @@
-.signIU-form {
+#modal_inner {
   position: relative;
   width: 400px;
   margin: 0 auto;
   background-color: white;
 }
-#modal h1 {
+#modal_heading {
+  text-align: center;
   color: var(--primary);
 }
-#modal .line {
-  /* input & button */
+.modal_main-line {
+  /* input & button tags */
   margin-top: 15px;
   border: 1px black solid;
   border-radius: 5px;
   padding: 10px;
   font-size: 1rem;
 }
-#modal .extra-line {
-  /* p */
+.modal_sub-line {
+  /* p tags */
   margin-top: 10px;
   text-align: center;
   font-size: 14px;
 }
-#modal .last-btn {
+#modal_inner .last-btn {
   margin-left: 10px;
   margin-right: 10px;
-  background-color: var(--primary);
+  background-color: var(--primary-light);
   font-weight: 700;
   color: white;
   align-self: center;
+}
+#modal_inner .last-btn:hover {
+  background-color: var(--primary);
 }
 
 #modal .tooltip {

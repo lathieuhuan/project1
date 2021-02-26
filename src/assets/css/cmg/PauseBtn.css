@@ -1,6 +1,11 @@
-#cmg .pause-btn {
-  margin: 0 auto 25px auto;
-  width: 40px;
-  height: 40px;
+#cmg_right-col .pause-btn {
+  margin: 0 auto 25px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
+  box-shadow: var(--normal-shadow);
+}
+#cmg_right-col .pause-btn:active {
+  transform: scale(0.95);
+  box-shadow: var(--lesser-shadow);
 }

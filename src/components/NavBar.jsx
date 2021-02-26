@@ -34,7 +34,7 @@ export class NavBar extends React.Component {
   render() {
     const { username, userId, setAppState } = this.props;
     const menu = userId === null ? (
-      <div className="menu">
+      <div id="nav_menu">
         <button className="menu-opt" onClick={() => setAppState("SignIn")}>
           Sign In
         </button>
@@ -43,7 +43,7 @@ export class NavBar extends React.Component {
         </button>
       </div>
     ) : (
-      <div ref={this.typeRef} className="menu">
+      <div ref={this.typeRef} id="nav_menu">
         <button className="menu-opt flex" onClick={this.toggleDropdown}>
           <img
             className="avatar"
@@ -54,7 +54,7 @@ export class NavBar extends React.Component {
           <p className="username">{username}</p>
         </button>
         {this.state.expanded ? (
-          <div className="dropdown flex-col radius-5 padding-10">
+          <div className="dropdown radius-5 flex-col">
             <button className="acc-opt" onClick={() => {
               window.location.assign("/Profile/" + userId)
             }}>
@@ -74,7 +74,7 @@ export class NavBar extends React.Component {
     );
     return (
       <div id="nav">
-        <div id="nav-inner">
+        <div id="nav_inner">
           <a href="/" className="logo">MinigameHub</a>
           <div className="search-bar flex">
             <input
@@ -89,7 +89,7 @@ export class NavBar extends React.Component {
                 }
               }}
             />
-            <div className="search-btn flex-center pointer">
+            <div className="search-btn flex-center">
               <img
                 src="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/search-512.png"
                 className="search-icon" alt="search"

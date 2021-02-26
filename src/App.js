@@ -11,6 +11,8 @@ import { Redirecting } from "./components/Redirecting";
 import { Profile } from "./components/Profile";
 import { Users } from "./components/Users";
 import { NotFound } from "./components/NotFound";
+// Dont create child components with the same first letters
+// the existing ones have those letters combined as their id
 
 class App extends Component {
   constructor(props) {
@@ -52,7 +54,7 @@ class App extends Component {
           userId={userId}
           setAppState={this.setAppState}
         />
-        <div id="app-body">
+        <div id="app-content">
           <Switch>
             <Route exact path="/">
               <Home />

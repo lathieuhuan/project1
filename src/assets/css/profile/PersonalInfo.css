@@ -5,16 +5,58 @@
   align-self: center;
 }
 
-/* ShowInfo */
-#psn-info h1 {
+/* EDIT PSNI */
+#psni_username {
+  width: 80%;
   margin: 15px 0;
+  padding: 5px 0;
+  border-radius: 5px;
+  align-self: center;
+  text-align: center;
+  font-size: 2em;
+  font-weight: 700;
 }
-.psn_line {
-  line-height: 2em;
+.psni_row {
+  /* div containing type & val pair */
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
 }
-#about {
+.psni_type {
+  /* p tags */
+  width: 35%;
+  padding: 5px 0;
+}
+.psni_val {
+  /* input text & date tags */
+  width: 63%;
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 1em;
+}
+.psni_gender {
+  /* input radio tags */
+  margin-right: 5px;
+  align-self: center;
+}
+#psn-info label {
+  margin-right: 15px;
+}
+#psni_about-editing {
+  resize: vertical;
+}
+#psni_username:focus,
+.psni_val:focus,
+#psni_about-editing:focus {
+  background-color: var(--secondary-light);
+}
+
+/* BOTH */
+#psni_about-editing,
+#psni_about-showing {
   width: 100%;
   height: 150px;
+  min-height: 50px;
   margin-top: 10px;
   border: 2px solid black;
   border-radius: 5px;
@@ -22,7 +64,6 @@
   font-size: 1em;
   text-indent: 1em;
   outline: none;
-  resize: vertical;
 }
 #psn-info .last-btn {
   margin: 20px 10px 0;
@@ -30,47 +71,25 @@
   border-radius: 5px;
   padding: 10px;
   background-color: var(--secondary-light);
-  font-size: 1em;
   font-weight: 700;
   align-self: center;
 }
 #psn-info .last-btn:hover {
   background-color: var(--secondary);
 }
+
+/* SHOW PSNI */
+.psni_heading {
+  margin: 15px 0;
+  text-align: center;
+}
+.psni_line {
+  /* p tags */
+  line-height: 2em;
+}
+#psni_about-showing {
+  resize: none;
+}
 #psn-info span {
   color: var(--accent);
-}
-
-/* Personal Info */
-#psn-username {
-  width: 80%;
-  margin: 15px 0;
-  padding: 5px 0;
-  align-self: center;
-  text-align: center;
-  font-size: 2em;
-  font-weight: 700;
-}
-#psn-info > .row {
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-}
-.psni-type {
-  /* p tags */
-  width: 35%;
-  padding: 5px 0;
-}
-.psni-val {
-  /* input text and date tags */
-  width: 63%;
-  padding: 5px 10px;
-  font-size: 1em;
-}
-.psn-gender {
-  margin-right: 5px;
-  align-self: center;
-}
-#psn-info label {
-  margin-right: 15px;
 }

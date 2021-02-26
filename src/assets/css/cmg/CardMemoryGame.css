@@ -1,21 +1,16 @@
-#cmg {
-  padding: 50px 0;
-  --btn-pad: 5px 10px;
-  --btn-rad: 5px;
-  --large: 22px;
-  --medium: 18px;
-  --small: 16px;
+#cmg-content {
+  height: 650px;
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-#cmg .content {
-  height: 560px;
-  padding-bottom: 50px;
+#cmg_left-col,
+#cmg_right-col {
+  width: 291.6px;
+  min-width: 291.6px;
 }
-#cmg .left-col,
-#cmg .right-col {
-  width: 381px;
-  min-width: 381px;
-}
-#cmg .center-col {
+#cmg_center-col {
   width: 756px;
   min-width: 756px;
 }

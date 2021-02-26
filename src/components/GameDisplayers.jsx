@@ -6,20 +6,20 @@ export function GameCard(props) {
       window.location.assign("/" + gameTitle.split(" ").join("_"));
     }
   return (
-    <div className="game-card border-1">
+    <div className="game-card border-1 radius-5">
       <div className="img-sec">
         <img
-          className="cover-img pointer"
+          className="parent-size pointer"
           src={image} alt="not found"
           onClick={redirect}
         />
       </div>
       <div className="flex-col padding-10">
-        <p className="line recommend pointer" onClick={redirect}>{gameTitle}</p>
-        <p className="extra-line">Total Players: {
+        <p className="gc_heading" onClick={redirect}>{gameTitle}</p>
+        <p className="gc_line">Total Players: {
           totalPlayers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         }</p>
-        <p className="extra-line">Category:</p>
+        <p className="gc_line">Category:</p>
       </div>
     </div>
   );
@@ -33,14 +33,14 @@ export function GameTitle(props) {
   return (
     <div className="game-title flex">
       <p
-        className={"rank pointer " + (rank <= 3 ? "top-3" : "top-5")}
+        className={"rank-num " + (rank <= 3 ? "top-3" : "top-5")}
         onClick={redirect}
       >
         {rank}
       </p>
       <div>
-        <h4 className="pointer" onClick={redirect}>{info.gameTitle}</h4>
-        <p className="num">{
+        <h4 className="gt_heading" onClick={redirect}>{info.gameTitle}</h4>
+        <p className="gt_line">{
           info.totalPlayers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         } total players</p>
       </div>

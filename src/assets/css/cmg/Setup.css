@@ -1,55 +1,55 @@
-#cmg .group {
+#cmgrc_setup {
+  box-shadow: var(--normal-shadow);
+}
+#cmgrc_setup .group {
   margin-bottom: 20px;
 }
-#cmg .group > label {
+.cmgrc_heading {
   margin-bottom: 5px;
-  font-size: var(--large);
+  font-size: 1.375em;
   font-weight: 700;
 }
-#cmg label,
-#cmg .start {
-  font-size: var(--medium);
-}
-#cmg input[type="radio"] {
+
+/* DIFFICULTY */
+#cmgrc_setup .dfc-radio {
   margin-right: 5px;
 }
-#cmg label[for="easy"] {
+#cmgrc_setup label[for="Easy"] {
+  font-size: 1.125em;
   margin-right: 20px;
 }
-#cmg .card-type {
+
+/* CARD TYPE */
+#cmgrc_setup .card-type {
+  position: relative;
   margin-top: 5px;
   width: 90%;
-  position: relative;
 }
-#cmg .show-line {
-  padding: var(--btn-pad);
-  border-radius: var(--btn-rad);
+#cmgrc_setup .show-line {
   background-image: url(https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-512.png);
-  background-size: 15px;
-  background-repeat: no-repeat;
-  background-position: right;
-  background-origin: content-box;
   cursor: default;
+  box-shadow: var(--lesser-shadow);
 }
-#cmg .dropdown {
+
+#cmgrc_setup .dropdown {
   position: absolute;
   top: 101%;
   left: 2%;
   width: 96%;
-  border-radius: 0 0 3px 3px;
+  border-radius: 0 0 5px 5px;
 }
-#cmg input[type="button"] {
+#cmgrc_setup .type-btn {
   width: 100%;
-  padding: var(--btn-pad);
   border: none;
-  border-radius: 3px;
-  font-size: var(--small);
   text-align: left;
+  font-size: 1em;
   background-color: white;
 }
-#cmg input[type="button"]:hover {
-  background-color: rgb(239, 239, 239);
+#cmgrc_setup .type-btn:hover {
+  background-color: var(--btn-hover);
 }
-#cmg .start {
+
+#cmgrc_setup .start-btn {
+  font-size: 1.125em;
   font-weight: 700;
 }

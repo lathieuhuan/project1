@@ -5,7 +5,7 @@ import { Setup } from "./Setup";
 
 export function RightCol(props) {
   return (
-    <div className="right-col">
+    <div id="cmg_right-col">
       <Stats limit={props.limit} time={props.time} />
       <PauseBtn gameState={props.gameState} switchPause={props.switchPause} />
       <Setup startGame={props.startGame} />
