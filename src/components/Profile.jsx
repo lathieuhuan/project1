@@ -5,6 +5,7 @@ import { ShowPsnI } from "./profile/ShowPsnI";
 import { Loading } from "./Loading";
 import { NotFound } from "./NotFound";
 import { getUserInfo, editUserInfo } from "../ultis/ultis";
+import { OtherInfo } from "./profile/OtherInfo";
 
 export class Profile extends React.Component {
   constructor(props) {
@@ -66,7 +67,7 @@ export class Profile extends React.Component {
             toggleEdit={this.toggleEdit}
           />
         )}
-        <div className="radius-10" id="achievements"></div>
+        <OtherInfo />
       </div>
     ) : <Loading /> : <NotFound />;
   }

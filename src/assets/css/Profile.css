@@ -6,7 +6,9 @@
   justify-content: space-between;
 }
 #psn-info,
-#achievements {
+#other-info {
+  border: 3px solid black;
+  border-radius: 10px;
   box-shadow: var(--normal-shadow);
   /* height: 800px; */
 }
@@ -14,6 +16,6 @@
   padding: 40px;
   width: 28%;
 }
-#achievements {
+#other-info {
   min-width: 70%;
 }

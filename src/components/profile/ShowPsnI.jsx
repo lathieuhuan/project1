@@ -3,7 +3,7 @@ import "../../assets/css/profile/PersonalInfo.css";
 export function ShowPsnI(props) {
   const { info, isOwner, toggleEdit } = props;
   return (
-    <div className="border-3 radius-10 flex-col" id="psn-info">
+    <div className="flex-col" id="psn-info">
       <img
         className="avatar"
         // src="https://image.flaticon.com/icons/png/512/61/61205.png" denied

@@ -1,7 +1,6 @@
 #cmg_playground .card {
   position: relative;
   cursor: pointer;
-  box-shadow: var(--lesser-shadow);
 }
 #cmg_playground .card:hover {
   transform: scale(1.05);

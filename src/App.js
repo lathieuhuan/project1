@@ -2,12 +2,10 @@ import "./App.css";
 import { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
-import { Home } from "./components/Home";
+// import { Home } from "./components/Home";
 import { Library } from "./components/Library";
 import { CardMemoryGame } from "./components/cmg/CardMemoryGame";
-import { SignIn } from "./components/SignIn";
-import { SignUp } from "./components/SignUp";
-import { Redirecting } from "./components/Redirecting";
+import { Modal } from "./components/Modal";
 import { Profile } from "./components/Profile";
 import { Users } from "./components/Users";
 import { NotFound } from "./components/NotFound";
@@ -39,14 +37,7 @@ class App extends Component {
     };
   }
   render() {
-    const { modal, username, userId } = this.state,
-      modalContent = {
-        SignIn: <SignIn setAppState={this.setAppState} />,
-        SignUp: <SignUp setAppState={this.setAppState} />,
-        Redirecting: (
-          <Redirecting username={username} setAppState={this.setAppState} />
-        ),
-      };
+    const { modal, username, userId } = this.state;
     return (
       <div>
         <NavBar
@@ -57,14 +48,14 @@ class App extends Component {
         <div id="app-content">
           <Switch>
             <Route exact path="/">
-              <Home />
-              {/* <div>Home</div> */}
+              {/* <Home /> */}
+              <div>Home</div>
             </Route>
             <Route path="/Library">
               <Library />
             </Route>
             <Route exact path="/Card_Memory_Game">
-              <CardMemoryGame />
+              <CardMemoryGame userId={userId} setAppState={this.setAppState} />
             </Route>
             <Route path="/Profile">
               <Profile userId={userId} setAppState={this.setAppState} />
@@ -78,9 +69,11 @@ class App extends Component {
         </div>
         <div id="footer"></div>
         {modal === "None" ? null : (
-          <div className="flex-center" id="modal">
-            {modalContent[modal]}
-          </div>
+          <Modal
+            modal={modal}
+            username={username}
+            setAppState={this.setAppState}
+          />
         )}
       </div>
     );

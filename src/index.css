@@ -21,6 +21,7 @@ code {
   --secondary: rgb(255, 211, 23);
   --secondary-light: rgb(255, 225, 93);
   --accent: rgb(50, 23, 255);
+  --accent-light: rgb(64, 93, 255);
   --normal-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
   --lesser-shadow: 0 3px 6px rgba(0, 0, 0, 0.2), 0 4px 13px rgba(0, 0, 0, 0.19);
   --inner-width: 900px;
@@ -129,6 +130,10 @@ a {
   background-position: right;
   background-origin: content-box;
   background-size: contain;
+}
+.vertical-separator {
+  width: 3px;
+  background-color: var(--accent);
 }
 .cover-body {
   width: 100%;

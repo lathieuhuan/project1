@@ -42,14 +42,14 @@ const classicURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/",
   ];
 
 export const cardImgs = {
-  Classic: {
+  classic: {
     front: classicImgs.map((val) => {
       return classicURL + val + ".svg.png";
     }),
     back:
       "https://previews.123rf.com/images/bobyramone/bobyramone1206/bobyramone120600016/14167526-playing-card-back-side-60x90-mm.jpg",
   },
-  "LoL Champions": {
+  "lol champions": {
     front: lolImgs.map((val) => {
       return lolURL + val + "_0.jpg";
     }),

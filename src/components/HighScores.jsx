@@ -1,17 +1,23 @@
 import "../assets/css/HighScores.css";
 
 export function HighScores(props) {
+  let highScores = props.highScores;
+  for (let i = highScores.length; i < 10; i++) {
+    highScores.push({ username: "" })
+  }
   return (
     <div id="high-scores">
-      <div className="thin-border medium-b-radius">
-        <h1>HIGH SCORES</h1>
-        <div className="medium-padding">
-          {props.highScores.map((val, i) => {
+      <div className="border-3 radius-5" id="hs_inner">
+        <h1 id="hs_heading">HIGH SCORES <sup>{props.mode}</sup></h1>
+        <div className="list">
+          {props.highScores.map((score, i) => {
             return (
-              <div key={i}>
-                <p>{i + 1}</p>
-                <p>{val.username}</p>
-                <p>{val.score}</p>
+              <div key={i} className="row">
+                <p className={"rank-num " + (i < 3 ? "top-3" : "top-10")}>
+                  {i + 1}
+                </p>
+                <p>{score.username}</p>
+                <p className="score">{score.value} {props.unit}</p>
               </div>
             );
           })}

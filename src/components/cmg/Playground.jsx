@@ -9,7 +9,7 @@ export function Playground(props) {
           <Card
             key={i}
             index={i}
-            size={props.difficulty === "Easy" ? "card-large" : "card-small"}
+            size={props.difficulty === "easy" ? "card-large" : "card-small"}
             {...val}
             setAnimation={props.setAnimation}
             flip={props.flip}

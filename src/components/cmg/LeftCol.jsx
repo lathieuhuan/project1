@@ -8,7 +8,7 @@ export function LeftCol() {
       <p className="cmglc_sub-line">
         Click on a card to flip it up or down. A pair of cards flipped up
         together in sequence will disappear if they are identical. Try to
-        clear them all within <b>15 seconds</b> in Easy Mode or <b>25
+        clear them all within <b>12 seconds</b> in Easy Mode or <b>20
         seconds</b> in Hard Mode!
       </p>
       <p className="cmglc_sub-line"><i>

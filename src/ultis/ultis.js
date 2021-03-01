@@ -9,7 +9,8 @@ try {
 }
 const db = firebase.firestore(),
   usersRef = db.collection("users"),
-  gamesRef = db.collection("games");
+  gamesRef = db.collection("games"),
+  highscoresRef = db.collection("highscores");
 
 function getGames(keywords) {
   return new Promise((res, rej) => {
@@ -168,19 +169,67 @@ function editUserInfo(userId, info) {
   });
 }
 
-function getHighScores(gameTitle) {
+function getUsername(userId) {
   return new Promise((res, rej) => {
-    gamesRef
-      .doc(gameTitle)
+    usersRef
+      .doc(userId)
       .get()
       .then((doc) => {
         if (!doc.exists) {
-          throw new Error("Probably wrong game title.");
+          throw new Error("There is no such user.");
+        } else {
+          res(doc.data().username);
         }
-        res(doc.data().highScores);
       })
       .catch((err) => rej(err));
   });
+}
+
+function subscribeHighscores(gameTitle, listener) {
+  highscoresRef
+    .where("gameTitle", "==", gameTitle)
+    .onSnapshot(async (querySnapshot) => {
+      // if (!querySnapshot.empty) {
+      let result = [];
+      querySnapshot.forEach((doc) => {
+        result.push(
+          new Promise((res) => {
+            getUsername(doc.data().userId).then((username) => {
+              res({
+                id: doc.id,
+                username,
+                ...doc.data(),
+              });
+            });
+          })
+        );
+      });
+      listener(await Promise.all(result));
+      // }
+    });
+}
+
+// function getHighScores(gameTitle) {
+//   return new Promise((res, rej) => {
+//     db.collection("games")
+//       .doc(gameTitle)
+//       .get()
+//       .then((doc) => {
+//         if (!doc.exists) {
+//           throw new Error("Probably wrong game title.");
+//         }
+//         res(doc.data().highScores);
+//       })
+//       .catch((err) => rej(err));
+//   });
+// }
+
+function addHighscore(score) {
+  highscoresRef.add(score);
+}
+
+function updateHighscore(highscoreId, score) {
+  highscoresRef.doc(highscoreId).update(score);
 }
 
 export {
@@ -190,5 +239,7 @@ export {
   signIn,
   getUserInfo,
   editUserInfo,
-  getHighScores,
+  subscribeHighscores,
+  addHighscore,
+  updateHighscore,
 };

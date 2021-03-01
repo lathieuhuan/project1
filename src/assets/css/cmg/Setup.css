@@ -14,8 +14,10 @@
 #cmgrc_setup .dfc-radio {
   margin-right: 5px;
 }
-#cmgrc_setup label[for="Easy"] {
+#cmgrc_setup label {
   font-size: 1.125em;
+}
+#cmgrc_setup label[for="Easy"] {
   margin-right: 20px;
 }
 
@@ -27,8 +29,9 @@
 }
 #cmgrc_setup .show-line {
   background-image: url(https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-512.png);
-  cursor: default;
   box-shadow: var(--lesser-shadow);
+  cursor: default;
+  text-transform: capitalize;
 }
 
 #cmgrc_setup .dropdown {
@@ -41,9 +44,10 @@
 #cmgrc_setup .type-btn {
   width: 100%;
   border: none;
-  text-align: left;
-  font-size: 1em;
   background-color: white;
+  font-size: 1em;
+  text-align: left;
+  text-transform: capitalize;
 }
 #cmgrc_setup .type-btn:hover {
   background-color: var(--btn-hover);

@@ -4,7 +4,7 @@ import React from "react";
 export class Setup extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { dropdownShown: false, difficulty: "Easy", type: "Classic" };
+    this.state = { dropdownShown: false, difficulty: "easy", type: "classic" };
     this.typeRef = React.createRef();
   }
   changeState = (e) => {
@@ -35,8 +35,8 @@ export class Setup extends React.Component {
               className="dfc-radio"
               type="radio"
               name="difficulty"
-              value="Easy"
-              checked={difficulty === "Easy"}
+              value="easy"
+              checked={difficulty === "easy"}
               onChange={this.changeState}
             />
             <label htmlFor="Easy">Easy</label>
@@ -44,8 +44,8 @@ export class Setup extends React.Component {
               className="dfc-radio"
               type="radio"
               name="difficulty"
-              value="Hard"
-              checked={difficulty === "Hard"}
+              value="hard"
+              checked={difficulty === "hard"}
               onChange={this.changeState}
             />
             <label htmlFor="Hard">Hard</label>
@@ -61,14 +61,14 @@ export class Setup extends React.Component {
                   className="type-btn padding-5-10 radius-5"
                   type="button"
                   name="type"
-                  value="Classic"
+                  value="classic"
                   onClick={this.changeState}
                 />
                 <input
                   className="type-btn padding-5-10 radius-5"
                   type="button"
                   name="type"
-                  value="LoL Champions"
+                  value="lol champions"
                   onClick={this.changeState}
                 />
               </div>

@@ -1,6 +1,5 @@
-import "../assets/css/SignIU.css";
-import React from 'react';
-import { signIn } from "../ultis/ultis";
+import React from "react";
+import { signIn } from "../../ultis/ultis";
 
 function isGood(str) {
   if (str.length < 8) {

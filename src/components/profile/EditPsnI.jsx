@@ -31,7 +31,7 @@ export class EditPsnI extends React.Component {
     const { newNameGood, infoDup } = this.state,
       { toggleEdit, tryUpdate } = this.props;
     return (
-      <div className="border-3 radius-10 flex-col" id="psn-info">
+      <div className="flex-col" id="psn-info">
         <img
           className="avatar"
           // src="https://image.flaticon.com/icons/png/512/61/61205.png" denied

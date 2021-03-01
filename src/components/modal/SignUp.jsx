@@ -1,6 +1,5 @@
-import "../assets/css/SignIU.css";
 import React from "react";
-import { signUp } from "../ultis/ultis";
+import { signUp } from "../../ultis/ultis";
 
 function isGood(str) {
   if (str.length < 8) {
@@ -37,7 +36,7 @@ export class SignUp extends React.Component {
     if (nameGood && passGood && pwdConfirmed) {
       signUp({ username, password, email })
       .then(() => {
-        this.props.setAppState("Redirecting", username);
+        this.props.setAppState("Notice successful sign-up", username);
       })
       .catch((err) => this.setState({ nameWarning: err.message }));
     }
