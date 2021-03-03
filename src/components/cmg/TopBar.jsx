@@ -1,9 +1,10 @@
-import "../../assets/css/cmg/Stats.css";
+import "../../assets/css/cmg/TopBar.css";
 import { Timer } from "./Timer"
+import { PauseBtn } from "./PauseBtn";
 
-export function Stats(props) {
+export function TopBar(props) {
   return (
-    <div className="border-2 radius-10" id="cmgrc_stats">
+    <div className="border-2 radius-10" id="cmgrc_top-bar">
       <p className="desc">Time Limit:</p>
       <p className="num radius-5">
         <Timer time={props.limit} />
@@ -12,6 +13,7 @@ export function Stats(props) {
       <p className="num radius-5">
         <Timer time={props.time} />
       </p>
+      <PauseBtn gameState={props.gameState} switchPause={props.switchPause} />
     </div>
   );
 }

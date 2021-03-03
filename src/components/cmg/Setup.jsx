@@ -4,9 +4,32 @@ import React from "react";
 export class Setup extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { dropdownShown: false, difficulty: "easy", type: "classic" };
+    this.state = {
+      dropdownShown: false,
+      difficulty: props.difficulty,
+      type: props.type,
+    };
     this.typeRef = React.createRef();
   }
+  // openFullscreen = () => {
+  //   let elm = document.getElementById("cmg_app");
+  //   if (elm.requestFullscreen) {
+  //     elm.requestFullscreen();
+  //   } else if (elm.webkitRequestFullscreen) { // Safari
+  //     elm.webkitRequestFullscreen();
+  //   } else if (elm.msRequestFullscreen) { // IE11
+  //     elm.msRequestFullscreen();
+  //   }
+  // }
+  // closeFullscreen = () => {
+  //   if (document.exitFullscreen) {
+  //     document.exitFullscreen();
+  //   } else if (document.webkitExitFullscreen) { // Safari
+  //     document.webkitExitFullscreen();
+  //   } else if (document.msExitFullscreen) { // IE11
+  //     document.msExitFullscreen();
+  //   }
+  // }
   changeState = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -27,59 +50,80 @@ export class Setup extends React.Component {
   render() {
     const { dropdownShown, difficulty, type } = this.state;
     return (
-      <div className="border-2 radius-10 padding-20 col-center" id="cmgrc_setup">
-        <div className="group col-center">
-          <p className="cmgrc_heading">Choose difficulty:</p>
-          <div>
-            <input
-              className="dfc-radio"
-              type="radio"
-              name="difficulty"
-              value="easy"
-              checked={difficulty === "easy"}
-              onChange={this.changeState}
+      <div className="border-2 radius-10 col-center" id="cmgrc_setup">
+        {/* <div className="flex">
+          <p className="cmgrc_heading">Full screen</p>
+          <div
+            id="cmg_fs-btn"
+            onClick={() => {
+              this.props.fullscreen ? this.closeFullscreen() : this.openFullscreen();
+              this.props.toggleFullscreen();
+          }}>
+            <img
+              className="parent-size"
+              src={this.props.fullscreen
+                ? "http://www.clker.com/cliparts/8/8/2/2/1195423990759977006molumen_multicolor_power_buttons_5.svg.med.png"
+                : "https://images.all-free-download.com/images/graphiclarge/red_power_button_clip_art_9034.jpg"}
+              alt="fs"
             />
-            <label htmlFor="Easy">Easy</label>
-            <input
-              className="dfc-radio"
-              type="radio"
-              name="difficulty"
-              value="hard"
-              checked={difficulty === "hard"}
-              onChange={this.changeState}
-            />
-            <label htmlFor="Hard">Hard</label>
+          </div>
+        </div> */}
+        <div className="flex mgbtm-20">
+          <div className="group col-center">
+            <p className="cmgrc_heading">Choose difficulty:</p>
+            <div>
+              <input
+                className="dfc-radio"
+                type="radio"
+                name="difficulty"
+                value="easy"
+                checked={difficulty === "easy"}
+                onChange={this.changeState}
+              />
+              <label htmlFor="Easy">Easy</label>
+              <input
+                className="dfc-radio"
+                type="radio"
+                name="difficulty"
+                value="hard"
+                checked={difficulty === "hard"}
+                onChange={this.changeState}
+              />
+              <label htmlFor="Hard">Hard</label>
+            </div>
+          </div>
+          <div className="group col-center">
+            <p className="cmgrc_heading">Choose card type:</p>
+            <div ref={this.typeRef} className="card-type" onClick={this.toggleDropdown}>
+              <p className="show-line right-bg-img border-1 radius-5 padding-5-10">{type}</p>
+              {dropdownShown ? (
+                <div className="dropdown border-1">
+                  <input
+                    className="type-btn padding-5-10"
+                    type="button"
+                    name="type"
+                    value="classic"
+                    onClick={this.changeState}
+                  />
+                  <input
+                    className="type-btn padding-5-10"
+                    type="button"
+                    name="type"
+                    value="lol champions"
+                    onClick={this.changeState}
+                  />
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
-        <div className="group col-center">
-          <p className="cmgrc_heading">Choose card type:</p>
-          <div ref={this.typeRef} className="card-type" onClick={this.toggleDropdown}>
-            <p className="show-line right-bg-img border-1 radius-5 padding-5-10">{type}</p>
-            {dropdownShown ? (
-              <div className="dropdown border-1">
-                <input
-                  className="type-btn padding-5-10 radius-5"
-                  type="button"
-                  name="type"
-                  value="classic"
-                  onClick={this.changeState}
-                />
-                <input
-                  className="type-btn padding-5-10 radius-5"
-                  type="button"
-                  name="type"
-                  value="lol champions"
-                  onClick={this.changeState}
-                />
-              </div>
-            ) : null}
-          </div>
-        </div>
-        <button className="start-btn radius-5 padding-5-10"
-          onClick={() => this.props.startGame(difficulty, type)}
-        >
-          START
-        </button>
+        <a href="#cmg_filler">
+          <button className="start-btn radius-5 padding-10"
+            onClick={() => this.props.startGame(difficulty, type)}
+          >
+            NEW GAME
+          </button>
+        </a>
       </div>
     );
   }

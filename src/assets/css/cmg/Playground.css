@@ -1,7 +1,17 @@
-#cmg_playground {
-  width: 100%;
-  padding: 25px 25px 17px;
+.cmg_playground {
+  background-color: white;
+  display: flex;
   flex-wrap: wrap;
-  align-content: space-between;
   box-shadow: var(--normal-shadow);
+}
+#large-pg {
+  margin-top: 20px;
+  width: 756px;
+  height: 436px;
+  padding: 20px;
+}
+#small-pg {
+  width: 696px;
+  height: 486px;
+  padding: 15px;
 }

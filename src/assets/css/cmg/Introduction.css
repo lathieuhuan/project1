@@ -1,0 +1,18 @@
+#cmg_intro {
+  padding: 50px 50px 0;
+}
+#cmgit_title {
+  margin-bottom: 25px;
+  font-size: 4em;
+  text-align: center;
+}
+#cmgit_heading {
+  margin-bottom: 10px;
+  font-size: 1.375em;
+}
+.cmgit_line {
+  margin-bottom: 15px;
+  font-size: 1.125em;
+  line-height: 1.6;
+  text-indent: 1.5em;
+}

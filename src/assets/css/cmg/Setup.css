@@ -1,14 +1,33 @@
 #cmgrc_setup {
-  box-shadow: var(--normal-shadow);
+  padding: 20px 0;
+  background-color: white;
+  box-shadow: var(--lesser-shadow);
 }
 #cmgrc_setup .group {
-  margin-bottom: 20px;
+  margin: 0 30px;
 }
 .cmgrc_heading {
   margin-bottom: 5px;
   font-size: 1.375em;
   font-weight: 700;
 }
+/* #cmg_fs-btn {
+  margin-left: 15px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+#cmg_fs-icon {
+  width: 20px;
+  height: 20px;
+}
+.fs-on {
+  background-color: rgb(91, 231, 105);
+}
+.fs-off {
+  background-color: rgb(238, 97, 100);
+} */
 
 /* DIFFICULTY */
 #cmgrc_setup .dfc-radio {
@@ -29,9 +48,9 @@
 }
 #cmgrc_setup .show-line {
   background-image: url(https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-512.png);
-  box-shadow: var(--lesser-shadow);
   cursor: default;
   text-transform: capitalize;
+  box-shadow: var(--lesser-shadow);
 }
 
 #cmgrc_setup .dropdown {
@@ -39,7 +58,6 @@
   top: 101%;
   left: 2%;
   width: 96%;
-  border-radius: 0 0 5px 5px;
 }
 #cmgrc_setup .type-btn {
   width: 100%;
@@ -54,6 +72,17 @@
 }
 
 #cmgrc_setup .start-btn {
+  border: none;
+  box-shadow: var(--normal-shadow);
+  background-color: var(--primary-light);
   font-size: 1.125em;
   font-weight: 700;
+  color: white;
+}
+#cmgrc_setup .start-btn:hover {
+  background-color: var(--primary);
+}
+#cmgrc_setup .start-btn:active {
+  box-shadow: var(--lesser-shadow);
+  transform: scale(0.95);
 }

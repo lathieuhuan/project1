@@ -1,17 +1,17 @@
-#cmg_message {
-  width: 600px;
-  height: 350px;
+#cmg_menu {
+  width: 756px;
+  height: 500px;
+  padding: 50px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  box-shadow: var(--normal-shadow);
+  justify-content: space-between;
 }
-#cmgms_heading {
+#cmgmn_heading {
   margin-bottom: 10px;
   font-size: 3.75em;
   text-transform: uppercase;
 }
-#cmgms_line {
+#cmgmn_line {
   font-size: 1.875em;
 }

@@ -1,9 +1,9 @@
 import "../../assets/css/cmg/CardMemoryGame.css";
 import React from 'react';
-import { LeftCol } from "./LeftCol";
-import { RightCol } from "./RightCol";
+import { Introduction } from "./Introduction";
+import { TopBar } from "./TopBar";
+import { Menu } from "./Menu";
 import { Playground } from "./Playground";
-import { Message } from "./Message";
 import { cardImgs } from "../cmgData";
 import { HighScores } from "../HighScores";
 import { subscribeHighscores, addHighscore, updateHighscore } from "../../ultis/ultis";
@@ -12,20 +12,24 @@ export class CardMemoryGame extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      difficulty: "",
-      type: "",
+      difficulty: "easy",
+      type: "classic",
       running: false,
       gameState: "welcome",
       cards: [],
       time: 0,
       highScores: { easy: [], hard: [] },
       newHS: false,
+      // fullscreen: false,
     };
     this.chosen = [];
     this.left = 0;
     this.limit = 1200;
     this.timer = 0;
   }
+  // toggleFullscreen = () => {
+  //   this.setState({ fullscreen: !this.state.fullscreen });
+  // }
   startGame = (difficulty, type) => {
     clearInterval(this.timer);
     const imgI = RandomShuffleDouble(
@@ -51,6 +55,7 @@ export class CardMemoryGame extends React.Component {
       time: 0,
       newHS: false,
     })
+    this.chosen = [];
     this.left = imgI.length;
     this.limit = difficulty === "easy" ? 1200 : 2000;
     this.timer = setInterval(this.countUp, 10);
@@ -123,14 +128,15 @@ export class CardMemoryGame extends React.Component {
       { userId } = this.props,
       highScores = this.state.highScores[difficulty],
       len = highScores.length;
+    let flag = false;
     for (let i = 0; i < len; i++) {
-      if (userId === highScores[i].userId) {
-        for (let j = 0; j <= i; j++) {
-          if (time < highScores[j].value) {
-            updateHighscore(highScores[i].id, { value: time });
-            return true;
-          }
-        }
+      if (time < highScores[i].value) {
+        flag = true;
+      }
+      if (userId === highScores[i].userId && flag) {
+        updateHighscore(highScores[i].id, { value: time });
+        return true;
+      } else if (userId === highScores[i].userId && !flag) {
         return false;
       }
     }
@@ -143,11 +149,9 @@ export class CardMemoryGame extends React.Component {
       });
       return true;
     }
-    for (let score in highScores) {
-      if (time < score.value) {
-        updateHighscore(highScores[len].id, { userId, value: time });
-        return true;
-      }
+    if (flag) {
+      updateHighscore(highScores[len - 1].id, { userId, value: time });
+      return true;
     }
     return false;
   }
@@ -161,15 +165,15 @@ export class CardMemoryGame extends React.Component {
       refinedHS.hard.sort((a, b) => a.value - b.value);
       this.setState({ highScores: refinedHS });
     });
-    if (this.props.userId === null) {
-      this.props.setAppState("Ask to sign in");
+    if ((this.props.userId === null) && (localStorage.getItem("doAsk") !== "false")) {
+      this.props.setAppState("Ask user to sign in");
     }
   }
   render() {
     const { difficulty, running, gameState, highScores } = this.state;
-    let centerCol;
+    let content;
     if (running && gameState === "progressing") {
-      centerCol = (
+      content = (
         <Playground
           cards={this.state.cards}
           difficulty={difficulty}
@@ -179,27 +183,42 @@ export class CardMemoryGame extends React.Component {
         />
       );
     } else {
-      centerCol = <Message gameState={gameState} newHS={this.state.newHS} />;
+      content = (
+        <Menu
+          gameState={gameState}
+          newHS={this.state.newHS}
+          startGame={this.startGame}
+          difficulty={difficulty}
+          type={this.state.type}
+          // fullscreen={this.state.fullscreen}
+          // toggleFullscreen={this.toggleFullscreen}
+        />
+      );
       if (!running) {
         clearInterval(this.timer);
       }
     }
     return (
-      <div>
-        <div id="cmg-content">
-          <LeftCol />
-          <div className="flex-center" id="cmg_center-col">
-            {centerCol}
+      <div id="cmg">
+        <div id="cmg_inner">
+          <Introduction />
+          <p id="cmg_filler">
+            Note: Consider opening the game in <span className="recommend pointer"
+            onClick={openFullscreen}>FULL SCREEN</span> if you cannot see the timer.
+          </p>
+          <div className="border-3 radius-10" id="cmg_app">
+            <TopBar
+              limit={this.limit}
+              time={this.state.time}
+              gameState={gameState}
+              switchPause={this.switchPause}
+            />
+            <div id="cmg_content">
+              {content}
+            </div>
           </div>
-          <RightCol
-            limit={this.limit}
-            time={this.state.time}
-            gameState={gameState}
-            switchPause={this.switchPause}
-            startGame={this.startGame}
-          />
         </div>
-        <div className="flex">
+        <div id="cmg_hs-wrapper">
           <HighScores
             highScores={highScores.easy.map((score) => {
               return {
@@ -210,7 +229,6 @@ export class CardMemoryGame extends React.Component {
             unit="seconds"
             mode="easy"
           />
-          <div className="vertical-separator"></div>
           <HighScores
             highScores={highScores.hard.map((score) => {
               return {
@@ -248,4 +266,15 @@ function RandomShuffleDouble(limit, max) {
     }
   }
   return result;
+}
+
+function openFullscreen() {
+  let elm = document.getElementById("cmg_app");
+  if (elm.requestFullscreen) {
+    elm.requestFullscreen();
+  } else if (elm.webkitRequestFullscreen) { // Safari
+    elm.webkitRequestFullscreen();
+  } else if (elm.msRequestFullscreen) { // IE11
+    elm.msRequestFullscreen();
+  }
 }

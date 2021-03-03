@@ -6,9 +6,9 @@ export function HighScores(props) {
     highScores.push({ username: "" })
   }
   return (
-    <div id="high-scores">
-      <div className="border-3 radius-5" id="hs_inner">
-        <h1 id="hs_heading">HIGH SCORES <sup>{props.mode}</sup></h1>
+    <div className="high-scores">
+      <div className="hs_inner border-3 radius-5">
+        <h1 className="hs_heading">HIGH SCORES <sup>{props.mode}</sup></h1>
         <div className="list">
           {props.highScores.map((score, i) => {
             return (

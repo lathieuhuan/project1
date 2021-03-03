@@ -63,8 +63,7 @@ export class NavBar extends React.Component {
             <button className="acc-opt" onClick={() => {
               this.toggleDropdown();
               setAppState("None");
-              localStorage.removeItem("username");
-              localStorage.removeItem("userId");
+              localStorage.clear();
             }}>
               Sign out
             </button>

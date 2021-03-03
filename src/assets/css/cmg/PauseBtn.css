@@ -1,11 +1,20 @@
-#cmg_right-col .pause-btn {
-  margin: 0 auto 25px;
+#cmgrc_top-bar .pause-btn {
+  position: absolute;
+  bottom: 0;
+  left: 120%;
   width: 50px;
   height: 50px;
+  margin: 0 auto 25px;
+  border: none;
   border-radius: 50%;
   box-shadow: var(--normal-shadow);
+  background-color: var(--accent-light);
+  color: white;
 }
-#cmg_right-col .pause-btn:active {
+#cmgrc_top-bar .pause-btn:hover {
+  background-color: var(--accent);
+}
+#cmgrc_top-bar .pause-btn:active {
   transform: scale(0.95);
   box-shadow: var(--lesser-shadow);
 }

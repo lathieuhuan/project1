@@ -1,29 +1,25 @@
-#high-scores {
-  padding: 50px 0 100px;
-  background-color: #eee;
-  flex-grow: 1;
-}
-#hs_inner {
+.hs_inner {
   width: 500px;
   margin: 0 auto;
   font-size: 1.25rem;
   background-color: white;
 }
-#hs_heading {
+.hs_heading {
   background-color: var(--secondary);
+  font-size: 1.5em;
   text-align: center;
   line-height: 1.5;
 }
-#hs_inner .list {
+.hs_inner .list {
   padding: 10px 40px 10px 30px;
 }
-#hs_inner .row {
+.hs_inner .row {
   margin: 10px 0;
   display: flex;
   align-items: center;
   font-weight: 700;
 }
-#hs_inner .rank-num {
+.hs_inner .rank-num {
   min-width: 35px;
   margin-right: 20px;
   border-radius: 5px;
@@ -31,12 +27,12 @@
   text-align: center;
   color: white;
 }
-#hs_inner .top-3 {
+.hs_inner .top-3 {
   background-color: var(--primary-light);
 }
-#hs_inner .top-10 {
+.hs_inner .top-10 {
   background-color: var(--accent-light);
 }
-#hs_inner .score {
+.hs_inner .score {
   margin-left: auto;
 }

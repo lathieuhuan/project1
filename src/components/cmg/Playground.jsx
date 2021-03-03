@@ -3,7 +3,10 @@ import { Card } from "./Card";
 
 export function Playground(props) {
   return (
-    <div className="border-3 radius-10 flex" id="cmg_playground">
+    <div
+      className="cmg_playground border-3 radius-10"
+      id={props.difficulty === "easy" ? "large-pg" : "small-pg"}
+    >
       {props.cards.map((val, i) => {
         return (
           <Card

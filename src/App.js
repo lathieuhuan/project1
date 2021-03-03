@@ -2,7 +2,7 @@ import "./App.css";
 import { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
-// import { Home } from "./components/Home";
+import { Home } from "./components/Home";
 import { Library } from "./components/Library";
 import { CardMemoryGame } from "./components/cmg/CardMemoryGame";
 import { Modal } from "./components/Modal";
@@ -48,8 +48,7 @@ class App extends Component {
         <div id="app-content">
           <Switch>
             <Route exact path="/">
-              {/* <Home /> */}
-              <div>Home</div>
+              <Home />
             </Route>
             <Route path="/Library">
               <Library />

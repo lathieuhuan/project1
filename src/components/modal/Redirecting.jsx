@@ -1,10 +1,10 @@
 
 export function Redirecting(props) {
   const { modal, username, setAppState } = props;
-  let content;
+  let content, doAsk = true;
   if (modal === "Notice successful sign-up") {
     content = (
-      <div className="flex-col border-2 radius-10 padding-20" id="modal_inner">
+      <div className="modal_inner border-2 radius-10 padding-20 flex-col" id="notice-signup">
         <h1 id="modal_heading">SIGNUP SUCCESSFUL</h1>
         <div className="flex-center">
           <button className="modal_main-line last-btn" onClick={() => {
@@ -20,9 +20,9 @@ export function Redirecting(props) {
         </div>
       </div>
     );
-  } else if (modal === "Ask to sign in") {
+  } else if (modal === "Ask user to sign in") {
     content = (
-      <div className="flex-col border-2 radius-10 padding-20" id="modal_inner">
+      <div className="modal_inner border-2 radius-10 padding-20 flex-col" id="ask-signin">
         <h1 id="modal_heading">SIGN IN TO SAVE YOUR SCORE!</h1>
         <div className="flex-center">
           <button className="modal_main-line last-btn" onClick={() => {
@@ -31,11 +31,18 @@ export function Redirecting(props) {
             Sign In / Sign Up
           </button>
           <button className="modal_main-line last-btn" onClick={() => {
-            setAppState("None")
+            setAppState("None");
+            if (!doAsk) {
+              localStorage.setItem("doAsk", "false");
+            }
           }}>
             Play as Guest
           </button>
         </div>
+        <form id="ask-bar">
+          <input type="checkbox" className="stop-btn" onClick={() => { doAsk = !doAsk }} />
+          <label>Stop asking</label>
+        </form>
       </div>
     );
   } else {

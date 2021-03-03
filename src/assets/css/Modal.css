@@ -6,12 +6,27 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
 }
-#modal_inner {
+.modal_inner {
   position: relative;
-  width: 400px;
   margin: 0 auto;
   background-color: white;
 }
+#notice-signup {
+  width: 400px;
+}
+
+/* REDIRECTING > ASK SIGN */
+#ask-signin {
+  width: 550px;
+}
+#ask-bar {
+  margin-top: 15px;
+  align-self: center;
+}
+#ask-bar .stop-btn {
+  margin-right: 5px;
+}
+
 #modal_heading {
   text-align: center;
   color: var(--primary);
@@ -30,7 +45,7 @@
   text-align: center;
   font-size: 14px;
 }
-#modal_inner .last-btn {
+.modal_inner .last-btn {
   margin-left: 10px;
   margin-right: 10px;
   background-color: var(--primary-light);
@@ -38,7 +53,7 @@
   color: white;
   align-self: center;
 }
-#modal_inner .last-btn:hover {
+.modal_inner .last-btn:hover {
   background-color: var(--primary);
 }
 
