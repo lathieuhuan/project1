@@ -8,6 +8,7 @@
 }
 .modal_inner {
   position: relative;
+  width: 400px;
   margin: 0 auto;
   background-color: white;
 }

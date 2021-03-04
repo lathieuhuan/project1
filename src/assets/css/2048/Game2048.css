@@ -1,0 +1,29 @@
+#game-2048 {
+  background-color: #eee;
+}
+#g2048_inner {
+  width: var(--inner-width);
+  margin: 0 auto;
+}
+#g2048_filler {
+  height: 70px;
+  text-align: center;
+  font-style: italic;
+}
+#g2048_app {
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 25px 0 50px;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#g2048_content {
+  display: flex;
+  justify-content: center;
+}
+
+#game-2048 .high-scores {
+  padding: 50px 0 100px;
+}

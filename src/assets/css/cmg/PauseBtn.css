@@ -1,4 +1,4 @@
-#cmgrc_top-bar .pause-btn {
+#cmg_top-bar .pause-btn {
   position: absolute;
   bottom: 0;
   left: 120%;
@@ -11,10 +11,10 @@
   background-color: var(--accent-light);
   color: white;
 }
-#cmgrc_top-bar .pause-btn:hover {
+#cmg_top-bar .pause-btn:hover {
   background-color: var(--accent);
 }
-#cmgrc_top-bar .pause-btn:active {
+#cmg_top-bar .pause-btn:active {
   transform: scale(0.95);
   box-shadow: var(--lesser-shadow);
 }

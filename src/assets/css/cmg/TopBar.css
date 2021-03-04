@@ -1,4 +1,4 @@
-#cmgrc_top-bar {
+#cmg_top-bar {
   position: relative;
   margin-bottom: 15px;
   padding: 5px 10px;
@@ -8,17 +8,17 @@
   flex-wrap: wrap;
   box-shadow: var(--normal-shadow);
 }
-#cmgrc_top-bar .desc,
-#cmgrc_top-bar .num {
+#cmg_top-bar .desc,
+#cmg_top-bar .num {
   margin: 5px 0;
   padding: 5px 10px;
   font-size: 1.25em;
   font-weight: 700;
 }
-#cmgrc_top-bar .desc {
+#cmg_top-bar .desc {
   width: 60%;
 }
-#cmgrc_top-bar .num {
+#cmg_top-bar .num {
   width: 35%;
   background-color: black;
   text-align: right;

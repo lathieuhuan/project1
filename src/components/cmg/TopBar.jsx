@@ -4,7 +4,7 @@ import { PauseBtn } from "./PauseBtn";
 
 export function TopBar(props) {
   return (
-    <div className="border-2 radius-10" id="cmgrc_top-bar">
+    <div className="border-2 radius-10" id="cmg_top-bar">
       <p className="desc">Time Limit:</p>
       <p className="num radius-5">
         <Timer time={props.limit} />

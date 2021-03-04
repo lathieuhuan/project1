@@ -20,16 +20,16 @@ export class CardMemoryGame extends React.Component {
       time: 0,
       highScores: { easy: [], hard: [] },
       newHS: false,
-      // fullscreen: false,
+      fullscreen: false,
     };
     this.chosen = [];
     this.left = 0;
     this.limit = 1200;
     this.timer = 0;
   }
-  // toggleFullscreen = () => {
-  //   this.setState({ fullscreen: !this.state.fullscreen });
-  // }
+  toggleFullscreen = () => {
+    this.setState({ fullscreen: !this.state.fullscreen });
+  }
   startGame = (difficulty, type) => {
     clearInterval(this.timer);
     const imgI = RandomShuffleDouble(
@@ -190,8 +190,8 @@ export class CardMemoryGame extends React.Component {
           startGame={this.startGame}
           difficulty={difficulty}
           type={this.state.type}
-          // fullscreen={this.state.fullscreen}
-          // toggleFullscreen={this.toggleFullscreen}
+          fullscreen={this.state.fullscreen}
+          toggleFullscreen={this.toggleFullscreen}
         />
       );
       if (!running) {

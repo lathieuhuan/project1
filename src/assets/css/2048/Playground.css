@@ -1,0 +1,38 @@
+#g2048_playground {
+  position: relative;
+}
+#g2048_pedestal {
+  width: 450px;
+  height: 450px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgb(187, 173, 160);
+  display: flex;
+  flex-wrap: wrap;
+}
+#g2048_pedestal > .cell {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  border-radius: 3px;
+  background-color: rgb(205, 193, 180);
+}
+#g2048_bowl {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 450px;
+  height: 450px;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.g2048_tile {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 100px;
+  text-align: center;
+}

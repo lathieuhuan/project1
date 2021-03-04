@@ -44,7 +44,7 @@ export class SignIn extends React.Component {
     const { setAppState } = this.props,
       { warning } = this.state;
     return (
-      <div className="border-3 radius-10 padding-20 flex-col" id="modal_inner">
+      <div className="modal_inner border-3 radius-10 padding-20 flex-col">
         <div onClick={() => setAppState("None")} className="close-btn flex-center">
           <i className="fa fa-close"></i>
         </div>

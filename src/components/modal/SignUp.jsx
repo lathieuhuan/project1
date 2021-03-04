@@ -58,7 +58,7 @@ export class SignUp extends React.Component {
     const { setAppState } = this.props,
       { nameWarning, passWarning, pwdConfirmed, tooltipOn } = this.state;
     return (
-      <div className="border-3 radius-10 padding-20 flex-col" id="modal_inner">
+      <div className="modal_inner border-3 radius-10 padding-20 flex-col">
         {tooltipOn ? <p className="tooltip radius-10 padding-20">
           Your username and password must contain atleast 8 characters, letters and numbers only.
         </p> : null}

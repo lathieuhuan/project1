@@ -11,25 +11,25 @@ export class Setup extends React.Component {
     };
     this.typeRef = React.createRef();
   }
-  // openFullscreen = () => {
-  //   let elm = document.getElementById("cmg_app");
-  //   if (elm.requestFullscreen) {
-  //     elm.requestFullscreen();
-  //   } else if (elm.webkitRequestFullscreen) { // Safari
-  //     elm.webkitRequestFullscreen();
-  //   } else if (elm.msRequestFullscreen) { // IE11
-  //     elm.msRequestFullscreen();
-  //   }
-  // }
-  // closeFullscreen = () => {
-  //   if (document.exitFullscreen) {
-  //     document.exitFullscreen();
-  //   } else if (document.webkitExitFullscreen) { // Safari
-  //     document.webkitExitFullscreen();
-  //   } else if (document.msExitFullscreen) { // IE11
-  //     document.msExitFullscreen();
-  //   }
-  // }
+  openFullscreen = () => {
+    let elm = document.getElementById("cmg_app");
+    if (elm.requestFullscreen) {
+      elm.requestFullscreen();
+    } else if (elm.webkitRequestFullscreen) { // Safari
+      elm.webkitRequestFullscreen();
+    } else if (elm.msRequestFullscreen) { // IE11
+      elm.msRequestFullscreen();
+    }
+  }
+  closeFullscreen = () => {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { // Safari
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { // IE11
+      document.msExitFullscreen();
+    }
+  }
   changeState = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -41,18 +41,25 @@ export class Setup extends React.Component {
       this.toggleDropdown();
     }
   }
+  handleFsChange = () => {
+    if (document.fullscreenElement === null && this.props.fullscreen) {
+      this.props.toggleFullscreen();
+    }
+  }
   componentDidMount() {
     document.addEventListener("click", this.handleClickOutside);
+    document.addEventListener("fullscreenchange", this.handleFsChange);
   }
   componentWillUnmount() {
     document.removeEventListener("click", this.handleClickOutside);
+    document.removeEventListener("fullscreenchange", this.handleFsChange);
   }
   render() {
     const { dropdownShown, difficulty, type } = this.state;
     return (
-      <div className="border-2 radius-10 col-center" id="cmgrc_setup">
-        {/* <div className="flex">
-          <p className="cmgrc_heading">Full screen</p>
+      <div className="border-2 radius-10 col-center" id="cmg_setup">
+        <div id="cmg_fs-bar">
+          <p className="cmgst_heading">Full screen</p>
           <div
             id="cmg_fs-btn"
             onClick={() => {
@@ -67,10 +74,10 @@ export class Setup extends React.Component {
               alt="fs"
             />
           </div>
-        </div> */}
+        </div>
         <div className="flex mgbtm-20">
           <div className="group col-center">
-            <p className="cmgrc_heading">Choose difficulty:</p>
+            <p className="cmgst_heading">Choose difficulty:</p>
             <div>
               <input
                 className="dfc-radio"
@@ -93,7 +100,7 @@ export class Setup extends React.Component {
             </div>
           </div>
           <div className="group col-center">
-            <p className="cmgrc_heading">Choose card type:</p>
+            <p className="cmgst_heading">Choose card type:</p>
             <div ref={this.typeRef} className="card-type" onClick={this.toggleDropdown}>
               <p className="show-line right-bg-img border-1 radius-5 padding-5-10">{type}</p>
               {dropdownShown ? (

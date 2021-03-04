@@ -15,8 +15,8 @@ export function Menu(props) {
         startGame={props.startGame}
         difficulty={props.difficulty}
         type={props.type}
-        // fullscreen={props.fullscreen}
-        // toggleFullscreen={props.toggleFullscreen}
+        fullscreen={props.fullscreen}
+        toggleFullscreen={props.toggleFullscreen}
       />
     </div>
   );

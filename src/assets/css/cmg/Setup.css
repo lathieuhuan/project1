@@ -1,65 +1,60 @@
-#cmgrc_setup {
+#cmg_setup {
   padding: 20px 0;
   background-color: white;
   box-shadow: var(--lesser-shadow);
 }
-#cmgrc_setup .group {
+#cmg_fs-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+#cmg_fs-btn {
+  margin-left: 15px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+#cmg_setup .group {
   margin: 0 30px;
 }
-.cmgrc_heading {
+.cmgst_heading {
   margin-bottom: 5px;
   font-size: 1.375em;
   font-weight: 700;
 }
-/* #cmg_fs-btn {
-  margin-left: 15px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-#cmg_fs-icon {
-  width: 20px;
-  height: 20px;
-}
-.fs-on {
-  background-color: rgb(91, 231, 105);
-}
-.fs-off {
-  background-color: rgb(238, 97, 100);
-} */
 
 /* DIFFICULTY */
-#cmgrc_setup .dfc-radio {
+#cmg_setup .dfc-radio {
   margin-right: 5px;
 }
-#cmgrc_setup label {
+#cmg_setup label {
   font-size: 1.125em;
 }
-#cmgrc_setup label[for="Easy"] {
+#cmg_setup label[for="Easy"] {
   margin-right: 20px;
 }
 
 /* CARD TYPE */
-#cmgrc_setup .card-type {
+#cmg_setup .card-type {
   position: relative;
   margin-top: 5px;
   width: 90%;
 }
-#cmgrc_setup .show-line {
+#cmg_setup .show-line {
   background-image: url(https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-512.png);
   cursor: default;
   text-transform: capitalize;
   box-shadow: var(--lesser-shadow);
 }
 
-#cmgrc_setup .dropdown {
+#cmg_setup .dropdown {
   position: absolute;
   top: 101%;
   left: 2%;
   width: 96%;
 }
-#cmgrc_setup .type-btn {
+#cmg_setup .type-btn {
   width: 100%;
   border: none;
   background-color: white;
@@ -67,11 +62,11 @@
   text-align: left;
   text-transform: capitalize;
 }
-#cmgrc_setup .type-btn:hover {
+#cmg_setup .type-btn:hover {
   background-color: var(--btn-hover);
 }
 
-#cmgrc_setup .start-btn {
+#cmg_setup .start-btn {
   border: none;
   box-shadow: var(--normal-shadow);
   background-color: var(--primary-light);
@@ -79,10 +74,10 @@
   font-weight: 700;
   color: white;
 }
-#cmgrc_setup .start-btn:hover {
+#cmg_setup .start-btn:hover {
   background-color: var(--primary);
 }
-#cmgrc_setup .start-btn:active {
+#cmg_setup .start-btn:active {
   box-shadow: var(--lesser-shadow);
   transform: scale(0.95);
 }

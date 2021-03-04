@@ -1,16 +1,16 @@
-#cmg_intro {
+#ingame_intro {
   padding: 50px 50px 0;
 }
-#cmgit_title {
+#ingame_title {
   margin-bottom: 25px;
   font-size: 4em;
   text-align: center;
 }
-#cmgit_heading {
+#ingame_heading {
   margin-bottom: 10px;
   font-size: 1.375em;
 }
-.cmgit_line {
+.ingame_line {
   margin-bottom: 15px;
   font-size: 1.125em;
   line-height: 1.6;

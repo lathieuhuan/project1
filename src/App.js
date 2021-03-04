@@ -4,11 +4,12 @@ import { Switch, Route } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
 import { Home } from "./components/Home";
 import { Library } from "./components/Library";
-import { CardMemoryGame } from "./components/cmg/CardMemoryGame";
 import { Modal } from "./components/Modal";
 import { Profile } from "./components/Profile";
 import { Users } from "./components/Users";
 import { NotFound } from "./components/NotFound";
+import { CardMemoryGame } from "./components/cmg/CardMemoryGame";
+import { Game2048 } from "./components/2048/Game2048";
 // Dont create child components with the same first letters
 // the existing ones have those letters combined as their id
 
@@ -30,11 +31,11 @@ class App extends Component {
     //     this.setAppState("None");
     //   }
     // };
-    window.onkeydown = (e) => {
+    window.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && this.state.modal !== "None") {
         this.setAppState("None");
       }
-    };
+    });
   }
   render() {
     const { modal, username, userId } = this.state;
@@ -55,6 +56,9 @@ class App extends Component {
             </Route>
             <Route exact path="/Card_Memory_Game">
               <CardMemoryGame userId={userId} setAppState={this.setAppState} />
+            </Route>
+            <Route exact path="/2048">
+              <Game2048 userId={userId} setAppState={this.setAppState} />
             </Route>
             <Route path="/Profile">
               <Profile userId={userId} setAppState={this.setAppState} />

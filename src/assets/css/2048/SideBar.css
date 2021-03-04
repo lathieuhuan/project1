@@ -1,0 +1,43 @@
+#g2048_side-bar {
+  position: absolute;
+  top: 80px;
+  left: 500px;
+}
+#g2048_side-bar .start-btn {
+  margin-right: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: var(--normal-shadow);
+  padding: 10px;
+  background-color: var(--primary-light);
+  font-weight: 700;
+  color: white;
+}
+#g2048_side-bar .start-btn:hover {
+  background-color: var(--primary);
+}
+#g2048_side-bar .start-btn:focus {
+  transform: scale(0.95);
+  box-shadow: var(--lesser-shadow);
+}
+#g2048_score {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#g2048_score .desc,
+#g2048_score .num {
+  padding-top: 10px;
+  padding-bottom: 5px;
+  font-size: 1.5em;
+  font-weight: 700;
+}
+#g2048_score .num {
+  width: 110px;
+  padding-right: 10px;
+  border-radius: 5px;
+  background-color: black;
+  text-align: right;
+  color: white;
+}
