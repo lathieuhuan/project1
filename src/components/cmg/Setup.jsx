@@ -42,9 +42,7 @@ export class Setup extends React.Component {
     }
   }
   handleFsChange = () => {
-    if (document.fullscreenElement === null && this.props.fullscreen) {
-      this.props.toggleFullscreen();
-    }
+    this.props.toggleFullscreen();
   }
   componentDidMount() {
     document.addEventListener("click", this.handleClickOutside);
@@ -64,7 +62,6 @@ export class Setup extends React.Component {
             id="cmg_fs-btn"
             onClick={() => {
               this.props.fullscreen ? this.closeFullscreen() : this.openFullscreen();
-              this.props.toggleFullscreen();
           }}>
             <img
               className="parent-size"
@@ -124,13 +121,11 @@ export class Setup extends React.Component {
             </div>
           </div>
         </div>
-        <a href="#cmg_filler">
-          <button className="start-btn radius-5 padding-10"
-            onClick={() => this.props.startGame(difficulty, type)}
-          >
-            NEW GAME
-          </button>
-        </a>
+        <button className="start-btn radius-5 padding-10"
+          onClick={() => this.props.startGame(difficulty, type)}
+        >
+          NEW GAME
+        </button>
       </div>
     );
   }

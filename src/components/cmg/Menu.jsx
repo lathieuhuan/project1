@@ -9,8 +9,10 @@ export function Menu(props) {
   }
   return (
     <div id="cmg_menu">
-      <h1 id="cmgmn_heading">{gameState}</h1>
-      {line}
+      <div>
+        <h1 id="cmgmn_heading">{gameState}</h1>
+        {line}
+      </div>
       <Setup
         startGame={props.startGame}
         difficulty={props.difficulty}

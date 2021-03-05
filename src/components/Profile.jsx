@@ -3,7 +3,7 @@ import React from "react";
 import { EditPsnI } from "./profile/EditPsnI";
 import { ShowPsnI } from "./profile/ShowPsnI";
 import { Loading } from "./Loading";
-import { NotFound } from "./NotFound";
+import { NotFound } from "../components/accessories/NotFound";
 import { getUserInfo, editUserInfo } from "../ultis/ultis";
 import { OtherInfo } from "./profile/OtherInfo";
 
@@ -52,7 +52,7 @@ export class Profile extends React.Component {
   render() {
     const isOwner = this.props.userId === this.idForInfo;
     return this.state.found ? this.state.loadingDone ? (
-      <div className="flex" id="profile" >
+      <div id="profile" >
         {isOwner && this.state.editing ? (
           <EditPsnI
             editing={this.state.editing}

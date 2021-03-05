@@ -1,0 +1,19 @@
+#accessories {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+#cs_img {
+  width: 150px;
+  height: 150px;
+}
+#img-404 {
+  width: 200px;
+  height: 200px;
+}
+#smile-img {
+  width: 100px;
+  height: 100px;
+}

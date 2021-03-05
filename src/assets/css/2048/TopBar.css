@@ -30,9 +30,11 @@
   border: none;
   border-radius: 5px;
   box-shadow: var(--normal-shadow);
-  padding: 10px;
+  padding: 10px 15px;
   background-color: var(--primary-light);
+  font-size: 1.125em;
   font-weight: 700;
+  line-height: 20px;
   color: white;
 }
 #g2048_control-bar .start-btn:hover {
@@ -68,6 +70,7 @@
 #g2048_score .plus {
   position: absolute;
   left: 205px;
+  font-size: 0.875em;
   opacity: 0;
 }
 .ascend-fade {

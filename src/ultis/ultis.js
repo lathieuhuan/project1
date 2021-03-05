@@ -189,7 +189,6 @@ function subscribeHighscores(gameTitle, listener) {
   highscoresRef
     .where("gameTitle", "==", gameTitle)
     .onSnapshot(async (querySnapshot) => {
-      // if (!querySnapshot.empty) {
       let result = [];
       querySnapshot.forEach((doc) => {
         result.push(
@@ -205,24 +204,8 @@ function subscribeHighscores(gameTitle, listener) {
         );
       });
       listener(await Promise.all(result));
-      // }
     });
 }
-
-// function getHighScores(gameTitle) {
-//   return new Promise((res, rej) => {
-//     db.collection("games")
-//       .doc(gameTitle)
-//       .get()
-//       .then((doc) => {
-//         if (!doc.exists) {
-//           throw new Error("Probably wrong game title.");
-//         }
-//         res(doc.data().highScores);
-//       })
-//       .catch((err) => rej(err));
-//   });
-// }
 
 function addHighscore(score) {
   highscoresRef.add(score);

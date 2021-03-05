@@ -22,9 +22,7 @@ export class TopBar extends React.Component {
     }
   }
   handleFsChange = () => {
-    if (document.fullscreenElement === null && this.props.fullscreen) {
-      this.props.toggleFullscreen();
-    }
+    this.props.toggleFullscreen();
   }
   componentDidMount() {
     document.addEventListener("fullscreenchange", this.handleFsChange);
@@ -42,7 +40,6 @@ export class TopBar extends React.Component {
             id="g2048_fs-btn"
             onClick={() => {
               fullscreen ? this.closeFullscreen() : this.openFullscreen();
-              this.props.toggleFullscreen();
             }}
           >
             <img
@@ -55,10 +52,19 @@ export class TopBar extends React.Component {
           </div>
         </div>
         <div id="g2048_control-bar">
-          <button className="start-btn">NEW GAME</button>
+          <button
+            className="start-btn"
+            onClick={this.props.startGame}
+            // somehow this btn stay focus after click, below is to fix it
+            onMouseUp={(e) => {
+              e.target.blur();
+            }}
+          >
+            NEW GAME
+          </button>
           <div id="g2048_score">
             <p className="desc">SCORE:</p>
-            <p className="num">2048</p>
+            <p className="num">{this.props.points}</p>
             <p
               className={"plus" + (plus === null ? "" : " ascend-fade")}
               onAnimationEnd={this.props.nullifyPlus}

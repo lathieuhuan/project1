@@ -1,11 +1,6 @@
 #app-content {
   margin-top: var(--nav-height);
 }
-#footer {
-  width: 100%;
-  height: var(--footer-height);
-  background-color: var(--primary);
-}
 .close-btn {
   position: absolute;
   top: -15px;
