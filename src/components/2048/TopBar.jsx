@@ -66,10 +66,10 @@ export class TopBar extends React.Component {
             <p className="desc">SCORE:</p>
             <p className="num">{this.props.points}</p>
             <p
-              className={"plus" + (plus === null ? "" : " ascend-fade")}
+              className={"plus" + (!plus ? "" : " ascend-fade")}
               onAnimationEnd={this.props.nullifyPlus}
             >
-              {plus}
+              {"+" + plus}
             </p>
           </div>
         </div>

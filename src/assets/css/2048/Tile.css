@@ -8,34 +8,43 @@
 }
 .val-8 {
   background-color: rgb(243, 178, 122);
+  color: rgb(249, 246, 242);
 }
 .val-16 {
   background-color: rgb(246, 150, 100);
+  color: rgb(249, 246, 242);
 }
 .val-32 {
   background-color: rgb(247, 124, 95);
+  color: rgb(249, 246, 242);
 }
 .val-64 {
   background-color: rgb(247, 95, 59);
+  color: rgb(249, 246, 242);
 }
 .val-128 {
   background-color: rgb(237, 208, 115);
+  color: rgb(249, 246, 242);
   font-size: 42px;
 }
 .val-256 {
   background-color: rgb(237, 204, 98);
+  color: rgb(249, 246, 242);
   font-size: 42px;
 }
 .val-512 {
   background-color: rgb(237, 201, 80);
+  color: rgb(249, 246, 242);
   font-size: 42px;
 }
 .val-1024 {
   background-color: rgb(237, 195, 44);
+  color: rgb(249, 246, 242);
   font-size: 36px;
 }
 .val-2048 {
   background-color: rgb(237, 189, 8);
+  color: rgb(249, 246, 242);
   font-size: 36px;
 }
 

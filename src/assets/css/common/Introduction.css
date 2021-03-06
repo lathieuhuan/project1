@@ -5,6 +5,7 @@
   margin-bottom: 25px;
   font-size: 4em;
   text-align: center;
+  color: var(--tertiary);
 }
 #ingame_heading {
   margin-bottom: 10px;

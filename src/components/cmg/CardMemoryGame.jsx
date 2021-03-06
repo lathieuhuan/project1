@@ -203,9 +203,9 @@ export class CardMemoryGame extends React.Component {
         <div id="cmg_inner">
           <Introduction />
           <p id="cmg_filler">
-            <b>Note:</b> Consider opening the game in <span className="recommend
-            pointer" onClick={openFullscreen}>FULL SCREEN</span> if you cannot
-            see the timer.
+            <b>Note:</b> Consider opening the game in <span className="pointer
+            recommend" onClick={openFullscreen}>Full screen</span> if you
+            cannot see the timer.
           </p>
           <div className="border-3 radius-10" id="cmg_app">
             <TopBar

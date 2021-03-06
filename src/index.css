@@ -17,12 +17,13 @@ code {
 /* 1536px / 1519.2px is the max width without / with scrollbar */
 :root {
   font-size: 16px;
-  --primary: rgb(255, 23, 112);
-  --primary-light: rgb(255, 93, 126);
+  --primary: rgb(255, 23, 93);
+  --primary-light: rgb(255, 93, 107);
   --secondary: rgb(255, 211, 23);
   --secondary-light: rgb(255, 225, 93);
-  --accent: rgb(50, 23, 255);
-  --accent-light: rgb(64, 93, 255);
+  --tertiary: rgb(50, 23, 255);
+  --tertiary-light: rgb(76, 103, 253);
+  --quaternary: rgb(0, 195, 255);
   --normal-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
   --lesser-shadow: 0 3px 6px rgba(0, 0, 0, 0.2), 0 4px 13px rgba(0, 0, 0, 0.19);
   --inner-width: 900px;
@@ -112,7 +113,7 @@ a {
 }
 .recommend {
   font-weight: 700;
-  color: var(--accent);
+  color: var(--tertiary);
 }
 .invis {
   visibility: hidden;
@@ -137,7 +138,7 @@ a {
 }
 .vertical-separator {
   width: 3px;
-  background-color: var(--accent);
+  background-color: var(--tertiary);
 }
 .cover-body {
   width: 100%;

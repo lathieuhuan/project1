@@ -45,7 +45,7 @@
 }
 #top-games_heading {
   margin-bottom: 15px;
-  border-bottom: 2px solid var(--accent);
+  border-bottom: 2px solid var(--tertiary);
   padding-bottom: 5px;
   text-align: center;
 }
@@ -61,7 +61,7 @@
   font-size: 2rem;
   line-height: 3rem;
   color: var(--primary);
-  border-bottom: 3px solid var(--accent);
+  border-bottom: 3px solid var(--tertiary);
 }
 
 /* BOTTOM SECTION */

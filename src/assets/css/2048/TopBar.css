@@ -69,8 +69,7 @@
 }
 #g2048_score .plus {
   position: absolute;
-  left: 205px;
-  font-size: 0.875em;
+  left: 210px;
   opacity: 0;
 }
 .ascend-fade {

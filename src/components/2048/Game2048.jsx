@@ -21,7 +21,7 @@ export class Game2048 extends React.Component {
       gameState: "running",
       tiles,
       points: 0,
-      plus: null,
+      plus: 0,
       fullscreen: false,
       highScores: [],
       newHS: false,
@@ -34,7 +34,7 @@ export class Game2048 extends React.Component {
     this.setState({ fullscreen: !this.state.fullscreen });
   }
   nullifyPlus = () => {
-    this.setState({ plus: null });
+    this.setState({ plus: 0 });
   }
   nullifyType = (i) => {
     let tile = this.state.tiles[i];
@@ -171,157 +171,117 @@ export class Game2048 extends React.Component {
   getRealTiles = (type, num) => {
     let result = [];
     for (let i = 0; i < 4; i++) {
-      const index = type === "row" ? (num * 4 + i) : (i * 4 + num);
-      const tile = this.state.tiles[index];
-      if (tile.value !== 0) {
-        result.push({ value: tile.value, index });
+      const index = type === "row" ? (num * 4 + i) : (i * 4 + num),
+        { value } = this.state.tiles[index];
+      if (value !== 0) {
+        result.push({ value, index });
       }
     }
     return result;
   }
   moveLeft = () => {
-    let { tiles } = this.state,
-      score = 0;
+    let { tiles, points, plus } = this.state;
     for (let row = 0; row < 4; row++) {
-      let aim = 0;
-      let realTiles = this.getRealTiles("row", row);
+      let realTiles = this.getRealTiles("row", row),
+        aim = 0;
       for (let i = 0; i < realTiles.length; i++, aim++) {
+        let { value } = realTiles[i],
+          index = row * 4 + aim;
         realTiles[i].move = " left-" + (realTiles[i].index % 4 - aim);
-        if (realTiles[i].value === realTiles[i + 1]?.value) {
-          this.tileVals.push({
-            value: realTiles[i].value * 2,
-            index: row * 4 + aim,
-            type: " merged-tile",
-          });
-          score += realTiles[i].value * 2;
+        if (value === realTiles[i + 1]?.value) {
           realTiles[i + 1].move = " left-" + (realTiles[i + 1].index % 4 - aim);
           i++;
+          plus += value * 2;
+          this.tileVals.push({ value: value * 2, index, type: " merged-tile" });
         } else {
-          this.tileVals.push({
-            value: realTiles[i].value,
-            index: row * 4 + aim,
-          });
+          this.tileVals.push({ value, index });
         }
       }
       realTiles.forEach((realTile) => {
         tiles[realTile.index].move = realTile.move;
       });
     }
-    this.setState({
-      tiles,
-      points: this.state.points + score,
-      plus: !score ? null : "+" + score,
-    });
+    this.setState({ tiles, points: points + plus, plus });
     this.moving = true;
-    this.delay = setTimeout(this.adjustTiles, 160);
+    this.delay = setTimeout(this.adjustTiles, 180);
   }
   moveRight = () => {
-    let { tiles } = this.state,
-      score = 0;
+    let { tiles, points, plus } = this.state;
     for (let row = 0; row < 4; row++) {
       let aim = 3;
       let realTiles = this.getRealTiles("row", row);
       for (let i = realTiles.length - 1; i >= 0; i--, aim--) {
-        realTiles[i].move = " right-" + (aim - (realTiles[i].index % 4));
-        if (realTiles[i].value === realTiles[i - 1]?.value) {
-          this.tileVals.push({
-            value: realTiles[i].value * 2,
-            index: row * 4 + aim,
-            type: " merged-tile",
-          });
-          score += realTiles[i].value * 2;
-          realTiles[i - 1].move = " right-" + (aim - (realTiles[i - 1].index % 4));
+        let { value } = realTiles[i],
+          index = row * 4 + aim;
+        realTiles[i].move = " right-" + (aim - realTiles[i].index % 4);
+        if (value === realTiles[i - 1]?.value) {
+          realTiles[i - 1].move = " right-" + (aim - realTiles[i - 1].index % 4);
           i--;
+          plus += value * 2;
+          this.tileVals.push({ value: value * 2, index, type: " merged-tile" });
         } else {
-          this.tileVals.push({
-            value: realTiles[i].value,
-            index: row * 4 + aim,
-          });
+          this.tileVals.push({ value, index });
         }
       }
       realTiles.forEach((tile) => {
         tiles[tile.index].move = tile.move;
       });
     }
-    this.setState({
-      tiles,
-      points: this.state.points + score,
-      plus: !score ? null : "+" + score,
-    });
+    this.setState({ tiles, points: points + plus, plus });
     this.moving = true;
-    this.delay = setTimeout(this.adjustTiles, 160);
+    this.delay = setTimeout(this.adjustTiles, 180);
   }
   moveUp = () => {
-    let { tiles } = this.state,
-      score = 0;
+    let { tiles, points, plus } = this.state;
     for (let col = 0; col < 4; col++) {
       let aim = 0;
       let realTiles = this.getRealTiles("col", col);
       for (let i = 0; i < realTiles.length; i++, aim++) {
-        realTiles[i].move = " up-" + (Math.floor(realTiles[i].index / 4) - aim);
-        if (realTiles[i].value === realTiles[i + 1]?.value) {
-          this.tileVals.push({
-            value: realTiles[i].value * 2,
-            index: aim * 4 + col,
-            type: " merged-tile",
-          });
-          score += realTiles[i].value * 2;
-          realTiles[i + 1].move = " up-" + (Math.floor(realTiles[i + 1].index / 4) - aim);
+        let { value } = realTiles[i],
+          index = aim * 4 + col;
+        realTiles[i].move = " up-" + Math.floor(realTiles[i].index / 4 - aim);
+        if (value === realTiles[i + 1]?.value) {
+          realTiles[i + 1].move = " up-" + Math.floor(realTiles[i + 1].index / 4 - aim);
           i++;
+          plus += value * 2;
+          this.tileVals.push({ value: value * 2, index, type: " merged-tile" });
         } else {
-          this.tileVals.push({
-            value: realTiles[i].value,
-            index: aim * 4 + col,
-          });
+          this.tileVals.push({ value, index });
         }
       }
       realTiles.forEach((tile) => {
         tiles[tile.index].move = tile.move;
       });
     }
-    this.setState({
-      tiles,
-      points: this.state.points + score,
-      plus: !score ? null : "+" + score,
-    });
+    this.setState({ tiles, points: points + plus, plus });
     this.moving = true;
-    this.delay = setTimeout(this.adjustTiles, 160);
+    this.delay = setTimeout(this.adjustTiles, 180);
   }
   moveDown = () => {
-    let { tiles } = this.state,
-      score = 0;
+    let { tiles, points, plus } = this.state;
     for (let col = 0; col < 4; col++) {
       let aim = 3;
       let realTiles = this.getRealTiles("col", col);
       for (let i = realTiles.length - 1; i >= 0; i--, aim--) {
+        let { value } = realTiles[i],
+          index = aim * 4 + col;
         realTiles[i].move = " down-" + (aim - Math.floor(realTiles[i].index / 4));
-        if (realTiles[i].value === realTiles[i - 1]?.value) {
-          this.tileVals.push({
-            value: realTiles[i].value * 2,
-            index: aim * 4 + col,
-            type: " merged-tile",
-          });
-          score += realTiles[i].value * 2;
-          realTiles[i - 1].move = " down-" + (aim - Math.floor(realTiles[i - 1].index / 4));
+        if (value === realTiles[i - 1]?.value) {
+          realTiles[i - 1].move = " down-" + Math.floor(aim - realTiles[i - 1].index / 4);
           i--;
+          plus += value * 2;
+          this.tileVals.push({ value: value * 2, index, type: " merged-tile" });
         } else {
-          this.tileVals.push({
-            value: realTiles[i].value,
-            index: aim * 4 + col,
-          });
+          this.tileVals.push({ value, index });
         }
       }
       realTiles.forEach((tile) => {
         tiles[tile.index].move = tile.move;
       });
     }
-    this.setState({
-      tiles,
-      points: this.state.points + score,
-      plus: !score ? null : "+" + score,
-    });
+    this.setState({ tiles, points: points + plus, plus });
     this.moving = true;
-    this.delay = setTimeout(this.adjustTiles, 160);
+    this.delay = setTimeout(this.adjustTiles, 180);
   }
   preventScroll = (e) => {
     if (e.key.slice(0, 5) === "Arrow") {
@@ -365,7 +325,8 @@ export class Game2048 extends React.Component {
         <div id="g2048_inner">
           <Introduction />
           <p id="g2048_filler">
-            <b>Note:</b> Your score will be doubled when you finish the game.
+            <b>Note:</b> Your score will be <b>doubled</b> when you finish
+            the game.
           </p>
           <div id="g2048_app">
             <TopBar

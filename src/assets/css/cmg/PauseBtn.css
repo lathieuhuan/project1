@@ -8,11 +8,11 @@
   border: none;
   border-radius: 50%;
   box-shadow: var(--normal-shadow);
-  background-color: var(--accent-light);
+  background-color: var(--tertiary-light);
   color: white;
 }
 #cmg_top-bar .pause-btn:hover {
-  background-color: var(--accent);
+  background-color: var(--tertiary);
 }
 #cmg_top-bar .pause-btn:active {
   transform: scale(0.95);

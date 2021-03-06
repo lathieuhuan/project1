@@ -5,10 +5,12 @@
   background-color: white;
 }
 .hs_heading {
-  background-color: var(--secondary);
+  border-radius: 3px 3px 0 0;
+  background-color: var(--tertiary-light);
   font-size: 1.5em;
   text-align: center;
   line-height: 1.5;
+  color: white;
 }
 .hs_inner .list {
   padding: 10px 40px 10px 30px;
@@ -25,13 +27,14 @@
   border-radius: 5px;
   line-height: 2.5;
   text-align: center;
-  color: white;
 }
 .hs_inner .top-3 {
   background-color: var(--primary-light);
+  color: white;
 }
 .hs_inner .top-10 {
-  background-color: var(--accent-light);
+  background-color: var(--secondary-light);
+  color: black;
 }
 .hs_inner .score {
   margin-left: auto;

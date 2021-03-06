@@ -16,7 +16,7 @@
   align-self: center;
   font-size: 1.125em;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--tertiary);
   cursor: pointer;
 }
 .gc_line {
@@ -38,21 +38,15 @@
   background-color: var(--primary-light);
   color: white;
 }
-#top-games .top-3:hover {
-  background-color: var(--primary);
-}
 #top-games .top-5 {
   background-color: var(--secondary-light);
   color: black;
-}
-#top-games .top-5:hover {
-  background-color: var(--secondary);
 }
 .gt_heading {
   cursor: pointer;
 }
 .game-title:hover .gt_heading {
-  color: var(--accent);
+  color: var(--tertiary);
 }
 .gt_line {
   margin-top: 5px;
