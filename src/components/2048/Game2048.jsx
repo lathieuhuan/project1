@@ -9,26 +9,19 @@ import { subscribeHighscores, addHighscore, updateHighscore } from "../../ultis/
 export class Game2048 extends React.Component {
   constructor(props) {
     super(props);
-    let tiles = [];
-    for (let i = 0; i < 16; i++) {
-      tiles.push({
-        value: 0,
-        move: null,
-        type: null,
-      });
-    }
     this.state = {
+      fullscreen: false,
       gameState: "running",
-      tiles,
+      tiles: [],
+      movements: [],
       points: 0,
       plus: 0,
-      fullscreen: false,
       highScores: [],
       newHS: false,
     };
     this.moving = false;
     this.delay = null;
-    this.tileVals = [];
+    this.dup = [];
   }
   toggleFullscreen = () => {
     this.setState({ fullscreen: !this.state.fullscreen });
@@ -38,7 +31,7 @@ export class Game2048 extends React.Component {
   }
   nullifyType = (i) => {
     let tile = this.state.tiles[i];
-    tile.type = null;
+    tile.type = this.dup[i].type = null;
     this.setState({ tile });
   }
   startGame = () => {
@@ -46,18 +39,23 @@ export class Game2048 extends React.Component {
       clearTimeout(this.delay);
       this.moving = false;
     }
-    let { tiles } = this.state,
+    let { tiles, movements } = this.state,
       pos = [];
+    this.dup = [];
+    tiles = [];
+    movements = [];
     for (let i = 0; i < 16; i++) {
-      tiles[i].value = 0;
       pos.push(i);
+      this.dup.push({ value: 0 });
+      tiles.push({ value: 0 });
+      movements.push(null);
     }
     let random1 = Math.floor(Math.random() * 16);
-    tiles[random1].value = 2;
+    tiles[random1].value = this.dup[random1].value = 2;
     tiles[random1].type = " new-tile";
     pos.splice(random1, 1);
     let random2 = pos[Math.floor(Math.random() * pos.length)];
-    tiles[random2].value = Math.random() < 0.2 ? 4 : 2;
+    tiles[random2].value = this.dup[random2].value = Math.random() < 0.2 ? 4 : 2;
     tiles[random2].type = " new-tile";
     this.setState({
       gameState: "running",
@@ -94,10 +92,9 @@ export class Game2048 extends React.Component {
     return "game over";
   }
   madeHS(hsType) {
-    const { highScores } = this.state,
+    let { points, highScores } = this.state,
       { userId } = this.props,
       len = highScores.length;
-    let { points } = this.state;
     if (hsType === "won") {
       points *= 2;
     }
@@ -114,11 +111,7 @@ export class Game2048 extends React.Component {
       }
     }
     if (len < 10) {
-      addHighscore({
-        gameTitle: "2048",
-        userId,
-        value: points,
-      });
+      addHighscore({ gameTitle: "2048", userId, value: points });
       return true;
     }
     if (flag) {
@@ -128,34 +121,29 @@ export class Game2048 extends React.Component {
     return false;
   }
   adjustTiles = () => {
-    let { gameState, tiles, newHS } = this.state,
-      didMove = false,
-      posAdjust = [],
-      empty = [];
-    this.tileVals.forEach((val) => {
-      if (tiles[val.index].value !== val.value) {
-        tiles[val.index].value = val.value;
-        tiles[val.index].type = val.type;
+    let { gameState, tiles, movements, newHS } = this.state,
+      empty = [],
+      didMove = false;
+    for (let i = 0; i < 16; i++) {
+      movements[i] = null;
+      if (tiles[i].value !== this.dup[i].value) {
+        tiles[i].value = this.dup[i].value;
+        tiles[i].type = this.dup[i].type;
         didMove = true;
-        if (val.value === 2048) {
-          gameState = "you won!";
-          if (this.props.userId !== null) {
-            newHS = this.madeHS("won");
-          }
-        }
       }
-      posAdjust.push(val.index);
-    });
-    for (let i = 0; i < tiles.length; i++) {
-      if (posAdjust.indexOf(i) === -1) {
-        tiles[i].value = 0;
+      if (tiles[i].value === 0) {
         empty.push(i);
       }
-      tiles[i].move = null;
+      if (tiles[i].value === 2048) {
+        gameState = "you won!";
+        if (this.props.userId !== null) {
+          newHS = this.madeHS("won");
+        }
+      }
     }
     if (didMove) {
       let random = empty[Math.floor(Math.random() * empty.length)];
-      tiles[random].value = Math.random() < 0.2 ? 4 : 2;
+      tiles[random].value = this.dup[random].value = Math.random() < 0.2 ? 4 : 2;
       tiles[random].type = " new-tile";
     }
     if (gameState !== "you won!") {
@@ -164,122 +152,142 @@ export class Game2048 extends React.Component {
         newHS = this.madeHS("lost");
       }
     }
-    this.tileVals = [];
     this.moving = false;
-    this.setState({ gameState, tiles, newHS });
-  }
-  getRealTiles = (type, num) => {
-    let result = [];
-    for (let i = 0; i < 4; i++) {
-      const index = type === "row" ? (num * 4 + i) : (i * 4 + num),
-        { value } = this.state.tiles[index];
-      if (value !== 0) {
-        result.push({ value, index });
-      }
-    }
-    return result;
+    this.setState({ gameState, tiles, movements, newHS });
   }
   moveLeft = () => {
-    let { tiles, points, plus } = this.state;
+    let { movements, points, plus } = this.state;
     for (let row = 0; row < 4; row++) {
-      let realTiles = this.getRealTiles("row", row),
-        aim = 0;
-      for (let i = 0; i < realTiles.length; i++, aim++) {
-        let { value } = realTiles[i],
-          index = row * 4 + aim;
-        realTiles[i].move = " left-" + (realTiles[i].index % 4 - aim);
-        if (value === realTiles[i + 1]?.value) {
-          realTiles[i + 1].move = " left-" + (realTiles[i + 1].index % 4 - aim);
-          i++;
-          plus += value * 2;
-          this.tileVals.push({ value: value * 2, index, type: " merged-tile" });
-        } else {
-          this.tileVals.push({ value, index });
+      let aim = 0;
+      for (let col = 0; col < 4; col++) {
+        const here = row * 4 + col,
+          goal = row * 4 + aim;
+        let { value } = this.dup[here];
+        if (value !== 0) {
+          if (col !== aim) {
+            movements[here] = " left-" + (col - aim);
+            this.dup[here].value = 0;
+            this.dup[goal].value = value;
+          }
+          for (let i = 1; i < 4 - col; i++) {
+            if (this.dup[here + i].value !== 0) {
+              if (this.dup[here + i].value === value) {
+                movements[here + i] = " left-" + (col - aim + i);
+                this.dup[here + i].value = 0;
+                this.dup[goal].value *= 2;
+                this.dup[goal].type = " merged-tile";
+                plus += value * 2;
+              }
+              break;
+            }
+          }
+          aim++;
         }
       }
-      realTiles.forEach((realTile) => {
-        tiles[realTile.index].move = realTile.move;
-      });
     }
-    this.setState({ tiles, points: points + plus, plus });
+    this.setState({ movements, points: points + plus, plus });
     this.moving = true;
     this.delay = setTimeout(this.adjustTiles, 180);
   }
   moveRight = () => {
-    let { tiles, points, plus } = this.state;
+    let { movements, points, plus } = this.state;
     for (let row = 0; row < 4; row++) {
       let aim = 3;
-      let realTiles = this.getRealTiles("row", row);
-      for (let i = realTiles.length - 1; i >= 0; i--, aim--) {
-        let { value } = realTiles[i],
-          index = row * 4 + aim;
-        realTiles[i].move = " right-" + (aim - realTiles[i].index % 4);
-        if (value === realTiles[i - 1]?.value) {
-          realTiles[i - 1].move = " right-" + (aim - realTiles[i - 1].index % 4);
-          i--;
-          plus += value * 2;
-          this.tileVals.push({ value: value * 2, index, type: " merged-tile" });
-        } else {
-          this.tileVals.push({ value, index });
+      for (let col = 3; col >= 0; col--) {
+        const here = row * 4 + col,
+        goal = row * 4 + aim;
+        let { value } = this.dup[here];
+        if (value !== 0) {
+          if (col !== aim) {
+            movements[here] = " right-" + (aim - col);
+            this.dup[here].value = 0;
+            this.dup[goal].value = value;
+          }
+          for (let i = 1; i < col + 1; i++) {
+            if (this.dup[here - i].value !== 0) {
+              if (this.dup[here - i].value === value) {
+                movements[here - i] = " right-" + (aim - col + i);
+                this.dup[here - i].value = 0;
+                this.dup[goal].value *= 2;
+                this.dup[goal].type = " merged-tile";
+                plus += value * 2;
+              }
+              break;
+            }
+          }
+          aim--;
         }
       }
-      realTiles.forEach((tile) => {
-        tiles[tile.index].move = tile.move;
-      });
     }
-    this.setState({ tiles, points: points + plus, plus });
+    this.setState({ movements, points: points + plus, plus });
     this.moving = true;
     this.delay = setTimeout(this.adjustTiles, 180);
   }
   moveUp = () => {
-    let { tiles, points, plus } = this.state;
+    let { movements, points, plus } = this.state;
     for (let col = 0; col < 4; col++) {
       let aim = 0;
-      let realTiles = this.getRealTiles("col", col);
-      for (let i = 0; i < realTiles.length; i++, aim++) {
-        let { value } = realTiles[i],
-          index = aim * 4 + col;
-        realTiles[i].move = " up-" + Math.floor(realTiles[i].index / 4 - aim);
-        if (value === realTiles[i + 1]?.value) {
-          realTiles[i + 1].move = " up-" + Math.floor(realTiles[i + 1].index / 4 - aim);
-          i++;
-          plus += value * 2;
-          this.tileVals.push({ value: value * 2, index, type: " merged-tile" });
-        } else {
-          this.tileVals.push({ value, index });
+      for (let row = 0; row < 4; row++) {
+        const here = row * 4 + col,
+        goal = aim * 4 + col;
+        let { value } = this.dup[here];
+        if (value !== 0) {
+          if (row !== aim) {
+            movements[here] = " up-" + (row - aim);
+            this.dup[here].value = 0;
+            this.dup[goal].value = value;
+          }
+          for (let i = 4; i < 16 - row * 4; i += 4) {
+            if (this.dup[here + i].value !== 0) {
+              if (this.dup[here + i].value === value) {
+                movements[here + i] = " up-" + Math.floor(row - aim + i / 4);
+                this.dup[here + i].value = 0;
+                this.dup[goal].value *= 2;
+                this.dup[goal].type = " merged-tile";
+                plus += value * 2;
+              }
+              break;
+            }
+          }
+          aim++;
         }
       }
-      realTiles.forEach((tile) => {
-        tiles[tile.index].move = tile.move;
-      });
     }
-    this.setState({ tiles, points: points + plus, plus });
+    this.setState({ movements, points: points + plus, plus });
     this.moving = true;
     this.delay = setTimeout(this.adjustTiles, 180);
   }
   moveDown = () => {
-    let { tiles, points, plus } = this.state;
+    let { movements, points, plus } = this.state;
     for (let col = 0; col < 4; col++) {
       let aim = 3;
-      let realTiles = this.getRealTiles("col", col);
-      for (let i = realTiles.length - 1; i >= 0; i--, aim--) {
-        let { value } = realTiles[i],
-          index = aim * 4 + col;
-        realTiles[i].move = " down-" + (aim - Math.floor(realTiles[i].index / 4));
-        if (value === realTiles[i - 1]?.value) {
-          realTiles[i - 1].move = " down-" + Math.floor(aim - realTiles[i - 1].index / 4);
-          i--;
-          plus += value * 2;
-          this.tileVals.push({ value: value * 2, index, type: " merged-tile" });
-        } else {
-          this.tileVals.push({ value, index });
+      for (let row = 3; row >= 0; row--) {
+        const here = row * 4 + col,
+        goal = aim * 4 + col;
+        let { value } = this.dup[here];
+        if (value !== 0) {
+          if (row !== aim) {
+            movements[here] = " down-" + (aim - row);
+            this.dup[here].value = 0;
+            this.dup[goal].value = value;
+          }
+          for (let i = 4; i < row * 4 + 4; i += 4) {
+            if (this.dup[here - i].value !== 0) {
+              if (this.dup[here - i].value === value) {
+                movements[here - i] = " down-" + Math.floor(aim - row + i / 4);
+                this.dup[here - i].value = 0;
+                this.dup[goal].value *= 2;
+                this.dup[goal].type = " merged-tile";
+                plus += value * 2;
+              }
+              break;
+            }
+          }
+          aim--;
         }
       }
-      realTiles.forEach((tile) => {
-        tiles[tile.index].move = tile.move;
-      });
     }
-    this.setState({ tiles, points: points + plus, plus });
+    this.setState({ movements, points: points + plus, plus });
     this.moving = true;
     this.delay = setTimeout(this.adjustTiles, 180);
   }
@@ -341,6 +349,7 @@ export class Game2048 extends React.Component {
               <Playground
                 gameState={this.state.gameState}
                 tiles={this.state.tiles}
+                movements={this.state.movements}
                 newHS={this.state.newHS}
                 nullifyType={this.nullifyType}
               />

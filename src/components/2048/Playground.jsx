@@ -18,6 +18,7 @@ export function Playground(props) {
             <Tile
               key={i}
               tile={tile}
+              movement={props.movements[i]}
               index={i}
               nullifyType={props.nullifyType}
             />

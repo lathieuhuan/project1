@@ -5,7 +5,7 @@ export function Tile(props) {
   let className = "g2048_tile val-" + tile.value;
   return (
     <div
-      className={className + (tile.move || "") + (tile.type || "")}
+      className={className + (props.movement || "") + (tile.type || "")}
       onAnimationEnd={() => {
         if (tile.type !== null) {
           props.nullifyType(props.index);
