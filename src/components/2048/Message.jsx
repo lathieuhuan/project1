@@ -6,7 +6,7 @@ export function Message(props) {
     line = <p id="g2048ms_line">You made a new High Score!</p>
   }
   return (
-    <div id="g2048_ms">
+    <div className="parent-size" id="g2048_ms">
       <h1 id="g2048ms_heading">{props.gameState}</h1>
       {line}
     </div>

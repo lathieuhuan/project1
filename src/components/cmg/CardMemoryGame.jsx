@@ -113,7 +113,7 @@ export class CardMemoryGame extends React.Component {
         this.chosen = [];
       }
       let { running, gameState, newHS } = this.state;
-      if (!this.left) {
+      if (!this.left && gameState !== "game over!") {
         running = false;
         gameState = "you won!";
         if (this.props.userId !== null) {

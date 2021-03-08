@@ -9,10 +9,10 @@ export function Playground(props) {
   }
   return (
     <div id="g2048_playground">
-      <div id="g2048_pedestal">
+      <div className="parent-size" id="g2048_pedestal">
         {cells}
       </div>
-      <div id="g2048_bowl">
+      <div className="parent-size" id="g2048_bowl">
         {props.tiles.map((tile, i) => {
           return (
             <Tile
