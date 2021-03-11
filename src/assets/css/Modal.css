@@ -35,7 +35,6 @@
 .modal_main-line {
   /* input & button tags */
   margin-top: 15px;
-  border: 1px black solid;
   border-radius: 5px;
   padding: 10px;
   background-color: white;
@@ -50,6 +49,8 @@
 .modal_inner .last-btn {
   margin-left: 10px;
   margin-right: 10px;
+  border: none;
+  box-shadow: var(--lesser-shadow);
   background-color: var(--primary-light);
   font-weight: 700;
   color: white;
@@ -64,8 +65,9 @@
   top: 20%;
   left: calc(100% + 11px);
   width: 50%;
-  background-color: var(--secondary-light);
+  background-color: black;
   text-align: left;
+  color: white;
 }
 #modal .tooltip::after {
   position: absolute;
@@ -73,7 +75,7 @@
   right: 100%;
   margin-top: -8px;
   border-style: solid;
-  border-color: transparent var(--secondary-light) transparent transparent;
+  border-color: transparent black transparent transparent;
   border-width: 8px;
   content: "";
 }

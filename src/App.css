@@ -12,3 +12,6 @@
   background-color: white;
   cursor: pointer;
 }
+.close-btn:hover {
+  background-color: var(--secondary-light);
+}

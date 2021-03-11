@@ -34,4 +34,5 @@
   font-size: 200px;
   color: var(--primary);
   text-shadow: var(--white-stroke);
+  user-select: none;
 }

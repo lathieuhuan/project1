@@ -12,9 +12,8 @@ export function TopBar(props) {
       <p className="desc">Time Passed:</p>
       <p className="num radius-5">
         <Timer time={
-          props.gameState === "progressing" || props.gameState === "paused"
-          ? props.time : 0
-        }/>
+          props.gameState === "delay" || props.gameState === "welcome"
+          ? 0 : props.time} />
       </p>
       <PauseBtn gameState={props.gameState} switchPause={props.switchPause} />
     </div>
