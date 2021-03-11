@@ -6,8 +6,9 @@ export function ShowPsnI(props) {
     <div className="flex-col" id="psn-info">
       <img
         className="avatar"
-        // src="https://image.flaticon.com/icons/png/512/61/61205.png" denied
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA"
+        src={info.avatar}
+        // src="https://image.flaticon.com/icons/png/512/61/61205.png"
+        // src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA"
         alt=""
       />
       <h1 className="psni_heading"><span>{info.username}</span></h1>

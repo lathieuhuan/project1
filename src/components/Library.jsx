@@ -1,7 +1,7 @@
 import "../assets/css/Library.css";
 import React from "react";
 import { GameCard } from "./GameDisplayers";
-import { getGames } from "../ultis/ultis";
+import { getGames } from "../ultis/firestoreUltis";
 import { Loading } from "./Loading";
 
 export class Library extends React.Component {

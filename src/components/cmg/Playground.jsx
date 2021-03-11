@@ -20,6 +20,15 @@ export function Playground(props) {
           />
         );
       })}
+      {props.gameState === "delay" ? <div id="cmg_block">
+        <h1
+          className={props.zoom ? "cmgb_zoom-out" : ""}
+          id="cmgb_heading"
+          onAnimationEnd={props.eliminateZoom}
+        >
+          {props.time}
+        </h1>
+      </div> : null}
     </div>
   );
 }

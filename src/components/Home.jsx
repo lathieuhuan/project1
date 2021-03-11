@@ -1,6 +1,6 @@
 import "../assets/css/Home.css";
 import React from "react";
-import { getGames } from "../ultis/ultis";
+import { getGames } from "../ultis/firestoreUltis";
 import { GameCard, GameTitle } from "./GameDisplayers";
 
 export class Home extends React.Component {

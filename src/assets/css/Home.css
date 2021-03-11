@@ -23,7 +23,7 @@
 #main-banner {
   position: relative;
   width: 68%;
-  text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
+  text-shadow: var(--white-stroke);
 }
 .main-banner_inner {
   position: absolute;

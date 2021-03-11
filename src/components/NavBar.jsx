@@ -32,7 +32,7 @@ export class NavBar extends React.Component {
     document.removeEventListener("click", this.handleClickOutside);
   }
   render() {
-    const { username, userId, setAppState } = this.props;
+    const { setAppState, username, userId, avatar } = this.props;
     const menu = userId === null ? (
       <div id="nav_menu">
         <button className="menu-opt" onClick={() => setAppState("SignIn")}>
@@ -47,9 +47,8 @@ export class NavBar extends React.Component {
         <button className="menu-opt flex" onClick={this.toggleDropdown}>
           <img
             className="avatar"
-            // src="https://image.flaticon.com/icons/png/512/61/61205.png" denied
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA"
-            alt="avatar"
+            src={avatar}
+            alt=""
           />
           <p className="username">{username}</p>
         </button>

@@ -1,8 +1,26 @@
 #psn-info .avatar {
+  position: relative;
   width: 100px;
   height: 100px;
   border-radius: 50%;
   align-self: center;
+}
+#choose-file {
+  display: none;
+}
+#change-avatar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 50%;
+  font-size: 0.875em;
+  background-color: white;
+}
+#change-avatar:hover {
+  background-color: var(--secondary-light);
 }
 
 /* EDIT PSNI */
@@ -17,7 +35,7 @@
   font-weight: 700;
 }
 .psni_row {
-  /* div containing type & val pair */
+  /* div containing type & val pairs */
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
@@ -67,12 +85,13 @@
 }
 #psn-info .last-btn {
   margin: 20px 10px 0;
-  border: 2px solid black;
+  border: none;
   border-radius: 5px;
   padding: 10px;
   background-color: var(--secondary-light);
   font-weight: 700;
   align-self: center;
+  box-shadow: var(--lesser-shadow);
 }
 #psn-info .last-btn:hover {
   background-color: var(--secondary);

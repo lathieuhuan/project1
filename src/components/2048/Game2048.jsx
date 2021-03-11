@@ -4,7 +4,7 @@ import { Introduction } from "./Introduction";
 import { Playground } from "./Playground";
 import { HighScores } from "../HighScores";
 import { TopBar } from "./TopBar";
-import { subscribeHighscores, addHighscore, updateHighscore } from "../../ultis/ultis";
+import { subscribeHighscores, addHighscore, updateHighscore } from "../../ultis/firestoreUltis";
 
 export class Game2048 extends React.Component {
   constructor(props) {

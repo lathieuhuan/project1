@@ -6,7 +6,7 @@ import { Menu } from "./Menu";
 import { Playground } from "./Playground";
 import { cardImgs } from "../cmgData";
 import { HighScores } from "../HighScores";
-import { subscribeHighscores, addHighscore, updateHighscore } from "../../ultis/ultis";
+import { subscribeHighscores, addHighscore, updateHighscore } from "../../ultis/firestoreUltis";
 
 export class CardMemoryGame extends React.Component {
   constructor(props) {
@@ -17,10 +17,11 @@ export class CardMemoryGame extends React.Component {
       running: false,
       gameState: "welcome",
       cards: [],
-      time: 0,
+      time: 3,
       highScores: { easy: [], hard: [] },
       newHS: false,
       fullscreen: false,
+      zoom: true,
     };
     this.chosen = [];
     this.left = 0;
@@ -29,6 +30,9 @@ export class CardMemoryGame extends React.Component {
   }
   toggleFullscreen = () => {
     this.setState({ fullscreen: !this.state.fullscreen });
+  }
+  eliminateZoom = () => {
+    this.setState({ zoom: false });
   }
   startGame = (difficulty, type) => {
     clearInterval(this.timer);
@@ -50,15 +54,25 @@ export class CardMemoryGame extends React.Component {
       difficulty,
       type,
       running: true,
-      gameState: "progressing",
+      gameState: "delay",
       cards,
-      time: 0,
+      time: 3,
       newHS: false,
     })
     this.chosen = [];
     this.left = imgI.length;
     this.limit = difficulty === "easy" ? 1200 : 2000;
-    this.timer = setInterval(this.countUp, 10);
+    this.timer = setInterval(this.countDown, 1000);
+    setTimeout(() => {
+      clearInterval(this.timer);
+      this.setState({ time: 0, gameState: "progressing" });
+      this.timer = setInterval(this.countUp, 10);
+    }, 3000);
+  }
+  countDown = () => {
+    if (this.state.time > 0) {
+      this.setState({ zoom: true, time: this.state.time - 1 });
+    }
   }
   countUp = () => {
     if (this.state.time === this.limit) {
@@ -170,9 +184,9 @@ export class CardMemoryGame extends React.Component {
     }
   }
   render() {
-    const { difficulty, running, gameState, highScores } = this.state;
+    const { difficulty, running, gameState, time, highScores } = this.state;
     let content;
-    if (running && gameState === "progressing") {
+    if (running && (gameState === "delay" || gameState === "progressing")) {
       content = (
         <Playground
           cards={this.state.cards}
@@ -180,6 +194,10 @@ export class CardMemoryGame extends React.Component {
           setAnimation={this.setAnimation}
           flip={this.flip}
           process={this.process}
+          gameState={gameState}
+          time={time}
+          zoom={this.state.zoom}
+          eliminateZoom={this.eliminateZoom}
         />
       );
     } else {
@@ -210,7 +228,7 @@ export class CardMemoryGame extends React.Component {
           <div className="border-3 radius-10" id="cmg_app">
             <TopBar
               limit={this.limit}
-              time={this.state.time}
+              time={time}
               gameState={gameState}
               switchPause={this.switchPause}
             />

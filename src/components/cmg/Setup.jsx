@@ -1,5 +1,7 @@
 import "../../assets/css/cmg/Setup.css";
 import React from "react";
+import fullscreenOn from "../../assets/images/fullscreen_on.png";
+import fullscreenOff from "../../assets/images/fullscreen_off.png";
 
 export class Setup extends React.Component {
   constructor(props) {
@@ -65,9 +67,7 @@ export class Setup extends React.Component {
           }}>
             <img
               className="parent-size"
-              src={this.props.fullscreen
-                ? "http://www.clker.com/cliparts/8/8/2/2/1195423990759977006molumen_multicolor_power_buttons_5.svg.med.png"
-                : "https://images.all-free-download.com/images/graphiclarge/red_power_button_clip_art_9034.jpg"}
+              src={this.props.fullscreen ? fullscreenOn : fullscreenOff}
               alt="fs"
             />
           </div>

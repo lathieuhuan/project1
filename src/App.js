@@ -23,10 +23,11 @@ class App extends Component {
       modal: "None",
       username: localStorage.getItem("username"),
       userId: localStorage.getItem("userId"),
+      avatar: localStorage.getItem("avatar"),
     };
   }
-  setAppState = (modal, username = null, userId = null) => {
-    this.setState({ modal, username, userId });
+  setAppState = (modal, username = null, userId = null, avatar = null) => {
+    this.setState({ modal, username, userId, avatar });
   };
   componentDidMount() {
     // window.onclick = (e) => {
@@ -41,12 +42,13 @@ class App extends Component {
     });
   }
   render() {
-    const { modal, username, userId } = this.state;
+    const { modal, username, userId, avatar } = this.state;
     return (
       <div>
         <NavBar
           username={username}
           userId={userId}
+          avatar={avatar}
           setAppState={this.setAppState}
         />
         <div id="app-content">

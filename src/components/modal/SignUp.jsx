@@ -1,5 +1,7 @@
 import React from "react";
-import { signUp } from "../../ultis/ultis";
+import { signUp } from "../../ultis/firestoreUltis";
+import greenTick from "../../assets/images/green_tick.png";
+import redCross from "../../assets/images/red_cross.png";
 
 function isGood(str) {
   if (str.length < 8) {
@@ -110,10 +112,9 @@ export class SignUp extends React.Component {
           type="password"
           name="cf_password"
           placeholder="Confirm your password"
-          style={{
-            backgroundImage: pwdConfirmed
-              ? "url(https://www.pngitem.com/pimgs/m/508-5084657_green-check-mark-icon-free-check-icon-hd.png)"
-              : "url(https://png.pngitem.com/pimgs/s/4-46202_red-cross-transparent-png-red-transparent-background-cross.png)"
+          style={{ backgroundImage: pwdConfirmed
+            ? `url(${greenTick})`
+            : `url(${redCross})`
           }}
           onChange={this.comparePwd}
           onKeyDown = {(e) => {

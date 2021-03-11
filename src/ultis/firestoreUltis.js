@@ -1,16 +1,4 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
-import { firebaseConfig } from "../config/config.firebase";
-
-try {
-  firebase.initializeApp(firebaseConfig);
-} catch {
-  console.log("Firebase has already been installed.");
-}
-const db = firebase.firestore(),
-  usersRef = db.collection("users"),
-  gamesRef = db.collection("games"),
-  highscoresRef = db.collection("highscores");
+import { usersRef, gamesRef, highscoresRef } from "./firebaseRef";
 
 function getGames(keywords) {
   return new Promise((res, rej) => {
@@ -107,6 +95,8 @@ function signUp(accountInfo) {
         usersRef.doc(username).set({
           username,
           password,
+          avatar:
+            "https://firebasestorage.googleapis.com/v0/b/minigamehub-cijs-d06.appspot.com/o/avatars%2Fdefault.png?alt=media&token=e6740814-1535-42f9-9936-895befc2c3db",
           gender: "",
           dob: "",
           townOcity: "",

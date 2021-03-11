@@ -32,6 +32,8 @@ code {
   --nav-text: white;
   --nav-hover: black;
   --btn-hover: #eee;
+  --black-stroke: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  --white-stroke: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
 }
 
 button,

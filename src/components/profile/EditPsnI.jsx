@@ -1,5 +1,6 @@
 import "../../assets/css/profile/PersonalInfo.css";
 import React from 'react';
+import { uploadAvatar } from "../../ultis/gcloudUltis";
 
 function isGood(str) {
   return str.match(/([a-zA-Z0-9])+([ -~])*/);
@@ -12,6 +13,7 @@ export class EditPsnI extends React.Component {
       newNameGood: true,
       infoDup: { ...props.info },
     };
+    this.avatarFile = null;
   }
   handleChange = (e) => {
     let { infoDup } = this.state;
@@ -21,23 +23,54 @@ export class EditPsnI extends React.Component {
   setNewNameGood = (boo) => {
     this.setState({ newNameGood: boo });
   }
-  componentDidUpdate() {
-    if (!this.props.editing &&
-    JSON.stringify(this.state.infoDup) !== JSON.stringify(this.props.info)) {
-      this.setState({ infoDup: { ...this.props.info } });
+  getAvatarUrl = () => {
+    let { infoDup } = this.state;
+    if (this.avatarFile !== null) {
+      uploadAvatar(this.avatarFile, this.props.userId)
+      .then((url) => {
+        infoDup.avatar = url;
+        this.props.tryUpdate(infoDup);
+        this.avatarFile = null;
+      })
+      .catch(() => {
+        alert("Some error has occurred, please try again later.");
+      });
+    } else {
+      this.props.tryUpdate(infoDup);
     }
   }
+  // componentDidUpdate() {
+  //   if (!this.props.editing &&
+  //   JSON.stringify(this.state.infoDup) !== JSON.stringify(this.props.info)) {
+  //     this.setState({ infoDup: { ...this.props.info } });
+  //   }
+  // }
   render() {
     const { newNameGood, infoDup } = this.state,
-      { toggleEdit, tryUpdate } = this.props;
+      { toggleEdit } = this.props;
     return (
       <div className="flex-col" id="psn-info">
-        <img
-          className="avatar"
-          // src="https://image.flaticon.com/icons/png/512/61/61205.png" denied
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNyI5Bbsl1vq1BQjH9XA-Z4j0Kkk0cEpAnA"
-          alt=""
-        />
+        <div className="avatar">
+          <img
+            id="avatar-preview"
+            className="parent-size"
+            src={infoDup.avatar}
+            alt=""
+          />
+          <input id="choose-file" type="file" accept="image/*" onChange={(e) => {
+            if (e.target.files && e.target.files[0]) {
+              this.avatarFile = e.target.files[0];
+              let reader = new FileReader();
+              reader.onload = (ev) => {
+                document.getElementById("avatar-preview").src = ev.target.result;
+              }
+              reader.readAsDataURL(e.target.files[0]);
+            }
+          }} />
+          <button id="change-avatar" onClick={() => {
+            document.getElementById("choose-file").click();
+          }}><i className="fa fa-photo"></i></button>
+        </div>
         <input
           id="psni_username"
           type="text"
@@ -116,7 +149,7 @@ export class EditPsnI extends React.Component {
             className="last-btn"
             onClick={() => {
               const nameGood = isGood(infoDup.username);
-              if (nameGood) tryUpdate(infoDup);
+              if (nameGood) this.getAvatarUrl();
               this.setNewNameGood(nameGood);
             }}
           >

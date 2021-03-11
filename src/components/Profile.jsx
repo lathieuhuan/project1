@@ -4,7 +4,7 @@ import { EditPsnI } from "./profile/EditPsnI";
 import { ShowPsnI } from "./profile/ShowPsnI";
 import { Loading } from "./Loading";
 import { NotFound } from "../components/accessories/NotFound";
-import { getUserInfo, editUserInfo } from "../ultis/ultis";
+import { getUserInfo, editUserInfo } from "../ultis/firestoreUltis";
 import { OtherInfo } from "./profile/OtherInfo";
 
 export class Profile extends React.Component {
@@ -27,9 +27,10 @@ export class Profile extends React.Component {
     if (JSON.stringify(info) !== JSON.stringify(newInfo)) {
       editUserInfo(userId, newInfo)
       .then(() => {
-        if (info.username !== newInfo.username) {
-          this.props.setAppState("None", newInfo.username, userId);
+        if (info.username !== newInfo.username || info.avatar !== newInfo.avatar) {
+          this.props.setAppState("None", newInfo.username, userId, newInfo.avatar);
           localStorage.setItem("username", newInfo.username);
+          localStorage.setItem("avatar", newInfo.avatar);
         }
         this.setState({
           editing: false,
@@ -59,6 +60,7 @@ export class Profile extends React.Component {
             info={this.state.info}
             toggleEdit={this.toggleEdit}
             tryUpdate={this.tryUpdate}
+            userId={this.props.userId}
           />
         ) : (
           <ShowPsnI

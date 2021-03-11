@@ -1,5 +1,5 @@
 import React from "react";
-import { signIn } from "../../ultis/ultis";
+import { signIn } from "../../ultis/firestoreUltis";
 
 function isGood(str) {
   if (str.length < 8) {
@@ -33,9 +33,10 @@ export class SignIn extends React.Component {
     } else {
       signIn({ username, password })
       .then((data) => {
-        this.props.setAppState("None", data.username, username);
+        this.props.setAppState("None", data.username, username, data.avatar);
         localStorage.setItem("username", data.username);
         localStorage.setItem("userId", username);
+        localStorage.setItem("avatar", data.avatar);
       })
       .catch((err) => this.setState({ warning: err.message }));
     }

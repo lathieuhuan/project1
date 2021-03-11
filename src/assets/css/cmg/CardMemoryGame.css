@@ -32,3 +32,14 @@
 #cmg_hs-wrapper .high-scores {
   margin: 50px 30px 0;
 }
+.cmgb_zoom-out {
+  animation: cmgb_zoom-out 150ms linear forwards;
+}
+@keyframes cmgb_zoom-out {
+  from {
+    transform: scale(0.4);
+  }
+  to {
+    transform: scale(1);
+  }
+}

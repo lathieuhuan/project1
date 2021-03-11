@@ -38,6 +38,7 @@
   border: 1px black solid;
   border-radius: 5px;
   padding: 10px;
+  background-color: white;
   font-size: 1rem;
 }
 .modal_sub-line {
@@ -63,9 +64,8 @@
   top: 20%;
   left: calc(100% + 11px);
   width: 50%;
-  background-color: black;
+  background-color: var(--secondary-light);
   text-align: left;
-  color: white;
 }
 #modal .tooltip::after {
   position: absolute;
@@ -73,7 +73,7 @@
   right: 100%;
   margin-top: -8px;
   border-style: solid;
-  border-color: transparent black transparent transparent;
+  border-color: transparent var(--secondary-light) transparent transparent;
   border-width: 8px;
   content: "";
 }

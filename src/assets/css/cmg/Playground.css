@@ -1,4 +1,5 @@
 .cmg_playground {
+  position: relative;
   background-color: white;
   display: flex;
   flex-wrap: wrap;
@@ -14,4 +15,23 @@
   width: 696px;
   height: 486px;
   padding: 15px;
+}
+
+#cmg_block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#cmgb_heading {
+  font-size: 200px;
+  color: var(--primary);
+  text-shadow: var(--white-stroke);
 }
