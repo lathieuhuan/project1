@@ -91,32 +91,27 @@ export class CardMemoryGame extends React.Component {
     }
   };
   setAnimation = (i, val) => {
-    this.setState((prevS) => {
-      let data = prevS.cards;
-      data[i].animated = val;
-      return data[i].animated;
-    });
+    let { cards } = this.state;
+    cards[i].animated = val;
   };
   flip = (i) => {
-    this.setState((prevS) => {
-      let data = JSON.parse(JSON.stringify(prevS.cards));
-      if (!data[i].done) {
-        [data[i].front, data[i].back] = [data[i].back, data[i].front];
-        return { cards: data };
-      }
-    });
+    let { cards } = this.state;
+    if (!cards[i].done) {
+      [cards[i].front, cards[i].back] = [cards[i].back, cards[i].front];
+    }
+    this.setState({ cards });
   };
   process = (i) => {
     setTimeout(() => {
-      let data = this.state.cards;
-      if (!data[i].done && i !== this.chosen[0]) {
+      let { cards } = this.state;
+      if (!cards[i].done && i !== this.chosen[0]) {
         this.chosen.push(i);
       } else if (i === this.chosen[0]) {
         this.chosen.splice(-1);
       }
       if (this.chosen.length === 2) {
-        let cardX = data[this.chosen[0]],
-          cardY = data[this.chosen[1]];
+        let cardX = cards[this.chosen[0]],
+          cardY = cards[this.chosen[1]];
         if (cardX.imageFrt === cardY.imageFrt) {
           cardX.done = cardY.done = true;
           this.left -= 2;
@@ -125,16 +120,16 @@ export class CardMemoryGame extends React.Component {
           cardX.back = cardY.back = "top";
         }
         this.chosen = [];
-      }
-      let { running, gameState, newHS } = this.state;
-      if (!this.left && gameState !== "game over!") {
-        running = false;
-        gameState = "you won!";
-        if (this.props.userId !== null) {
-          newHS = this.madeHS();
+        let { running, gameState, newHS } = this.state;
+        if (!this.left && gameState !== "game over!") {
+          running = false;
+          gameState = "you won!";
+          if (this.props.userId !== null) {
+            newHS = this.madeHS();
+          }
         }
+        this.setState({ cards, running, gameState, newHS });
       }
-      this.setState({ cards: data, running, gameState, newHS });
     }, 300);
   };
   madeHS() {

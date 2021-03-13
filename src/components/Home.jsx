@@ -9,8 +9,8 @@ export class Home extends React.Component {
     this.state = { games: [] };
   }
   componentDidMount() {
-    getGames("all").then((data) => {
-      this.setState({ games: data });
+    getGames("all").then((games) => {
+      this.setState({ games });
     });
   }
   render() {

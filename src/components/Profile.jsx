@@ -32,10 +32,7 @@ export class Profile extends React.Component {
           localStorage.setItem("username", newInfo.username);
           localStorage.setItem("avatar", newInfo.avatar);
         }
-        this.setState({
-          editing: false,
-          info: { ...newInfo }
-        });
+        this.setState({ editing: false, info: { ...newInfo } });
       });    
     } else {
       this.setState({ editing: false });

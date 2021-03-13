@@ -139,10 +139,10 @@ export class Game2048 extends React.Component {
         }
       }
     }
-    let random = empty[Math.floor(Math.random() * empty.length)];
-    tiles[random].value = this.dup[random].value = Math.random() < 0.2 ? 4 : 2;
-    tiles[random].type = " new-tile";
     if (gameState !== "you won!") {
+      let random = empty[Math.floor(Math.random() * empty.length)];
+      tiles[random].value = this.dup[random].value = Math.random() < 0.2 ? 4 : 2;
+      tiles[random].type = " new-tile";
       gameState = this.getGS(tiles);
       if (gameState === "game over" && this.props.userId !== null) {
         newHS = this.madeHS("lost");
@@ -158,8 +158,8 @@ export class Game2048 extends React.Component {
       let aim = 0;
       for (let col = 0; col < 4; col++) {
         const here = row * 4 + col,
-          goal = row * 4 + aim;
-        let { value } = this.dup[here];
+          goal = row * 4 + aim, 
+          { value } = this.dup[here];
         if (value !== 0) {
           if (col !== aim) {
             movements[here] = " left-" + (col - aim);
@@ -188,8 +188,8 @@ export class Game2048 extends React.Component {
       }
     }
     if (didMove) {
-      this.setState({ movements, points: points + plus, plus });
       this.moving = true;
+      this.setState({ movements, points: points + plus, plus });
       this.delay = setTimeout(this.adjustTiles, 180);
     }
   }
@@ -200,8 +200,8 @@ export class Game2048 extends React.Component {
       let aim = 3;
       for (let col = 3; col >= 0; col--) {
         const here = row * 4 + col,
-        goal = row * 4 + aim;
-        let { value } = this.dup[here];
+          goal = row * 4 + aim,
+          { value } = this.dup[here];
         if (value !== 0) {
           if (col !== aim) {
             movements[here] = " right-" + (aim - col);
@@ -230,8 +230,8 @@ export class Game2048 extends React.Component {
       }
     }
     if (didMove) {
-      this.setState({ movements, points: points + plus, plus });
       this.moving = true;
+      this.setState({ movements, points: points + plus, plus });
       this.delay = setTimeout(this.adjustTiles, 180);
     }
   }
@@ -242,8 +242,8 @@ export class Game2048 extends React.Component {
       let aim = 0;
       for (let row = 0; row < 4; row++) {
         const here = row * 4 + col,
-        goal = aim * 4 + col;
-        let { value } = this.dup[here];
+          goal = aim * 4 + col,
+          { value } = this.dup[here];
         if (value !== 0) {
           if (row !== aim) {
             movements[here] = " up-" + (row - aim);
@@ -272,8 +272,8 @@ export class Game2048 extends React.Component {
       }
     }
     if (didMove) {
-      this.setState({ movements, points: points + plus, plus });
       this.moving = true;
+      this.setState({ movements, points: points + plus, plus });
       this.delay = setTimeout(this.adjustTiles, 180);
     }
   }
@@ -284,8 +284,8 @@ export class Game2048 extends React.Component {
       let aim = 3;
       for (let row = 3; row >= 0; row--) {
         const here = row * 4 + col,
-        goal = aim * 4 + col;
-        let { value } = this.dup[here];
+          goal = aim * 4 + col,
+          { value } = this.dup[here];
         if (value !== 0) {
           if (row !== aim) {
             movements[here] = " down-" + (aim - row);
@@ -314,8 +314,8 @@ export class Game2048 extends React.Component {
       }
     }
     if (didMove) {
-      this.setState({ movements, points: points + plus, plus });
       this.moving = true;
+      this.setState({ movements, points: points + plus, plus });
       this.delay = setTimeout(this.adjustTiles, 180);
     }
   }

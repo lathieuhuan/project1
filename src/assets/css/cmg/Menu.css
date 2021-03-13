@@ -10,14 +10,14 @@
 #cmgmn_heading {
   margin-bottom: 10px;
   font-size: 3.75em;
+  color: var(--primary);
+  text-shadow: var(--black-stroke);
   text-align: center;
   text-transform: uppercase;
 }
 #cmgmn_line {
   font-size: 1.875em;
-  font-weight: 600;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-    1px 1px 0 #000;
+  font-weight: 700;
+  color: var(--tertiary);
   letter-spacing: 1px;
-  color: white;
 }

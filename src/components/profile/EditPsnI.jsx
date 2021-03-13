@@ -39,12 +39,6 @@ export class EditPsnI extends React.Component {
       this.props.tryUpdate(infoDup);
     }
   }
-  // componentDidUpdate() {
-  //   if (!this.props.editing &&
-  //   JSON.stringify(this.state.infoDup) !== JSON.stringify(this.props.info)) {
-  //     this.setState({ infoDup: { ...this.props.info } });
-  //   }
-  // }
   render() {
     const { newNameGood, infoDup } = this.state,
       { toggleEdit } = this.props;
