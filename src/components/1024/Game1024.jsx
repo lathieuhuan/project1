@@ -1,12 +1,12 @@
-import "../../assets/css/2048/Game2048.css";
+import "../../assets/css/1024/Game1024.css";
 import React from "react";
 import { Introduction } from "./Introduction";
 import { Playground } from "./Playground";
-// import { HighScores } from "../HighScores";
+import { HighScores } from "../HighScores";
 import { TopBar } from "./TopBar";
-// import { subscribeHighscores, addHighscore, updateHighscore } from "../../ultis/firestoreUltis";
+import { subscribeHighscores, addHighscore, updateHighscore } from "../../ultis/firestoreUltis";
 
-export class Game2048 extends React.Component {
+export class Game1024 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,8 +16,8 @@ export class Game2048 extends React.Component {
       movements: [],
       points: 0,
       plus: 0,
-      // highScores: [],
-      // newHS: false,
+      highScores: [],
+      newHS: false,
     };
     this.moving = false;
     this.delay = null;
@@ -44,18 +44,18 @@ export class Game2048 extends React.Component {
     this.dup = [];
     tiles = [];
     movements = [];
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 25; i++) {
       pos.push(i);
       this.dup.push({ value: 0 });
       tiles.push({ value: 0 });
       movements.push(null);
     }
-    let random1 = Math.floor(Math.random() * 16);
-    tiles[random1].value = this.dup[random1].value = 2;
+    let random1 = Math.floor(Math.random() * 25);
+    tiles[random1].value = this.dup[random1].value = 8;
     tiles[random1].type = " new-tile";
     pos.splice(random1, 1);
     let random2 = pos[Math.floor(Math.random() * pos.length)];
-    tiles[random2].value = this.dup[random2].value = Math.random() < 0.2 ? 4 : 2;
+    tiles[random2].value = this.dup[random2].value = Math.random() < 0.2 ? 4 : 8;
     tiles[random2].type = " new-tile";
     this.setState({
       gameState: "running",
@@ -69,61 +69,63 @@ export class Game2048 extends React.Component {
         return "running";
       }
     }
-    for (let row = 0; row < 4; row++) {
-      const pos = row * 4 + 1;
+    for (let row = 0; row < 5; row++) {
+      const pos = row * 5 + 1;
       if (
         tiles[pos].value === tiles[pos - 1].value ||
         tiles[pos].value === tiles[pos + 1].value ||
-        tiles[pos + 1].value === tiles[pos + 2].value
+        tiles[pos + 1].value === tiles[pos + 2].value ||
+        tiles[pos + 2].value === tiles[pos + 3].value
       ) {
         return "running";
       }
     }
-    for (let col = 0; col < 4; col++) {
-      const pos = 4 + col;
+    for (let col = 0; col < 5; col++) {
+      const pos = 5 + col;
       if (
-        tiles[pos].value === tiles[pos - 4].value ||
-        tiles[pos].value === tiles[pos + 4].value ||
-        tiles[pos + 4].value === tiles[pos + 8].value
+        tiles[pos].value === tiles[pos - 5].value ||
+        tiles[pos].value === tiles[pos + 5].value ||
+        tiles[pos + 5].value === tiles[pos + 10].value ||
+        tiles[pos + 10].value === tiles[pos + 15].value
       ) {
         return "running";
       }
     }
     return "game over";
   }
-  // madeHS(hsType) {
-  //   let { points, highScores } = this.state,
-  //     { userId } = this.props,
-  //     len = highScores.length;
-  //   if (hsType === "won") {
-  //     points *= 2;
-  //   }
-  //   let flag = false;
-  //   for (let i = 0; i < len; i++) {
-  //     if (points > highScores[i].value) {
-  //       flag = true;
-  //     }
-  //     if (userId === highScores[i].userId && flag) {
-  //       updateHighscore(highScores[i].id, { value: points });
-  //       return true;
-  //     } else if (userId === highScores[i].userId && !flag) {
-  //       return false;
-  //     }
-  //   }
-  //   if (len < 10) {
-  //     addHighscore({ gameTitle: "2048", userId, value: points });
-  //     return true;
-  //   }
-  //   if (flag) {
-  //     updateHighscore(highScores[len - 1].id, { userId, value: points });
-  //     return true;
-  //   }
-  //   return false;
-  // }
+  madeHS(hsType) {
+    let { points, highScores } = this.state,
+      { userId } = this.props,
+      len = highScores.length;
+    if (hsType === "won") {
+      points *= 2;
+    }
+    let flag = false;
+    for (let i = 0; i < len; i++) {
+      if (points > highScores[i].value) {
+        flag = true;
+      }
+      if (userId === highScores[i].userId && flag) {
+        updateHighscore(highScores[i].id, { value: points });
+        return true;
+      } else if (userId === highScores[i].userId && !flag) {
+        return false;
+      }
+    }
+    if (len < 10) {
+      addHighscore({ gameTitle: "1024", userId, value: points });
+      return true;
+    }
+    if (flag) {
+      updateHighscore(highScores[len - 1].id, { userId, value: points });
+      return true;
+    }
+    return false;
+  }
   adjustTiles = () => {
-    let { gameState, tiles, movements, points } = this.state,
+    let { gameState, tiles, movements, points, newHS } = this.state,
       empty = [];
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 25; i++) {
       movements[i] = null;
       if (tiles[i].value !== this.dup[i].value) {
         tiles[i].value = this.dup[i].value;
@@ -132,35 +134,35 @@ export class Game2048 extends React.Component {
       if (tiles[i].value === 0) {
         empty.push(i);
       }
-      if (tiles[i].value === 2048) {
+      if (tiles[i].value === 1024) {
         gameState = "you won!";
-        // if (this.props.userId !== null) {
-        //   newHS = this.madeHS("won");
-        // }
+        if (this.props.userId !== null) {
+          newHS = this.madeHS("won");
+        }
       }
     }
     if (gameState !== "you won!") {
       let random = empty[Math.floor(Math.random() * empty.length)];
-      tiles[random].value = this.dup[random].value = Math.random() < 0.2 ? 4 : 2;
+      tiles[random].value = this.dup[random].value = Math.random() < 0.2 ? 4 : 8;
       tiles[random].type = " new-tile";
       gameState = this.getGS(tiles);
-      // if (gameState === "game over" && this.props.userId !== null) {
-      //   newHS = this.madeHS("lost");
-      // }
+      if (gameState === "game over" && this.props.userId !== null) {
+        newHS = this.madeHS("lost");
+      }
     } else {
       points *= 2;
     }
     this.moving = false;
-    this.setState({ gameState, tiles, movements, points });
+    this.setState({ gameState, tiles, movements, points, newHS });
   }
   moveLeft = () => {
     let { movements, points, plus } = this.state,
       didMove = false;
-    for (let row = 0; row < 4; row++) {
+    for (let row = 0; row < 5; row++) {
       let aim = 0;
-      for (let col = 0; col < 4; col++) {
-        const here = row * 4 + col,
-          goal = row * 4 + aim, 
+      for (let col = 0; col < 5; col++) {
+        const here = row * 5 + col,
+          goal = row * 5 + aim, 
           { value } = this.dup[here];
         if (value !== 0) {
           if (col !== aim) {
@@ -169,7 +171,7 @@ export class Game2048 extends React.Component {
             this.dup[goal].value = value;
             didMove = true;
           }
-          for (let i = 1; i < 4 - col; i++) {
+          for (let i = 1; i < 5 - col; i++) {
             if (this.dup[here + i].value !== 0) {
               if (this.dup[here + i].value === value) {
                 movements[here + i] = " left-" + (col - aim + i);
@@ -192,17 +194,17 @@ export class Game2048 extends React.Component {
     if (didMove) {
       this.moving = true;
       this.setState({ movements, points: points + plus, plus });
-      this.delay = setTimeout(this.adjustTiles, 180);
+      this.delay = setTimeout(this.adjustTiles, 200);
     }
   }
   moveRight = () => {
     let { movements, points, plus } = this.state,
       didMove = false;
-    for (let row = 0; row < 4; row++) {
-      let aim = 3;
-      for (let col = 3; col >= 0; col--) {
-        const here = row * 4 + col,
-          goal = row * 4 + aim,
+    for (let row = 0; row < 5; row++) {
+      let aim = 4;
+      for (let col = 4; col >= 0; col--) {
+        const here = row * 5 + col,
+          goal = row * 5 + aim,
           { value } = this.dup[here];
         if (value !== 0) {
           if (col !== aim) {
@@ -234,17 +236,17 @@ export class Game2048 extends React.Component {
     if (didMove) {
       this.moving = true;
       this.setState({ movements, points: points + plus, plus });
-      this.delay = setTimeout(this.adjustTiles, 180);
+      this.delay = setTimeout(this.adjustTiles, 200);
     }
   }
   moveUp = () => {
     let { movements, points, plus } = this.state,
       didMove = false;
-    for (let col = 0; col < 4; col++) {
+    for (let col = 0; col < 5; col++) {
       let aim = 0;
-      for (let row = 0; row < 4; row++) {
-        const here = row * 4 + col,
-          goal = aim * 4 + col,
+      for (let row = 0; row < 5; row++) {
+        const here = row * 5 + col,
+          goal = aim * 5 + col,
           { value } = this.dup[here];
         if (value !== 0) {
           if (row !== aim) {
@@ -253,18 +255,18 @@ export class Game2048 extends React.Component {
             this.dup[goal].value = value;
             didMove = true;
           }
-          for (let i = 4; i < 16 - row * 4; i += 4) {
+          for (let i = 5; i < 25 - row * 5; i += 5) {
             if (this.dup[here + i].value !== 0) {
               if (this.dup[here + i].value === value) {
-                movements[here + i] = " up-" + Math.floor(row - aim + i / 4);
+                movements[here + i] = " up-" + Math.floor(row - aim + i / 5);
                 this.dup[here + i].value = 0;
                 this.dup[goal].value *= 2;
                 this.dup[goal].type = " merged-tile";
                 plus += value * 2;
                 didMove = true;
-                row += i / 4;
+                row += i / 5;
               } else {
-                row += i / 4 - 1;
+                row += i / 5 - 1;
               }
               break;
             }
@@ -276,17 +278,17 @@ export class Game2048 extends React.Component {
     if (didMove) {
       this.moving = true;
       this.setState({ movements, points: points + plus, plus });
-      this.delay = setTimeout(this.adjustTiles, 180);
+      this.delay = setTimeout(this.adjustTiles, 200);
     }
   }
   moveDown = () => {
     let { movements, points, plus } = this.state,
       didMove = false;
-    for (let col = 0; col < 4; col++) {
-      let aim = 3;
-      for (let row = 3; row >= 0; row--) {
-        const here = row * 4 + col,
-          goal = aim * 4 + col,
+    for (let col = 0; col < 5; col++) {
+      let aim = 4;
+      for (let row = 4; row >= 0; row--) {
+        const here = row * 5 + col,
+          goal = aim * 5 + col,
           { value } = this.dup[here];
         if (value !== 0) {
           if (row !== aim) {
@@ -295,18 +297,18 @@ export class Game2048 extends React.Component {
             this.dup[goal].value = value;
             didMove = true;
           }
-          for (let i = 4; i < row * 4 + 4; i += 4) {
+          for (let i = 5; i < row * 5 + 5; i += 5) {
             if (this.dup[here - i].value !== 0) {
               if (this.dup[here - i].value === value) {
-                movements[here - i] = " down-" + Math.floor(aim - row + i / 4);
+                movements[here - i] = " down-" + Math.floor(aim - row + i / 5);
                 this.dup[here - i].value = 0;
                 this.dup[goal].value *= 2;
                 this.dup[goal].type = " merged-tile";
                 plus += value * 2;
                 didMove = true;
-                row -= i / 4;
+                row -= i / 5;
               } else {
-                row -= i / 4 - 1;
+                row -= i / 5 - 1;
               }
               break;
             }
@@ -318,7 +320,7 @@ export class Game2048 extends React.Component {
     if (didMove) {
       this.moving = true;
       this.setState({ movements, points: points + plus, plus });
-      this.delay = setTimeout(this.adjustTiles, 180);
+      this.delay = setTimeout(this.adjustTiles, 200);
     }
   }
   preventScroll = (e) => {
@@ -346,27 +348,27 @@ export class Game2048 extends React.Component {
         }
       }
     });
-    // subscribeHighscores("2048", (highScores) => {
-    //   highScores.sort((a, b) => b.value - a.value);
-    //   this.setState({ highScores });
-    // });
-    // if ((this.props.userId === null) && (localStorage.getItem("doAsk") !== "false")) {
-    //   this.props.setAppState("Ask user to sign in");
-    // }
+    subscribeHighscores("1024", (highScores) => {
+      highScores.sort((a, b) => b.value - a.value);
+      this.setState({ highScores });
+    });
+    if ((this.props.userId === null) && (localStorage.getItem("doAsk") !== "false")) {
+      this.props.setAppState("Ask user to sign in");
+    }
   }
   componentWillUnmount() {
     window.removeEventListener("keydown", this.preventScroll);
   }
   render() {
     return (
-      <div id="game-2048">
-        <div id="g2048_inner">
+      <div id="game-1024">
+        <div id="g1024_inner">
           <Introduction />
-          <p id="g2048_filler">
+          <p id="g1024_filler">
             <b>Note:</b> Your score will be <b>doubled</b> when you finish
             the game.
           </p>
-          <div id="g2048_app">
+          <div id="g1024_app">
             <TopBar
               fullscreen={this.state.fullscreen}
               toggleFullscreen={this.toggleFullscreen}
@@ -375,18 +377,18 @@ export class Game2048 extends React.Component {
               plus={this.state.plus}
               nullifyPlus={this.nullifyPlus}
             />
-            <div id="g2048_content">
+            <div id="g1024_content">
               <Playground
                 gameState={this.state.gameState}
                 tiles={this.state.tiles}
                 movements={this.state.movements}
-                // newHS={this.state.newHS}
+                newHS={this.state.newHS}
                 nullifyType={this.nullifyType}
               />
             </div>
           </div>
         </div>
-        {/* <HighScores highScores={this.state.highScores} unit="points" /> */}
+        <HighScores highScores={this.state.highScores} unit="points" />
       </div>
     );
   }

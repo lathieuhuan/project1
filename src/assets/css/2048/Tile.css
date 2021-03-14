@@ -1,48 +1,48 @@
-.val-2 {
+.g2048_tile.val-2 {
   background-color: rgb(238, 228, 218);
   color: rgb(119, 110, 101);
 }
-.val-4 {
+.g2048_tile.val-4 {
   background-color: rgb(238, 225, 201);
   color: rgb(119, 110, 101);
 }
-.val-8 {
+.g2048_tile.val-8 {
   background-color: rgb(243, 178, 122);
   color: rgb(249, 246, 242);
 }
-.val-16 {
+.g2048_tile.val-16 {
   background-color: rgb(246, 150, 100);
   color: rgb(249, 246, 242);
 }
-.val-32 {
+.g2048_tile.val-32 {
   background-color: rgb(247, 124, 95);
   color: rgb(249, 246, 242);
 }
-.val-64 {
+.g2048_tile.val-64 {
   background-color: rgb(247, 95, 59);
   color: rgb(249, 246, 242);
 }
-.val-128 {
+.g2048_tile.val-128 {
   background-color: rgb(237, 208, 115);
   color: rgb(249, 246, 242);
   font-size: 42px;
 }
-.val-256 {
+.g2048_tile.val-256 {
   background-color: rgb(237, 204, 98);
   color: rgb(249, 246, 242);
   font-size: 42px;
 }
-.val-512 {
+.g2048_tile.val-512 {
   background-color: rgb(237, 201, 80);
   color: rgb(249, 246, 242);
   font-size: 42px;
 }
-.val-1024 {
+.g2048_tile.val-1024 {
   background-color: rgb(237, 195, 44);
   color: rgb(249, 246, 242);
   font-size: 36px;
 }
-.val-2048 {
+.g2048_tile.val-2048 {
   background-color: rgb(237, 189, 8);
   color: rgb(249, 246, 242);
   font-size: 36px;
@@ -72,46 +72,46 @@
 }
 
 .g2048_tile.left-1 {
-  animation: left1 150ms linear forwards;
+  animation: left1-2048 150ms linear forwards;
 }
 .g2048_tile.left-2 {
-  animation: left2 150ms linear forwards;
+  animation: left2-2048 150ms linear forwards;
 }
 .g2048_tile.left-3 {
-  animation: left3 150ms linear forwards;
+  animation: left3-2048 150ms linear forwards;
 }
 
 .g2048_tile.right-1 {
-  animation: right1 150ms linear forwards;
+  animation: right1-2048 150ms linear forwards;
 }
 .g2048_tile.right-2 {
-  animation: right2 150ms linear forwards;
+  animation: right2-2048 150ms linear forwards;
 }
 .g2048_tile.right-3 {
-  animation: right3 150ms linear forwards;
+  animation: right3-2048 150ms linear forwards;
 }
 
 .g2048_tile.up-1 {
-  animation: up1 150ms linear forwards;
+  animation: up1-2048 150ms linear forwards;
 }
 .g2048_tile.up-2 {
-  animation: up2 150ms linear forwards;
+  animation: up2-2048 150ms linear forwards;
 }
 .g2048_tile.up-3 {
-  animation: up3 150ms linear forwards;
+  animation: up3-2048 150ms linear forwards;
 }
 
 .g2048_tile.down-1 {
-  animation: down1 150ms linear forwards;
+  animation: down1-2048 150ms linear forwards;
 }
 .g2048_tile.down-2 {
-  animation: down2 150ms linear forwards;
+  animation: down2-2048 150ms linear forwards;
 }
 .g2048_tile.down-3 {
-  animation: down3 150ms linear forwards;
+  animation: down3-2048 150ms linear forwards;
 }
 
-@keyframes left1 {
+@keyframes left1-2048 {
   from {
     transform: translateX(0);
   }
@@ -119,7 +119,7 @@
     transform: translateX(-110px);
   }
 }
-@keyframes left2 {
+@keyframes left2-2048 {
   from {
     transform: translateX(0);
   }
@@ -127,7 +127,7 @@
     transform: translateX(-220px);
   }
 }
-@keyframes left3 {
+@keyframes left3-2048 {
   from {
     transform: translateX(0);
   }
@@ -136,7 +136,7 @@
   }
 }
 
-@keyframes right1 {
+@keyframes right1-2048 {
   from {
     transform: translateX(0);
   }
@@ -144,7 +144,7 @@
     transform: translateX(110px);
   }
 }
-@keyframes right2 {
+@keyframes right2-2048 {
   from {
     transform: translateX(0);
   }
@@ -152,7 +152,7 @@
     transform: translateX(220px);
   }
 }
-@keyframes right3 {
+@keyframes right3-2048 {
   from {
     transform: translateX(0);
   }
@@ -161,7 +161,7 @@
   }
 }
 
-@keyframes up1 {
+@keyframes up1-2048 {
   from {
     transform: translateY(0);
   }
@@ -169,7 +169,7 @@
     transform: translateY(-110px);
   }
 }
-@keyframes up2 {
+@keyframes up2-2048 {
   from {
     transform: translateY(0);
   }
@@ -177,7 +177,7 @@
     transform: translateY(-220px);
   }
 }
-@keyframes up3 {
+@keyframes up3-2048 {
   from {
     transform: translateY(0);
   }
@@ -186,7 +186,7 @@
   }
 }
 
-@keyframes down1 {
+@keyframes down1-2048 {
   from {
     transform: translateY(0);
   }
@@ -194,7 +194,7 @@
     transform: translateY(110px);
   }
 }
-@keyframes down2 {
+@keyframes down2-2048 {
   from {
     transform: translateY(0);
   }
@@ -202,7 +202,7 @@
     transform: translateY(220px);
   }
 }
-@keyframes down3 {
+@keyframes down3-2048 {
   from {
     transform: translateY(0);
   }

@@ -1,18 +1,17 @@
-#game-2048 {
-  padding-bottom: 50px;
+#game-1024 {
   background-color: #eee;
 }
-#g2048_inner {
+#g1024_inner {
   width: var(--inner-width);
   margin: 0 auto;
 }
-#g2048_filler {
+#g1024_filler {
   height: 70px;
   color: var(--accent);
   text-align: center;
   font-style: italic;
 }
-#g2048_app {
+#g1024_app {
   border: 3px solid black;
   border-radius: 10px;
   padding: 25px 0 50px;
@@ -21,11 +20,11 @@
   flex-direction: column;
   justify-content: center;
 }
-#g2048_content {
+#g1024_content {
   display: flex;
   justify-content: center;
 }
 
-#game-2048 .high-scores {
+#game-1024 .high-scores {
   padding: 50px 0 100px;
 }

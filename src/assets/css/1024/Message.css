@@ -1,0 +1,27 @@
+#g1024_ms {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#g1024ms_heading {
+  margin-top: 162px;
+  font-size: 4em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--primary);
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+    1px 1px 0 #fff;
+}
+#g1024ms_line {
+  margin-top: 38px;
+  font-size: 1.75em;
+  font-weight: 600;
+  color: var(--tertiary);
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+    1px 1px 0 #fff;
+  letter-spacing: 1px;
+}

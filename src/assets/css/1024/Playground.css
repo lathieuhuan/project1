@@ -1,0 +1,39 @@
+#g1024_playground {
+  position: relative;
+  width: 510px;
+  height: 510px;
+  border-radius: 5px;
+  cursor: default;
+  user-select: none;
+}
+#g1024_pedestal {
+  padding: 5px;
+  background-color: rgb(187, 173, 160);
+  display: flex;
+  flex-wrap: wrap;
+}
+#g1024_pedestal > .cell {
+  width: 90px;
+  height: 90px;
+  margin: 5px;
+  border-radius: 3px;
+  background-color: rgb(205, 193, 180);
+}
+#g1024_bowl {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  padding: 5px;
+  background: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+.g1024_tile {
+  width: 90px;
+  height: 90px;
+  margin: 5px;
+  border-radius: 3px;
+  font-weight: 700;
+  line-height: 90px;
+  text-align: center;
+}

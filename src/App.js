@@ -11,6 +11,7 @@ import { ConstructionSite } from "./components/accessories/ConstructionSite";
 import { NotFound } from "./components/accessories/NotFound";
 import { FillerPage } from "./components/accessories/FillerPage";
 import { CardMemoryGame } from "./components/cmg/CardMemoryGame";
+import { Game1024 } from "./components/1024/Game1024";
 import { Game2048 } from "./components/2048/Game2048";
 import { Footer } from "./components/Footer";
 // Dont create child components with the same first letters
@@ -62,8 +63,11 @@ class App extends Component {
             <Route exact path="/Card_Memory_Game">
               <CardMemoryGame userId={userId} setAppState={this.setAppState} />
             </Route>
+            <Route exact path="/1024">
+              <Game1024 userId={userId} setAppState={this.setAppState} />
+            </Route>
             <Route exact path="/2048">
-              <Game2048 userId={userId} setAppState={this.setAppState} />
+              <Game2048 />
             </Route>
             <Route
               exact

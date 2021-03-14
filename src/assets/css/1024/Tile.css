@@ -1,0 +1,252 @@
+.g1024_tile.val-4 {
+  background-color: rgb(243, 178, 122);
+  color: rgb(249, 246, 242);
+  font-size: 50px;
+}
+.g1024_tile.val-8 {
+  background-color: rgb(246, 150, 100);
+  color: rgb(249, 246, 242);
+  font-size: 50px;
+}
+.g1024_tile.val-16 {
+  background-color: rgb(247, 124, 95);
+  color: rgb(249, 246, 242);
+  font-size: 46px;
+}
+.g1024_tile.val-32 {
+  background-color: rgb(247, 95, 59);
+  color: rgb(249, 246, 242);
+  font-size: 46px;
+}
+.g1024_tile.val-64 {
+  background-color: rgb(237, 208, 115);
+  color: rgb(249, 246, 242);
+  font-size: 46px;
+}
+.g1024_tile.val-128 {
+  background-color: rgb(237, 204, 98);
+  color: rgb(249, 246, 242);
+  font-size: 38px;
+}
+.g1024_tile.val-256 {
+  background-color: rgb(237, 201, 80);
+  color: rgb(249, 246, 242);
+  font-size: 38px;
+}
+.g1024_tile.val-512 {
+  background-color: rgb(237, 195, 44);
+  color: rgb(249, 246, 242);
+  font-size: 38px;
+}
+.g1024_tile.val-1024 {
+  background-color: rgb(237, 189, 8);
+  color: rgb(249, 246, 242);
+  font-size: 32px;
+}
+
+/* .new-tile {
+  animation: innerZoom 150ms ease-in-out;
+}
+.merged-tile {
+  animation: outerZoom 150ms ease-in-out;
+}
+@keyframes innerZoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes outerZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.3);
+  }
+} */
+
+.g1024_tile.left-1 {
+  animation: left1-1024 150ms linear forwards;
+}
+.g1024_tile.left-2 {
+  animation: left2-1024 150ms linear forwards;
+}
+.g1024_tile.left-3 {
+  animation: left3-1024 150ms linear forwards;
+}
+.g1024_tile.left-4 {
+  animation: left4-1024 150ms linear forwards;
+}
+
+.g1024_tile.right-1 {
+  animation: right1-1024 150ms linear forwards;
+}
+.g1024_tile.right-2 {
+  animation: right2-1024 150ms linear forwards;
+}
+.g1024_tile.right-3 {
+  animation: right3-1024 150ms linear forwards;
+}
+.g1024_tile.right-4 {
+  animation: right4-1024 150ms linear forwards;
+}
+
+.g1024_tile.up-1 {
+  animation: up1-1024 150ms linear forwards;
+}
+.g1024_tile.up-2 {
+  animation: up2-1024 150ms linear forwards;
+}
+.g1024_tile.up-3 {
+  animation: up3-1024 150ms linear forwards;
+}
+.g1024_tile.up-4 {
+  animation: up4-1024 150ms linear forwards;
+}
+
+.g1024_tile.down-1 {
+  animation: down1-1024 150ms linear forwards;
+}
+.g1024_tile.down-2 {
+  animation: down2-1024 150ms linear forwards;
+}
+.g1024_tile.down-3 {
+  animation: down3-1024 150ms linear forwards;
+}
+.g1024_tile.down-4 {
+  animation: down4-1024 150ms linear forwards;
+}
+
+@keyframes left1-1024 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100px);
+  }
+}
+@keyframes left2-1024 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-200px);
+  }
+}
+@keyframes left3-1024 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-300px);
+  }
+}
+@keyframes left4-1024 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-400px);
+  }
+}
+
+@keyframes right1-1024 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100px);
+  }
+}
+@keyframes right2-1024 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(200px);
+  }
+}
+@keyframes right3-1024 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(300px);
+  }
+}
+@keyframes right4-1024 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(400px);
+  }
+}
+
+@keyframes up1-1024 {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100px);
+  }
+}
+@keyframes up2-1024 {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-200px);
+  }
+}
+@keyframes up3-1024 {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-300px);
+  }
+}
+@keyframes up4-1024 {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-400px);
+  }
+}
+
+@keyframes down1-1024 {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100px);
+  }
+}
+@keyframes down2-1024 {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(200px);
+  }
+}
+@keyframes down3-1024 {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(300px);
+  }
+}
+@keyframes down4-1024 {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(400px);
+  }
+}
