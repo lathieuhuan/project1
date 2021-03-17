@@ -1,6 +1,12 @@
 #playground {
   padding: 0 30px;
 }
+#return-home {
+  position: fixed;
+  top: 2rem;
+  background-color: rgb(27, 189, 27);
+  color: white;
+}
 #score {
   margin-bottom: 0.8rem;
   color: red;
@@ -28,12 +34,20 @@
   width: 49%;
   margin-bottom: 0.2rem;
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 10px;
   background-color: black;
+  line-height: 1;
   color: white;
   cursor: pointer;
+}
+.choice:hover {
+  transform: scale(1.03);
 }
 .chosen {
   background-color: rgb(236, 236, 0);
   color: black;
+}
+#submit {
+  background-color: rgb(224, 34, 34);
+  color: white;
 }

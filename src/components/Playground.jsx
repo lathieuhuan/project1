@@ -13,6 +13,9 @@ export class Playground extends React.Component {
     const { index, question, answer, showMessage, score } = this.props;
     return (
       <div className="flex-col-center parent-size" id="playground">
+        <button id="return-home" onClick={this.props.returnHome}>
+          Main Menu
+        </button>
         <p id="score">Score: {score}</p>
         <p id="pg_title">Question {index + 1}: {question.difficulty}</p>
         <p id="question">{question.content}</p>
