@@ -3,6 +3,7 @@ import { Component } from "react";
 import { Welcome } from "./components/Welcome";
 import { Playground } from "./components/Playground";
 import { Message } from "./components/Message";
+import "./components/partA";
 
 class App extends Component {
   constructor(props) {
