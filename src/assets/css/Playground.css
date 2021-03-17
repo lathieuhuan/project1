@@ -1,0 +1,39 @@
+#playground {
+  padding: 0 30px;
+}
+#score {
+  margin-bottom: 0.8rem;
+  color: red;
+  font-weight: 700;
+}
+#pg_title {
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+#question {
+  margin-bottom: 0.8rem;
+  text-align: center;
+  font-weight: 700;
+  color: blue;
+}
+#answers {
+  padding: 0 5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.choice {
+  width: 49%;
+  margin-bottom: 0.2rem;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+.chosen {
+  background-color: rgb(236, 236, 0);
+  color: black;
+}

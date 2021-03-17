@@ -1,0 +1,12 @@
+#home {
+  font-size: 1.4em;
+  padding: 0 5rem;
+  text-align: center;
+}
+#home_heading {
+  margin-bottom: 0.5rem;
+}
+#home_line {
+  font-size: 1.2em;
+  margin-bottom: 1rem;
+}
