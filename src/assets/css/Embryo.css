@@ -1,0 +1,70 @@
+#embryo {
+  width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+#eb_name {
+  width: 300px;
+  margin: 0 auto 15px;
+  font-size: 28px !important;
+  font-weight: 750;
+  text-align: center;
+}
+.eb_line {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+#embryo .eb_left {
+  width: 120px;
+  font-weight: 700;
+  flex-grow: 0;
+}
+#embryo input,
+#embryo textarea {
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 16px;
+}
+#embryo input {
+  padding: 5px 10px;
+}
+#embryo textarea {
+  resize: vertical;
+  padding: 10px 15px;
+  text-align: justify;
+  line-height: 1.5;
+  outline: none;
+}
+#eb_desc {
+  min-height: 150px;
+}
+.shrink {
+  width: 50px;
+}
+.grow {
+  flex-grow: 1;
+}
+
+.effect_name {
+  margin-bottom: 5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.effect_name .fa-minus-square {
+  margin-left: 15px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.effect_desc {
+  min-height: 65px;
+}
+.eb_line .fa-plus-square {
+  margin-top: 10px;
+  font-size: 20px;
+  transform: translateX(283px);
+  cursor: pointer;
+}

@@ -1,0 +1,50 @@
+#skill-list {
+  min-height: 722px;
+  padding: 100px 30px 30px;
+  background-color: #eee;
+  columns: 3;
+  column-gap: 30px;
+}
+.skill-card {
+  position: relative;
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 20px 20px 10px;
+  background-color: white;
+  text-align: justify;
+  break-inside: avoid;
+  box-shadow: var(--normal-shadow);
+}
+.skill-card .fa-edit {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 20px;
+  color: rgb(150, 150, 150);
+  cursor: pointer;
+}
+.skill-card .fa-edit:hover {
+  color: black;
+}
+.sc_heading {
+  margin-bottom: 5px;
+}
+.passive {
+  color: rgb(0, 200, 0);
+}
+.active {
+  color: blue;
+}
+.skill-card sup {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgb(125, 125, 125);
+}
+.sc_subheading {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+.sc_line {
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
