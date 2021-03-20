@@ -13,6 +13,10 @@ export function MasteryEmbryo(props) {
         value={mastery.name || ""}
         onChange={handleChange}
       />
+      {props.nameExisted ? <p className="warning">
+        <span className="fa fa-exclamation-circle">
+        </span> Name existed! <span className="fa fa-exclamation-circle">
+        </span></p> : null}
       <div>
         <div className="eb_line">
           <p className="eb_left">Mastery slot: </p>

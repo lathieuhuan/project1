@@ -19,7 +19,10 @@ async function heroKit(heroName) {
     .then((querySnapshot) => {
       let skills = [];
       querySnapshot.forEach((doc) => {
-        skills.push(doc.data());
+        skills.push({
+          id: doc.id,
+          ...doc.data(),
+        });
       });
       return skills;
     });
@@ -29,7 +32,10 @@ async function heroKit(heroName) {
     .then((querySnapshot) => {
       let masteries = [];
       querySnapshot.forEach((doc) => {
-        masteries.push(doc.data());
+        masteries.push({
+          id: doc.id,
+          ...doc.data(),
+        });
       });
       return masteries;
     });
@@ -45,26 +51,46 @@ function kitCate(keywords, type) {
       .then((querySnapshot) => {
         let result = [];
         querySnapshot.forEach((doc) => {
-          result.push(doc.data());
+          result.push({
+            id: doc.id,
+            ...doc.data(),
+          });
         });
         res(result);
       });
   });
 }
 
-function updateKit(kit, type) {
-  return new Promise((res) => {
+function updateKit(oriKit, type) {
+  let kit = { ...oriKit },
+    { id } = kit;
+  delete kit.id;
+  return new Promise((res, rej) => {
     const ref = type === "skill" ? skillsRef : masteriesRef;
     ref
-      .where("name", "==", kit.name)
-      .limit(1)
+      .doc(id)
       .get()
       .then((querySnapshot) => {
-        return querySnapshot.docs[0].id;
+        if (querySnapshot.data().name === kit.name) {
+          ref.doc(id).update(kit);
+          res();
+        }
       })
-      .then((id) => {
-        ref.doc(id).update(kit);
-        res();
+      .then(() => {
+        ref
+          .where("name", "==", kit.name)
+          .limit(1)
+          .get()
+          .then((querySnapshot) => {
+            if (!querySnapshot.empty) {
+              throw new Error("Name existed.");
+            }
+          })
+          .then(() => {
+            ref.doc(id).update(kit);
+            res();
+          })
+          .catch((err) => rej(err));
       });
   });
 }
@@ -78,7 +104,7 @@ function addKit(kit, type) {
       .get()
       .then((querySnapshot) => {
         if (!querySnapshot.empty) {
-          throw new Error("The skill name has already existed.");
+          throw new Error("Name existed.");
         }
       })
       .then(() => {

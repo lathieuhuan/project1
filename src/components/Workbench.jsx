@@ -57,6 +57,7 @@ export class Workbench extends React.Component {
             submitEffectName={this.submitEffectName}
             deleteEffect={this.deleteEffect}
             addEffect={this.addEffect}
+            nameExisted={this.props.nameExisted}
           />
         ) : (
           <MasteryEmbryo
@@ -65,6 +66,7 @@ export class Workbench extends React.Component {
             submitEffectName={this.submitEffectName}
             deleteEffect={this.deleteEffect}
             addEffect={this.addEffect}
+            nameExisted={this.props.nameExisted}
           />
         )}
       </div>

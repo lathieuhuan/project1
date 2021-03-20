@@ -14,14 +14,14 @@ export class Apprentice extends React.Component {
     return (
       <div id="apprentice">
         <button
-          class="prepare-workbench"
+          className="prepare-workbench"
           id="work-on-skill"
           onClick={() => this.props.setUI("creating", "skill")}
         >
           Add Skill
         </button>
         <button
-          class="prepare-workbench"
+          className="prepare-workbench"
           id="work-on-mastery"
           onClick={() => this.props.setUI("creating", "mastery")}
         >

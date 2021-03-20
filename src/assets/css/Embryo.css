@@ -12,6 +12,11 @@
   font-weight: 750;
   text-align: center;
 }
+.warning {
+  text-align: center;
+  font-weight: 700;
+  color: var(--orange);
+}
 .eb_line {
   margin-bottom: 10px;
   display: flex;
@@ -25,13 +30,15 @@
   flex-grow: 0;
 }
 #embryo input,
-#embryo textarea {
+#embryo textarea,
+#embryo select {
   border: 1px solid black;
   border-radius: 3px;
   font-family: "Times New Roman", Times, serif;
   font-size: inherit;
 }
-#embryo input {
+#embryo input,
+#embryo select {
   padding: 5px 10px;
 }
 #embryo textarea {

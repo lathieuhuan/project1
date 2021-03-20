@@ -35,6 +35,7 @@ class App extends Component {
             ? skills.length
             : masteries.length
           : currentI,
+      nameExisted: false,
     });
   };
   search = (type, terms) => {
@@ -60,18 +61,30 @@ class App extends Component {
     let { kitType } = this.state;
     if (action === "editing") {
       let { skills, masteries } = this.state;
-      updateKit(newKit, kitType).then(() => {
-        if (kitType === "skill") {
-          skills[this.state.currentI] = newKit;
-        } else {
-          masteries[this.state.currentI] = newKit;
-        }
-        this.setState({ updating: false, UIstate: "viewing" });
-      });
+      updateKit(newKit, kitType)
+        .then(() => {
+          if (kitType === "skill") {
+            skills[this.state.currentI] = newKit;
+          } else {
+            masteries[this.state.currentI] = newKit;
+          }
+          this.setState({
+            UIstate: "viewing",
+            nameExisted: false,
+            updating: false,
+          });
+        })
+        .catch(() => this.setState({ nameExisted: true, updating: false }));
     } else if (action === "creating") {
       addKit(newKit, kitType)
-        .then(() => this.setState({ updating: false, UIstate: "viewing" }))
-        .catch(() => this.setState({ nameExisted: true }));
+        .then(() =>
+          this.setState({
+            UIstate: "viewing",
+            nameExisted: false,
+            updating: false,
+          })
+        )
+        .catch(() => this.setState({ nameExisted: true, updating: false }));
     }
   };
   tryDelete = (type, i) => {
@@ -96,6 +109,7 @@ class App extends Component {
       currentI,
       kitType,
       updating,
+      nameExisted,
     } = this.state;
     const content = {
       viewing: (
@@ -121,6 +135,7 @@ class App extends Component {
           updating={updating}
           tryUpdate={this.tryUpdate}
           setUI={this.setUI}
+          nameExisted={nameExisted}
         />
       ),
       creating: (
@@ -131,6 +146,7 @@ class App extends Component {
           updating={updating}
           tryUpdate={this.tryUpdate}
           setUI={this.setUI}
+          nameExisted={nameExisted}
         />
       ),
     };

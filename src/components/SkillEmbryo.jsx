@@ -14,6 +14,7 @@ export function SkillEmbryo(props) {
         value={skill.name || ""}
         onChange={handleChange}
       />
+      {props.nameExisted ? <p className="warning">Name existed!</p> : null}
       <div>
         <div className="eb_line">
           <p className="eb_left">Skill slot: </p>
@@ -48,13 +49,24 @@ export function SkillEmbryo(props) {
         </div>
         <div className="eb_line">
           <p className="eb_left">Type: </p>
-          <input
-            type="text"
+          <select
             name="type"
             className="grow"
-            value={skill.type || ""}
+            defaultValue={skill.type || "Bị động"}
             onChange={handleChange}
-          />
+          >
+            <option value="Bị động">Bị động</option>
+            <option value="Chủ động - Không mục tiêu">
+              Chủ động - Không mục tiêu
+            </option>
+            <option value="Chủ động - Mục tiêu ô">Chủ động - Mục tiêu ô</option>
+            <option value="Chủ động - Mục tiêu quân cờ">
+              Chủ động - Mục tiêu quân cờ
+            </option>
+            <option value="Chủ động - Mục tiêu vùng">
+              Chủ động - Mục tiêu vùng
+            </option>
+          </select>
         </div>
         <div className="eb_line">
           <p className="eb_left">Description: </p>
