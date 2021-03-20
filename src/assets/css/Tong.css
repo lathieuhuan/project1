@@ -1,0 +1,41 @@
+#tong-rack {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 70px;
+}
+#rack {
+  width: 900px;
+  margin: 0 auto;
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+}
+#moving {
+  height: 40px;
+}
+
+#rack button {
+  height: 40px;
+  margin: 0 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 700;
+  box-shadow: var(--lesser-shadow);
+}
+#to-shelf {
+  background-color: var(--light-yellow);
+}
+#to-shelf:hover {
+  background-color: var(--yellow);
+}
+#to-trashbin {
+  background-color: rgb(50, 50, 50);
+  color: white;
+}
+#to-trashbin:hover {
+  background-color: black;
+}

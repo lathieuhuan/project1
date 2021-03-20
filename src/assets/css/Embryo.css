@@ -1,6 +1,7 @@
 #embryo {
   width: 700px;
   margin: 0 auto;
+  font-size: 17px;
   display: flex;
   flex-direction: column;
 }
@@ -14,11 +15,12 @@
 .eb_line {
   margin-bottom: 10px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 #embryo .eb_left {
   width: 120px;
+  margin-top: 5px;
   font-weight: 700;
   flex-grow: 0;
 }
@@ -26,7 +28,8 @@
 #embryo textarea {
   border: 1px solid black;
   border-radius: 3px;
-  font-size: 16px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: inherit;
 }
 #embryo input {
   padding: 5px 10px;
@@ -54,16 +57,18 @@
   display: flex;
   align-items: center;
 }
-.effect_name .fa-minus-square {
+.effect_name .fa-check-square,
+.effect_name .fa-minus-square,
+.effect_name .fa-pencil-square {
   margin-left: 15px;
   font-size: 18px;
   cursor: pointer;
 }
 .effect_desc {
   min-height: 65px;
+  margin-bottom: 10px;
 }
 .eb_line .fa-plus-square {
-  margin-top: 10px;
   font-size: 20px;
   transform: translateX(283px);
   cursor: pointer;

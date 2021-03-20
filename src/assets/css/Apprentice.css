@@ -1,11 +1,11 @@
-#search-bar {
+#apprentice {
   position: fixed;
   top: 0;
   z-index: 1;
   width: 100%;
   height: 70px;
 }
-#sb_inner {
+#query {
   --content-height: 40px;
   width: 900px;
   margin: 0 auto;
@@ -15,41 +15,45 @@
   align-items: center;
 }
 
-#add-btn {
+.prepare-workbench {
   position: absolute;
-  left: 15px;
   top: 15px;
   height: 40px;
   padding: 0 10px;
   border: none;
   border-radius: 5px;
-  background-color: rgb(50, 50, 50);
+  background-color: var(--light-yellow);
   font-size: 1em;
   font-weight: 700;
-  color: white;
   box-shadow: var(--lesser-shadow);
 }
-#add-btn:hover {
-  background-color: black;
+.prepare-workbench:hover {
+  background-color: var(--yellow);
+}
+#work-on-skill {
+  left: 15px;
+}
+#work-on-mastery {
+  right: 15px;
 }
 
-#search-bar p {
+#apprentice p {
   font-size: 20px;
   font-weight: 700;
   color: white;
   user-select: none;
 }
-#search-bar select,
-#search-bar input {
+#apprentice select,
+#apprentice input {
   height: var(--content-height);
   margin-left: 10px;
   font-size: 15px;
 }
-#search-bar select {
+#apprentice select {
   border-radius: 5px;
   padding: 0 5px;
 }
-#search-bar input {
+#apprentice input {
   width: 300px;
   border: none;
   border-radius: 5px 0 0 5px;
@@ -59,8 +63,11 @@
   width: var(--content-height);
   height: var(--content-height);
   border-radius: 0 5px 5px 0;
-  background-color: var(--yellow);
+  background-color: var(--light-yellow);
   cursor: pointer;
+}
+#search-btn:hover {
+  background-color: var(--yellow);
 }
 #search-icon {
   width: 20px;

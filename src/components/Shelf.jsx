@@ -1,11 +1,22 @@
-import { SearchBar } from "./SearchBar";
-import { SkillsList } from "./SkillsList"
+import "../assets/css/Shelf.css";
+import React from "react";
+import { Skills } from "./Skills";
+import { Masteries } from "./Masteries";
 
 export function Shelf(props) {
   return (
-    <div>
-      <SearchBar search={props.search} />
-      <SkillsList skills={props.skills} setUI={props.setUI} />
+    <div id="shelf">
+      <Skills
+        skills={props.skills}
+        setUI={props.setUI}
+        tryDelete={props.tryDelete}
+      />
+      <div className="full-hor-line"></div>
+      <Masteries
+        masteries={props.masteries}
+        setUI={props.setUI}
+        tryDelete={props.tryDelete}
+      />
     </div>
   );
 }

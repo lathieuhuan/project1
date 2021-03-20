@@ -1,30 +1,9 @@
 import "../assets/css/Embryo.css";
+import { Effects } from "./Effects";
 
-export function Embryo(props) {
+export function SkillEmbryo(props) {
   const { skill, handleChange } = props,
-    active = skill.type.substr(0, 3) === "Chủ";
-  let effects = [];
-  for (let key in skill.effects) {
-    effects.push(
-      <div key={key} className="flex-col">
-        <div className="effect_name">
-          <p>{key}</p>
-          <p
-            className="fa fa-minus-square"
-            onClick={() => props.deleteEffect(key)}
-          ></p>
-        </div>
-        <textarea
-          type="text"
-          name={key}
-          className="effect_desc"
-          value={skill.effects[key]}
-          spellCheck={false}
-          onChange={props.changeEffect}
-        />
-      </div>
-    );
-  }
+    active = skill.type?.substr(0, 3) === "Chủ";
   return (
     <div id="embryo">
       <input
@@ -32,7 +11,7 @@ export function Embryo(props) {
         name="name"
         className={active ? "active" : "passive"}
         id="eb_name"
-        value={skill.name}
+        value={skill.name || ""}
         onChange={handleChange}
       />
       <div>
@@ -42,16 +21,19 @@ export function Embryo(props) {
             type="text"
             name="slot"
             className="shrink"
-            value={skill.slot}
+            value={skill.slot || ""}
             onChange={handleChange}
           />
         </div>
         <div className="eb_line">
           <p className="eb_left">Categories: </p>
           <input
+            type="text"
+            name="categories"
             className="grow"
-            value={skill.categories.join(", ")}
-            onChange={props.changeCategories}
+            value={skill.categories?.join(", ") || ""}
+            spellCheck={false}
+            onChange={(e) => handleChange(e, "c")}
           />
         </div>
         <div className="eb_line">
@@ -60,7 +42,7 @@ export function Embryo(props) {
             type="text"
             name="owner"
             className="grow"
-            value={skill.owner}
+            value={skill.owner || ""}
             onChange={handleChange}
           />
         </div>
@@ -70,7 +52,7 @@ export function Embryo(props) {
             type="text"
             name="type"
             className="grow"
-            value={skill.type}
+            value={skill.type || ""}
             onChange={handleChange}
           />
         </div>
@@ -81,18 +63,18 @@ export function Embryo(props) {
             name="desc"
             className="grow"
             id="eb_desc"
-            value={skill.desc}
+            value={skill.desc || ""}
             spellCheck={false}
             onChange={handleChange}
           />
         </div>
-        <div className="eb_line">
-          <p className="eb_left">Effects:</p>
-          <div className="grow">
-            {effects}
-            <p className="fa fa-plus-square"></p>
-          </div>
-        </div>
+        <Effects
+          effects={skill.effects || ""}
+          handleChange={handleChange}
+          submitEffectName={props.submitEffectName}
+          deleteEffect={props.deleteEffect}
+          addEffect={props.addEffect}
+        />
         {active ? (
           <div className="flex-col">
             <div className="eb_line">
@@ -101,7 +83,7 @@ export function Embryo(props) {
                 type="text"
                 name="AP"
                 className="shrink"
-                value={skill.AP}
+                value={skill.AP || ""}
                 onChange={handleChange}
               />
             </div>
@@ -111,7 +93,7 @@ export function Embryo(props) {
                 type="text"
                 name="manaCost"
                 className="shrink"
-                value={skill.manaCost}
+                value={skill.manaCost || ""}
                 onChange={handleChange}
               />
             </div>
@@ -121,7 +103,7 @@ export function Embryo(props) {
                 type="text"
                 name="cooldown"
                 className="shrink"
-                value={skill.cooldown}
+                value={skill.cooldown || ""}
                 onChange={handleChange}
               />
             </div>

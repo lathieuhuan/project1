@@ -1,7 +1,7 @@
-import "../assets/css/SearchBar.css";
+import "../assets/css/Apprentice.css";
 import React from "react";
 
-export class SearchBar extends React.Component {
+export class Apprentice extends React.Component {
   constructor(props) {
     super(props);
     this.state = { searchType: "skills & masteries by hero", searchTerms: "" };
@@ -12,9 +12,22 @@ export class SearchBar extends React.Component {
   render() {
     const { searchType, searchTerms } = this.state;
     return (
-      <div id="search-bar">
-        <button id="add-btn">Add Skill / Masteries</button>
-        <div id="sb_inner">
+      <div id="apprentice">
+        <button
+          class="prepare-workbench"
+          id="work-on-skill"
+          onClick={() => this.props.setUI("creating", "skill")}
+        >
+          Add Skill
+        </button>
+        <button
+          class="prepare-workbench"
+          id="work-on-mastery"
+          onClick={() => this.props.setUI("creating", "mastery")}
+        >
+          Add Masteries
+        </button>
+        <div id="query">
           <p>SEARCH</p>
           <select
             name="searchType"
