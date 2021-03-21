@@ -22,6 +22,7 @@ class App extends Component {
       kitType: null,
       updating: false,
       nameExisted: false,
+      allowDup: false,
     };
   }
   setUI = (UIstate, kitType, currentI) => {
@@ -58,10 +59,10 @@ class App extends Component {
   };
   tryUpdate = (newKit, action) => {
     this.setState({ updating: true });
-    let { kitType } = this.state;
+    let { kitType, allowDup } = this.state;
     if (action === "editing") {
       let { skills, masteries } = this.state;
-      updateKit(newKit, kitType)
+      updateKit(newKit, kitType, allowDup)
         .then(() => {
           if (kitType === "skill") {
             skills[this.state.currentI] = newKit;
@@ -72,16 +73,18 @@ class App extends Component {
             UIstate: "viewing",
             nameExisted: false,
             updating: false,
+            allowDup: false,
           });
         })
         .catch(() => this.setState({ nameExisted: true, updating: false }));
     } else if (action === "creating") {
-      addKit(newKit, kitType)
+      addKit(newKit, kitType, allowDup)
         .then(() =>
           this.setState({
             UIstate: "viewing",
             nameExisted: false,
             updating: false,
+            allowDup: false,
           })
         )
         .catch(() => this.setState({ nameExisted: true, updating: false }));
@@ -101,16 +104,11 @@ class App extends Component {
       }
     );
   };
+  toggleDup = () => {
+    this.setState({ allowDup: !this.state.allowDup });
+  };
   render() {
-    const {
-      UIstate,
-      skills,
-      masteries,
-      currentI,
-      kitType,
-      updating,
-      nameExisted,
-    } = this.state;
+    const { UIstate, skills, masteries, currentI, kitType } = this.state;
     const content = {
       viewing: (
         <div>
@@ -124,6 +122,7 @@ class App extends Component {
             masteries={masteries}
             setUI={this.setUI}
             tryDelete={this.tryDelete}
+            search={this.search}
           />
         </div>
       ),
@@ -132,10 +131,12 @@ class App extends Component {
           UIstate={UIstate}
           kit={kitType === "skill" ? skills[currentI] : masteries[currentI]}
           kitType={kitType}
-          updating={updating}
+          updating={this.state.updating}
           tryUpdate={this.tryUpdate}
           setUI={this.setUI}
-          nameExisted={nameExisted}
+          nameExisted={this.state.nameExisted}
+          allowDup={this.state.allowDup}
+          toggleDup={this.toggleDup}
         />
       ),
       creating: (
@@ -143,10 +144,12 @@ class App extends Component {
           UIstate={UIstate}
           kit={kitType === "skill" ? skills[currentI] : masteries[currentI]}
           kitType={kitType}
-          updating={updating}
+          updating={this.state.updating}
           tryUpdate={this.tryUpdate}
           setUI={this.setUI}
-          nameExisted={nameExisted}
+          nameExisted={this.state.nameExisted}
+          allowDup={this.state.allowDup}
+          toggleDup={this.toggleDup}
         />
       ),
     };

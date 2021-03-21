@@ -61,7 +61,7 @@ function kitCate(keywords, type) {
   });
 }
 
-function updateKit(oriKit, type) {
+function updateKit(oriKit, type, allowDup) {
   let kit = { ...oriKit },
     { id } = kit;
   delete kit.id;
@@ -71,7 +71,7 @@ function updateKit(oriKit, type) {
       .doc(id)
       .get()
       .then((querySnapshot) => {
-        if (querySnapshot.data().name === kit.name) {
+        if (allowDup || querySnapshot.data().name === kit.name) {
           ref.doc(id).update(kit);
           res();
         }
@@ -95,7 +95,7 @@ function updateKit(oriKit, type) {
   });
 }
 
-function addKit(kit, type) {
+function addKit(kit, type, allowDup) {
   return new Promise((res, rej) => {
     const ref = type === "skill" ? skillsRef : masteriesRef;
     ref
@@ -103,7 +103,7 @@ function addKit(kit, type) {
       .limit(1)
       .get()
       .then((querySnapshot) => {
-        if (!querySnapshot.empty) {
+        if (!allowDup && !querySnapshot.empty) {
           throw new Error("Name existed.");
         }
       })

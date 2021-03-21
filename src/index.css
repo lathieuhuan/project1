@@ -21,8 +21,8 @@ code {
 :root {
   --red: rgb(255, 23, 93);
   --orange: rgb(255, 104, 23);
-  --yellow: rgb(255, 217, 0);
-  --light-yellow: rgb(255, 220, 83);
+  --yellow: rgb(255, 200, 0);
+  --light-yellow: rgb(255, 213, 60);
   --blue: rgb(23, 162, 255);
   --normal-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15);
   --lesser-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 3px 10px rgba(0, 0, 0, 0.15);

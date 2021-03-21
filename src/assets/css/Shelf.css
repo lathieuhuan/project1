@@ -59,6 +59,22 @@
   line-height: 1.8;
   font-size: 14px;
 }
+#kc_cats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#cat_desc {
+  color: var(--red);
+  font-weight: 600;
+}
+.kc_cat {
+  margin: 2px;
+  padding: 0 10px;
+  border-radius: 20px;
+  background-color: var(--light-yellow);
+  cursor: pointer;
+}
 .kc_line {
   margin-bottom: 5px;
   line-height: 1.5;

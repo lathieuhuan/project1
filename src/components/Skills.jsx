@@ -3,7 +3,7 @@ export function Skills(props) {
   return (
     <div className="shelf_container">
       {props.skills?.map((skill, i) => {
-        const type = skill.type.substr(0,2) === "Bị" ? "passive" : "active";
+        const type = skill.type?.substr(0,2) === "Bị" ? "passive" : "active";
         let effects = [];
         for (let key in skill.effects) {
           effects.push(
@@ -26,11 +26,19 @@ export function Skills(props) {
               <span className={type}
               >{skill.name}</span> <sup>(Skill {skill.slot})</sup>
             </h1>
-            <p className="kc_subheading">
-              <i><span className="red">Categories:</span> {
-                skill.categories?.join(", ")
-              }</i>
-            </p>
+            <div className="kc_subheading" id="kc_cats">
+              <p id="cat_desc">Categories:</p>
+              {skill.categories?.map((cat, i) => {
+                return (
+                  <p key={i}
+                    className="kc_cat"
+                    onClick={() => props.search("skills by category", cat)}
+                  >
+                    {cat}
+                  </p>
+                );
+              })}
+            </div>
             <p className="kc_line"><b>Hero:</b> {skill.owner}</p>
             <p className="kc_line"><b>Type:</b> {skill.type}</p>
             <p className="kc_line"><b>Description:</b> {skill.desc}</p>

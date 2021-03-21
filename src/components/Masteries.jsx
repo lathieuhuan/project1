@@ -25,11 +25,19 @@ export function Masteries(props) {
               <span className="mastery"
               >{mastery.name}</span> <sup>(Mastery {mastery.slot})</sup>
             </h1>
-            <p className="kc_subheading">
-              <i><span className="red">Categories:</span> {
-                mastery.categories?.join(", ")
-              }</i>
-            </p>
+            <div className="kc_subheading" id="kc_cats">
+              <p id="cat_desc">Categories:</p>
+              {mastery.categories?.map((cat, i) => {
+                return (
+                  <p key={i}
+                    className="kc_cat"
+                    onClick={() => props.search("masteries by category", cat)}
+                  >
+                    {cat}
+                  </p>
+                );
+              })}
+            </div>
             <p className="kc_line"><b>Hero:</b> {mastery.owner}</p>
             <p className="kc_line"><b>Description:</b> {mastery.desc}</p>
             {effects}

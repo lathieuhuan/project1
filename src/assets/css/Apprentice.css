@@ -44,21 +44,27 @@
   user-select: none;
 }
 #apprentice select,
-#apprentice input {
+#sb_inner {
   height: var(--content-height);
-  margin-left: 10px;
   font-size: 15px;
 }
 #apprentice select {
+  margin-left: 10px;
   border-radius: 5px;
   padding: 0 5px;
 }
-#apprentice input {
-  width: 300px;
+#search-box {
+  position: relative;
+  width: 260px;
+  margin-left: 10px;
+}
+#sb_inner {
+  width: 100%;
   border: none;
-  border-radius: 5px 0 0 5px;
+  border-radius: 5px 0 0;
   padding: 0 15px;
 }
+
 #search-btn {
   width: var(--content-height);
   height: var(--content-height);

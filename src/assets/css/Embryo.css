@@ -1,4 +1,5 @@
 #embryo {
+  position: relative;
   width: 700px;
   margin: 0 auto;
   font-size: 17px;
@@ -12,6 +13,17 @@
   font-weight: 750;
   text-align: center;
 }
+#embryo .fa-clone {
+  position: absolute;
+  top: 6px;
+  right: 150px;
+  border: none;
+  font-size: 32px;
+  font-weight: 700;
+}
+.allow-dup {
+  color: red;
+}
 .warning {
   text-align: center;
   font-weight: 700;
@@ -22,14 +34,13 @@
   display: flex;
   align-items: flex-start;
 }
-
 #embryo .eb_left {
   width: 120px;
   margin-top: 5px;
   font-weight: 700;
   flex-grow: 0;
 }
-#embryo input,
+.regular-inp,
 #embryo textarea,
 #embryo select {
   border: 1px solid black;
@@ -37,7 +48,7 @@
   font-family: "Times New Roman", Times, serif;
   font-size: inherit;
 }
-#embryo input,
+.regular-inp,
 #embryo select {
   padding: 5px 10px;
 }
@@ -56,6 +67,65 @@
 }
 .grow {
   flex-grow: 1;
+}
+
+#hero-name,
+#cats {
+  position: relative;
+}
+#cats_inner {
+  max-width: 580px;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 3px;
+  background-color: white;
+  font-size: inherit;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+}
+.cat {
+  position: relative;
+}
+.cat .fa-close {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-10px, -10px);
+  width: 20px;
+  height: 20px;
+  border: 2px solid red;
+  border-radius: 50%;
+  background-color: black;
+  color: red;
+  font-size: 12px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.cat:hover .fa-close {
+  display: flex;
+}
+
+.cat_inner,
+#extra-cats {
+  margin: 5px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+.cat_inner {
+  background-color: var(--blue);
+  color: white;
+  cursor: default;
+}
+#extra-cats {
+  width: 150px;
+  height: 32.4px;
+  border: none;
+  background-color: #eee;
+  font-size: 17px;
 }
 
 .effect_name {

@@ -7,7 +7,7 @@ import { MasteryEmbryo } from "./MasteryEmbryo";
 export class Workbench extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { kit: {...props.kit} };
+    this.state = { kit: {...props.kit}, extraCats: "" };
   }
   handleChange = (e, type) => {
     let { kit } = this.state,
@@ -17,10 +17,31 @@ export class Workbench extends React.Component {
     : (kit[e.target.name] = type === "c" ? value.split(", ") : value);
     this.setState({ kit });
   }
-  submitEffectName = (newName, key) => {
-    if (newName !== key) {
+  changeHeroName = (heroName) => {
+    let { kit } = this.state;
+    kit.owner = heroName;
+    this.setState({ kit });
+  }
+  changeExtra = (e) => {
+    this.setState({ extraCats: e.target.value });
+  }
+  addCat = (e) => {
+    let { kit } = this.state;
+    if (!kit.categories) {
+      kit.categories = [];
+    }
+    kit.categories.push(e.target.value);
+    this.setState({ kit, extraCats: "" });
+  }
+  deleteCat = (i) => {
+    let { kit } = this.state;
+    kit.categories.splice(i, 1);
+    this.setState({ kit });
+  }
+  submitEffectName = (effectName, key) => {
+    if (effectName !== key) {
       let { kit } = this.state;
-      kit.effects[newName] = kit.effects[key];
+      kit.effects[effectName] = kit.effects[key];
       delete kit.effects[key];
       this.setState({ kit });
     }
@@ -39,7 +60,11 @@ export class Workbench extends React.Component {
     this.setState({ kit });
   }
   save = () => {
-    this.props.tryUpdate(this.state.kit, this.props.UIstate);
+    let { kit, extraCats } = this.state;
+    if (extraCats !== "") {
+      kit.categories = kit.categories.concat(extraCats.split(", "));
+    }
+    this.props.tryUpdate(kit, this.props.UIstate);
   }
   render() {
     return (
@@ -58,6 +83,13 @@ export class Workbench extends React.Component {
             deleteEffect={this.deleteEffect}
             addEffect={this.addEffect}
             nameExisted={this.props.nameExisted}
+            allowDup={this.props.allowDup}
+            toggleDup={this.props.toggleDup}
+            changeHeroName={this.changeHeroName}
+            extraCats={this.state.extraCats}
+            changeExtra={this.changeExtra}
+            addCat={this.addCat}
+            deleteCat={this.deleteCat}
           />
         ) : (
           <MasteryEmbryo
@@ -67,6 +99,13 @@ export class Workbench extends React.Component {
             deleteEffect={this.deleteEffect}
             addEffect={this.addEffect}
             nameExisted={this.props.nameExisted}
+            allowDup={this.props.allowDup}
+            toggleDup={this.props.toggleDup}
+            changeHeroName={this.changeHeroName}
+            extraCats={this.state.extraCats}
+            changeExtra={this.changeExtra}
+            addCat={this.addCat}
+            deleteCat={this.deleteCat}
           />
         )}
       </div>

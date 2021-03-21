@@ -10,12 +10,14 @@ export function Shelf(props) {
         skills={props.skills}
         setUI={props.setUI}
         tryDelete={props.tryDelete}
+        search={props.search}
       />
       <div className="full-hor-line"></div>
       <Masteries
         masteries={props.masteries}
         setUI={props.setUI}
         tryDelete={props.tryDelete}
+        search={props.search}
       />
     </div>
   );
