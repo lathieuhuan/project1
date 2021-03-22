@@ -39,9 +39,20 @@
 }
 .kc_heading {
   margin-bottom: 5px;
+  width: 360px;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+}
+.kc_name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.kit-card:hover .kc_name {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
 }
 .kc_slot {
   margin-left: 10px;
@@ -78,6 +89,14 @@
   padding: 0 10px;
   border-radius: 20px;
   background-color: var(--light-yellow);
+  cursor: pointer;
+}
+.kc-owner {
+  padding: 2px 10px 5px;
+  border-radius: 30px;
+  background-color: rgb(168, 0, 168);
+  color: white;
+  font-weight: 600;
   cursor: pointer;
 }
 .kc_line {

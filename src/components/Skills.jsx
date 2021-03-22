@@ -22,8 +22,8 @@ export function Skills(props) {
               className="fa fa-trash"
               onClick={() => props.tryDelete("skill", i)}
             ></span>
-            <div className={"kc_heading " + type}>
-              <h1>{skill.name}</h1>
+            <div className="kc_heading">
+              <h1 className={"kc_name " + type}>{skill.name}</h1>
               <p className="kc_slot">(Skill {skill.slot})</p>
             </div>
             <div className="kc_subheading" id="kc_cats">
@@ -39,7 +39,10 @@ export function Skills(props) {
                 );
               })}
             </div>
-            <p className="kc_line"><b>Hero:</b> {skill.owner}</p>
+            <p className="kc_line"><b>Hero:</b> <span className="kc-owner" onClick={() => 
+              props.search("skills & masteries by hero", skill.owner)}
+            >
+              {skill.owner}</span></p>
             <p className="kc_line"><b>Type:</b> {skill.type}</p>
             <p className="kc_line"><b>Description:</b> {skill.desc}</p>
             {effects}

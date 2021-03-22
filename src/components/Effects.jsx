@@ -6,43 +6,45 @@ export class Effects extends React.Component {
     this.state = { 
       editing: false,
       newEffect: null,
-      currentKey: null,
+      editedKey: null,
     };
   }
-  toggleEdit = (newEffect) => {
-    let editing = newEffect === "New Effect" ? true : !this.state.editing;
-    this.setState({ editing, newEffect, currentKey: newEffect });
+  toggleEdit = (editedKey) => {
+    let editing = editedKey === "New Effect" ? true : !this.state.editing,
+      newEffect = editedKey === "Clear" ? null : this.state.newEffect;
+    this.setState({ editing, newEffect, editedKey });
   }
   makeNewName = (e) => {
     this.setState({ newEffect: e.target.value });
   }
   render() {
-    const { editing, newEffect, currentKey } = this.state,
+    const { editing, newEffect, editedKey } = this.state,
       { effects } = this.props;
     let content = [];
     for (let key in effects) {
       content.push(
         <div key={key} className="flex-col">
           <div className="effect_name">
-          {key === currentKey && editing
+          {key === editedKey && editing
             ? <input
                 type="text"
                 className="regular-inp"
-                value={newEffect}
+                value={newEffect || ""}
+                placeholder={key}
                 onChange={this.makeNewName}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     this.props.submitEffectName(newEffect, key);
-                    this.toggleEdit();
+                    this.toggleEdit("Clear");
                   }
                 }}
               />
             : <p>{key}</p>}
-          {key === currentKey && editing
+          {key === editedKey && editing
             ? <p className="fa fa-check-square"
                 onClick={() => {
                   this.props.submitEffectName(newEffect, key);
-                  this.toggleEdit();
+                  this.toggleEdit("Clear");
                 }}></p>
             : <p className="fa fa-pencil-square"
                 onClick={() => this.toggleEdit(key)}></p>}
@@ -54,7 +56,7 @@ export class Effects extends React.Component {
             type="text"
             name={key}
             className="effect_desc"
-            value={this.props.effects[key]}
+            value={effects[key]}
             spellCheck={false}
             onChange={(e) => this.props.handleChange(e, "e")}
           />
