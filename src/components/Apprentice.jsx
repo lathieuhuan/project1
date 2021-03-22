@@ -1,7 +1,8 @@
 import "../assets/css/Apprentice.css";
 import React from "react";
 import { HeroNames } from "./HeroNames";
-import { heroes } from "./data";
+import { heroes as oriHeroes, cats as oriCats } from "./data";
+import { CatNames } from "./CatNames";
 
 export class Apprentice extends React.Component {
   constructor(props) {
@@ -9,50 +10,74 @@ export class Apprentice extends React.Component {
     this.state = {
       searchType: "skills & masteries by hero",
       searchTerms: "",
-      expanded: false,
-      heroes: [...heroes],
+      dropHeroes: false,
+      dropCats: false,
+      heroes: [...oriHeroes],
+      cats: [...oriCats],
       heroI: -1,
     };
   }
   handleChange = (e) => {
     if (e.target.name === "owner" || e.target.name === "searchTerms") {
-      let len = e.target.value.length,
-        result = heroes.filter((name) => {
+      let { searchType, heroes, cats } = this.state;
+      if (searchType === "skills & masteries by hero") {
+        let len = e.target.value.length;
+        heroes = oriHeroes.filter((name) => {
           return name.toLowerCase().substr(0, len) === e.target.value.toLowerCase();
         });
-      this.setState({ searchTerms: e.target.value, heroes: result });
+      } else {
+        let words = e.target.value.split(" ");
+        words = words[words.length - 1];
+        cats = oriCats.filter((name) => {
+          return name.toLowerCase().substr(0, words.length) === words.toLowerCase();
+        });
+      }
+      this.setState({ searchTerms: e.target.value, heroes, cats });
     } else {
       this.setState({ searchType: e.target.value });
     }
   };
+  addCat = (e) => {
+    let { searchTerms } = this.state;
+    searchTerms = searchTerms.split(" ");
+    searchTerms[searchTerms.length - 1] = e.target.value;
+    this.setState({ searchTerms: searchTerms.join(" ") + " " });
+  }
   clearTerms = () => {
     this.setState({ searchTerms: "" });
   }
-  toggleHeroesL = () => {
-    if (this.state.searchType === "skills & masteries by hero") {
-      this.setState({ expanded: !this.state.expanded, heroI: -1 });
-    }
+  openHeroesL = () => {
+    this.setState({ dropHeroes: true, heroI: -1 });
+  }
+  closeHeroesL = () => {
+    this.setState({ dropHeroes: false, heroI: -1 });
+  }
+  openCatsL = () => {
+    this.setState({ dropCats: true });
+  }
+  closeCatsL = () => {
+    this.setState({ dropCats: false });
   }
   handleKeyDown = (e) => {
-    const { expanded, heroes, heroI, searchType, searchTerms } = this.state;
-    let dropdown = document.getElementsByClassName("dropdown");
+    const { dropHeroes, heroes, heroI, searchType, searchTerms } = this.state;
+    let dropdown = document.getElementsByClassName("heroes_dd");
     if (e.key === "ArrowDown" || e.key === "ArrowUp") {
       if (heroI > -1 && e.key === "ArrowUp") {
-        if (expanded && Math.ceil(dropdown[0].scrollTop) / 30 === heroI) {
+        if (dropHeroes && Math.ceil(dropdown[0].scrollTop) / 30 === heroI) {
           dropdown[0].scroll(0, 30 * (heroI - 1));
         }
-        this.setState({ expanded: true, heroI: heroI - 1 });
+        this.setState({ dropHeroes: true, heroI: heroI - 1 });
       } else if (heroI < heroes.length - 1 && e.key === "ArrowDown") {
-        if (expanded && Math.ceil(dropdown[0].scrollTop) / 30 === (heroI - 4)) {
+        if (dropHeroes && Math.ceil(dropdown[0].scrollTop) / 30 === (heroI - 4)) {
           dropdown[0].scroll(0, 30 * (heroI - 3));
         }
-        this.setState({ expanded: true, heroI: heroI + 1 });
+        this.setState({ dropHeroes: true, heroI: heroI + 1 });
       }
     } else if (e.key === "Enter") {
       if (heroI >= 0) {
         this.setState({
           searchTerms: heroes[heroI],
-          expanded: false,
+          dropHeroes: false,
           heroes: [heroes[heroI]],
           heroI: -1,
         });
@@ -61,14 +86,35 @@ export class Apprentice extends React.Component {
         this.clearTerms();
       }
     } else if (["ArrowLeft", "ArrowRight"].indexOf(e.key) === -1) {
-      if (expanded) {
+      if (dropHeroes) {
         dropdown[0].scrollTop = 0;
       }
       this.setState({ heroI: -1 });
     }
   }
+  closeAllDD = () => {
+    this.setState({ dropHeroes: false, dropCats: false });
+  }
+  closeDDbyEsc = (e) => {
+    if (e.key === "Escape") {
+      this.closeAllDD();
+    }
+  }
+  handleClickOutside = (e) => {
+    if (!e.target.matches("#sb_inner")) {
+      this.closeAllDD();
+    }
+  }
+  componentDidMount() {
+    window.addEventListener("keydown", this.closeDDbyEsc);
+    window.addEventListener("click", this.handleClickOutside);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this.closeDDbyEsc);
+    window.removeEventListener("click", this.handleClickOutside);
+  }
   render() {
-    const { searchType, searchTerms } = this.state;
+    const { searchType, searchTerms, dropHeroes, dropCats } = this.state;
     return (
       <div id="apprentice">
         <button
@@ -83,7 +129,7 @@ export class Apprentice extends React.Component {
           id="work-on-mastery"
           onClick={() => this.props.setUI("creating", "mastery")}
         >
-          Add Masteries
+          Add Mastery
         </button>
         <div id="query">
           <p>SEARCH</p>
@@ -91,6 +137,9 @@ export class Apprentice extends React.Component {
             name="searchType"
             defaultValue="skills by hero"
             onChange={this.handleChange}
+            onClick={() => {
+              this.clearTerms();
+            }}
           >
             <option value="skills &amp; masteries by hero">
               skills &amp; masteries by hero
@@ -108,21 +157,44 @@ export class Apprentice extends React.Component {
               value={searchTerms}
               onChange={(e) => {
                 this.handleChange(e);
-                if (!this.state.expanded) {
-                  this.toggleHeroesL();
+                if (searchType === "skills & masteries by hero") {
+                  this.openHeroesL();
+                } else {
+                  this.openCatsL();
                 }
               }}
-              onKeyDown={this.handleKeyDown}
-              onFocus={this.toggleHeroesL}
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  this.closeAllDD();
+                }
+                if (searchType === "skills & masteries by hero") {
+                  this.handleKeyDown(e);
+                } else {
+                  if (e.key === "Enter") {
+                    this.props.search(searchType, searchTerms);
+                    this.clearTerms();
+                  }
+                }
+              }}
+              onClick={() => {
+                if (searchType === "skills & masteries by hero") {
+                  this.openHeroesL();
+                } else {
+                  this.openCatsL();
+                }
+              }}
             />
-            {this.state.expanded
+            {dropHeroes
               ? <HeroNames
                   heroes={this.state.heroes}
                   heroI={this.state.heroI}
                   handleChange={this.handleChange}
-                  toggleHeroesL={this.toggleHeroesL}
+                  toggleHeroesL={this.closeHeroesL}
                 />
-              : null}  
+              : null}
+            {dropCats
+              ? <CatNames cats={this.state.cats} addCat={this.addCat} />
+              : null}
           </div>
           <div
             className="flex-center"

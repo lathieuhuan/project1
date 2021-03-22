@@ -39,7 +39,7 @@ export class SkillEmbryo extends React.Component {
   }
   handleKeyDown = (e) => {
     const { dropHeroes, heroes, heroI } = this.state;
-    let dropdown = document.getElementsByClassName("dropdown");
+    let dropdown = document.getElementsByClassName("heroes_dd");
     if (e.key === "ArrowDown" || e.key === "ArrowUp") {
       if (heroI > -1 && e.key === "ArrowUp") {
         if (dropHeroes && Math.ceil(dropdown[0].scrollTop) / 30 === heroI) {
@@ -55,8 +55,8 @@ export class SkillEmbryo extends React.Component {
     } else if (e.key === "Enter" && heroI >= 0) {
       this.props.changeHeroName(heroes[heroI]);
       this.setState({ dropHeroes: false, heroes: [heroes[heroI]], heroI: -1 });
-    } else if (e.key === "Tab" && this.state.dropHeroes) {
-      this.setState({ dropHeroes: false });
+    } else if ((e.key === "Tab" || e.key === "Escape") && dropHeroes) {
+      this.toggleHeroesL();
     } else if (["ArrowLeft", "ArrowRight"].indexOf(e.key) === -1) {
       if (dropHeroes) {
         dropdown[0].scrollTop = 0;
@@ -68,15 +68,19 @@ export class SkillEmbryo extends React.Component {
     if (!this.typeRef.current.contains(e.target) && this.state.dropHeroes) {
       this.toggleHeroesL();
     }
+    if (!e.target.matches("#extra-cats") && this.state.dropCats) {
+      this.toggleCatsL();
+    }
   }
   componentDidMount() {
-    document.addEventListener("click", this.handleClickOutside);
+    window.addEventListener("click", this.handleClickOutside);
   }
   componentWillUnmount() {
-    document.removeEventListener("click", this.handleClickOutside);
+    window.removeEventListener("click", this.handleClickOutside);
   }
   render() {
     const { skill, handleChange, allowDup, addCat } = this.props,
+      { dropHeroes, dropCats } = this.state,
       active = skill.type?.substr(0, 3) === "Chủ";
     return (
       <div id="embryo">
@@ -125,24 +129,23 @@ export class SkillEmbryo extends React.Component {
                 onChange={(e) => {
                   this.props.changeExtra(e);
                   this.filterCats(e);
-                  if (!this.state.dropCats) {
+                  if (!dropCats) {
                     this.toggleCatsL();
                   }
                 }}
                 onKeyDown={(e) => {
-                  if (e.key === "Escape" && this.state.dropCats) {
+                  if ((e.key === "Escape" || e.key === "Tab") && dropCats) {
                     this.toggleCatsL();
                   }
                 }}
               />
             </div>
-            {this.state.dropCats
-              ? <CatNames cats={this.state.cats} addCat={addCat} />
-              : null}
+            {dropCats ? <CatNames cats={this.state.cats} addCat={addCat} /> : null}
           </div>
-          <div ref={this.typeRef} className="eb_line" id="hero-name">
+          <div className="eb_line" id="hero-name">
             <p className="eb_left">Hero: </p>
             <input
+              ref={this.typeRef}
               type="text"
               name="owner"
               className="regular-inp grow"
@@ -150,14 +153,14 @@ export class SkillEmbryo extends React.Component {
               onChange={(e) => {
                 handleChange(e);
                 this.filterHeroes(e);
-                if (!this.state.dropHeroes) {
+                if (!dropHeroes) {
                   this.toggleHeroesL();
                 }
               }}
               onKeyDown={this.handleKeyDown}
-              onFocus={this.toggleHeroesL}
+              onClick={this.toggleHeroesL}
             />
-            {this.state.dropHeroes
+            {dropHeroes
               ? <HeroNames
                   heroes={this.state.heroes}
                   heroI={this.state.heroI}
@@ -171,7 +174,7 @@ export class SkillEmbryo extends React.Component {
             <select
               name="type"
               className="grow"
-              defaultValue={skill.type || "Bị động"}
+              value={skill.type || ""}
               onChange={handleChange}
             >
               <option value="Bị động">Bị động</option>

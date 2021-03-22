@@ -22,10 +22,10 @@ export function Skills(props) {
               className="fa fa-trash"
               onClick={() => props.tryDelete("skill", i)}
             ></span>
-            <h1 className="kc_heading">
-              <span className={type}
-              >{skill.name}</span> <sup>(Skill {skill.slot})</sup>
-            </h1>
+            <div className={"kc_heading " + type}>
+              <h1>{skill.name}</h1>
+              <p className="kc_slot">(Skill {skill.slot})</p>
+            </div>
             <div className="kc_subheading" id="kc_cats">
               <p id="cat_desc">Categories:</p>
               {skill.categories?.map((cat, i) => {

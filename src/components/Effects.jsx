@@ -27,8 +27,16 @@ export class Effects extends React.Component {
           {key === currentKey && editing
             ? <input
                 type="text"
+                className="regular-inp"
                 value={newEffect}
-                onChange={this.makeNewName}/>
+                onChange={this.makeNewName}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    this.props.submitEffectName(newEffect, key);
+                    this.toggleEdit();
+                  }
+                }}
+              />
             : <p>{key}</p>}
           {key === currentKey && editing
             ? <p className="fa fa-check-square"

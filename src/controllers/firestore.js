@@ -42,7 +42,7 @@ async function heroKit(heroName) {
   return { skills, masteries };
 }
 
-function kitCate(keywords, type) {
+function kitCat(keywords, type) {
   return new Promise((res) => {
     const ref = type === "skill" ? skillsRef : masteriesRef;
     ref
@@ -132,4 +132,4 @@ function deleteKit(name, type) {
   });
 }
 
-export { heroKit, kitCate, updateKit, addKit, deleteKit };
+export { heroKit, kitCat, updateKit, addKit, deleteKit };

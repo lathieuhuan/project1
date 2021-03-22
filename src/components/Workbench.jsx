@@ -62,7 +62,13 @@ export class Workbench extends React.Component {
   save = () => {
     let { kit, extraCats } = this.state;
     if (extraCats !== "") {
+      if (kit.categories === undefined) {
+        kit.categories = [];
+      }
       kit.categories = kit.categories.concat(extraCats.split(", "));
+    }
+    if (this.props.kitType === "skill" && kit.type === undefined) {
+      kit.type = "Bị động";
     }
     this.props.tryUpdate(kit, this.props.UIstate);
   }

@@ -1,22 +1,23 @@
 .dropdown {
   position: absolute;
-  max-height: 152px;
   overflow: auto;
   border: 1px solid black;
   font-family: "Times New Roman", Times, serif;
 }
-#hero-name .dropdown {
+#hero-name .heroes_dd {
   top: 32px;
   left: 120px;
   width: 580px;
+  max-height: 152px;
 }
-#search-box .dropdown {
+#search-box .heroes_dd {
   top: 100%;
   left: 0;
   width: 100%;
+  max-height: 152px;
 }
 
-.dropdown_opt {
+.hero_opt {
   width: 100%;
   padding: 5px 0 5px 10px;
   border: none;
@@ -27,10 +28,10 @@
   font-family: inherit;
   cursor: default;
 }
-#hero-name .dropdown_opt:hover {
+#hero-name .hero_opt:hover {
   background-color: var(--orange) !important;
 }
-#search-box .dropdown_opt:hover {
+#search-box .hero_opt:hover {
   color: black;
   background-color: var(--blue) !important;
 }

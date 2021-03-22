@@ -5,7 +5,7 @@ import {
   heroKit,
   updateKit,
   deleteKit,
-  kitCate,
+  kitCat,
 } from "./controllers/firestore";
 import { Workbench } from "./components/Workbench";
 import { Shelf } from "./components/Shelf";
@@ -40,6 +40,7 @@ class App extends Component {
     });
   };
   search = (type, terms) => {
+    window.screenTop = 0;
     if (type === "skills & masteries by hero") {
       heroKit(terms).then((kit) => {
         this.setState({
@@ -48,11 +49,11 @@ class App extends Component {
         });
       });
     } else {
-      kitCate(terms.split(" "), type.substr(0, 5)).then((cate) => {
+      kitCat(terms.trim().split(" "), type.substr(0, 5)).then((cat) => {
         if (type.substr(0, 5) === "skill") {
-          this.setState({ skills: cate, masteries: [] });
+          this.setState({ skills: cat, masteries: [] });
         } else {
-          this.setState({ skills: [], masteries: cate });
+          this.setState({ skills: [], masteries: cat });
         }
       });
     }

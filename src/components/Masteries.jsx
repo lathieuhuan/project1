@@ -21,10 +21,10 @@ export function Masteries(props) {
               className="fa fa-trash"
               onClick={() => props.tryDelete("mastery", i)}
             ></span>
-            <h1 className="kc_heading">
-              <span className="mastery"
-              >{mastery.name}</span> <sup>(Mastery {mastery.slot})</sup>
-            </h1>
+            <div className="kc_heading mastery">
+              <h1>{mastery.name}</h1>
+              <p className="kc_slot">(Mastery {mastery.slot})</p>
+            </div>
             <div className="kc_subheading" id="kc_cats">
               <p id="cat_desc">Categories:</p>
               {mastery.categories?.map((cat, i) => {
