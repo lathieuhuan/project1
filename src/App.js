@@ -40,7 +40,7 @@ class App extends Component {
     });
   };
   search = (type, terms) => {
-    window.screenTop = 0;
+    document.documentElement.scrollTop = 0;
     if (type === "skills & masteries by hero") {
       heroKit(terms).then((kit) => {
         this.setState({

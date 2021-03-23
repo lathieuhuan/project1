@@ -8,6 +8,9 @@
   columns: 3;
   column-gap: 30px;
 }
+#skill-container {
+  border-bottom: 2px solid black;
+}
 
 .kit-card {
   position: relative;
@@ -16,7 +19,6 @@
   border-radius: 10px;
   padding: 20px 20px 10px;
   background-color: white;
-  text-align: justify;
   break-inside: avoid;
 }
 .kit-card .fa-edit,
@@ -40,25 +42,12 @@
 .kc_heading {
   margin-bottom: 5px;
   width: 360px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-}
-.kc_name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.kit-card:hover .kc_name {
-  white-space: normal;
-  overflow: visible;
-  text-overflow: clip;
 }
 .kc_slot {
-  margin-left: 10px;
   font-size: 16px;
   font-weight: 700;
   color: rgb(125, 125, 125);
+  white-space: nowrap;
 }
 
 .passive {
@@ -91,15 +80,22 @@
   background-color: var(--light-yellow);
   cursor: pointer;
 }
+.kc_cat:hover {
+  background-color: var(--yellow);
+}
 .kc-owner {
   padding: 2px 10px 5px;
   border-radius: 30px;
-  background-color: rgb(168, 0, 168);
+  background-color: rgb(212, 0, 212);
   color: white;
   font-weight: 600;
   cursor: pointer;
 }
+.kc-owner:hover {
+  background-color: rgb(182, 0, 182);
+}
 .kc_line {
   margin-bottom: 5px;
   line-height: 1.5;
+  text-align: justify;
 }

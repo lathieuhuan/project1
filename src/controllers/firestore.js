@@ -67,31 +67,36 @@ function updateKit(oriKit, type, allowDup) {
   delete kit.id;
   return new Promise((res, rej) => {
     const ref = type === "skill" ? skillsRef : masteriesRef;
-    ref
-      .doc(id)
-      .get()
-      .then((querySnapshot) => {
-        if (allowDup || querySnapshot.data().name === kit.name) {
-          ref.doc(id).update(kit);
-          res();
-        }
-      })
-      .then(() => {
-        ref
-          .where("name", "==", kit.name)
-          .limit(1)
-          .get()
-          .then((querySnapshot) => {
-            if (!querySnapshot.empty) {
-              throw new Error("Name existed.");
-            }
-          })
-          .then(() => {
+    if (allowDup) {
+      ref.doc(id).update(kit);
+      res();
+    } else {
+      ref
+        .doc(id)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.data().name === kit.name) {
             ref.doc(id).update(kit);
             res();
-          })
-          .catch((err) => rej(err));
-      });
+          }
+        })
+        .then(() => {
+          ref
+            .where("name", "==", kit.name)
+            .limit(1)
+            .get()
+            .then((querySnapshot) => {
+              if (!querySnapshot.empty) {
+                throw new Error("Name existed.");
+              }
+            })
+            .then(() => {
+              ref.doc(id).update(kit);
+              res();
+            })
+            .catch((err) => rej(err));
+        });
+    }
   });
 }
 

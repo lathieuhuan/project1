@@ -7,7 +7,11 @@ import { MasteryEmbryo } from "./MasteryEmbryo";
 export class Workbench extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { kit: {...props.kit}, extraCats: "" };
+    let cats = !props.kit.categories ? [] : props.kit.categories;
+    this.state = {
+      kit: {...props.kit, categories: [...cats] },
+      extraCats: "",
+    };
   }
   handleChange = (e, type) => {
     let { kit } = this.state,

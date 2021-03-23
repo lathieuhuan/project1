@@ -199,8 +199,8 @@ export class SkillEmbryo extends React.Component {
               name="desc"
               className="grow"
               id="eb_desc"
-              value={skill.desc || ""}
               spellCheck={false}
+              value={skill.desc || ""}
               onChange={handleChange}
             />
           </div>

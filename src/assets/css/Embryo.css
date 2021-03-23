@@ -60,7 +60,7 @@
   outline: none;
 }
 #eb_desc {
-  min-height: 150px;
+  min-height: 140px;
 }
 .shrink {
   width: 50px;
@@ -149,7 +149,8 @@
   color: black;
 }
 .effect_desc {
-  min-height: 65px;
+  height: 96px;
+  min-height: 96px;
   margin-bottom: 10px;
 }
 .eb_line .fa-plus-square {

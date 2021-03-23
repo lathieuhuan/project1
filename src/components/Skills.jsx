@@ -1,7 +1,7 @@
 
 export function Skills(props) {
   return (
-    <div className="shelf_container">
+    <div className="shelf_container" id="skill-container">
       {props.skills?.map((skill, i) => {
         const type = skill.type?.substr(0,2) === "Bị" ? "passive" : "active";
         let effects = [];
@@ -22,10 +22,11 @@ export function Skills(props) {
               className="fa fa-trash"
               onClick={() => props.tryDelete("skill", i)}
             ></span>
-            <div className="kc_heading">
-              <h1 className={"kc_name " + type}>{skill.name}</h1>
-              <p className="kc_slot">(Skill {skill.slot})</p>
-            </div>
+            <h1 className="kc_heading">
+              <span className={type}>
+                {skill.name}</span> <sup className="kc_slot">
+                  (Skill {skill.slot})</sup>
+            </h1>
             <div className="kc_subheading" id="kc_cats">
               <p id="cat_desc">Categories:</p>
               {skill.categories?.map((cat, i) => {
@@ -47,7 +48,7 @@ export function Skills(props) {
             <p className="kc_line"><b>Description:</b> {skill.desc}</p>
             {effects}
             {type === "active" ? (
-              <div className="kc_line flex">
+              <div className="kc_line flex-wrap">
                 <p className="mgright-5"><b>AP:</b> {skill.AP} |</p>
                 <p className="mgright-5">
                   <b>Mana cost:</b> {skill.manaCost} |
