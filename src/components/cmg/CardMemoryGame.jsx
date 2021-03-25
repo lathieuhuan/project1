@@ -25,7 +25,7 @@ export class CardMemoryGame extends React.Component {
     };
     this.chosen = [];
     this.left = 0;
-    this.limit = 1200;
+    this.limit = 1500;
     this.timer = 0;
   }
   toggleFullscreen = () => {
@@ -61,7 +61,7 @@ export class CardMemoryGame extends React.Component {
     })
     this.chosen = [];
     this.left = imgI.length;
-    this.limit = difficulty === "easy" ? 1200 : 2000;
+    this.limit = difficulty === "easy" ? 1500 : 2500;
     this.timer = setInterval(this.countDown, 1000);
     setTimeout(() => {
       clearInterval(this.timer);
