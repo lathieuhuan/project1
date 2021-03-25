@@ -59,7 +59,7 @@ export class Apprentice extends React.Component {
     this.setState({ dropCats: false });
   }
   handleKeyDown = (e) => {
-    const { dropHeroes, heroes, heroI, searchType, searchTerms } = this.state;
+    const { dropHeroes, heroes, heroI } = this.state;
     let dropdown = document.getElementsByClassName("heroes_dd");
     if (e.key === "ArrowDown" || e.key === "ArrowUp") {
       if (heroI > -1 && e.key === "ArrowUp") {
@@ -81,9 +81,6 @@ export class Apprentice extends React.Component {
           heroes: [heroes[heroI]],
           heroI: -1,
         });
-      } else if (searchTerms.match(/([a-zA-Z0-9])+([ -~])*/)) {
-        this.props.search(searchType, searchTerms);
-        this.clearTerms();
       }
     } else if (["ArrowLeft", "ArrowRight"].indexOf(e.key) === -1) {
       if (dropHeroes) {
@@ -95,9 +92,13 @@ export class Apprentice extends React.Component {
   closeAllDD = () => {
     this.setState({ dropHeroes: false, dropCats: false });
   }
-  closeDDbyEsc = (e) => {
+  handleWindowKey = (e) => {
+    const { searchType, searchTerms } = this.state;
     if (e.key === "Escape") {
       this.closeAllDD();
+    } else if (e.key === "Enter" && searchTerms !== "") {
+      this.props.search(searchType, searchTerms);
+      this.clearTerms();
     }
   }
   handleClickOutside = (e) => {
@@ -106,11 +107,11 @@ export class Apprentice extends React.Component {
     }
   }
   componentDidMount() {
-    window.addEventListener("keydown", this.closeDDbyEsc);
+    window.addEventListener("keydown", this.handleWindowKey);
     window.addEventListener("click", this.handleClickOutside);
   }
   componentWillUnmount() {
-    window.removeEventListener("keydown", this.closeDDbyEsc);
+    window.removeEventListener("keydown", this.handleWindowKey);
     window.removeEventListener("click", this.handleClickOutside);
   }
   render() {

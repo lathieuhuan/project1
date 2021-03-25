@@ -7,7 +7,7 @@ import { MasteryEmbryo } from "./MasteryEmbryo";
 export class Workbench extends React.Component {
   constructor(props) {
     super(props);
-    let cats = !props.kit.categories ? [] : props.kit.categories;
+    let cats = !props.kit?.categories ? [] : props.kit.categories;
     this.state = {
       kit: {...props.kit, categories: [...cats] },
       extraCats: "",
