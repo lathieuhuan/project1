@@ -1,6 +1,6 @@
 
 export function Redirecting(props) {
-  const { modal, username, setAppState } = props;
+  const { modal, username, avatar, setAppState } = props;
   let content, doAsk = true;
   if (modal === "Notice successful sign-up") {
     content = (
@@ -8,9 +8,10 @@ export function Redirecting(props) {
         <h1 id="modal_heading">SIGNUP SUCCESSFUL</h1>
         <div className="flex-center">
           <button className="modal_main-line last-btn" onClick={() => {
-            setAppState("None", username, username);
+            setAppState("None", username, username, avatar);
             localStorage.setItem("username", username);
             localStorage.setItem("userId", username);
+            localStorage.setItem("avatar", avatar);
           }}>
             Sign In
           </button>

@@ -1,42 +1,42 @@
 .g1024_tile.val-4 {
   background-color: rgb(243, 178, 122);
   color: rgb(249, 246, 242);
-  font-size: 50px;
+  font-size: 48px;
 }
 .g1024_tile.val-8 {
   background-color: rgb(246, 150, 100);
   color: rgb(249, 246, 242);
-  font-size: 50px;
+  font-size: 48px;
 }
 .g1024_tile.val-16 {
   background-color: rgb(247, 124, 95);
   color: rgb(249, 246, 242);
-  font-size: 46px;
+  font-size: 44px;
 }
 .g1024_tile.val-32 {
   background-color: rgb(247, 95, 59);
   color: rgb(249, 246, 242);
-  font-size: 46px;
+  font-size: 44px;
 }
 .g1024_tile.val-64 {
   background-color: rgb(237, 208, 115);
   color: rgb(249, 246, 242);
-  font-size: 46px;
+  font-size: 44px;
 }
 .g1024_tile.val-128 {
   background-color: rgb(237, 204, 98);
   color: rgb(249, 246, 242);
-  font-size: 38px;
+  font-size: 36px;
 }
 .g1024_tile.val-256 {
   background-color: rgb(237, 201, 80);
   color: rgb(249, 246, 242);
-  font-size: 38px;
+  font-size: 36px;
 }
 .g1024_tile.val-512 {
   background-color: rgb(237, 195, 44);
   color: rgb(249, 246, 242);
-  font-size: 38px;
+  font-size: 36px;
 }
 .g1024_tile.val-1024 {
   background-color: rgb(237, 189, 8);
@@ -124,7 +124,7 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(-100px);
+    transform: translateX(-90px);
   }
 }
 @keyframes left2-1024 {
@@ -132,7 +132,7 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(-200px);
+    transform: translateX(-180px);
   }
 }
 @keyframes left3-1024 {
@@ -140,7 +140,7 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(-300px);
+    transform: translateX(-270px);
   }
 }
 @keyframes left4-1024 {
@@ -148,7 +148,7 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(-400px);
+    transform: translateX(-360px);
   }
 }
 
@@ -157,7 +157,7 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(100px);
+    transform: translateX(90px);
   }
 }
 @keyframes right2-1024 {
@@ -165,7 +165,7 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(200px);
+    transform: translateX(180px);
   }
 }
 @keyframes right3-1024 {
@@ -173,7 +173,7 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(300px);
+    transform: translateX(270px);
   }
 }
 @keyframes right4-1024 {
@@ -181,7 +181,7 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(400px);
+    transform: translateX(360px);
   }
 }
 
@@ -190,7 +190,7 @@
     transform: translateY(0);
   }
   to {
-    transform: translateY(-100px);
+    transform: translateY(-90px);
   }
 }
 @keyframes up2-1024 {
@@ -198,7 +198,7 @@
     transform: translateY(0);
   }
   to {
-    transform: translateY(-200px);
+    transform: translateY(-180px);
   }
 }
 @keyframes up3-1024 {
@@ -206,7 +206,7 @@
     transform: translateY(0);
   }
   to {
-    transform: translateY(-300px);
+    transform: translateY(-270px);
   }
 }
 @keyframes up4-1024 {
@@ -214,7 +214,7 @@
     transform: translateY(0);
   }
   to {
-    transform: translateY(-400px);
+    transform: translateY(-360px);
   }
 }
 
@@ -223,7 +223,7 @@
     transform: translateY(0);
   }
   to {
-    transform: translateY(100px);
+    transform: translateY(90px);
   }
 }
 @keyframes down2-1024 {
@@ -231,7 +231,7 @@
     transform: translateY(0);
   }
   to {
-    transform: translateY(200px);
+    transform: translateY(180px);
   }
 }
 @keyframes down3-1024 {
@@ -239,7 +239,7 @@
     transform: translateY(0);
   }
   to {
-    transform: translateY(300px);
+    transform: translateY(270px);
   }
 }
 @keyframes down4-1024 {
@@ -247,6 +247,6 @@
     transform: translateY(0);
   }
   to {
-    transform: translateY(400px);
+    transform: translateY(360px);
   }
 }

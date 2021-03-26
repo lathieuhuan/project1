@@ -55,7 +55,7 @@ export class Game1024 extends React.Component {
     tiles[random1].type = " new-tile";
     pos.splice(random1, 1);
     let random2 = pos[Math.floor(Math.random() * pos.length)];
-    tiles[random2].value = this.dup[random2].value = Math.random() < 0.2 ? 4 : 8;
+    tiles[random2].value = this.dup[random2].value = Math.random() < 0.3 ? 4 : 8;
     tiles[random2].type = " new-tile";
     this.setState({
       gameState: "running",
@@ -143,7 +143,7 @@ export class Game1024 extends React.Component {
     }
     if (gameState !== "you won!") {
       let random = empty[Math.floor(Math.random() * empty.length)];
-      tiles[random].value = this.dup[random].value = Math.random() < 0.2 ? 4 : 8;
+      tiles[random].value = this.dup[random].value = Math.random() < 0.3 ? 4 : 8;
       tiles[random].type = " new-tile";
       gameState = this.getGS(tiles);
       if (gameState === "game over" && this.props.userId !== null) {
@@ -365,8 +365,7 @@ export class Game1024 extends React.Component {
         <div id="g1024_inner">
           <Introduction />
           <p id="g1024_filler">
-            <b>Note:</b> Your score will be <b>doubled</b> when you finish
-            the game.
+            <b>Note:</b> Your score is <b>doubled</b> when you win the game.
           </p>
           <div id="g1024_app">
             <TopBar
@@ -384,6 +383,10 @@ export class Game1024 extends React.Component {
                 movements={this.state.movements}
                 newHS={this.state.newHS}
                 nullifyType={this.nullifyType}
+                moveLeft={this.moveLeft}
+                moveRight={this.moveRight}
+                moveUp={this.moveUp}
+                moveDown={this.moveDown}
               />
             </div>
           </div>

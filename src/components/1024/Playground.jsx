@@ -1,6 +1,6 @@
 import "../../assets/css/1024/Playground.css";
 import { Tile } from "./Tile";
-import { Message } from "./Message";
+import { GameModal } from "./GameModal";
 
 export function Playground(props) {
   let cells = [];
@@ -25,8 +25,14 @@ export function Playground(props) {
           );
         })}
       </div>
-      {props.gameState === "running" ? null
-        : <Message gameState={props.gameState} newHS={props.newHS} />}
+      <GameModal
+        gameState={props.gameState}
+        newHS={props.newHS}
+        moveLeft={props.moveLeft}
+        moveRight={props.moveRight}
+        moveUp={props.moveUp}
+        moveDown={props.moveDown}
+      />
     </div>
   );
 }

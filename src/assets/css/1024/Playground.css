@@ -1,7 +1,7 @@
 #g1024_playground {
   position: relative;
-  width: 510px;
-  height: 510px;
+  width: 460px;
+  height: 460px;
   border-radius: 5px;
   cursor: default;
   user-select: none;
@@ -13,8 +13,8 @@
   flex-wrap: wrap;
 }
 #g1024_pedestal > .cell {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   margin: 5px;
   border-radius: 3px;
   background-color: rgb(205, 193, 180);
@@ -29,11 +29,11 @@
   flex-wrap: wrap;
 }
 .g1024_tile {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   margin: 5px;
   border-radius: 3px;
   font-weight: 700;
-  line-height: 90px;
+  line-height: 80px;
   text-align: center;
 }

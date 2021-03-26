@@ -38,7 +38,11 @@ export class SignUp extends React.Component {
     if (nameGood && passGood && pwdConfirmed) {
       signUp({ username, password, email })
       .then(() => {
-        this.props.setAppState("Notice successful sign-up", username);
+        this.props.setAppState(
+          "Notice successful sign-up",
+          username, null,
+          "https://firebasestorage.googleapis.com/v0/b/minigamehub-cijs-d06.appspot.com/o/avatars%2Fdefault.png?alt=media&token=e6740814-1535-42f9-9936-895befc2c3db"
+        );
       })
       .catch((err) => this.setState({ nameWarning: err.message }));
     }

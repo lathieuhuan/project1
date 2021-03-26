@@ -4,7 +4,7 @@ import { SignIn } from "./modal/SignIn";
 import { SignUp } from "./modal/SignUp";
 
 export function Modal(props) {
-  const { modal, username, setAppState } = props;
+  const { modal, username, avatar, setAppState } = props;
   let content;
   if (modal === "SignIn") {
     content = <SignIn setAppState={setAppState} />
@@ -15,6 +15,7 @@ export function Modal(props) {
       <Redirecting
         modal={modal}
         username={username}
+        avatar={avatar}
         setAppState={setAppState}
       />
     )

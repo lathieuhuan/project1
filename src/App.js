@@ -100,6 +100,7 @@ class App extends Component {
           <Modal
             modal={modal}
             username={username}
+            avatar={avatar}
             setAppState={this.setAppState}
           />
         )}
