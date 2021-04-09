@@ -1,22 +1,19 @@
 import "./App.css";
-import { Component } from "react";
+import React, { useState } from "react";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { test: 0 };
-  }
-  handleClick = () => {
-    this.setState();
+function App() {
+  const [num, setNum] = useState(0);
+  const countUp = () => {
+    setInterval(() => {
+      setNum((prev) => prev + 1);
+    }, 1000);
   };
-  render() {
-    return (
-      <div id="test">
-        <p>Testing...</p>
-        <button onClick={this.handleClick}>Click</button>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <input type="button" onClick={countUp} value="Click" />
+      <p>{num}</p>
+    </div>
+  );
 }
 
 export default App;
