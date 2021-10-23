@@ -36,8 +36,3 @@ code {
   margin: auto;
   transform: scale(3);
 }
-#hint {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-}

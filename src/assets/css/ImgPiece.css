@@ -1,6 +1,25 @@
-img {
+.img-piece {
   cursor: pointer;
 }
-img:hover {
+.img-piece.hinted {
+  -webkit-animation: glow 0.5s ease-in-out infinite alternate;
+  -moz-animation: glow 0.5s ease-in-out infinite alternate;
+  animation: glow 0.5s ease-in-out infinite alternate;
+}
+@keyframes glow {
+  from {
+    box-shadow: 0 0 3px 2px #fff, 0 0 4px 2px #fff, 0 0 5px 2px #fff,
+      0 0 6px 2px #fff, 0 0 7px 2px #fff;
+  }
+  to {
+    box-shadow: 0 0 6px 2px #fff, 0 0 8px 2px #fff, 0 0 10px 2px #fff,
+      0 0 12px 2px #fff, 0 0 14px 2px #fff;
+  }
+}
+
+.side-col > .img-piece {
+  margin: 10px 0;
+}
+.side-col > .img-piece:hover {
   transform: scale(1.1);
 }

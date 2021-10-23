@@ -19,38 +19,23 @@ function divideShuffle(total) {
   return result;
 }
 
+function initGame(num) {
+  let shuffledI = divideShuffle(num);
+  return {
+    leftCol: shuffledI[0],
+    rightCol: shuffledI[1],
+    platform: Array.from({ length: num }, () => 0),
+    done: false,
+    hiliPiece: -1,
+  };
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
-    let shuffledI = divideShuffle(54),
-      indexes = [];
-    for (let i = 1; i <= 54; i++) {
-      indexes.push(0);
-    }
-    this.state = {
-      leftCol: shuffledI[0],
-      rightCol: shuffledI[1],
-      platform: indexes,
-      done: false,
-      hiliPiece: -1,
-    };
+    this.state = initGame(54);
   }
-  restart = () => {
-    this.setState(() => {
-      let shuffledI = divideShuffle(54),
-        indexes = [];
-      for (let i = 1; i <= 54; i++) {
-        indexes.push(0);
-      }
-      return {
-        leftCol: shuffledI[0],
-        rightCol: shuffledI[1],
-        platform: indexes,
-        done: false,
-        hiliPiece: -1,
-      };
-    });
-  };
+  restart = () => this.setState(() => initGame(54));
   showHint = (i) => {
     this.setState({ hiliPiece: i });
   };
@@ -117,6 +102,9 @@ class App extends Component {
             );
           })}
           {done ? <Message restart={this.restart} /> : null}
+          <button id="reset" onClick={this.restart}>
+            RESET
+          </button>
         </div>
         <SideCol
           imgIs={rightCol}
