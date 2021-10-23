@@ -12,8 +12,8 @@ export class Apprentice extends React.Component {
       searchTerms: "",
       dropHeroes: false,
       dropCats: false,
-      heroes: [...oriHeroes],
-      cats: [...oriCats],
+      heroes: oriHeroes,
+      cats: oriCats,
       heroI: -1,
     };
   }
@@ -78,7 +78,6 @@ export class Apprentice extends React.Component {
         this.setState({
           searchTerms: heroes[heroI],
           dropHeroes: false,
-          heroes: [heroes[heroI]],
           heroI: -1,
         });
       }
@@ -138,9 +137,7 @@ export class Apprentice extends React.Component {
             name="searchType"
             defaultValue="skills by hero"
             onChange={this.handleChange}
-            onClick={() => {
-              this.clearTerms();
-            }}
+            onClick={this.clearTerms}
           >
             <option value="skills &amp; masteries by hero">
               skills &amp; masteries by hero
@@ -189,8 +186,8 @@ export class Apprentice extends React.Component {
               ? <HeroNames
                   heroes={this.state.heroes}
                   heroI={this.state.heroI}
-                  handleChange={this.handleChange}
-                  toggleHeroesL={this.closeHeroesL}
+                  search={(term) => this.props.search(searchType, term)}
+                  closeHeroesL={this.closeHeroesL}
                 />
               : null}
             {dropCats
